@@ -2465,6 +2465,23 @@
         }
 
         function filtrarProductos() {
+            function filtrarPorCategoria(categoriaBuscada) {
+            // Limpia el texto del buscador si se usa un botón
+            document.getElementById("inputBuscador").value = ""; 
+            
+            if (categoriaBuscada === '') {
+                // El botón "Ver Todo" muestra la lista original
+                mostrarProductos(inventario);
+                return;
+            }
+
+            // Filtra dependiendo del botón que presionaste
+            const filtrados = inventario.filter(prod => 
+                prod.departamento.toUpperCase().includes(categoriaBuscada)
+            );
+            
+            mostrarProductos(filtrados);
+        }
             const textoBusqueda = document.getElementById("inputBuscador").value.toLowerCase();
             const filtrados = inventario.filter(prod => 
                 prod.nombre.toLowerCase().includes(textoBusqueda) || 
