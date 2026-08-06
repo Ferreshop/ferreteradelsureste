@@ -142,9 +142,61 @@
         <h2>Construcción y Herramientas</h2>
         <p>El mejor surtido en material eléctrico, plomería y ferretería en general.</p>
     </section>
-
+/* ================= CATEGORÍAS VISUALES ================= */
+        .seccion-categorias { margin-bottom: 30px; }
+        .grid-categorias { 
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 20px;
+        }
+        .categoria-card {
+            background: white; border: 2px solid var(--color-secundario); border-radius: 10px;
+            padding: 15px 10px; text-align: center; cursor: pointer; transition: all 0.3s ease;
+            width: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .categoria-card:hover {
+            background: var(--color-secundario); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+        }
+        .categoria-card:hover .categoria-nombre { color: white; }
+        .categoria-icono { font-size: 2.5rem; margin-bottom: 8px; }
+        .categoria-nombre { font-size: 0.8rem; font-weight: bold; color: var(--color-principal); text-transform: uppercase; line-height: 1.2;}
     <section id="tienda" class="seccion">
         <h2>Nuestro Catálogo</h2>
+        <!-- BOTONERA DE CATEGORÍAS -->
+        <div class="seccion-categorias">
+            <div class="grid-categorias">
+                <div class="categoria-card" onclick="filtrarPorCategoria('FERRETERIA')">
+                    <div class="categoria-icono">🛠️</div>
+                    <div class="categoria-nombre">Ferretería</div>
+                </div>
+                <div class="categoria-card" onclick="filtrarPorCategoria('MATERIAL ELECTRICO')">
+                    <div class="categoria-icono">⚡</div>
+                    <div class="categoria-nombre">Eléctrico</div>
+                </div>
+                <div class="categoria-card" onclick="filtrarPorCategoria('PLOMERIA')">
+                    <div class="categoria-icono">🚰</div>
+                    <div class="categoria-nombre">Plomería</div>
+                </div>
+                <div class="categoria-card" onclick="filtrarPorCategoria('PINTURAS')">
+                    <div class="categoria-icono">🎨</div>
+                    <div class="categoria-nombre">Pinturas</div>
+                </div>
+                <div class="categoria-card" onclick="filtrarPorCategoria('TORNILLOS')">
+                    <div class="categoria-icono">🔩</div>
+                    <div class="categoria-nombre">Tornillería</div>
+                </div>
+                <div class="categoria-card" onclick="filtrarPorCategoria('HERRAMIENTA')">
+                    <div class="categoria-icono">🔌</div>
+                    <div class="categoria-nombre">Herramientas</div>
+                </div>
+                <div class="categoria-card" onclick="filtrarPorCategoria('TUBERIA')">
+                    <div class="categoria-icono">🪈</div>
+                    <div class="categoria-nombre">Tuberías</div>
+                </div>
+                <div class="categoria-card" onclick="filtrarPorCategoria('')">
+                    <div class="categoria-icono">📦</div>
+                    <div class="categoria-nombre">Ver Todo</div>
+                </div>
+            </div>
+        </div>
         <div class="buscador-container">
             <input type="text" id="inputBuscador" placeholder="🔍 Busca pinzas, cables, focos..." onkeyup="filtrarProductos()">
         </div>
