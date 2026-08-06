@@ -67,6 +67,23 @@
         .seccion { padding: 3rem 5%; text-align: center; }
         .seccion h2 { color: var(--color-principal); margin-bottom: 2rem; font-size: 2rem; text-transform: uppercase; }
 
+        /* ================= CATEGORÍAS VISUALES ================= */
+        .seccion-categorias { margin-bottom: 30px; }
+        .grid-categorias { 
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 20px;
+        }
+        .categoria-card {
+            background: white; border: 2px solid var(--color-secundario); border-radius: 10px;
+            padding: 15px 10px; text-align: center; cursor: pointer; transition: all 0.3s ease;
+            width: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .categoria-card:hover {
+            background: var(--color-secundario); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+        }
+        .categoria-card:hover .categoria-nombre { color: white; }
+        .categoria-icono { font-size: 2.5rem; margin-bottom: 8px; }
+        .categoria-nombre { font-size: 0.8rem; font-weight: bold; color: var(--color-principal); text-transform: uppercase; line-height: 1.2;}
+
         .buscador-container { max-width: 600px; margin: 0 auto 30px auto; }
         #inputBuscador {
             width: 100%; padding: 15px; font-size: 16px; 
@@ -142,24 +159,10 @@
         <h2>Construcción y Herramientas</h2>
         <p>El mejor surtido en material eléctrico, plomería y ferretería en general.</p>
     </section>
-/* ================= CATEGORÍAS VISUALES ================= */
-        .seccion-categorias { margin-bottom: 30px; }
-        .grid-categorias { 
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 20px;
-        }
-        .categoria-card {
-            background: white; border: 2px solid var(--color-secundario); border-radius: 10px;
-            padding: 15px 10px; text-align: center; cursor: pointer; transition: all 0.3s ease;
-            width: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-        }
-        .categoria-card:hover {
-            background: var(--color-secundario); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
-        }
-        .categoria-card:hover .categoria-nombre { color: white; }
-        .categoria-icono { font-size: 2.5rem; margin-bottom: 8px; }
-        .categoria-nombre { font-size: 0.8rem; font-weight: bold; color: var(--color-principal); text-transform: uppercase; line-height: 1.2;}
+
     <section id="tienda" class="seccion">
         <h2>Nuestro Catálogo</h2>
+        
         <!-- BOTONERA DE CATEGORÍAS -->
         <div class="seccion-categorias">
             <div class="grid-categorias">
@@ -197,6 +200,7 @@
                 </div>
             </div>
         </div>
+
         <div class="buscador-container">
             <input type="text" id="inputBuscador" placeholder="🔍 Busca pinzas, cables, focos..." onkeyup="filtrarProductos()">
         </div>
@@ -1374,7 +1378,8 @@
             { id: 'JAN15', nombre: 'JUEGO DE 15 ACCESORIOS NEUMATICOS, CUERDA 1/4 NTP, TRUPER', departamento: 'FERRETERIA EN GENERAL', precio: 0.0, existencia: 1, imagen: 'https://placehold.co/400x300/e67e22/white?text=Articulo' },
             { id: 'JBMC5', nombre: 'JUEGO DE 5 BROCAS MULTIMATERIAL, TRUPER', departamento: 'FERRETERIA EN GENERAL', precio: 195.0, existencia: 0, imagen: 'https://placehold.co/400x300/e67e22/white?text=Articulo' },
             { id: 'JBROU6', nombre: 'JUEGO DE 6 BROCAS PARA ROUTER, TRUPER', departamento: 'FERRETERIA EN GENERAL', precio: 0.0, existencia: 0, imagen: 'https://placehold.co/400x300/e67e22/white?text=Articulo' },
-            { id: 'JCH', nombre: 'JUEGO DE 2 CHUMACERAS PARA CARRETILLA', departamento: 'FERRETERIA EN GENERAL', precio: 22.0, existencia: 5, imagen: 'https://placehold.co/400x300/e67e22/white?text=Articulo' },
+            { id: 'JCH', nombre: 'JUEGO DE 2 CHUMACERAS PARA CARRETILLA', departamento: 'FERRETERIA EN GENERAL', precio: 22.0, existencia: 5
+, imagen: 'https://placehold.co/400x300/e67e22/white?text=Articulo' },
             { id: 'JD12X9MMP', nombre: 'JUEGO DE 8 DADOS CUADRO 1/2\" MM, PRETUL', departamento: 'FERRETERIA EN GENERAL', precio: 220.0, existencia: 2, imagen: 'https://placehold.co/400x300/e67e22/white?text=Articulo' },
             { id: 'JD12X9SAEP', nombre: 'JUEGO DE 8 DADOS CUADRO 1/2\" STD, PRETUL', departamento: 'FERRETERIA EN GENERAL', precio: 220.0, existencia: 0, imagen: 'https://placehold.co/400x300/e67e22/white?text=Articulo' },
             { id: 'JD38X10SAE', nombre: 'JUEGO DE 9 DADOS CUADRO 3/8\" STD, PRETUL', departamento: 'FERRETERIA EN GENERAL', precio: 180.0, existencia: 0, imagen: 'https://placehold.co/400x300/e67e22/white?text=Articulo' },
@@ -1388,8 +1393,7 @@
             { id: 'JTTUB', nombre: 'JUEGO TORNILLERIA, CHUMACERA Y EJE PARA CARRERILLA TRUPER', departamento: 'FERRETERIA EN GENERAL', precio: 106.0, existencia: 2, imagen: 'https://placehold.co/400x300/e67e22/white?text=Articulo' },
             { id: 'JUDA25P', nombre: 'JUEGO DE DADOS, 21 HERRAMIENTAS 1/4\" Y 3/8\" PARA MECANICO', departamento: 'FERRETERIA EN GENERAL', precio: 165.0, existencia: 3, imagen: 'https://placehold.co/400x300/e67e22/white?text=Articulo' },
             { id: 'KIT5P', nombre: 'KIT 5 BROCASIERRAS PARA MADERA, BLISTER, PRETUL', departamento: 'FERRETERIA EN GENERAL', precio: 85.0, existencia: 3, imagen: 'https://placehold.co/400x300/e67e22/white?text=Articulo' },
-            { id: 'KITROPI915', nombre: 'KIT DE RODILLO PARA PINTAR, 9\" (MANERAL, CHAROLA Y FELPA)', departamento:
- 'FERRETERIA EN GENERAL', precio: 90.0, existencia: 0, imagen: 'https://placehold.co/400x300/e67e22/white?text=Articulo' },
+            { id: 'KITROPI915', nombre: 'KIT DE RODILLO PARA PINTAR, 9\" (MANERAL, CHAROLA Y FELPA)', departamento: 'FERRETERIA EN GENERAL', precio: 90.0, existencia: 0, imagen: 'https://placehold.co/400x300/e67e22/white?text=Articulo' },
             { id: 'KR2L', nombre: 'PISON 10\" X 10\" CON MANGO DE ACERO DE 44\", 5.8 KG, TRUPER', departamento: 'FERRETERIA EN GENERAL', precio: 680.0, existencia: 0, imagen: 'https://placehold.co/400x300/e67e22/white?text=Articulo' },
             { id: 'LACA3D', nombre: 'LINTERNA DE LED, PARA CAMPAMENTO, TIPO FAROL, DE PILAS 3D', departamento: 'FERRETERIA EN GENERAL', precio: 376.0, existencia: 2, imagen: 'https://placehold.co/400x300/e67e22/white?text=Articulo' },
             { id: 'LAE100', nombre: 'LÁMPARA DE EMERGENCIA DE 500 LM RECARGABLE, VOLTECK', departamento: 'MATERIAL ELECTRICO', precio: 275.0, existencia: 0, imagen: 'https://placehold.co/400x300/e67e22/white?text=Articulo' },
@@ -2464,24 +2468,19 @@
             }
         }
 
-        function filtrarProductos() {
-            function filtrarPorCategoria(categoriaBuscada) {
-            // Limpia el texto del buscador si se usa un botón
+        function filtrarPorCategoria(categoriaBuscada) {
             document.getElementById("inputBuscador").value = ""; 
-            
             if (categoriaBuscada === '') {
-                // El botón "Ver Todo" muestra la lista original
                 mostrarProductos(inventario);
                 return;
             }
-
-            // Filtra dependiendo del botón que presionaste
             const filtrados = inventario.filter(prod => 
                 prod.departamento.toUpperCase().includes(categoriaBuscada)
             );
-            
             mostrarProductos(filtrados);
         }
+
+        function filtrarProductos() {
             const textoBusqueda = document.getElementById("inputBuscador").value.toLowerCase();
             const filtrados = inventario.filter(prod => 
                 prod.nombre.toLowerCase().includes(textoBusqueda) || 
