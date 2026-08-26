@@ -374,7 +374,7 @@
         <p style="color: #6b7280; margin-top: 15px; font-size: 0.9rem;">&copy; 2026 Ferreteral del Sureste. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- LÓGICA BASE (VARIABLES GLOBALES) -->
+   <!-- LÓGICA BASE (VARIABLES GLOBALES) -->
     <script>
         var isMayoreo = false;
         var total = 0; 
@@ -389,11 +389,13 @@
             document.body.classList.add('mayoreo-active');
             document.querySelector('header .logo').innerHTML = `<i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE <span style="font-size:11px; background:var(--amarillo); color:black; padding:4px 10px; border-radius:20px; margin-left:10px; vertical-align:middle; text-shadow:none;">MAYOREO: ${nombreUsuario}</span>`;
             
+            // MOSTRAR TABLAS DE VOLUMEN
             let cards = document.querySelectorAll('.card');
             cards.forEach(card => {
-                let pNormal = parseFloat(card.getAttribute('data-price')).toFixed(2);
-                let pMayoreo = parseFloat(card.getAttribute('data-price-wholesale')).toFixed(2);
-                card.querySelector('.price-text').innerHTML = `<span style="font-size:1rem; text-decoration:line-through; color:var(--texto-claro); font-weight:600;">$${pNormal}</span> <span style="color:var(--primario); font-size: 2rem;">$${pMayoreo}</span>`;
+                let tablaEscalas = card.querySelector('.tabla-escalas');
+                if(tablaEscalas && tablaEscalas.innerHTML.includes('A partir de')) {
+                    tablaEscalas.style.display = 'block'; // Muestra la tabla si tiene precios
+                }
             });
             
             cart = [];
@@ -456,17 +458,13 @@
         }
 
         // VISTA RÁPIDA Y CARRITO
-        function openQuickView(imgSrc, title, price, wholesalePrice, dept) {
+        function openQuickView(imgSrc, title, price, dept) {
             document.getElementById('qv-img').src = imgSrc;
             document.getElementById('qv-title').innerText = title;
             document.getElementById('qv-dept').innerText = "Depto: " + dept;
-            let activePrice = isMayoreo ? wholesalePrice : price;
-            if(isMayoreo) {
-                document.getElementById('qv-price').innerHTML = `<span style="font-size:1.5rem; text-decoration:line-through; color:var(--texto-claro);">$$${price.toFixed(2)}</span> <span style="color:var(--primario);">$$${activePrice.toFixed(2)}</span>`;
-            } else {
-                document.getElementById('qv-price').innerText = "$" + activePrice.toFixed(2);
-            }
-            document.getElementById('qv-add-btn').onclick = function() { addToCart(title, price, wholesalePrice); closeQuickView(); };
+            document.getElementById('qv-price').innerText = "$" + parseFloat(price).toFixed(2);
+            
+            document.getElementById('qv-add-btn').onclick = function() { addToCart(title, price); closeQuickView(); };
             document.getElementById('quickViewModal').classList.add('active');
             document.body.style.overflow = 'hidden'; 
         }
@@ -477,9 +475,8 @@
             document.body.style.overflow = 'auto'; 
         }
 
-        function addToCart(name, retailPrice, wholesalePrice) {
-            let activePrice = isMayoreo ? wholesalePrice : retailPrice;
-            cart.push({name: name, price: activePrice});
+        function addToCart(name, retailPrice) {
+            cart.push({name: name, price: retailPrice});
             renderCart();
             showToast(`Agregado al carrito: ${name}`);
             let cartIcon = document.querySelector('.nav-cart');
@@ -502,7 +499,7 @@
                     total += item.price;
                     let li = document.createElement('li');
                     li.className = 'cart-item-row';
-                    li.innerHTML = `<span><i class="fa-solid fa-check" style="color:var(--primario);"></i> <strong style="font-size: 0.9rem;">${item.name}</strong> - <span style="color:var(--texto-oscuro); font-weight:800;">$${item.price.toFixed(2)}</span></span>` +
+                    li.innerHTML = `<span><i class="fa-solid fa-check" style="color:var(--primario);"></i> <strong style="font-size: 0.9rem;">${item.name}</strong></span>` +
                                    `<button onclick="removeFromCart(${index})"><i class="fa-solid fa-trash"></i> Quitar</button>`;
                     cartItemsElement.appendChild(li);
                 });
@@ -562,7 +559,7 @@
                 const querySnapshot = await getDocs(q);
 
                 if (!querySnapshot.empty) {
-                    window.isMayoreo = true; // Sincroniza variable global
+                    window.isMayoreo = true; 
                     document.getElementById('mayoreoModal').classList.remove('active');
                     enableMayoreoMode(user);
                     alert("¡Bienvenido Mayorista: " + user + "!");
@@ -606,7 +603,7 @@
             }
         };
 
-        // NUEVO: PROCESAR PEDIDO POR WHATSAPP Y GUARDAR EN FIREBASE
+        // PROCESAR PEDIDO POR WHATSAPP Y GUARDAR EN FIREBASE
         window.procesarPedidoWhatsApp = async function() {
             if (window.cart.length === 0) {
                 alert("Tu carrito está vacío. Agrega productos antes de enviar el pedido.");
@@ -619,13 +616,12 @@
             btn.disabled = true;
 
             try {
-                // 1. Quién hace el pedido
                 let clienteNombre = window.isMayoreo ? document.getElementById('mayoreo-user').value.trim().toUpperCase() : "Público General";
 
-                // 2. Guardar en Firestore para control de Stock
+                // Guardar en Firestore para control de Stock
                 let pedidoData = {
                     fecha: new Date().toLocaleString("es-MX", { timeZone: "America/Mexico_City" }),
-                    total: window.total,
+                    total_publico: window.total,
                     cliente: clienteNombre,
                     esMayoreo: window.isMayoreo,
                     productos: window.cart,
@@ -634,27 +630,27 @@
 
                 await addDoc(collection(db, "pedidos"), pedidoData);
 
-                // 3. Crear el mensaje de WhatsApp
+                // Crear el mensaje de WhatsApp
                 let mensajeWA = `*NUEVO PEDIDO - FERRETERAL DEL SURESTE*%0A`;
                 mensajeWA += `-----------------------------------%0A`;
                 if(window.isMayoreo) {
-                    mensajeWA += `👷‍♂️ *Cliente:* ${clienteNombre}%0A`;
+                    mensajeWA += `👷‍♂️ *Cliente Mayorista:* ${clienteNombre}%0A`;
+                    mensajeWA += `*(Aplicar precios según escala de volumen)*%0A`;
                 }
-                mensajeWA += `🛍️ *Productos:*%0A`;
+                mensajeWA += `🛍️ *Productos Solicitados:*%0A`;
                 
                 window.cart.forEach((item, index) => {
-                    mensajeWA += `${index + 1}. ${item.name} - $${item.price.toFixed(2)}%0A`;
+                    mensajeWA += `${index + 1}. ${item.name}%0A`;
                 });
                 
                 mensajeWA += `-----------------------------------%0A`;
-                mensajeWA += `💰 *TOTAL A PAGAR:* $${window.total.toFixed(2)}%0A%0A`;
-                mensajeWA += `Por favor, confírmenme el pedido para realizar el pago.`;
+                mensajeWA += `Por favor, confírmenme la disponibilidad y el total a pagar.`;
 
-                // 4. Limpiar el carrito de la página
+                // Limpiar el carrito de la página
                 window.cart = [];
                 renderCart();
 
-                // 5. Redirigir a WhatsApp
+                // Redirigir a WhatsApp
                 let numeroWhatsApp = "529641091387";
                 window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeWA}`, '_blank');
 
