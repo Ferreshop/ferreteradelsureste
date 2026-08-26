@@ -9,7 +9,6 @@
     
     <style>
         :root {
-            /* Paleta Ferretera Premium */
             --primario: #ff6600; 
             --primario-hover: #e65c00;
             --gradiente-naranja: linear-gradient(135deg, #ff8c00 0%, #ff5500 100%);
@@ -30,8 +29,8 @@
 
         /* MODO MAYOREO */
         body.mayoreo-active { border-top: 6px solid var(--amarillo); }
-        body.mayoreo-active .btn-buy { background: var(--amarillo); color: var(--secundario); box-shadow: 0 8px 20px rgba(250, 204, 21, 0.4); }
-        body.mayoreo-active .btn-buy:hover { background: #eab308; transform: translateY(-3px); }
+        body.mayoreo-active .btn-buy:not([disabled]) { background: var(--amarillo); color: var(--secundario); box-shadow: 0 8px 20px rgba(250, 204, 21, 0.4); }
+        body.mayoreo-active .btn-buy:not([disabled]):hover { background: #eab308; transform: translateY(-3px); }
 
         /* CABECERA (HEADER) */
         header { 
@@ -105,7 +104,7 @@
         .product-img { width: 100%; height: 200px; object-fit: contain; transition: 0.5s; }
         .img-wrapper:hover .product-img { transform: scale(1.1); }
 
-        .stock-badge { position: absolute; bottom: 10px; right: 10px; background: var(--secundario); color: var(--blanco); font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 20px; z-index: 3; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
+        .stock-badge { position: absolute; bottom: 10px; right: 10px; background: var(--secundario); color: var(--blanco); font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 20px; z-index: 3; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: background 0.3s;}
         
         .quick-view-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); background: rgba(255, 255, 255, 0.95); color: var(--secundario); padding: 12px 25px; border-radius: 30px; font-size: 0.9rem; font-weight: 700; transition: 0.3s; opacity: 0; z-index: 4; text-transform: uppercase; box-shadow: 0 5px 15px rgba(0,0,0,0.2);}
         .img-wrapper:hover .quick-view-btn { opacity: 1; transform: translate(-50%, -50%) scale(1); }
@@ -115,7 +114,10 @@
         .price-text { margin: 15px 0; color: var(--primario); font-size: 1.8rem; font-weight: 800; }
         
         .btn-buy { background: var(--gradiente-naranja); color: white; border: none; padding: 15px 25px; cursor: pointer; border-radius: 12px; font-weight: 700; transition: 0.3s; width: 100%; font-size: 1.05rem; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(255,102,0,0.25);}
-        .btn-buy:hover { background: var(--secundario); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
+        .btn-buy:not([disabled]):hover { background: var(--secundario); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
+
+        .escala-mayoreo-etiqueta { display: none; background: rgba(255,102,0,0.1); color: var(--primario); padding: 5px 10px; border-radius: 8px; font-size: 10.5px; font-weight: 700; margin-bottom: 15px; border: 1px solid rgba(255,102,0,0.2); }
+        body.mayoreo-active .escala-mayoreo-etiqueta { display: inline-block; }
 
         /* CARRITO */
         .cart-section, .quote-section, .reviews-section { background: var(--blanco); padding: 50px; margin-top: 50px; border-radius: 20px; border: none; box-shadow: var(--sombra-suave); }
@@ -197,6 +199,7 @@
                 <img id="qv-img" src="" alt="Producto">
             </div>
             <div class="modal-right">
+                <span class="escala-mayoreo-etiqueta" style="width: max-content; display:inline-block;"><i class="fa-solid fa-layer-group"></i> Escalas Por Volumen</span>
                 <span class="modal-dept" id="qv-dept" style="color:var(--texto-claro); font-weight:800; font-size:0.95rem; text-transform:uppercase; letter-spacing: 1px;">DEPARTAMENTO</span>
                 <h2 class="modal-title" id="qv-title" style="font-size:1.8rem; font-weight:800; color:var(--texto-oscuro); margin:15px 0; text-transform:uppercase; line-height: 1.2;">Nombre del Producto</h2>
                 <div class="modal-price" id="qv-price" style="font-size:3rem; color:var(--primario); font-weight:800; margin-bottom:30px; text-shadow: 0 2px 5px rgba(255,102,0,0.1);">$0.00</div>
@@ -304,11 +307,11 @@
         <div class="grid" id="product-grid">
 
             <!-- ========================================== -->
-            <!-- COMIENZAN TUS PRODUCTOS -->
+            <!-- TUS PRODUCTOS VAN AQUÍ DEBAJO -->
             <!-- ========================================== -->
 
             <!-- CÓDIGO: 12940 -->
-            <div class="card fade-in" data-brand="TRUPER EXPERT" data-name="DADO MAGNETICO DE 3/8&quot; LARGO 2 1/2&quot; TRUPER EXPERT" data-price="62.0" data-t3="0.0" data-t5="0.0" data-t10="17.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="FERRETERIA EN GENERAL" style="display:flex;">
+            <div class="card fade-in" data-brand="TRUPER EXPERT" data-name="DADO MAGNETICO DE 3/8&quot; LARGO 2 1/2&quot; TRUPER EXPERT" data-price="62.0" data-stock="5.4" data-t3="0.0" data-t5="0.0" data-t10="17.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="FERRETERIA EN GENERAL" style="display:flex;">
                 <div>
                     <div class="img-wrapper" onclick="openQuickView(this)">
                         <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="DADO MAGNETICO DE 3/8&quot; LARGO 2 1/2&quot; TRUPER EXPERT" class="product-img">
@@ -326,16 +329,16 @@
                 <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
             </div>
             <!-- CÓDIGO: 205 -->
-            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR ROJO ESCARLATA." data-price="90.0" data-t3="0.0" data-t5="0.0" data-t10="85.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
+            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR ROJO ESCARLATA." data-price="90.0" data-stock="2.0" data-t3="0.0" data-t5="0.0" data-t10="85.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
                 <div>
                     <div class="img-wrapper" onclick="openQuickView(this)">
                         <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="PINTURA PARA CEMENTO COLOR ROJO ESCARLATA." class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 2 disp.</span>
+                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 2.0 disp.</span>
                         <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 205</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS...</span>
+                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS</span>
                     </div>
                     <h3 class="product-title">PINTURA PARA CEMENTO COLOR ROJO ESCARLATA.</h3>
                     <p class="price-text">$90.00</p>
@@ -344,34 +347,34 @@
                 <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
             </div>
             <!-- CÓDIGO: 209 -->
-            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR VERDE NILO" data-price="70.0" data-t3="0.0" data-t5="0.0" data-t10="66.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
+            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR VERDE NILO" data-price="70.0" data-stock="0" data-t3="0.0" data-t5="0.0" data-t10="66.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
                 <div>
                     <div class="img-wrapper" onclick="openQuickView(this)">
                         <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="PINTURA PARA CEMENTO COLOR VERDE NILO" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 0 disp.</span>
+                        <span class="stock-badge" style="background:#e11d48;"><i class="fa-solid fa-box"></i> 0 disp.</span>
                         <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 209</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS...</span>
+                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS</span>
                     </div>
                     <h3 class="product-title">PINTURA PARA CEMENTO COLOR VERDE NILO</h3>
                     <p class="price-text">$70.00</p>
                     <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 10 pzas:</span> <b>$66.00</b></div></div>
                 </div>
-                <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
+                <button class="btn-buy" disabled style="background:#94a3b8; cursor:not-allowed; box-shadow:none;"><i class="fa-solid fa-ban"></i> Agotado</button>
             </div>
             <!-- CÓDIGO: 210 -->
-            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR VERDE HOJA" data-price="93.0" data-t3="0.0" data-t5="0.0" data-t10="87.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
+            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR VERDE HOJA" data-price="93.0" data-stock="1.0" data-t3="0.0" data-t5="0.0" data-t10="87.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
                 <div>
                     <div class="img-wrapper" onclick="openQuickView(this)">
                         <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="PINTURA PARA CEMENTO COLOR VERDE HOJA" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 1 disp.</span>
+                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 1.0 disp.</span>
                         <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 210</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS...</span>
+                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS</span>
                     </div>
                     <h3 class="product-title">PINTURA PARA CEMENTO COLOR VERDE HOJA</h3>
                     <p class="price-text">$93.00</p>
@@ -380,52 +383,52 @@
                 <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
             </div>
             <!-- CÓDIGO: 211 -->
-            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR VERDE TURQUESA" data-price="80.0" data-t3="0.0" data-t5="0.0" data-t10="78.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
+            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR VERDE TURQUESA" data-price="80.0" data-stock="0" data-t3="0.0" data-t5="0.0" data-t10="78.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
                 <div>
                     <div class="img-wrapper" onclick="openQuickView(this)">
                         <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="PINTURA PARA CEMENTO COLOR VERDE TURQUESA" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 0 disp.</span>
+                        <span class="stock-badge" style="background:#e11d48;"><i class="fa-solid fa-box"></i> 0 disp.</span>
                         <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 211</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS...</span>
+                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS</span>
                     </div>
                     <h3 class="product-title">PINTURA PARA CEMENTO COLOR VERDE TURQUESA</h3>
                     <p class="price-text">$80.00</p>
                     <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 10 pzas:</span> <b>$78.00</b></div></div>
                 </div>
-                <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
+                <button class="btn-buy" disabled style="background:#94a3b8; cursor:not-allowed; box-shadow:none;"><i class="fa-solid fa-ban"></i> Agotado</button>
             </div>
             <!-- CÓDIGO: 212 -->
-            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR  AZUL CELESTE" data-price="72.0" data-t3="0.0" data-t5="0.0" data-t10="70.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
+            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR  AZUL CELESTE" data-price="72.0" data-stock="0" data-t3="0.0" data-t5="0.0" data-t10="70.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
                 <div>
                     <div class="img-wrapper" onclick="openQuickView(this)">
                         <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="PINTURA PARA CEMENTO COLOR  AZUL CELESTE" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 0 disp.</span>
+                        <span class="stock-badge" style="background:#e11d48;"><i class="fa-solid fa-box"></i> 0 disp.</span>
                         <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 212</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS...</span>
+                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS</span>
                     </div>
                     <h3 class="product-title">PINTURA PARA CEMENTO COLOR  AZUL CELESTE</h3>
                     <p class="price-text">$72.00</p>
                     <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 10 pzas:</span> <b>$70.00</b></div></div>
                 </div>
-                <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
+                <button class="btn-buy" disabled style="background:#94a3b8; cursor:not-allowed; box-shadow:none;"><i class="fa-solid fa-ban"></i> Agotado</button>
             </div>
             <!-- CÓDIGO: 214 -->
-            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR  AZUL REY" data-price="140.0" data-t3="0.0" data-t5="0.0" data-t10="134.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
+            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR  AZUL REY" data-price="140.0" data-stock="4.0" data-t3="0.0" data-t5="0.0" data-t10="134.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
                 <div>
                     <div class="img-wrapper" onclick="openQuickView(this)">
                         <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="PINTURA PARA CEMENTO COLOR  AZUL REY" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 4 disp.</span>
+                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 4.0 disp.</span>
                         <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 214</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS...</span>
+                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS</span>
                     </div>
                     <h3 class="product-title">PINTURA PARA CEMENTO COLOR  AZUL REY</h3>
                     <p class="price-text">$140.00</p>
@@ -433,154 +436,45 @@
                 </div>
                 <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
             </div>
-            <!-- CÓDIGO: 219P -->
-            <div class="card fade-in" data-brand="TRUPER" data-name="PINZA PARA ELECTRICISTA TRUPER DE 9&quot;" data-price="130.0" data-t3="0.0" data-t5="115.0" data-t10="0.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="FERRETERIA EN GENERAL" style="display:flex;">
-                <div>
-                    <div class="img-wrapper" onclick="openQuickView(this)">
-                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="PINZA PARA ELECTRICISTA TRUPER DE 9&quot;" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 4 disp.</span>
-                        <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 219P</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">FERRETERIA EN G...</span>
-                    </div>
-                    <h3 class="product-title">PINZA PARA ELECTRICISTA TRUPER DE 9&quot;</h3>
-                    <p class="price-text">$130.00</p>
-                    <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 5 pzas:</span> <b>$115.00</b></div></div>
-                </div>
-                <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
-            </div>
             <!-- CÓDIGO: 3020600 -->
-            <div class="card fade-in" data-brand="CATO JAZMIN" data-name="ACCESORIOS CERAMICOS PARA BAÑO CATO JAZMIN COLOR BLANCO" data-price="350.0" data-t3="340.0" data-t5="0.0" data-t10="0.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PLOMERIA" style="display:flex;">
+            <div class="card fade-in" data-brand="CATO JAZMIN" data-name="ACCESORIOS CERAMICOS PARA BAÑO CATO JAZMIN COLOR BLANCO" data-price="350.0" data-stock="0" data-t3="340.0" data-t5="0.0" data-t10="0.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PLOMERIA" style="display:flex;">
                 <div>
                     <div class="img-wrapper" onclick="openQuickView(this)">
                         <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="ACCESORIOS CERAMICOS PARA BAÑO CATO JAZMIN COLOR BLANCO" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 0 disp.</span>
+                        <span class="stock-badge" style="background:#e11d48;"><i class="fa-solid fa-box"></i> 0 disp.</span>
                         <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 3020600</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PLOMERIA...</span>
+                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PLOMERIA</span>
                     </div>
                     <h3 class="product-title">ACCESORIOS CERAMICOS PARA BAÑO CATO JAZMIN COLOR BLANCO</h3>
                     <p class="price-text">$350.00</p>
                     <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 3 pzas:</span> <b>$340.00</b></div></div>
                 </div>
-                <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
+                <button class="btn-buy" disabled style="background:#94a3b8; cursor:not-allowed; box-shadow:none;"><i class="fa-solid fa-ban"></i> Agotado</button>
             </div>
-            <!-- CÓDIGO: 3020601 -->
-            <div class="card fade-in" data-brand="CATO JAZMIN" data-name="ACCESORIOS CERAMICOS PARA BAÑO CATO JAZMIN COLOR MARFIL" data-price="510.0" data-t3="0.0" data-t5="0.0" data-t10="0.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PLOMERIA" style="display:flex;">
+            <!-- CÓDIGO: 8404 -->
+            <div class="card fade-in" data-brand="ADVANCE" data-name="TUBO DE PVC PARA USO SANITARIO DE 2&quot;" data-price="27.0" data-stock="109.0" data-t3="22.5" data-t5="0.0" data-t10="20.66" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="TUBERIA SANITARIA" style="display:flex;">
                 <div>
                     <div class="img-wrapper" onclick="openQuickView(this)">
-                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="ACCESORIOS CERAMICOS PARA BAÑO CATO JAZMIN COLOR MARFIL" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 0 disp.</span>
+                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="TUBO DE PVC PARA USO SANITARIO DE 2&quot;" class="product-img">
+                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 109.0 disp.</span>
                         <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 3020601</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PLOMERIA...</span>
+                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 8404</span>
+                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">TUBERIA SANIT...</span>
                     </div>
-                    <h3 class="product-title">ACCESORIOS CERAMICOS PARA BAÑO CATO JAZMIN COLOR MARFIL</h3>
-                    <p class="price-text">$510.00</p>
-                    
-                </div>
-                <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
-            </div>
-            <!-- CÓDIGO: 3023260B -->
-            <div class="card fade-in" data-brand="ADVANCE" data-name="CODO DE 90° DE PVC PARA USO HIDRAULICO DE 6&quot; CEDULA 40" data-price="130.0" data-t3="0.0" data-t5="0.0" data-t10="0.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="TUBERIA HIDRAULICO" style="display:flex;">
-                <div>
-                    <div class="img-wrapper" onclick="openQuickView(this)">
-                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="CODO DE 90° DE PVC PARA USO HIDRAULICO DE 6&quot; CEDULA 40" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 2 disp.</span>
-                        <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 3023260B</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">TUBERIA HIDRAUL...</span>
-                    </div>
-                    <h3 class="product-title">CODO DE 90° DE PVC PARA USO HIDRAULICO DE 6&quot; CEDULA 40</h3>
-                    <p class="price-text">$130.00</p>
-                    
-                </div>
-                <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
-            </div>
-            <!-- CÓDIGO: 3023640B -->
-            <div class="card fade-in" data-brand="ADVANCE" data-name="ADAPTADOR HERMBRA PARA USO HIDRÁULICO DE 4&quot; CEDULA 40" data-price="52.0" data-t3="0.0" data-t5="0.0" data-t10="0.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="TUBERIA HIDRAULICO" style="display:flex;">
-                <div>
-                    <div class="img-wrapper" onclick="openQuickView(this)">
-                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="ADAPTADOR HERMBRA PARA USO HIDRÁULICO DE 4&quot; CEDULA 40" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 4 disp.</span>
-                        <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 3023640B</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">TUBERIA HIDRAUL...</span>
-                    </div>
-                    <h3 class="product-title">ADAPTADOR HERMBRA PARA USO HIDRÁULICO DE 4&quot; CEDULA 40</h3>
-                    <p class="price-text">$52.00</p>
-                    
-                </div>
-                <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
-            </div>
-            <!-- CÓDIGO: 3023825B -->
-            <div class="card fade-in" data-brand="ADVANCE" data-name="ADAPTADOR MACHO PARA USO HIDRÁULICO DE 2 1/2&quot; CEDULA 40" data-price="27.0" data-t3="0.0" data-t5="0.0" data-t10="0.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="TUBERIA HIDRAULICO" style="display:flex;">
-                <div>
-                    <div class="img-wrapper" onclick="openQuickView(this)">
-                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="ADAPTADOR MACHO PARA USO HIDRÁULICO DE 2 1/2&quot; CEDULA 40" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 3 disp.</span>
-                        <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 3023825B</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">TUBERIA HIDRAUL...</span>
-                    </div>
-                    <h3 class="product-title">ADAPTADOR MACHO PARA USO HIDRÁULICO DE 2 1/2&quot; CEDULA 40</h3>
+                    <h3 class="product-title">TUBO DE PVC PARA USO SANITARIO DE 2&quot;</h3>
                     <p class="price-text">$27.00</p>
-                    
-                </div>
-                <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
-            </div>
-            <!-- CÓDIGO: 49555 -->
-            <div class="card fade-in" data-brand="FOSET" data-name="JUEGO DE 2 TAPAS  PARA COLADERA DE 5&quot;, FOSET" data-price="22.0" data-t3="0.0" data-t5="0.0" data-t10="20.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="FERRETERIA EN GENERAL" style="display:flex;">
-                <div>
-                    <div class="img-wrapper" onclick="openQuickView(this)">
-                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="JUEGO DE 2 TAPAS  PARA COLADERA DE 5&quot;, FOSET" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 9 disp.</span>
-                        <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 49555</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">FERRETERIA EN G...</span>
-                    </div>
-                    <h3 class="product-title">JUEGO DE 2 TAPAS  PARA COLADERA DE 5&quot;, FOSET</h3>
-                    <p class="price-text">$22.00</p>
-                    <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 10 pzas:</span> <b>$20.00</b></div></div>
-                </div>
-                <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
-            </div>
-            <!-- CÓDIGO: 57001 -->
-            <div class="card fade-in" data-brand="KLINTEK" data-name="ESTOPA COLOR CREMA, KLINTEK" data-price="60.0" data-t3="32.0" data-t5="0.0" data-t10="50.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="FERRETERIA EN GENERAL" style="display:flex;">
-                <div>
-                    <div class="img-wrapper" onclick="openQuickView(this)">
-                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="ESTOPA COLOR CREMA, KLINTEK" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 1 disp.</span>
-                        <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 57001</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">FERRETERIA EN G...</span>
-                    </div>
-                    <h3 class="product-title">ESTOPA COLOR CREMA, KLINTEK</h3>
-                    <p class="price-text">$60.00</p>
-                    <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 3 pzas:</span> <b>$32.00</b></div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 10 pzas:</span> <b>$50.00</b></div></div>
+                    <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 3 pzas:</span> <b>$22.50</b></div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 10 pzas:</span> <b>$20.66</b></div></div>
                 </div>
                 <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
             </div>
 
             <!-- ========================================== -->
             <!-- TERMINA MUESTRA DE PRODUCTOS -->
-            <!-- TUS DEMÁS PRODUCTOS GENERADOS EN EXCEL VAN AQUÍ DEBAJO -->
             <!-- ========================================== -->
 
         </div>
@@ -641,7 +535,7 @@
             </div>
         </div>
 
-        <!-- COTIZACIONES (CONECTADO A FIREBASE) -->
+        <!-- COTIZACIONES -->
         <div class="quote-section fade-in">
             <h2 style="text-align: left; margin-bottom: 10px; color: var(--texto-oscuro); font-weight:800; text-transform:uppercase;">¿Requieres una Cotización?</h2>
             <p style="margin-bottom: 30px; color: var(--texto-claro); font-size: 1.1rem;">Ideal para constructoras, contratistas o compras de alto volumen.</p>
@@ -672,7 +566,7 @@
         <p style="color: #6b7280; margin-top: 15px; font-size: 0.9rem;">&copy; 2026 Ferreteral del Sureste. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- LÓGICA BASE Y JAVASCRIPT (CARRITO CON CANTIDADES Y PRECIOS DINÁMICOS) -->
+    <!-- LÓGICA BASE Y JAVASCRIPT -->
     <script>
         var isMayoreo = false;
         var total = 0; 
@@ -696,11 +590,10 @@
                     tablaEscalas.style.display = 'block'; 
                 }
             });
-            
-            renderCart(); // Refresca carrito para aplicar precios mayoreo si ya tenían cosas
+            renderCart(); 
         }
 
-        // SLIDER
+        // ANIMACIÓN SCROLL Y CARRUSEL
         let currentSlideIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
@@ -713,7 +606,6 @@
         }
         setInterval(() => { changeSlide((currentSlideIndex + 1) % slides.length); }, 5000);
 
-        // SCROLL
         const faders = document.querySelectorAll('.fade-in');
         const appearOnScroll = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
@@ -758,7 +650,7 @@
         // VISTA RÁPIDA 
         function openQuickView(element) {
             let card = element.closest('.card');
-            currentQuickViewCard = card; // Guardar tarjeta actual
+            currentQuickViewCard = card; 
 
             let name = card.getAttribute('data-name');
             let price = parseFloat(card.getAttribute('data-price'));
@@ -787,10 +679,10 @@
             }
         };
 
-        // FUNCIÓN QUE CALCULA EL PRECIO SEGÚN CANTIDAD (ESCALAS DE MAYOREO)
+        // CALCULAR PRECIO MAYOREO
         function calculateItemPrice(item) {
             let price = item.basePrice;
-            if (!window.isMayoreo) return price; // Solo hace descuentos si es Mayorista
+            if (!window.isMayoreo) return price; 
 
             let q = item.qty;
             let t = item.tiers;
@@ -807,13 +699,36 @@
             return price;
         }
 
-        // LÓGICA DEL CARRITO DINÁMICO
+        // LÓGICA DE ACTUALIZAR LA ETIQUETA VISUAL DE STOCK
+        function updateStockUI() {
+            document.querySelectorAll('.card').forEach(card => {
+                let name = card.getAttribute('data-name');
+                let maxStock = parseFloat(card.getAttribute('data-stock'));
+                
+                let inCartItem = cart.find(i => i.name === name);
+                let inCartQty = inCartItem ? inCartItem.qty : 0;
+                
+                let available = maxStock - inCartQty;
+                
+                let badge = card.querySelector('.stock-badge');
+                if (badge) {
+                    badge.innerHTML = `<i class="fa-solid fa-box"></i> ${available.toFixed(1).replace('.0','')} disp.`;
+                    if (available <= 0 && maxStock > 0) {
+                        badge.style.background = "#e11d48"; // Rojo si se acabaron
+                    } else {
+                        badge.style.background = "var(--secundario)";
+                    }
+                }
+            });
+        }
+
+        // LÓGICA DEL CARRITO CON CONTROL DE INVENTARIO
         function addToCart(element) {
             let card = element.closest('.card');
             let name = card.getAttribute('data-name');
             let basePrice = parseFloat(card.getAttribute('data-price'));
+            let maxStock = parseFloat(card.getAttribute('data-stock'));
             
-            // Extraer las escalas de la tarjeta
             let tiers = {
                 3: parseFloat(card.getAttribute('data-t3')) || 0,
                 5: parseFloat(card.getAttribute('data-t5')) || 0,
@@ -826,10 +741,17 @@
             };
 
             let existingItem = cart.find(i => i.name === name);
+            let currentQty = existingItem ? existingItem.qty : 0;
+
+            if (currentQty + 1 > maxStock) {
+                alert(`No hay suficiente inventario disponible. Solo quedan ${maxStock}.`);
+                return;
+            }
+
             if (existingItem) {
                 existingItem.qty++;
             } else {
-                cart.push({ name: name, basePrice: basePrice, qty: 1, tiers: tiers });
+                cart.push({ name: name, basePrice: basePrice, maxStock: maxStock, qty: 1, tiers: tiers });
             }
             
             renderCart();
@@ -841,8 +763,15 @@
 
         // BOTONES DE MAS Y MENOS EN CARRITO
         window.changeQty = function(index, delta) {
-            cart[index].qty += delta;
-            if (cart[index].qty <= 0) {
+            let item = cart[index];
+            
+            if (delta > 0 && item.qty + delta > item.maxStock) {
+                alert(`Límite alcanzado. Solo hay ${item.maxStock} piezas en inventario.`);
+                return;
+            }
+
+            item.qty += delta;
+            if (item.qty <= 0) {
                 cart.splice(index, 1);
             }
             renderCart();
@@ -893,6 +822,8 @@
             }
             document.getElementById('cart-total').innerText = total.toFixed(2);
             document.getElementById('cart-count').innerText = count;
+
+            updateStockUI(); // Refresca las etiquetas de la tienda
         }
 
         function showToast(message) {
@@ -902,14 +833,12 @@
             toast.style.cssText = 'background: var(--secundario); color: white; padding: 15px 25px; border-radius: 8px; font-weight: 600; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); border-left: 5px solid var(--primario); animation: slideIn 0.3s forwards;';
             toast.innerHTML = `<div style="background: white; color: var(--primario); border-radius:50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-check"></i></div> <span>${message}</span>`;
             
-            // Add keyframes if not exists
             if(!document.getElementById('toast-style')) {
                 let style = document.createElement('style');
                 style.id = 'toast-style';
                 style.innerHTML = `@keyframes slideIn { from { transform: translateX(-150%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }`;
                 document.head.appendChild(style);
             }
-
             container.appendChild(toast);
             setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3000);
         }
@@ -941,7 +870,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // LOGIN DE MAYORISTAS CON FIRESTORE
+        // LOGIN DE MAYORISTAS
         window.loginMayoreo = async function() {
             let user = document.getElementById('mayoreo-user').value.trim().toUpperCase();
             let pwd = document.getElementById('mayoreo-pwd').value.trim();
@@ -1014,14 +943,14 @@
             try {
                 let clienteNombre = window.isMayoreo ? document.getElementById('mayoreo-user').value.trim().toUpperCase() : "Público General";
 
-                // Guardar en Firestore para control de Stock
+                // Guardar en Firestore para control de Stock real
                 let pedidoData = {
                     fecha: new Date().toLocaleString("es-MX", { timeZone: "America/Mexico_City" }),
-                    total_pagar: window.total,
+                    total_estimado: window.total,
                     cliente: clienteNombre,
                     esMayoreo: window.isMayoreo,
                     productos: window.cart,
-                    estado: "Por Descontar Stock"
+                    estado: "Pendiente"
                 };
 
                 await addDoc(collection(db, "pedidos"), pedidoData);
@@ -1041,14 +970,14 @@
                 });
                 
                 mensajeWA += `-----------------------------------%0A`;
-                mensajeWA += `💰 *TOTAL A PAGAR:* $${window.total.toFixed(2)}%0A%0A`;
-                mensajeWA += `Por favor, confírmenme la disponibilidad para proceder.`;
+                mensajeWA += `💰 *TOTAL ESTIMADO:* $${window.total.toFixed(2)}%0A%0A`;
+                mensajeWA += `Por favor, confírmenme la disponibilidad para proceder con mi pago.`;
 
-                // Limpiar el carrito de la página
+                // Limpiar el carrito
                 window.cart = [];
                 window.renderCart();
 
-                // Redirigir a WhatsApp (Reemplaza el número si es necesario)
+                // Redirigir a WhatsApp
                 let numeroWhatsApp = "529641091387";
                 window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeWA}`, '_blank');
 
