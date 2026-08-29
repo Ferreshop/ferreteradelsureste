@@ -31,86 +31,135 @@
         body.mayoreo-active .btn-buy:not([disabled]) { background: var(--amarillo); color: var(--secundario); box-shadow: 0 8px 20px rgba(250, 204, 21, 0.4); }
         body.mayoreo-active .btn-buy:not([disabled]):hover { background: #eab308; transform: translateY(-3px); }
 
-        /* HEADER, SLIDER Y UI BÁSICA */
+        /* CABECERA */
         header { padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; background: rgba(17, 17, 17, 0.98); color: var(--blanco); border-bottom: 3px solid var(--primario); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
-        .logo { font-size: 26px; font-weight: 800; display: flex; align-items: center; gap: 12px; letter-spacing: 1px;}
+        .logo { font-size: 26px; color: var(--blanco); font-weight: 800; display: flex; align-items: center; gap: 12px; letter-spacing: 1px;}
         .logo i { font-size: 32px; color: var(--primario); }
-        nav { display: flex; align-items: center; gap: 15px;}
-        nav div { padding: 10px 20px; border-radius: 30px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; font-weight: 600;}
+        nav { color: var(--blanco); font-weight: 600; display: flex; align-items: center; gap: 15px;}
+        nav div { padding: 10px 20px; border-radius: 30px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
         .nav-mayoreo { color: var(--amarillo); background: rgba(250, 204, 21, 0.1); border: 1px solid rgba(250, 204, 21, 0.3); }
         .nav-mayoreo:hover { background: var(--amarillo); color: var(--secundario); }
         .nav-cart { background: var(--gradiente-naranja); color: white; box-shadow: 0 4px 15px rgba(255,102,0,0.3); }
         .nav-cart:hover { transform: scale(1.05); box-shadow: var(--sombra-fuerte); }
 
+        /* SLIDER HERO */
         .hero-slider { position: relative; width: 100%; height: 500px; overflow: hidden; }
-        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; padding: 0 20px; opacity: 0; transition: opacity 1s, transform 3s; background-size: cover; background-position: center; transform: scale(1.05); }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; padding: 0 20px; opacity: 0; transition: opacity 1s ease-in-out, transform 3s ease-in-out; background-size: cover; background-position: center; transform: scale(1.05); }
         .slide.active { opacity: 1; z-index: 1; transform: scale(1); }
-        .slide h1 { font-size: 4rem; margin-bottom: 15px; text-shadow: 0 5px 15px rgba(0,0,0,0.6); font-weight: 800; }
-        .slide p { font-size: 1.5rem; max-width: 800px; font-weight: 500; text-shadow: 0 3px 8px rgba(0,0,0,0.6); }
+        .slide h1 { font-size: 4rem; margin-bottom: 15px; text-shadow: 0 5px 15px rgba(0,0,0,0.6); font-weight: 800; transform: translateY(30px); opacity: 0; transition: 0.8s 0.3s ease-out; text-transform: uppercase; letter-spacing: 2px;}
+        .slide p { font-size: 1.5rem; max-width: 800px; font-weight: 500; text-shadow: 0 3px 8px rgba(0,0,0,0.6); transform: translateY(30px); opacity: 0; transition: 0.8s 0.5s ease-out; }
+        .slide.active h1, .slide.active p { transform: translateY(0); opacity: 1; }
+        .slider-dots { position: absolute; bottom: 60px; width: 100%; display: flex; justify-content: center; gap: 12px; z-index: 2; }
+        .dot { width: 14px; height: 14px; background: rgba(255,255,255,0.4); border-radius: 50%; cursor: pointer; transition: 0.4s; border: 2px solid transparent;}
+        .dot.active { background: var(--primario); border-color: white; transform: scale(1.3); box-shadow: 0 0 10px var(--primario);}
 
-        /* BUSCADOR Y MARCAS */
+        /* FRANJA DE CONFIANZA */
+        .trust-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1100px; margin: -50px auto 50px auto; padding: 0 20px; position: relative; z-index: 10; }
+        .trust-box { background: var(--blanco); padding: 25px 20px; border-radius: 15px; text-align: center; box-shadow: var(--sombra-suave); transition: 0.3s; display: flex; flex-direction: column; align-items: center; border: 1px solid var(--borde-card);}
+        .trust-box:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,0,0,0.08); border-color: var(--primario); }
+        .icon-circle { width: 70px; height: 70px; background: rgba(255,102,0,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; transition: 0.3s;}
+        .trust-box:hover .icon-circle { background: var(--gradiente-naranja); }
+        .trust-box i { font-size: 30px; color: var(--primario); transition: 0.3s;}
+        .trust-box:hover i { color: white; }
+        .trust-box h4 { font-size: 17px; margin-bottom: 5px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase;}
+        .trust-box p { font-size: 14px; color: var(--texto-claro); }
+
+        /* BUSCADOR */
         .search-container { max-width: 850px; margin: 50px auto; padding: 0 20px; }
         .search-wrapper { position: relative; display: flex; align-items: center; box-shadow: var(--sombra-suave); border-radius: 50px; background: white;}
         .search-wrapper i { position: absolute; left: 25px; color: var(--primario); font-size: 1.3rem; }
-        .search-wrapper input { width: 100%; padding: 20px 20px 20px 60px; border: 2px solid transparent; border-radius: 50px; font-size: 1.15rem; outline: none; transition: 0.3s; background: transparent;}
+        .search-wrapper input { width: 100%; padding: 20px 20px 20px 60px; border: 2px solid transparent; border-radius: 50px; font-size: 1.15rem; outline: none; transition: 0.3s; color: var(--texto-oscuro); background: transparent;}
         .search-wrapper input:focus { border-color: var(--primario); box-shadow: 0 0 0 5px rgba(255, 102, 0, 0.1); }
-        
-        .brands-section { max-width: 1200px; margin: 20px auto 40px auto; padding: 0 20px; text-align: center; }
-        .brands-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-        .brand-item { background: var(--blanco); padding: 12px 25px; border-radius: 30px; font-weight: 600; color: var(--texto-claro); border: 1px solid var(--borde-card); cursor: pointer; transition: 0.3s; text-transform: uppercase; }
-        .brand-item:hover, .brand-item.active { background: var(--secundario); color: var(--blanco); border-color: var(--secundario); transform: translateY(-3px); }
 
-        /* TARJETAS DINÁMICAS (DISEÑO) */
+        /* MARCAS */
+        .brands-section { max-width: 1200px; margin: 20px auto 40px auto; padding: 0 20px; text-align: center; }
+        .brands-section h2 { color: var(--texto-oscuro); margin-bottom: 25px; font-size: 2rem; font-weight: 800; text-transform: uppercase; }
+        .brands-section h2 span { color: transparent; background: var(--gradiente-naranja); -webkit-background-clip: text; }
+        .brands-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+        .brand-item { background: var(--blanco); padding: 12px 25px; border-radius: 30px; font-weight: 600; color: var(--texto-claro); border: 1px solid var(--borde-card); cursor: pointer; transition: 0.3s; text-transform: uppercase; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
+        .brand-item:hover, .brand-item.active { background: var(--secundario); color: var(--blanco); border-color: var(--secundario); transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); }
+
+        /* PRODUCTOS */
         .container { max-width: 1250px; margin: 50px auto; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 30px; }
-        .card { border: none; padding: 25px; text-align: center; border-radius: 20px; background: var(--blanco); transition: 0.4s; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--sombra-suave); position: relative; overflow: hidden;}
+        .card { border: none; padding: 25px; text-align: center; border-radius: 20px; background: var(--blanco); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--sombra-suave); position: relative; overflow: hidden;}
         .card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--gradiente-naranja); transform: scaleX(0); transition: 0.4s; transform-origin: left;}
         .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
         .card:hover::before { transform: scaleX(1); }
+        
         .img-wrapper { position: relative; overflow: hidden; border-radius: 12px; margin-bottom: 20px; cursor: pointer; background: #fff; padding: 10px; border: 1px solid var(--fondo-gris);}
         .product-img { width: 100%; height: 200px; object-fit: contain; transition: 0.5s; }
         .img-wrapper:hover .product-img { transform: scale(1.1); }
-        .stock-badge { position: absolute; bottom: 10px; right: 10px; background: var(--secundario); color: var(--blanco); font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 20px; z-index: 3;}
+        .stock-badge { position: absolute; bottom: 10px; right: 10px; background: var(--secundario); color: var(--blanco); font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 20px; z-index: 3; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: background 0.3s;}
+        
         .quick-view-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); background: rgba(255, 255, 255, 0.95); color: var(--secundario); padding: 12px 25px; border-radius: 30px; font-size: 0.9rem; font-weight: 700; transition: 0.3s; opacity: 0; z-index: 4; text-transform: uppercase; box-shadow: 0 5px 15px rgba(0,0,0,0.2);}
         .img-wrapper:hover .quick-view-btn { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        .product-title { font-size: 1.1rem; margin-bottom: 10px; line-height: 1.4; font-weight: 700; text-transform: uppercase; height: 45px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
+        .quick-view-btn:hover { background: var(--primario); color: white; }
+        
+        .product-title { font-size: 1.1rem; color: var(--texto-oscuro); margin-bottom: 10px; line-height: 1.4; font-weight: 700; text-transform: uppercase; height: 45px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
         .price-text { margin: 15px 0; color: var(--primario); font-size: 1.8rem; font-weight: 800; }
-        .btn-buy { background: var(--gradiente-naranja); color: white; border: none; padding: 15px 25px; cursor: pointer; border-radius: 12px; font-weight: 700; transition: 0.3s; width: 100%; font-size: 1.05rem; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-transform: uppercase;}
+        .btn-buy { background: var(--gradiente-naranja); color: white; border: none; padding: 15px 25px; cursor: pointer; border-radius: 12px; font-weight: 700; transition: 0.3s; width: 100%; font-size: 1.05rem; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(255,102,0,0.25);}
         .btn-buy:not([disabled]):hover { background: var(--secundario); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
         .escala-mayoreo-etiqueta { display: none; background: rgba(255,102,0,0.1); color: var(--primario); padding: 5px 10px; border-radius: 8px; font-size: 10.5px; font-weight: 700; margin-bottom: 15px; border: 1px solid rgba(255,102,0,0.2); }
         body.mayoreo-active .escala-mayoreo-etiqueta { display: inline-block; }
 
-        /* CARRITO Y OTROS */
-        .cart-section, .quote-section { background: var(--blanco); padding: 50px; margin-top: 50px; border-radius: 20px; box-shadow: var(--sombra-suave); }
+        /* CARRITO, FORMULARIOS Y RESEÑAS */
+        .cart-section, .quote-section, .reviews-section { background: var(--blanco); padding: 50px; margin-top: 50px; border-radius: 20px; border: none; box-shadow: var(--sombra-suave); }
         .cart-item-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; background: var(--fondo-gris); padding: 15px 20px; border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--borde-card); }
-        .qty-btn { background: var(--borde-card); border: none; width: 30px; height: 30px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center;}
+        .qty-btn { background: var(--borde-card); border: none; width: 30px; height: 30px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; color: var(--secundario);}
         .qty-btn:hover { background: var(--primario); color: white; }
-        .form-control { width: 100%; padding: 18px; border: 2px solid var(--borde-card); border-radius: 10px; margin-bottom: 15px; outline: none; background: var(--fondo-gris); font-size: 1rem; transition: 0.3s; }
+        .form-control { width: 100%; padding: 18px; border: 2px solid var(--borde-card); border-radius: 10px; margin-bottom: 15px; outline: none; background: var(--fondo-gris); color: var(--texto-oscuro); font-size: 1rem; transition: 0.3s; }
         .form-control:focus { border-color: var(--primario); background: var(--blanco); box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.1); }
         
-        /* MODALES */
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .review-card { background: var(--fondo-gris); padding: 30px; border-radius: 15px; border-left: 5px solid var(--primario); position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.02);}
+        .review-card::after { content: "\f10d"; font-family: "FontAwesome"; position: absolute; top: 20px; right: 20px; font-size: 30px; color: rgba(0,0,0,0.05); }
+        .stars { color: var(--amarillo); margin-bottom: 15px; font-size: 1.2rem; }
+
+        /* CARRUSEL INFINITO DE MARCAS */
+        .marquee-container { background: var(--secundario); padding: 50px 0; margin-top: 70px; overflow: hidden; color: white;}
+        .marquee-container h2 { text-align: center; color: var(--blanco); font-size: 1.6rem; font-weight: 800; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px;}
+        .marquee { display: flex; width: max-content; animation: scroll 25s linear infinite; }
+        .marquee:hover { animation-play-state: paused; }
+        .brand-logo { font-size: 2.5rem; font-weight: 800; color: rgba(255,255,255,0.2); margin: 0 50px; text-transform: uppercase; transition: 0.3s; cursor: pointer; }
+        .brand-logo:hover { color: var(--primario); text-shadow: 0 0 15px rgba(255,102,0,0.5); }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* SPINNER DE CARGA RÁPIDA */
+        .loading-spinner { font-size: 3rem; color: var(--primario); margin: 50px auto; display: block; text-align: center; }
+
+        /* MODAL VISTA RÁPIDA Y GALERÍA */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 17, 17, 0.85); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.4s; backdrop-filter: blur(8px); padding: 20px; }
         .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-content { background: var(--blanco); width: 900px; max-width: 100%; border-radius: 20px; overflow: hidden; display: flex; flex-wrap: wrap; position: relative; transform: translateY(50px) scale(0.9); transition: 0.4s; box-shadow: 0 30px 60px rgba(0,0,0,0.4); max-height: 90vh; overflow-y: auto;}
+        .modal-content { background: var(--blanco); width: 900px; max-width: 100%; border-radius: 20px; overflow: hidden; display: flex; flex-wrap: wrap; position: relative; transform: translateY(50px) scale(0.9); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 30px 60px rgba(0,0,0,0.4); max-height: 90vh; overflow-y: auto;}
         .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
-        .modal-close { position: absolute; top: 20px; right: 20px; background: var(--fondo-gris); border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; transition: 0.2s; z-index: 10; }
+        .modal-close { position: absolute; top: 20px; right: 20px; background: var(--fondo-gris); border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; color: var(--texto-oscuro); transition: 0.2s; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.1);}
         .modal-close:hover { background: var(--primario); color: white; transform: rotate(90deg);}
+        
         .modal-left { flex: 1; min-width: 350px; background: #fff; padding: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .modal-left img.main-modal-img { max-width: 100%; max-height: 350px; object-fit: contain; margin-bottom: 20px; }
+        .modal-left img.main-modal-img { max-width: 100%; max-height: 350px; object-fit: contain; margin-bottom: 20px; transition: 0.3s;}
         .gallery-container { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
         .gallery-img { width: 60px; height: 60px; object-fit: contain; cursor: pointer; border: 2px solid var(--borde-card); border-radius: 8px; transition: 0.3s; padding: 5px; }
         .gallery-img:hover { border-color: var(--primario); transform: translateY(-2px); }
         .modal-right { flex: 1; min-width: 350px; padding: 50px; display: flex; flex-direction: column; justify-content: center; background: var(--fondo-gris); border-left: 1px solid var(--borde-card);}
         .features-box { background: white; padding: 15px; border-radius: 10px; font-size: 0.95rem; color: var(--texto-claro); margin-bottom: 20px; border: 1px solid var(--borde-card); max-height: 150px; overflow-y: auto; line-height: 1.5; }
         
+        /* BOTONES FLOTANTES Y FOOTER */
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 65px; height: 65px; border-radius: 50px; text-align: center; font-size: 35px; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s; }
         .whatsapp-float:hover { transform: scale(1.1) rotate(-10deg); background: #20ba5a; }
-        .loading-spinner { font-size: 3rem; color: var(--primario); margin: 50px auto; display: block; text-align: center; }
+        .back-to-top { position: fixed; bottom: 110px; right: 35px; background: var(--secundario); color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; opacity: 0; visibility: hidden; z-index: 99; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        .back-to-top:hover { background: var(--primario); transform: translateY(-5px); }
+
+        footer { text-align: center; padding: 60px 20px; background: #0a0a0a; color: white; border-top: 5px solid var(--primario);}
+        footer a { color: var(--texto-claro); text-decoration: none; font-size: 15px; font-weight: 600; margin: 0 15px; transition: 0.3s;}
+        footer a:hover { color: var(--primario); }
     </style>
 </head>
 <body>
 
     <div id="toast-container" style="position: fixed; bottom: 30px; left: 30px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;"></div>
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="Volver Arriba"><i class="fa-solid fa-chevron-up"></i></button>
     
     <!-- MODAL MAYOREO -->
     <div class="modal-overlay" id="mayoreoModal" onclick="closeMayoreoModal(event)">
@@ -171,7 +220,41 @@
             <p>Equípate con las mejores marcas para construcción, carpintería y herrería.</p>
             <button onclick="document.getElementById('catalog-section').scrollIntoView();" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
         </div>
+        <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(250, 204, 21, 0.6)), url('https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1920&q=80');">
+            <h1>Material Eléctrico e Iluminación</h1>
+            <p>Todo el cableado, iluminación y accesorios Volteck para tus proyectos.</p>
+            <button onclick="document.getElementById('catalog-section').scrollIntoView();" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+        </div>
+        <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(220, 38, 38, 0.6)), url('https://images.unsplash.com/photo-1533626904905-cc52fd99285e?auto=format&fit=crop&w=1920&q=80');">
+            <h1>Maquinaria Pesada</h1>
+            <p>Potencia garantizada. Soldadoras, compresoras y generadores eléctricos.</p>
+            <button onclick="document.getElementById('catalog-section').scrollIntoView();" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+        </div>
+        <div class="slider-dots">
+            <span class="dot active" onclick="changeSlide(0)"></span>
+            <span class="dot" onclick="changeSlide(1)"></span>
+            <span class="dot" onclick="changeSlide(2)"></span>
+        </div>
     </section>
+
+    <!-- FRANJA DE CONFIANZA -->
+    <div class="trust-bar fade-in">
+        <div class="trust-box">
+            <div class="icon-circle"><i class="fa-solid fa-truck-pickup"></i></div>
+            <h4>Envíos a Obra</h4>
+            <p>Llevamos el material hasta tu proyecto</p>
+        </div>
+        <div class="trust-box">
+            <div class="icon-circle"><i class="fa-solid fa-shield-halved"></i></div>
+            <h4>Garantía de Fábrica</h4>
+            <p>Respaldados por las mejores marcas</p>
+        </div>
+        <div class="trust-box">
+            <div class="icon-circle"><i class="fa-solid fa-helmet-safety"></i></div>
+            <h4>Asesoría Técnica</h4>
+            <p>Te ayudamos a elegir el equipo ideal</p>
+        </div>
+    </div>
 
     <!-- BUSCADOR -->
     <div class="search-container fade-in">
@@ -186,11 +269,18 @@
         <h2>Filtra por <span>Marcas</span></h2>
         <div class="brands-grid" id="brands-container">
             <button class="brand-item active" onclick="filterByBrand('ALL', this)">Todas</button>
-            <!-- Las marcas se llenan automáticamente desde Firebase -->
+            <button class="brand-item" onclick="filterByBrand('Truper', this)">Truper</button>
+            <button class="brand-item" onclick="filterByBrand('Volteck', this)">Volteck</button>
+            <button class="brand-item" onclick="filterByBrand('Pretul', this)">Pretul</button>
+            <button class="brand-item" onclick="filterByBrand('Foset', this)">Foset</button>
+            <button class="brand-item" onclick="filterByBrand('Von Riegen', this)">Von Riegen</button>
+            <button class="brand-item" onclick="filterByBrand('Advance', this)">Advance</button>
+            <button class="brand-item" onclick="filterByBrand('Klintek', this)">Klintek</button>
+            <button class="brand-item" onclick="filterByBrand('Cato', this)">Cato</button>
         </div>
     </div>
 
-    <!-- CATÁLOGO DE PRODUCTOS (VACÍO POR DEFECTO, SE LLENA CON FIREBASE) -->
+    <!-- CATÁLOGO DE PRODUCTOS (LLENADO POR FIREBASE DE FORMA SÚPER RÁPIDA) -->
     <div class="container" id="catalog-section">
         <h2 class="section-header fade-in" style="font-size: 2.2rem; margin-bottom: 30px; font-weight:800; text-transform:uppercase;">Catálogo <span id="catalog-title" style="color:var(--primario);">General</span></h2>
         
@@ -199,11 +289,40 @@
             <h3 style="font-size: 1.5rem; color: var(--texto-oscuro);">No encontramos resultados</h3>
         </div>
         
-        <!-- ESTE GRID SE LLENARÁ SOLITO GRACIAS AL JAVASCRIPT Y A FIREBASE -->
         <div class="grid" id="product-grid">
             <div style="width: 100%; text-align: center; grid-column: 1 / -1;">
                 <i class="fa-solid fa-spinner fa-spin loading-spinner"></i>
-                <h3 style="color: var(--texto-claro);">Cargando tu inventario desde Firebase...</h3>
+                <h3 style="color: var(--texto-claro);">Cargando tu inventario en tiempo real...</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARRUSEL INFINITO DE MARCAS -->
+    <div class="marquee-container fade-in">
+        <h2>Nuestros Distribuidores Oficiales</h2>
+        <div class="marquee">
+            <div class="marquee-content">
+                <span class="brand-logo">TRUPER</span>
+                <span class="brand-logo">VOLTECK</span>
+                <span class="brand-logo">PRETUL</span>
+                <span class="brand-logo">MAKITA</span>
+                <span class="brand-logo">DEWALT</span>
+                <span class="brand-logo">URREA</span>
+                <span class="brand-logo">SURTEK</span>
+                <span class="brand-logo">3M</span>
+                <span class="brand-logo">BOSCH</span>
+                <span class="brand-logo">CONDUMEX</span>
+                <!-- Duplicate for infinite effect -->
+                <span class="brand-logo">TRUPER</span>
+                <span class="brand-logo">VOLTECK</span>
+                <span class="brand-logo">PRETUL</span>
+                <span class="brand-logo">MAKITA</span>
+                <span class="brand-logo">DEWALT</span>
+                <span class="brand-logo">URREA</span>
+                <span class="brand-logo">SURTEK</span>
+                <span class="brand-logo">3M</span>
+                <span class="brand-logo">BOSCH</span>
+                <span class="brand-logo">CONDUMEX</span>
             </div>
         </div>
     </div>
@@ -234,8 +353,8 @@
     </div>
 
     <!-- COTIZACIONES -->
-    <div class="container quote-section fade-in" style="margin-bottom: 50px;">
-        <h2 style="text-align: left; margin-bottom: 10px; color: var(--texto-oscuro); font-weight:800; text-transform:uppercase;">¿Requieres una Cotización?</h2>
+    <div class="container quote-section fade-in">
+        <h2 style="text-align: left; margin-bottom: 10px; color: var(--texto-oscuro); font-weight:800; text-transform:uppercase;">¿Requieres una Cotización Especial?</h2>
         <p style="margin-bottom: 30px; color: var(--texto-claro); font-size: 1.1rem;">Ideal para constructoras, contratistas o compras de alto volumen.</p>
         
         <form id="form-cotizacion" onsubmit="enviarCotizacion(event)">
@@ -249,11 +368,34 @@
         </form>
     </div>
 
+    <!-- RESEÑAS -->
+    <div class="container reviews-section fade-in" style="margin-bottom: 50px;">
+        <h2 style="text-align: center; color: var(--texto-oscuro); margin-bottom: 40px; font-weight:800; text-transform:uppercase;">Lo que opinan nuestros clientes</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p style="font-size: 1.05rem; font-weight: 500; color: var(--texto-oscuro); margin-bottom: 15px;">"Excelente surtido de herramienta Truper y me cotizaron súper rápido todo el material eléctrico para mi obra en Tapachula."</p>
+                <strong style="color: var(--primario); font-size: 1.1rem;">- Arq. Roberto M.</strong>
+            </div>
+            <div class="review-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                <p style="font-size: 1.05rem; font-weight: 500; color: var(--texto-oscuro); margin-bottom: 15px;">"Muy confiables. Compré un taladro y discos de corte, llegaron el mismo día hasta donde estábamos trabajando."</p>
+                <strong style="color: var(--primario); font-size: 1.1rem;">- Carlos R.</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER COMPLETO -->
     <footer>
         <div class="logo" style="justify-content: center; margin-bottom: 25px; color: white;">
             <i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE
         </div>
-        <p style="color: #6b7280; margin-top: 15px; font-size: 0.9rem;">&copy; 2026 Ferreteral del Sureste. Todos los derechos reservados.</p>
+        <div class="links" style="margin-bottom: 20px;">
+            <a href="#" onclick="alert('Envíos a obra de 24 a 48 horas en la zona, aplican restricciones por volumen.')">Políticas de Envío</a>
+            <a href="#" onclick="alert('Garantía directa con la marca en maquinaria pesada y herramientas eléctricas.')">Políticas de Garantía</a>
+            <a href="#" onclick="alert('Tus datos están protegidos conforme a la ley de privacidad vigente.')">Aviso de Privacidad</a>
+        </div>
+        <p style="color: #6b7280; margin-top: 15px; font-size: 0.9rem;">&copy; 2026 Ferreteral del Sureste. Todos los derechos reservados. Huixtla, Chiapas.</p>
     </footer>
 
     <!-- LÓGICA BASE Y JAVASCRIPT UI -->
@@ -261,7 +403,7 @@
         var isMayoreo = false;
         var total = 0; 
         var cart = [];
-        var productosDB = []; // Memoria de productos cargados desde Firebase
+        var productosDB = []; 
         var currentQuickViewId = null;
 
         function openMayoreoModal() { document.getElementById('mayoreoModal').classList.add('active'); }
@@ -270,7 +412,7 @@
         function enableMayoreoMode(nombreUsuario) {
             document.body.classList.add('mayoreo-active');
             document.querySelector('header .logo').innerHTML = `<i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE <span style="font-size:11px; background:var(--amarillo); color:black; padding:4px 10px; border-radius:20px; margin-left:10px; vertical-align:middle; text-shadow:none;">MAYOREO: ${nombreUsuario}</span>`;
-            renderProductos(); // Re-dibuja los productos mostrando precios de mayoreo
+            renderProductos(); 
             renderCart(); 
         }
 
@@ -299,7 +441,20 @@
             document.getElementById('no-results').style.display = (visibleCount === 0) ? 'block' : 'none';
         }
 
-        // VISTA RÁPIDA 
+        // SLIDER Y SCROLL
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        function changeSlide(index) {
+            slides[currentSlideIndex].classList.remove('active');
+            if(dots.length) dots[currentSlideIndex].classList.remove('active');
+            currentSlideIndex = index;
+            slides[currentSlideIndex].classList.add('active');
+            if(dots.length) dots[currentSlideIndex].classList.add('active');
+        }
+        if(slides.length > 0) { setInterval(() => { changeSlide((currentSlideIndex + 1) % slides.length); }, 5000); }
+
+        // VISTA RÁPIDA Y GALERÍA
         window.openQuickView = function(id) {
             let prod = productosDB.find(p => p.id === id);
             if(!prod) return;
@@ -400,6 +555,7 @@
         }
 
         window.renderCart = function() {
+            let cartItemsElement = document.getElementById('cart-items');
             cartItemsElement.innerHTML = '';
             total = 0; let totalQty = 0;
 
@@ -467,12 +623,11 @@
         }
     </script>
 
-    <!-- FIREBASE SDK, CARGA DE PRODUCTOS Y WHATSAPP -->
+    <!-- FIREBASE SDK, CARGA SÚPER RÁPIDA DE PRODUCTOS Y WHATSAPP -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        // TUS LLAVES DE FIREBASE
         const firebaseConfig = {
             apiKey: "AIzaSyDcu8X6gdw7He5Rvwfl2UfICp4TP10O6LM",
             authDomain: "ferreteral-sureste.firebaseapp.com",
@@ -488,51 +643,41 @@
         // CARGAR PRODUCTOS DESDE FIRESTORE
         async function cargarCatalogo() {
             const grid = document.getElementById('product-grid');
-            const marcasContainer = document.getElementById('brands-container');
             
             try {
                 const querySnapshot = await getDocs(collection(db, "productos"));
                 window.productosDB = [];
-                let marcasSet = new Set();
                 grid.innerHTML = '';
 
                 if (querySnapshot.empty) {
-                    grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: var(--texto-claro);">No hay productos registrados en tu base de datos aún.</h3></div>';
+                    grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: var(--texto-claro);">Aún no hay productos en la base de datos. Utiliza tu Subidor de Excel para agregarlos.</h3></div>';
                     return;
                 }
 
                 querySnapshot.forEach((documento) => {
                     let p = documento.data();
-                    p.id = documento.id; // Guardamos el ID de Firebase para poder restar el stock luego
+                    p.id = documento.id; 
                     window.productosDB.push(p);
-                    
-                    if(p.marca) marcasSet.add(p.marca.trim().toUpperCase());
                 });
 
                 window.renderProductos();
 
-                // Llenar marcas dinámicamente
-                marcasSet.forEach(marca => {
-                    marcasContainer.innerHTML += `<button class="brand-item" onclick="filterByBrand('${marca}', this)">${marca}</button>`;
-                });
-
             } catch (e) {
                 console.error("Error cargando Firebase:", e);
-                grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: red;">Error al conectar con la base de datos.</h3></div>';
+                grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: red;">Error al conectar con la base de datos. Verifica las reglas de seguridad de Firestore.</h3></div>';
             }
         }
 
-        // RENDERIZAR LAS TARJETAS (Se llama al iniciar y al entrar como mayorista)
+        // RENDERIZAR LAS TARJETAS DINÁMICAMENTE EN UN SOLO GOLPE (OPTIMIZADO PARA NO TRABAR LA PC)
         window.renderProductos = function() {
             const grid = document.getElementById('product-grid');
-            grid.innerHTML = '';
+            let htmlBuffer = "";
 
             window.productosDB.forEach(p => {
                 let img1 = p.img1 || 'https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen';
                 let st = parseFloat(p.stock) || 0;
                 let pr = parseFloat(p.precio) || 0;
                 
-                // Construir tabla de escalas
                 let tHtml = "";
                 if(p.t3>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 3 pzas:</span> <b>$${parseFloat(p.t3).toFixed(2)}</b></div>`;
                 if(p.t5>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 5 pzas:</span> <b>$${parseFloat(p.t5).toFixed(2)}</b></div>`;
@@ -550,7 +695,6 @@
                     ? `<button class="btn-buy" onclick="addToCart('${p.id}')"><i class="fa-solid fa-cart-plus"></i> Agregar</button>` 
                     : `<button class="btn-buy" disabled style="background:#94a3b8; cursor:not-allowed; box-shadow:none;"><i class="fa-solid fa-ban"></i> Agotado</button>`;
 
-                // Etiqueta tachada si es mayorista
                 let precioHtml = `<p class="price-text">$${pr.toFixed(2)}</p>`;
                 if (window.isMayoreo && (p.t3>0 || p.t5>0 || p.t10>0)) {
                      precioHtml = `<p class="price-text"><span style="font-size:1rem; text-decoration:line-through; color:var(--texto-claro);">$$${pr.toFixed(2)}</span> $${pr.toFixed(2)}</p>`;
@@ -575,15 +719,17 @@
                     </div>
                     ${btnHtml}
                 </div>`;
-                grid.innerHTML += cardHtml;
+                htmlBuffer += cardHtml;
             });
-            updateStockUI();
+            
+            grid.innerHTML = htmlBuffer;
+            if(window.updateStockUI) window.updateStockUI();
         };
 
-        // LLAMAMOS LA FUNCIÓN AL CARGAR LA PÁGINA
+        // Iniciar
         cargarCatalogo();
 
-        // LOGINS Y COTIZACIONES (Igual que antes)
+        // LOGINS Y COTIZACIONES
         window.loginMayoreo = async function() {
             let user = document.getElementById('mayoreo-user').value.trim().toUpperCase();
             let pwd = document.getElementById('mayoreo-pwd').value.trim();
@@ -636,31 +782,29 @@
             try {
                 let clienteNombre = window.isMayoreo ? document.getElementById('mayoreo-user').value.trim().toUpperCase() : "Público General";
 
-                // 1. Guardar el pedido en Firebase
                 await addDoc(collection(db, "pedidos"), {
                     fecha: new Date().toLocaleString("es-MX", { timeZone: "America/Mexico_City" }),
                     total_estimado: window.total,
                     cliente: clienteNombre,
                     esMayoreo: window.isMayoreo,
                     productos: window.cart,
-                    estado: "Por pagar"
+                    estado: "Por confirmar"
                 });
 
-                // 2. DESCONTAR STOCK EN FIREBASE AUTOMÁTICAMENTE
+                // DESCONTAR STOCK EN FIREBASE
                 for (let item of window.cart) {
                     if (item.id) {
                         const productRef = doc(db, "productos", item.id);
                         await updateDoc(productRef, {
-                            stock: increment(-item.qty) // Resta la cantidad comprada
+                            stock: increment(-item.qty)
                         });
                         
-                        // Actualiza la memoria visual
                         let prodLocal = window.productosDB.find(p => p.id === item.id);
                         if (prodLocal) prodLocal.stock -= item.qty;
                     }
                 }
 
-                // 3. Crear el mensaje de WhatsApp
+                // MENSAJE WA
                 let mensajeWA = `*NUEVO PEDIDO - FERRETERAL DEL SURESTE*%0A`;
                 mensajeWA += `-----------------------------------%0A`;
                 if(window.isMayoreo) mensajeWA += `👷‍♂️ *Cliente:* ${clienteNombre}%0A`;
@@ -671,15 +815,14 @@
                     mensajeWA += `▪ ${item.qty}x ${item.name} - $${subtotal.toFixed(2)}%0A`;
                 });
                 mensajeWA += `-----------------------------------%0A`;
-                mensajeWA += `💰 *TOTAL:* $${window.total.toFixed(2)}%0A%0A`;
+                mensajeWA += `💰 *TOTAL ESTIMADO:* $${window.total.toFixed(2)}%0A%0A`;
                 mensajeWA += `Stock apartado. Confírmenme para proceder con el pago.`;
 
-                // 4. Limpiar el carrito y recargar la UI
+                // LIMPIAR
                 window.cart = [];
                 window.renderCart();
-                window.renderProductos(); // Re-dibuja para actualizar el stock visible
+                window.renderProductos(); 
 
-                // 5. Enviar a WhatsApp
                 let numeroWhatsApp = "529641091387";
                 window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeWA}`, '_blank');
 
