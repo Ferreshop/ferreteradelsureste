@@ -31,8 +31,12 @@
         body.mayoreo-active .btn-buy:not([disabled]) { background: var(--amarillo); color: var(--secundario); box-shadow: 0 8px 20px rgba(250, 204, 21, 0.4); }
         body.mayoreo-active .btn-buy:not([disabled]):hover { background: #eab308; transform: translateY(-3px); }
 
-        /* CABECERA */
-        header { padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; background: rgba(17, 17, 17, 0.98); color: var(--blanco); border-bottom: 3px solid var(--primario); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        /* CABECERA (HEADER) PRINCIPAL */
+        header { 
+            padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; 
+            background: rgba(17, 17, 17, 1); color: var(--blanco); border-bottom: 3px solid var(--primario); 
+            position: relative; z-index: 1001; box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        }
         .logo { font-size: 26px; color: var(--blanco); font-weight: 800; display: flex; align-items: center; gap: 12px; letter-spacing: 1px;}
         .logo i { font-size: 32px; color: var(--primario); }
         nav { color: var(--blanco); font-weight: 600; display: flex; align-items: center; gap: 15px;}
@@ -42,16 +46,32 @@
         .nav-cart { background: var(--gradiente-naranja); color: white; box-shadow: 0 4px 15px rgba(255,102,0,0.3); }
         .nav-cart:hover { transform: scale(1.05); box-shadow: var(--sombra-fuerte); }
 
-        /* SLIDER HERO */
-        .hero-slider { position: relative; width: 100%; height: 500px; overflow: hidden; }
+        /* SUB-HEADER (BUSCADOR Y FILTROS) */
+        .sub-header { background: var(--blanco); padding: 20px 50px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); position: relative; z-index: 1000; border-bottom: 1px solid var(--borde-card);}
+        .search-wrapper-top { position: relative; max-width: 900px; margin: 0 auto 20px auto; }
+        .search-wrapper-top i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--primario); font-size: 1.2rem; }
+        .search-wrapper-top input { width: 100%; padding: 16px 20px 16px 55px; border: 2px solid var(--borde-card); border-radius: 30px; font-size: 1.05rem; outline: none; transition: 0.3s; background: var(--fondo-gris); color: var(--texto-oscuro);}
+        .search-wrapper-top input:focus { border-color: var(--primario); background: white; box-shadow: 0 0 0 5px rgba(255,102,0,0.1); }
+        
+        .filters-wrapper { display: flex; flex-direction: column; gap: 15px; max-width: 1200px; margin: 0 auto; }
+        .filter-group { display: flex; align-items: center; gap: 15px; }
+        .filter-label { font-weight: 800; color: var(--texto-oscuro); font-size: 0.9rem; min-width: 140px; text-align: right; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .scroll-pills { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
+        .scroll-pills::-webkit-scrollbar { display: none; } /* Oculta scrollbar en Chrome/Safari */
+        .brand-item { white-space: nowrap; padding: 8px 20px; font-size: 0.85rem; border-radius: 20px; border: 1px solid var(--borde-card); background: var(--fondo-gris); color: var(--texto-claro); cursor: pointer; font-weight: 600; transition: 0.3s; text-transform: uppercase;}
+        .brand-item:hover, .brand-item.active { background: var(--secundario); color: white; border-color: var(--secundario); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
+
+        /* SLIDER CARRUSEL HERO */
+        .hero-slider { position: relative; width: 100%; height: 450px; overflow: hidden; }
         .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; padding: 0 20px; opacity: 0; transition: opacity 1s ease-in-out, transform 3s ease-in-out; background-size: cover; background-position: center; transform: scale(1.05); }
         .slide.active { opacity: 1; z-index: 1; transform: scale(1); }
         .slide h1 { font-size: 4rem; margin-bottom: 15px; text-shadow: 0 5px 15px rgba(0,0,0,0.6); font-weight: 800; transform: translateY(30px); opacity: 0; transition: 0.8s 0.3s ease-out; text-transform: uppercase; letter-spacing: 2px;}
         .slide p { font-size: 1.5rem; max-width: 800px; font-weight: 500; text-shadow: 0 3px 8px rgba(0,0,0,0.6); transform: translateY(30px); opacity: 0; transition: 0.8s 0.5s ease-out; }
         .slide.active h1, .slide.active p { transform: translateY(0); opacity: 1; }
 
-        /* FRANJA DE CONFIANZA */
-        .trust-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1100px; margin: -50px auto 50px auto; padding: 0 20px; position: relative; z-index: 10; }
+        /* FRANJA DE CONFIANZA FLOTANTE */
+        .trust-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1100px; margin: -50px auto 40px auto; padding: 0 20px; position: relative; z-index: 10; }
         .trust-box { background: var(--blanco); padding: 25px 20px; border-radius: 15px; text-align: center; box-shadow: var(--sombra-suave); transition: 0.3s; display: flex; flex-direction: column; align-items: center; border: 1px solid var(--borde-card);}
         .trust-box:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,0,0,0.08); border-color: var(--primario); }
         .icon-circle { width: 70px; height: 70px; background: rgba(255,102,0,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; transition: 0.3s;}
@@ -61,23 +81,8 @@
         .trust-box h4 { font-size: 17px; margin-bottom: 5px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase;}
         .trust-box p { font-size: 14px; color: var(--texto-claro); }
 
-        /* BUSCADOR */
-        .search-container { max-width: 850px; margin: 50px auto; padding: 0 20px; }
-        .search-wrapper { position: relative; display: flex; align-items: center; box-shadow: var(--sombra-suave); border-radius: 50px; background: white;}
-        .search-wrapper i { position: absolute; left: 25px; color: var(--primario); font-size: 1.3rem; }
-        .search-wrapper input { width: 100%; padding: 20px 20px 20px 60px; border: 2px solid transparent; border-radius: 50px; font-size: 1.15rem; outline: none; transition: 0.3s; color: var(--texto-oscuro); background: transparent;}
-        .search-wrapper input:focus { border-color: var(--primario); box-shadow: 0 0 0 5px rgba(255, 102, 0, 0.1); }
-
-        /* SECCIÓN DE MARCAS Y CATEGORÍAS */
-        .brands-section { max-width: 1200px; margin: 20px auto 40px auto; padding: 0 20px; text-align: center; }
-        .brands-section h2 { color: var(--texto-oscuro); margin-bottom: 25px; font-size: 2rem; font-weight: 800; text-transform: uppercase; }
-        .brands-section h2 span { color: transparent; background: var(--gradiente-naranja); -webkit-background-clip: text; }
-        .brands-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 40px;}
-        .brand-item { background: var(--blanco); padding: 12px 25px; border-radius: 30px; font-weight: 600; color: var(--texto-claro); border: 1px solid var(--borde-card); cursor: pointer; transition: 0.3s; text-transform: uppercase; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
-        .brand-item:hover, .brand-item.active { background: var(--secundario); color: var(--blanco); border-color: var(--secundario); transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); }
-
-        /* PRODUCTOS */
-        .container { max-width: 1250px; margin: 50px auto; padding: 0 20px; }
+        /* TARJETAS DE PRODUCTO PREMIUM */
+        .container { max-width: 1250px; margin: 40px auto; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 30px; }
         .card { border: none; padding: 25px; text-align: center; border-radius: 20px; background: var(--blanco); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--sombra-suave); position: relative; overflow: hidden;}
         .card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--gradiente-naranja); transform: scaleX(0); transition: 0.4s; transform-origin: left;}
@@ -100,7 +105,7 @@
         .escala-mayoreo-etiqueta { display: none; background: rgba(255,102,0,0.1); color: var(--primario); padding: 5px 10px; border-radius: 8px; font-size: 10.5px; font-weight: 700; margin-bottom: 15px; border: 1px solid rgba(255,102,0,0.2); }
         body.mayoreo-active .escala-mayoreo-etiqueta { display: inline-block; }
 
-        /* CARRITO Y RESEÑAS */
+        /* CARRITO, FORMULARIOS Y RESEÑAS */
         .cart-section, .quote-section, .reviews-section { background: var(--blanco); padding: 50px; margin-top: 50px; border-radius: 20px; border: none; box-shadow: var(--sombra-suave); }
         .cart-item-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; background: var(--fondo-gris); padding: 15px 20px; border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--borde-card); }
         .qty-btn { background: var(--borde-card); border: none; width: 30px; height: 30px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; color: var(--secundario);}
@@ -113,16 +118,26 @@
         .review-card::after { content: "\f10d"; font-family: "FontAwesome"; position: absolute; top: 20px; right: 20px; font-size: 30px; color: rgba(0,0,0,0.05); }
         .stars { color: var(--amarillo); margin-bottom: 15px; font-size: 1.2rem; }
 
-        /* SPINNER DE CARGA */
+        /* CARRUSEL INFINITO DE MARCAS */
+        .marquee-container { background: var(--secundario); padding: 50px 0; margin-top: 70px; overflow: hidden; color: white;}
+        .marquee-container h2 { text-align: center; color: var(--blanco); font-size: 1.6rem; font-weight: 800; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px;}
+        .marquee { display: flex; width: max-content; animation: scroll 25s linear infinite; }
+        .marquee:hover { animation-play-state: paused; }
+        .brand-logo { font-size: 2.5rem; font-weight: 800; color: rgba(255,255,255,0.2); margin: 0 50px; text-transform: uppercase; transition: 0.3s; cursor: pointer; }
+        .brand-logo:hover { color: var(--primario); text-shadow: 0 0 15px rgba(255,102,0,0.5); }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* SPINNER DE CARGA RÁPIDA */
         .loading-spinner { font-size: 3rem; color: var(--primario); margin: 50px auto; display: block; text-align: center; }
 
-        /* MODAL VISTA RÁPIDA */
+        /* MODAL VISTA RÁPIDA Y GALERÍA */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 17, 17, 0.85); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.4s; backdrop-filter: blur(8px); padding: 20px; }
         .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-content { background: var(--blanco); width: 900px; max-width: 100%; border-radius: 20px; overflow: hidden; display: flex; flex-wrap: wrap; position: relative; transform: translateY(50px) scale(0.9); transition: 0.4s; box-shadow: 0 30px 60px rgba(0,0,0,0.4); max-height: 90vh; overflow-y: auto;}
+        .modal-content { background: var(--blanco); width: 900px; max-width: 100%; border-radius: 20px; overflow: hidden; display: flex; flex-wrap: wrap; position: relative; transform: translateY(50px) scale(0.9); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 30px 60px rgba(0,0,0,0.4); max-height: 90vh; overflow-y: auto;}
         .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
-        .modal-close { position: absolute; top: 20px; right: 20px; background: var(--fondo-gris); border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; color: var(--texto-oscuro); transition: 0.2s; z-index: 10;}
+        .modal-close { position: absolute; top: 20px; right: 20px; background: var(--fondo-gris); border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; color: var(--texto-oscuro); transition: 0.2s; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.1);}
         .modal-close:hover { background: var(--primario); color: white; transform: rotate(90deg);}
+        
         .modal-left { flex: 1; min-width: 350px; background: #fff; padding: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .modal-left img.main-modal-img { max-width: 100%; max-height: 350px; object-fit: contain; margin-bottom: 20px; transition: 0.3s;}
         .gallery-container { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
@@ -141,6 +156,14 @@
         footer { text-align: center; padding: 60px 20px; background: #0a0a0a; color: white; border-top: 5px solid var(--primario);}
         footer a { color: var(--texto-claro); text-decoration: none; font-size: 15px; font-weight: 600; margin: 0 15px; transition: 0.3s;}
         footer a:hover { color: var(--primario); }
+
+        /* AJUSTES RESPONSIVOS */
+        @media (max-width: 768px) {
+            .filter-group { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .filter-label { text-align: left; }
+            header { padding: 15px 20px; flex-direction: column; gap: 15px; }
+            .sub-header { padding: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -191,7 +214,7 @@
     <!-- BOTÓN WHATSAPP FLOTANTE -->
     <a href="https://wa.me/529641091387?text=Hola,%20vengo%20de%20la%20tienda%20Ferreteral%20del%20Sureste%20y%20quiero%20hacer%20un%20pedido" class="whatsapp-float" target="_blank" title="¡Escríbenos por WhatsApp!"><i class="fa-brands fa-whatsapp"></i></a>
 
-    <!-- CABECERA -->
+    <!-- CABECERA PRINCIPAL -->
     <header>
         <div class="logo"><i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE</div>
         <nav>
@@ -200,11 +223,44 @@
         </nav>
     </header>
 
+    <!-- NUEVO SUB-HEADER DE BUSQUEDA Y FILTROS ELEGANTES -->
+    <div class="sub-header">
+        <div class="search-wrapper-top">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="¿Qué material buscas hoy? Ej. Taladro, cable, pintura..." onkeyup="window.applyFilters()">
+        </div>
+        
+        <div class="filters-wrapper">
+            <!-- Pestañas Deslizables de Departamentos -->
+            <div class="filter-group">
+                <span class="filter-label"><i class="fa-solid fa-list"></i> Departamentos:</span>
+                <div class="scroll-pills" id="categories-container">
+                    <button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>
+                    <!-- Se llena con Firebase -->
+                </div>
+            </div>
+            
+            <!-- Pestañas Deslizables de Marcas -->
+            <div class="filter-group">
+                <span class="filter-label"><i class="fa-solid fa-tag"></i> Marcas:</span>
+                <div class="scroll-pills" id="brands-container">
+                    <button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>
+                    <!-- Se llena con Firebase -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- CARRUSEL HERO -->
     <section class="hero-slider">
         <div class="slide active" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(255, 102, 0, 0.6)), url('https://images.unsplash.com/photo-1581166397007-0bc07644d5d4?auto=format&fit=crop&w=1920&q=80');">
             <h1>Herramienta Profesional</h1>
             <p>Equípate con las mejores marcas para construcción, carpintería y herrería.</p>
+            <button onclick="document.getElementById('catalog-section').scrollIntoView();" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+        </div>
+        <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(250, 204, 21, 0.6)), url('https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1920&q=80');">
+            <h1>Material Eléctrico e Iluminación</h1>
+            <p>Todo el cableado, iluminación y accesorios Volteck para tus proyectos.</p>
             <button onclick="document.getElementById('catalog-section').scrollIntoView();" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
         </div>
     </section>
@@ -228,44 +284,50 @@
         </div>
     </div>
 
-    <!-- BUSCADOR -->
-    <div class="search-container fade-in">
-        <div class="search-wrapper">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="¿Qué material buscas hoy? Ej. Taladro, cable, pintura..." onkeyup="window.applyFilters()">
-        </div>
-    </div>
-
-    <!-- SECCIÓN DE CATEGORÍAS Y MARCAS (NUEVO) -->
-    <div class="brands-section fade-in">
-        
-        <h2>Filtra por <span>Departamentos</span></h2>
-        <div class="brands-grid" id="categories-container">
-            <button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>
-            <!-- Llenado dinámico por Firebase -->
-        </div>
-
-        <h2 style="margin-top: 40px;">Filtra por <span>Marcas</span></h2>
-        <div class="brands-grid" id="brands-container">
-            <button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>
-            <!-- Llenado dinámico por Firebase -->
-        </div>
-    </div>
-
-    <!-- CATÁLOGO DE PRODUCTOS -->
-    <div class="container" id="catalog-section">
+    <!-- CATÁLOGO DE PRODUCTOS (LLENADO POR FIREBASE) -->
+    <div class="container" id="catalog-section" style="margin-top: 0;">
         <h2 class="section-header fade-in" style="font-size: 2.2rem; margin-bottom: 30px; font-weight:800; text-transform:uppercase;">Catálogo <span id="catalog-title" style="color:var(--primario);">General</span></h2>
         
         <div id="no-results" style="display: none; text-align: center; padding: 60px 20px; background: white; border-radius: 20px; box-shadow: var(--sombra-suave);">
             <i class="fa-solid fa-box-open" style="font-size: 4rem; color: #cbd5e1; margin-bottom: 20px; display: block;"></i>
             <h3 style="font-size: 1.5rem; color: var(--texto-oscuro);">No encontramos resultados</h3>
-            <p style="color: var(--texto-claro);">Intenta buscar con otra palabra o elimina los filtros de marca/departamento.</p>
+            <p style="color: var(--texto-claro);">Intenta buscar con otra palabra o selecciona "Todos" en los filtros de arriba.</p>
         </div>
         
         <div class="grid" id="product-grid">
             <div style="width: 100%; text-align: center; grid-column: 1 / -1;">
                 <i class="fa-solid fa-spinner fa-spin loading-spinner"></i>
                 <h3 style="color: var(--texto-claro);">Cargando tu inventario en tiempo real...</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARRUSEL INFINITO DE MARCAS -->
+    <div class="marquee-container fade-in">
+        <h2>Nuestros Distribuidores Oficiales</h2>
+        <div class="marquee">
+            <div class="marquee-content">
+                <span class="brand-logo">TRUPER</span>
+                <span class="brand-logo">VOLTECK</span>
+                <span class="brand-logo">PRETUL</span>
+                <span class="brand-logo">MAKITA</span>
+                <span class="brand-logo">DEWALT</span>
+                <span class="brand-logo">URREA</span>
+                <span class="brand-logo">SURTEK</span>
+                <span class="brand-logo">3M</span>
+                <span class="brand-logo">BOSCH</span>
+                <span class="brand-logo">CONDUMEX</span>
+                <!-- Duplicate for infinite effect -->
+                <span class="brand-logo">TRUPER</span>
+                <span class="brand-logo">VOLTECK</span>
+                <span class="brand-logo">PRETUL</span>
+                <span class="brand-logo">MAKITA</span>
+                <span class="brand-logo">DEWALT</span>
+                <span class="brand-logo">URREA</span>
+                <span class="brand-logo">SURTEK</span>
+                <span class="brand-logo">3M</span>
+                <span class="brand-logo">BOSCH</span>
+                <span class="brand-logo">CONDUMEX</span>
             </div>
         </div>
     </div>
@@ -328,7 +390,7 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
+    <!-- FOOTER COMPLETO -->
     <footer>
         <div class="logo" style="justify-content: center; margin-bottom: 25px; color: white;">
             <i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE
@@ -378,7 +440,7 @@
                 let n = window.removeAccents(card.getAttribute('data-name') || '').toLowerCase();
                 let d = window.removeAccents(card.getAttribute('data-dept') || '').toLowerCase();
 
-                let matchBrand = (window.currentBrand === 'ALL' || b.includes(window.currentBrand));
+                let matchBrand = (window.currentBrand === 'ALL' || b === window.currentBrand);
                 let matchCat = (window.currentCategory === 'ALL' || d === window.currentCategory);
                 
                 let matchSearch = searchTerms.length === 0 || searchTerms.every(term => n.includes(term) || b.includes(term) || d.includes(term));
@@ -406,7 +468,9 @@
             document.getElementById('catalog-title').innerText = title;
 
             window.applyFilters();
-            document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth' });
+            
+            // Animación suave de scroll hacia el catálogo
+            document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
         };
 
         window.filterByCategory = function(category, btnElement) {
@@ -420,7 +484,9 @@
             document.getElementById('catalog-title').innerText = title;
 
             window.applyFilters();
-            document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth' });
+
+            // Animación suave de scroll hacia el catálogo
+            document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
         };
 
         // SCROLL ANIMATIONS
@@ -608,7 +674,7 @@
         }
     </script>
 
-    <!-- FIREBASE SDK Y CARGA SÚPER RÁPIDA -->
+    <!-- FIREBASE SDK Y CARGA DE PRODUCTOS RÁPIDA -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
@@ -639,7 +705,7 @@
                 grid.innerHTML = '';
 
                 if (querySnapshot.empty) {
-                    grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: var(--texto-claro);">Aún no hay productos. Usa el Subidor de Excel.</h3></div>';
+                    grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: var(--texto-claro);">Aún no hay productos en la base de datos. Utiliza el Subidor de Excel para sincronizarlos.</h3></div>';
                     return;
                 }
 
@@ -650,6 +716,9 @@
                     if(p.marca && p.marca.trim() !== "") marcasSet.add(p.marca.trim().toUpperCase());
                     if(p.departamento && p.departamento.trim() !== "") catSet.add(p.departamento.trim().toUpperCase());
                 });
+
+                // ORDENAR ALFABÉTICAMENTE EL CATÁLOGO ANTES DE PINTAR
+                window.productosDB.sort((a, b) => a.nombre.localeCompare(b.nombre));
 
                 window.renderProductos();
 
@@ -667,7 +736,7 @@
 
             } catch (e) {
                 console.error("Error cargando Firebase:", e);
-                grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: red;">Error al conectar. Revisa las reglas de Firestore (Paso 1).</h3></div>';
+                grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: red;">Error al conectar. Verifica las reglas de Firestore (Paso 1).</h3></div>';
             }
         }
 
@@ -681,6 +750,7 @@
                 let st = parseFloat(p.stock) || 0;
                 let pr = parseFloat(p.precio) || 0;
                 let depto = p.departamento || '';
+                let marca = p.marca || '';
                 
                 let tHtml = "";
                 if(p.t3>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 3 pzas:</span> <b>$${parseFloat(p.t3).toFixed(2)}</b></div>`;
@@ -705,7 +775,7 @@
                 }
 
                 let cardHtml = `
-                <div class="card fade-in visible" data-id="${p.id}" data-brand="${p.marca || ''}" data-name="${p.nombre}" data-dept="${depto}">
+                <div class="card fade-in visible" data-id="${p.id}" data-brand="${marca}" data-name="${p.nombre}" data-dept="${depto}">
                     <div>
                         <div class="img-wrapper" onclick="window.openQuickView('${p.id}')">
                             <img src="${img1}" class="product-img" loading="lazy">
@@ -731,7 +801,6 @@
             if(window.applyFilters) window.applyFilters();
         };
 
-        // Iniciar
         cargarCatalogo();
 
         // LOGINS Y COTIZACIONES
@@ -823,7 +892,6 @@
                 mensajeWA += `💰 *TOTAL ESTIMADO:* $${window.total.toFixed(2)}%0A%0A`;
                 mensajeWA += `Stock apartado. Confírmenme para proceder con el pago.`;
 
-                // LIMPIAR
                 window.cart = [];
                 window.renderCart();
                 window.renderProductos(); 
