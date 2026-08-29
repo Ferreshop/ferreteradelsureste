@@ -24,7 +24,6 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-        
         body { background-color: var(--fondo-gris); color: var(--texto-oscuro); overflow-x: hidden; }
 
         /* MODO MAYOREO */
@@ -32,155 +31,92 @@
         body.mayoreo-active .btn-buy:not([disabled]) { background: var(--amarillo); color: var(--secundario); box-shadow: 0 8px 20px rgba(250, 204, 21, 0.4); }
         body.mayoreo-active .btn-buy:not([disabled]):hover { background: #eab308; transform: translateY(-3px); }
 
-        /* CABECERA (HEADER) */
-        header { 
-            padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; 
-            background: rgba(17, 17, 17, 0.98); color: var(--blanco); 
-            border-bottom: 3px solid var(--primario); position: sticky; top: 0; z-index: 1000; 
-            backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        }
-        .logo { font-size: 26px; color: var(--blanco); font-weight: 800; display: flex; align-items: center; gap: 12px; letter-spacing: 1px;}
+        /* HEADER, SLIDER Y UI BÁSICA */
+        header { padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; background: rgba(17, 17, 17, 0.98); color: var(--blanco); border-bottom: 3px solid var(--primario); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .logo { font-size: 26px; font-weight: 800; display: flex; align-items: center; gap: 12px; letter-spacing: 1px;}
         .logo i { font-size: 32px; color: var(--primario); }
-        nav { color: var(--blanco); font-weight: 600; display: flex; align-items: center; gap: 15px;}
-        nav div { padding: 10px 20px; border-radius: 30px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        nav { display: flex; align-items: center; gap: 15px;}
+        nav div { padding: 10px 20px; border-radius: 30px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; font-weight: 600;}
         .nav-mayoreo { color: var(--amarillo); background: rgba(250, 204, 21, 0.1); border: 1px solid rgba(250, 204, 21, 0.3); }
         .nav-mayoreo:hover { background: var(--amarillo); color: var(--secundario); }
         .nav-cart { background: var(--gradiente-naranja); color: white; box-shadow: 0 4px 15px rgba(255,102,0,0.3); }
         .nav-cart:hover { transform: scale(1.05); box-shadow: var(--sombra-fuerte); }
 
-        /* SLIDER CARRUSEL HERO */
         .hero-slider { position: relative; width: 100%; height: 500px; overflow: hidden; }
-        .slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            color: white; text-align: center; padding: 0 20px;
-            opacity: 0; transition: opacity 1s ease-in-out, transform 3s ease-in-out; 
-            background-size: cover; background-position: center; transform: scale(1.05);
-        }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; padding: 0 20px; opacity: 0; transition: opacity 1s, transform 3s; background-size: cover; background-position: center; transform: scale(1.05); }
         .slide.active { opacity: 1; z-index: 1; transform: scale(1); }
-        .slide h1 { font-size: 4rem; margin-bottom: 15px; text-shadow: 0 5px 15px rgba(0,0,0,0.6); font-weight: 800; transform: translateY(30px); opacity: 0; transition: 0.8s 0.3s ease-out; text-transform: uppercase; letter-spacing: 2px;}
-        .slide p { font-size: 1.5rem; max-width: 800px; font-weight: 500; text-shadow: 0 3px 8px rgba(0,0,0,0.6); transform: translateY(30px); opacity: 0; transition: 0.8s 0.5s ease-out; }
-        .slide.active h1, .slide.active p { transform: translateY(0); opacity: 1; }
-        .slider-dots { position: absolute; bottom: 60px; width: 100%; display: flex; justify-content: center; gap: 12px; z-index: 2; }
-        .dot { width: 14px; height: 14px; background: rgba(255,255,255,0.4); border-radius: 50%; cursor: pointer; transition: 0.4s; border: 2px solid transparent;}
-        .dot.active { background: var(--primario); border-color: white; transform: scale(1.3); box-shadow: 0 0 10px var(--primario);}
+        .slide h1 { font-size: 4rem; margin-bottom: 15px; text-shadow: 0 5px 15px rgba(0,0,0,0.6); font-weight: 800; }
+        .slide p { font-size: 1.5rem; max-width: 800px; font-weight: 500; text-shadow: 0 3px 8px rgba(0,0,0,0.6); }
 
-        /* FRANJA DE CONFIANZA FLOTANTE */
-        .trust-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1100px; margin: -50px auto 50px auto; padding: 0 20px; position: relative; z-index: 10; }
-        .trust-box { background: var(--blanco); padding: 25px 20px; border-radius: 15px; text-align: center; box-shadow: var(--sombra-suave); transition: 0.3s; display: flex; flex-direction: column; align-items: center; border: 1px solid var(--borde-card);}
-        .trust-box:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,0,0,0.08); border-color: var(--primario); }
-        .icon-circle { width: 70px; height: 70px; background: rgba(255,102,0,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; transition: 0.3s;}
-        .trust-box:hover .icon-circle { background: var(--gradiente-naranja); }
-        .trust-box i { font-size: 30px; color: var(--primario); transition: 0.3s;}
-        .trust-box:hover i { color: white; }
-        .trust-box h4 { font-size: 17px; margin-bottom: 5px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase;}
-        .trust-box p { font-size: 14px; color: var(--texto-claro); }
-
-        /* BUSCADOR CLÁSICO CENTRADO */
+        /* BUSCADOR Y MARCAS */
         .search-container { max-width: 850px; margin: 50px auto; padding: 0 20px; }
         .search-wrapper { position: relative; display: flex; align-items: center; box-shadow: var(--sombra-suave); border-radius: 50px; background: white;}
         .search-wrapper i { position: absolute; left: 25px; color: var(--primario); font-size: 1.3rem; }
-        .search-wrapper input { width: 100%; padding: 20px 20px 20px 60px; border: 2px solid transparent; border-radius: 50px; font-size: 1.15rem; outline: none; transition: 0.3s; color: var(--texto-oscuro); background: transparent;}
+        .search-wrapper input { width: 100%; padding: 20px 20px 20px 60px; border: 2px solid transparent; border-radius: 50px; font-size: 1.15rem; outline: none; transition: 0.3s; background: transparent;}
         .search-wrapper input:focus { border-color: var(--primario); box-shadow: 0 0 0 5px rgba(255, 102, 0, 0.1); }
-
-        /* SECCIÓN DE MARCAS */
+        
         .brands-section { max-width: 1200px; margin: 20px auto 40px auto; padding: 0 20px; text-align: center; }
-        .brands-section h2 { color: var(--texto-oscuro); margin-bottom: 25px; font-size: 2rem; font-weight: 800; text-transform: uppercase; }
-        .brands-section h2 span { color: transparent; background: var(--gradiente-naranja); -webkit-background-clip: text; }
         .brands-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-        .brand-item { background: var(--blanco); padding: 12px 25px; border-radius: 30px; font-weight: 600; color: var(--texto-claro); border: 1px solid var(--borde-card); cursor: pointer; transition: 0.3s; text-transform: uppercase; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
-        .brand-item:hover, .brand-item.active { background: var(--secundario); color: var(--blanco); border-color: var(--secundario); transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); }
+        .brand-item { background: var(--blanco); padding: 12px 25px; border-radius: 30px; font-weight: 600; color: var(--texto-claro); border: 1px solid var(--borde-card); cursor: pointer; transition: 0.3s; text-transform: uppercase; }
+        .brand-item:hover, .brand-item.active { background: var(--secundario); color: var(--blanco); border-color: var(--secundario); transform: translateY(-3px); }
 
+        /* TARJETAS DINÁMICAS (DISEÑO) */
         .container { max-width: 1250px; margin: 50px auto; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 30px; }
-        
-        /* TARJETAS DE PRODUCTO PREMIUM */
-        .card { border: none; padding: 25px; text-align: center; border-radius: 20px; background: var(--blanco); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--sombra-suave); position: relative; overflow: hidden;}
+        .card { border: none; padding: 25px; text-align: center; border-radius: 20px; background: var(--blanco); transition: 0.4s; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--sombra-suave); position: relative; overflow: hidden;}
         .card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--gradiente-naranja); transform: scaleX(0); transition: 0.4s; transform-origin: left;}
         .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
         .card:hover::before { transform: scaleX(1); }
-        
         .img-wrapper { position: relative; overflow: hidden; border-radius: 12px; margin-bottom: 20px; cursor: pointer; background: #fff; padding: 10px; border: 1px solid var(--fondo-gris);}
         .product-img { width: 100%; height: 200px; object-fit: contain; transition: 0.5s; }
         .img-wrapper:hover .product-img { transform: scale(1.1); }
-
-        .stock-badge { position: absolute; bottom: 10px; right: 10px; background: var(--secundario); color: var(--blanco); font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 20px; z-index: 3; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: background 0.3s;}
-        
+        .stock-badge { position: absolute; bottom: 10px; right: 10px; background: var(--secundario); color: var(--blanco); font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 20px; z-index: 3;}
         .quick-view-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); background: rgba(255, 255, 255, 0.95); color: var(--secundario); padding: 12px 25px; border-radius: 30px; font-size: 0.9rem; font-weight: 700; transition: 0.3s; opacity: 0; z-index: 4; text-transform: uppercase; box-shadow: 0 5px 15px rgba(0,0,0,0.2);}
         .img-wrapper:hover .quick-view-btn { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        .quick-view-btn:hover { background: var(--primario); color: white; }
-        
-        .product-title { font-size: 1.1rem; color: var(--texto-oscuro); margin-bottom: 10px; line-height: 1.4; font-weight: 700; text-transform: uppercase; height: 45px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
+        .product-title { font-size: 1.1rem; margin-bottom: 10px; line-height: 1.4; font-weight: 700; text-transform: uppercase; height: 45px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
         .price-text { margin: 15px 0; color: var(--primario); font-size: 1.8rem; font-weight: 800; }
-        
-        .btn-buy { background: var(--gradiente-naranja); color: white; border: none; padding: 15px 25px; cursor: pointer; border-radius: 12px; font-weight: 700; transition: 0.3s; width: 100%; font-size: 1.05rem; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(255,102,0,0.25);}
+        .btn-buy { background: var(--gradiente-naranja); color: white; border: none; padding: 15px 25px; cursor: pointer; border-radius: 12px; font-weight: 700; transition: 0.3s; width: 100%; font-size: 1.05rem; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-transform: uppercase;}
         .btn-buy:not([disabled]):hover { background: var(--secundario); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
-
         .escala-mayoreo-etiqueta { display: none; background: rgba(255,102,0,0.1); color: var(--primario); padding: 5px 10px; border-radius: 8px; font-size: 10.5px; font-weight: 700; margin-bottom: 15px; border: 1px solid rgba(255,102,0,0.2); }
         body.mayoreo-active .escala-mayoreo-etiqueta { display: inline-block; }
 
-        /* CARRITO */
-        .cart-section, .quote-section, .reviews-section { background: var(--blanco); padding: 50px; margin-top: 50px; border-radius: 20px; border: none; box-shadow: var(--sombra-suave); }
+        /* CARRITO Y OTROS */
+        .cart-section, .quote-section { background: var(--blanco); padding: 50px; margin-top: 50px; border-radius: 20px; box-shadow: var(--sombra-suave); }
         .cart-item-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; background: var(--fondo-gris); padding: 15px 20px; border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--borde-card); }
-        .qty-btn { background: var(--borde-card); border: none; width: 30px; height: 30px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; color: var(--secundario);}
+        .qty-btn { background: var(--borde-card); border: none; width: 30px; height: 30px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center;}
         .qty-btn:hover { background: var(--primario); color: white; }
-
-        /* EFECTOS DE ANIMACIÓN SCROLL */
-        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-        /* CARRUSEL INFINITO DE MARCAS */
-        .marquee-container { background: var(--secundario); padding: 50px 0; margin-top: 70px; overflow: hidden; color: white;}
-        .marquee-container h2 { text-align: center; color: var(--blanco); font-size: 1.6rem; font-weight: 800; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px;}
-        .marquee { display: flex; width: max-content; animation: scroll 25s linear infinite; }
-        .marquee:hover { animation-play-state: paused; }
-        .brand-logo { font-size: 2.5rem; font-weight: 800; color: rgba(255,255,255,0.2); margin: 0 50px; text-transform: uppercase; transition: 0.3s; cursor: pointer; }
-        .brand-logo:hover { color: var(--primario); text-shadow: 0 0 15px rgba(255,102,0,0.5); }
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-        /* FORMULARIOS */
-        .form-control { width: 100%; padding: 18px; border: 2px solid var(--borde-card); border-radius: 10px; margin-bottom: 15px; outline: none; background: var(--fondo-gris); color: var(--texto-oscuro); font-size: 1rem; transition: 0.3s; }
+        .form-control { width: 100%; padding: 18px; border: 2px solid var(--borde-card); border-radius: 10px; margin-bottom: 15px; outline: none; background: var(--fondo-gris); font-size: 1rem; transition: 0.3s; }
         .form-control:focus { border-color: var(--primario); background: var(--blanco); box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.1); }
-
-        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .review-card { background: var(--fondo-gris); padding: 30px; border-radius: 15px; border-left: 5px solid var(--primario); position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.02);}
-        .review-card::after { content: "\f10d"; font-family: "FontAwesome"; position: absolute; top: 20px; right: 20px; font-size: 30px; color: rgba(0,0,0,0.05); }
-        .stars { color: var(--amarillo); margin-bottom: 15px; font-size: 1.2rem; }
-
-        /* BOTONES FLOTANTES */
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 65px; height: 65px; border-radius: 50px; text-align: center; font-size: 35px; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s; }
-        .whatsapp-float:hover { transform: scale(1.1) rotate(-10deg); background: #20ba5a; }
         
-        .back-to-top { position: fixed; bottom: 110px; right: 35px; background: var(--secundario); color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; opacity: 0; visibility: hidden; z-index: 99; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
-        .back-to-top.show { opacity: 1; visibility: visible; }
-        .back-to-top:hover { background: var(--primario); transform: translateY(-5px); }
-
-        footer { text-align: center; padding: 60px 20px; background: #0a0a0a; color: white; border-top: 5px solid var(--primario);}
-        footer a { color: var(--texto-claro); text-decoration: none; font-size: 15px; font-weight: 600; margin: 0 15px; transition: 0.3s;}
-        footer a:hover { color: var(--primario); }
-        
-        /* MODAL */
+        /* MODALES */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 17, 17, 0.85); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.4s; backdrop-filter: blur(8px); padding: 20px; }
         .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-content { background: var(--blanco); width: 900px; max-width: 100%; border-radius: 20px; overflow: hidden; display: flex; flex-wrap: wrap; position: relative; transform: translateY(50px) scale(0.9); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+        .modal-content { background: var(--blanco); width: 900px; max-width: 100%; border-radius: 20px; overflow: hidden; display: flex; flex-wrap: wrap; position: relative; transform: translateY(50px) scale(0.9); transition: 0.4s; box-shadow: 0 30px 60px rgba(0,0,0,0.4); max-height: 90vh; overflow-y: auto;}
         .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
-        .modal-close { position: absolute; top: 20px; right: 20px; background: var(--fondo-gris); border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; color: var(--texto-oscuro); transition: 0.2s; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.1);}
+        .modal-close { position: absolute; top: 20px; right: 20px; background: var(--fondo-gris); border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; transition: 0.2s; z-index: 10; }
         .modal-close:hover { background: var(--primario); color: white; transform: rotate(90deg);}
-        .modal-left { flex: 1; min-width: 350px; background: #fff; padding: 50px; display: flex; align-items: center; justify-content: center; }
-        .modal-left img { max-width: 100%; max-height: 400px; object-fit: contain; }
+        .modal-left { flex: 1; min-width: 350px; background: #fff; padding: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .modal-left img.main-modal-img { max-width: 100%; max-height: 350px; object-fit: contain; margin-bottom: 20px; }
+        .gallery-container { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .gallery-img { width: 60px; height: 60px; object-fit: contain; cursor: pointer; border: 2px solid var(--borde-card); border-radius: 8px; transition: 0.3s; padding: 5px; }
+        .gallery-img:hover { border-color: var(--primario); transform: translateY(-2px); }
         .modal-right { flex: 1; min-width: 350px; padding: 50px; display: flex; flex-direction: column; justify-content: center; background: var(--fondo-gris); border-left: 1px solid var(--borde-card);}
+        .features-box { background: white; padding: 15px; border-radius: 10px; font-size: 0.95rem; color: var(--texto-claro); margin-bottom: 20px; border: 1px solid var(--borde-card); max-height: 150px; overflow-y: auto; line-height: 1.5; }
+        
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 65px; height: 65px; border-radius: 50px; text-align: center; font-size: 35px; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s; }
+        .whatsapp-float:hover { transform: scale(1.1) rotate(-10deg); background: #20ba5a; }
+        .loading-spinner { font-size: 3rem; color: var(--primario); margin: 50px auto; display: block; text-align: center; }
     </style>
 </head>
 <body>
 
     <div id="toast-container" style="position: fixed; bottom: 30px; left: 30px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;"></div>
-    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="Volver Arriba"><i class="fa-solid fa-chevron-up"></i></button>
     
     <!-- MODAL MAYOREO -->
     <div class="modal-overlay" id="mayoreoModal" onclick="closeMayoreoModal(event)">
         <div class="modal-content" style="max-width: 450px; padding: 50px; text-align: center; display: block;" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeMayoreoModal(event)"><i class="fa-solid fa-xmark"></i></button>
-            <div class="icon-circle" style="width:90px; height:90px; margin: 0 auto 20px auto; background:var(--gradiente-naranja);">
+            <div class="icon-circle" style="width:90px; height:90px; margin: 0 auto 20px auto; background:var(--gradiente-naranja); border-radius:50%; display:flex; align-items:center; justify-content:center;">
                 <i class="fa-solid fa-hard-hat" style="font-size: 3rem; color: white;"></i>
             </div>
             <h2 style="margin-bottom: 10px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase;">Portal Mayoristas</h2>
@@ -195,14 +131,20 @@
     <div class="modal-overlay" id="quickViewModal" onclick="closeQuickView(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeQuickView(event)"><i class="fa-solid fa-xmark"></i></button>
+            
             <div class="modal-left">
-                <img id="qv-img" src="" alt="Producto">
+                <img id="qv-img" src="" alt="Producto" class="main-modal-img">
+                <div class="gallery-container" id="qv-gallery"></div>
             </div>
+
             <div class="modal-right">
                 <span class="escala-mayoreo-etiqueta" style="width: max-content; display:inline-block;"><i class="fa-solid fa-layer-group"></i> Escalas Por Volumen</span>
                 <span class="modal-dept" id="qv-dept" style="color:var(--texto-claro); font-weight:800; font-size:0.95rem; text-transform:uppercase; letter-spacing: 1px;">DEPARTAMENTO</span>
-                <h2 class="modal-title" id="qv-title" style="font-size:1.8rem; font-weight:800; color:var(--texto-oscuro); margin:15px 0; text-transform:uppercase; line-height: 1.2;">Nombre del Producto</h2>
-                <div class="modal-price" id="qv-price" style="font-size:3rem; color:var(--primario); font-weight:800; margin-bottom:30px; text-shadow: 0 2px 5px rgba(255,102,0,0.1);">$0.00</div>
+                <h2 class="modal-title" id="qv-title" style="font-size:1.8rem; font-weight:800; color:var(--texto-oscuro); margin:10px 0; text-transform:uppercase; line-height: 1.2;">Nombre del Producto</h2>
+                
+                <div class="features-box" id="qv-desc"></div>
+
+                <div class="modal-price" id="qv-price" style="font-size:3rem; color:var(--primario); font-weight:800; margin-bottom:20px; text-shadow: 0 2px 5px rgba(255,102,0,0.1);">$0.00</div>
                 <button class="btn-buy" id="qv-add-btn" style="padding: 20px; font-size: 1.2rem; box-shadow: var(--sombra-fuerte);">
                     <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
                 </button>
@@ -211,16 +153,11 @@
     </div>
 
     <!-- BOTÓN WHATSAPP FLOTANTE -->
-    <a href="https://wa.me/529641091387?text=Hola,%20vengo%20de%20la%20tienda%20Ferreteral%20del%20Sureste%20y%20quiero%20hacer%20un%20pedido" class="whatsapp-float" target="_blank" title="¡Escríbenos por WhatsApp!">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+    <a href="https://wa.me/529641091387?text=Hola,%20vengo%20de%20la%20tienda%20Ferreteral%20del%20Sureste%20y%20quiero%20hacer%20un%20pedido" class="whatsapp-float" target="_blank" title="¡Escríbenos por WhatsApp!"><i class="fa-brands fa-whatsapp"></i></a>
 
     <!-- CABECERA -->
     <header>
-        <div class="logo">
-            <i class="fa-solid fa-screwdriver-wrench"></i>
-            FERRETERAL DEL SURESTE
-        </div>
+        <div class="logo"><i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE</div>
         <nav>
             <div class="nav-mayoreo" onclick="openMayoreoModal()"><i class="fa-solid fa-hard-hat"></i> Constructores / Mayoreo</div>
             <div class="nav-cart" onclick="document.getElementById('cart-section-target').scrollIntoView();"><i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">0</span> Prod.</div>
@@ -234,41 +171,7 @@
             <p>Equípate con las mejores marcas para construcción, carpintería y herrería.</p>
             <button onclick="document.getElementById('catalog-section').scrollIntoView();" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
         </div>
-        <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(250, 204, 21, 0.6)), url('https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1920&q=80');">
-            <h1>Material Eléctrico e Iluminación</h1>
-            <p>Todo el cableado, iluminación y accesorios Volteck para tus proyectos.</p>
-            <button onclick="document.getElementById('catalog-section').scrollIntoView();" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
-        </div>
-        <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(220, 38, 38, 0.6)), url('https://images.unsplash.com/photo-1533626904905-cc52fd99285e?auto=format&fit=crop&w=1920&q=80');">
-            <h1>Maquinaria Pesada</h1>
-            <p>Potencia garantizada. Soldadoras, compresoras y generadores eléctricos.</p>
-            <button onclick="document.getElementById('catalog-section').scrollIntoView();" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
-        </div>
-        <div class="slider-dots">
-            <span class="dot active" onclick="changeSlide(0)"></span>
-            <span class="dot" onclick="changeSlide(1)"></span>
-            <span class="dot" onclick="changeSlide(2)"></span>
-        </div>
     </section>
-
-    <!-- FRANJA DE CONFIANZA -->
-    <div class="trust-bar fade-in">
-        <div class="trust-box">
-            <div class="icon-circle"><i class="fa-solid fa-truck-pickup"></i></div>
-            <h4>Envíos a Obra</h4>
-            <p>Llevamos el material hasta tu proyecto</p>
-        </div>
-        <div class="trust-box">
-            <div class="icon-circle"><i class="fa-solid fa-shield-halved"></i></div>
-            <h4>Garantía de Fábrica</h4>
-            <p>Respaldados por las mejores marcas</p>
-        </div>
-        <div class="trust-box">
-            <div class="icon-circle"><i class="fa-solid fa-helmet-safety"></i></div>
-            <h4>Asesoría Técnica</h4>
-            <p>Te ayudamos a elegir el equipo ideal</p>
-        </div>
-    </div>
 
     <!-- BUSCADOR -->
     <div class="search-container fade-in">
@@ -281,299 +184,85 @@
     <!-- SECCIÓN DE MARCAS -->
     <div class="brands-section fade-in">
         <h2>Filtra por <span>Marcas</span></h2>
-        <div class="brands-grid">
+        <div class="brands-grid" id="brands-container">
             <button class="brand-item active" onclick="filterByBrand('ALL', this)">Todas</button>
-            <button class="brand-item" onclick="filterByBrand('Truper', this)">Truper</button>
-            <button class="brand-item" onclick="filterByBrand('Volteck', this)">Volteck</button>
-            <button class="brand-item" onclick="filterByBrand('Pretul', this)">Pretul</button>
-            <button class="brand-item" onclick="filterByBrand('Foset', this)">Foset</button>
-            <button class="brand-item" onclick="filterByBrand('Von Riegen', this)">Von Riegen</button>
-            <button class="brand-item" onclick="filterByBrand('Advance', this)">Advance</button>
-            <button class="brand-item" onclick="filterByBrand('Klintek', this)">Klintek</button>
-            <button class="brand-item" onclick="filterByBrand('Cato Jazmin', this)">Cato</button>
+            <!-- Las marcas se llenan automáticamente desde Firebase -->
         </div>
     </div>
 
-    <!-- CATÁLOGO DE PRODUCTOS -->
+    <!-- CATÁLOGO DE PRODUCTOS (VACÍO POR DEFECTO, SE LLENA CON FIREBASE) -->
     <div class="container" id="catalog-section">
         <h2 class="section-header fade-in" style="font-size: 2.2rem; margin-bottom: 30px; font-weight:800; text-transform:uppercase;">Catálogo <span id="catalog-title" style="color:var(--primario);">General</span></h2>
         
         <div id="no-results" style="display: none; text-align: center; padding: 60px 20px; background: white; border-radius: 20px; box-shadow: var(--sombra-suave);">
             <i class="fa-solid fa-box-open" style="font-size: 4rem; color: #cbd5e1; margin-bottom: 20px; display: block;"></i>
             <h3 style="font-size: 1.5rem; color: var(--texto-oscuro);">No encontramos resultados</h3>
-            <p style="color: var(--texto-claro);">Prueba buscando con otra palabra o selecciona una marca diferente.</p>
         </div>
         
+        <!-- ESTE GRID SE LLENARÁ SOLITO GRACIAS AL JAVASCRIPT Y A FIREBASE -->
         <div class="grid" id="product-grid">
-
-            <!-- ========================================== -->
-            <!-- TUS PRODUCTOS VAN AQUÍ DEBAJO -->
-            <!-- ========================================== -->
-
-            <!-- CÓDIGO: 12940 -->
-            <div class="card fade-in" data-brand="TRUPER EXPERT" data-name="DADO MAGNETICO DE 3/8&quot; LARGO 2 1/2&quot; TRUPER EXPERT" data-price="62.0" data-stock="5.4" data-t3="0.0" data-t5="0.0" data-t10="17.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="FERRETERIA EN GENERAL" style="display:flex;">
-                <div>
-                    <div class="img-wrapper" onclick="openQuickView(this)">
-                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="DADO MAGNETICO DE 3/8&quot; LARGO 2 1/2&quot; TRUPER EXPERT" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 5.4 disp.</span>
-                        <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 12940</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">FERRETERIA EN G...</span>
-                    </div>
-                    <h3 class="product-title">DADO MAGNETICO DE 3/8&quot; LARGO 2 1/2&quot; TRUPER EXPERT</h3>
-                    <p class="price-text">$62.00</p>
-                    <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 10 pzas:</span> <b>$17.00</b></div></div>
-                </div>
-                <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
-            </div>
-            <!-- CÓDIGO: 205 -->
-            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR ROJO ESCARLATA." data-price="90.0" data-stock="2.0" data-t3="0.0" data-t5="0.0" data-t10="85.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
-                <div>
-                    <div class="img-wrapper" onclick="openQuickView(this)">
-                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="PINTURA PARA CEMENTO COLOR ROJO ESCARLATA." class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 2.0 disp.</span>
-                        <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 205</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS</span>
-                    </div>
-                    <h3 class="product-title">PINTURA PARA CEMENTO COLOR ROJO ESCARLATA.</h3>
-                    <p class="price-text">$90.00</p>
-                    <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 10 pzas:</span> <b>$85.00</b></div></div>
-                </div>
-                <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
-            </div>
-            <!-- CÓDIGO: 209 -->
-            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR VERDE NILO" data-price="70.0" data-stock="0" data-t3="0.0" data-t5="0.0" data-t10="66.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
-                <div>
-                    <div class="img-wrapper" onclick="openQuickView(this)">
-                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="PINTURA PARA CEMENTO COLOR VERDE NILO" class="product-img">
-                        <span class="stock-badge" style="background:#e11d48;"><i class="fa-solid fa-box"></i> 0 disp.</span>
-                        <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 209</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS</span>
-                    </div>
-                    <h3 class="product-title">PINTURA PARA CEMENTO COLOR VERDE NILO</h3>
-                    <p class="price-text">$70.00</p>
-                    <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 10 pzas:</span> <b>$66.00</b></div></div>
-                </div>
-                <button class="btn-buy" disabled style="background:#94a3b8; cursor:not-allowed; box-shadow:none;"><i class="fa-solid fa-ban"></i> Agotado</button>
-            </div>
-            <!-- CÓDIGO: 210 -->
-            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR VERDE HOJA" data-price="93.0" data-stock="1.0" data-t3="0.0" data-t5="0.0" data-t10="87.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
-                <div>
-                    <div class="img-wrapper" onclick="openQuickView(this)">
-                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="PINTURA PARA CEMENTO COLOR VERDE HOJA" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 1.0 disp.</span>
-                        <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 210</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS</span>
-                    </div>
-                    <h3 class="product-title">PINTURA PARA CEMENTO COLOR VERDE HOJA</h3>
-                    <p class="price-text">$93.00</p>
-                    <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 10 pzas:</span> <b>$87.00</b></div></div>
-                </div>
-                <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
-            </div>
-            <!-- CÓDIGO: 211 -->
-            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR VERDE TURQUESA" data-price="80.0" data-stock="0" data-t3="0.0" data-t5="0.0" data-t10="78.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
-                <div>
-                    <div class="img-wrapper" onclick="openQuickView(this)">
-                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="PINTURA PARA CEMENTO COLOR VERDE TURQUESA" class="product-img">
-                        <span class="stock-badge" style="background:#e11d48;"><i class="fa-solid fa-box"></i> 0 disp.</span>
-                        <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 211</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS</span>
-                    </div>
-                    <h3 class="product-title">PINTURA PARA CEMENTO COLOR VERDE TURQUESA</h3>
-                    <p class="price-text">$80.00</p>
-                    <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 10 pzas:</span> <b>$78.00</b></div></div>
-                </div>
-                <button class="btn-buy" disabled style="background:#94a3b8; cursor:not-allowed; box-shadow:none;"><i class="fa-solid fa-ban"></i> Agotado</button>
-            </div>
-            <!-- CÓDIGO: 212 -->
-            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR  AZUL CELESTE" data-price="72.0" data-stock="0" data-t3="0.0" data-t5="0.0" data-t10="70.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
-                <div>
-                    <div class="img-wrapper" onclick="openQuickView(this)">
-                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="PINTURA PARA CEMENTO COLOR  AZUL CELESTE" class="product-img">
-                        <span class="stock-badge" style="background:#e11d48;"><i class="fa-solid fa-box"></i> 0 disp.</span>
-                        <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 212</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS</span>
-                    </div>
-                    <h3 class="product-title">PINTURA PARA CEMENTO COLOR  AZUL CELESTE</h3>
-                    <p class="price-text">$72.00</p>
-                    <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 10 pzas:</span> <b>$70.00</b></div></div>
-                </div>
-                <button class="btn-buy" disabled style="background:#94a3b8; cursor:not-allowed; box-shadow:none;"><i class="fa-solid fa-ban"></i> Agotado</button>
-            </div>
-            <!-- CÓDIGO: 214 -->
-            <div class="card fade-in" data-brand="VON RIEGEN" data-name="PINTURA PARA CEMENTO COLOR  AZUL REY" data-price="140.0" data-stock="4.0" data-t3="0.0" data-t5="0.0" data-t10="134.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PINTURAS" style="display:flex;">
-                <div>
-                    <div class="img-wrapper" onclick="openQuickView(this)">
-                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="PINTURA PARA CEMENTO COLOR  AZUL REY" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 4.0 disp.</span>
-                        <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 214</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PINTURAS</span>
-                    </div>
-                    <h3 class="product-title">PINTURA PARA CEMENTO COLOR  AZUL REY</h3>
-                    <p class="price-text">$140.00</p>
-                    <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 10 pzas:</span> <b>$134.00</b></div></div>
-                </div>
-                <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
-            </div>
-            <!-- CÓDIGO: 3020600 -->
-            <div class="card fade-in" data-brand="CATO JAZMIN" data-name="ACCESORIOS CERAMICOS PARA BAÑO CATO JAZMIN COLOR BLANCO" data-price="350.0" data-stock="0" data-t3="340.0" data-t5="0.0" data-t10="0.0" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="PLOMERIA" style="display:flex;">
-                <div>
-                    <div class="img-wrapper" onclick="openQuickView(this)">
-                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="ACCESORIOS CERAMICOS PARA BAÑO CATO JAZMIN COLOR BLANCO" class="product-img">
-                        <span class="stock-badge" style="background:#e11d48;"><i class="fa-solid fa-box"></i> 0 disp.</span>
-                        <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 3020600</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">PLOMERIA</span>
-                    </div>
-                    <h3 class="product-title">ACCESORIOS CERAMICOS PARA BAÑO CATO JAZMIN COLOR BLANCO</h3>
-                    <p class="price-text">$350.00</p>
-                    <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 3 pzas:</span> <b>$340.00</b></div></div>
-                </div>
-                <button class="btn-buy" disabled style="background:#94a3b8; cursor:not-allowed; box-shadow:none;"><i class="fa-solid fa-ban"></i> Agotado</button>
-            </div>
-            <!-- CÓDIGO: 8404 -->
-            <div class="card fade-in" data-brand="ADVANCE" data-name="TUBO DE PVC PARA USO SANITARIO DE 2&quot;" data-price="27.0" data-stock="109.0" data-t3="22.5" data-t5="0.0" data-t10="20.66" data-t12="0.0" data-t20="0.0" data-t25="0.0" data-t50="0.0" data-t100="0.0" data-img="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" data-dept="TUBERIA SANITARIA" style="display:flex;">
-                <div>
-                    <div class="img-wrapper" onclick="openQuickView(this)">
-                        <img src="https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen" alt="TUBO DE PVC PARA USO SANITARIO DE 2&quot;" class="product-img">
-                        <span class="stock-badge"><i class="fa-solid fa-box"></i> 109.0 disp.</span>
-                        <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Ver Detalles</div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800; text-transform:uppercase;">CÓDIGO: 8404</span>
-                        <span style="font-size:10px; color:var(--texto-claro); font-weight:700; text-transform:uppercase;">TUBERIA SANIT...</span>
-                    </div>
-                    <h3 class="product-title">TUBO DE PVC PARA USO SANITARIO DE 2&quot;</h3>
-                    <p class="price-text">$27.00</p>
-                    <div class="tabla-escalas" style="display:none; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 3 pzas:</span> <b>$22.50</b></div><div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 10 pzas:</span> <b>$20.66</b></div></div>
-                </div>
-                <button class="btn-buy" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
-            </div>
-
-            <!-- ========================================== -->
-            <!-- TERMINA MUESTRA DE PRODUCTOS -->
-            <!-- ========================================== -->
-
-        </div>
-
-        <!-- CARRUSEL INFINITO DE MARCAS -->
-        <div class="marquee-container fade-in">
-            <h2>Nuestros Distribuidores Oficiales</h2>
-            <div class="marquee">
-                <div class="marquee-content">
-                    <span class="brand-logo">TRUPER</span>
-                    <span class="brand-logo">VOLTECK</span>
-                    <span class="brand-logo">PRETUL</span>
-                    <span class="brand-logo">MAKITA</span>
-                    <span class="brand-logo">DEWALT</span>
-                    <span class="brand-logo">URREA</span>
-                    <span class="brand-logo">SURTEK</span>
-                    <span class="brand-logo">3M</span>
-                    <span class="brand-logo">BOSCH</span>
-                    <span class="brand-logo">CONDUMEX</span>
-                    <!-- Duplicate for infinite effect -->
-                    <span class="brand-logo">TRUPER</span>
-                    <span class="brand-logo">VOLTECK</span>
-                    <span class="brand-logo">PRETUL</span>
-                    <span class="brand-logo">MAKITA</span>
-                    <span class="brand-logo">DEWALT</span>
-                    <span class="brand-logo">URREA</span>
-                    <span class="brand-logo">SURTEK</span>
-                    <span class="brand-logo">3M</span>
-                    <span class="brand-logo">BOSCH</span>
-                    <span class="brand-logo">CONDUMEX</span>
-                </div>
+            <div style="width: 100%; text-align: center; grid-column: 1 / -1;">
+                <i class="fa-solid fa-spinner fa-spin loading-spinner"></i>
+                <h3 style="color: var(--texto-claro);">Cargando tu inventario desde Firebase...</h3>
             </div>
         </div>
-
-        <!-- CARRITO Y CHECKOUT POR WHATSAPP -->
-        <div class="cart-section fade-in" id="cart-section-target">
-            <h3 style="font-size: 2rem; margin-bottom: 25px; color: var(--texto-oscuro); text-transform:uppercase; font-weight:800;"><i class="fa-solid fa-basket-shopping" style="color: var(--primario);"></i> Tu Carrito</h3>
-            
-            <div style="background: #fff3e0; padding: 15px 20px; border-radius: 10px; border-left: 5px solid var(--primario); margin-bottom: 25px;">
-                <p style="color: var(--secundario); font-size: 0.95rem; margin: 0;">
-                    <i class="fa-solid fa-circle-info" style="color: var(--primario);"></i> <b>Nota:</b> Si eres mayorista, el carrito calculará tus descuentos por volumen en tiempo real. Precios de caja cerrada/paquete se ajustan en mostrador.
-                </p>
-            </div>
-
-            <ul id="cart-items" style="list-style: none; margin: 15px 0; padding-left: 0;">
-                <li style="color: var(--texto-claro); background: var(--fondo-gris); padding: 30px; border-radius: 12px; text-align: center; border: 2px dashed var(--borde-card); font-weight: 500;">El carrito está vacío. Agrega material para continuar.</li>
-            </ul>
-            <div style="background: var(--secundario); color: white; padding: 25px; border-radius: 15px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; border-left: 6px solid var(--primario); box-shadow: var(--sombra-suave);">
-                <span style="font-size: 1.5rem; font-weight: 700;">Total Estimado:</span>
-                <span style="font-size: 2.5rem; font-weight: 800; color: var(--primario); text-shadow: 0 0 10px rgba(255,102,0,0.3);">$<span id="cart-total">0.00</span></span>
-            </div>
-            
-            <!-- BOTÓN ÚNICO DE PAGO POR WHATSAPP -->
-            <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
-                <button class="btn-buy" style="background: linear-gradient(135deg, #25D366, #128C7E); width: 100%; font-size: 1.2rem; padding: 20px; border-radius: 30px; box-shadow: 0 5px 15px rgba(37,211,102,0.3);" onclick="procesarPedidoWhatsApp()">
-                    <i class="fa-brands fa-whatsapp" style="font-size: 1.5rem;"></i> Enviar Pedido por WhatsApp
-                </button>
-            </div>
-        </div>
-
-        <!-- COTIZACIONES -->
-        <div class="quote-section fade-in">
-            <h2 style="text-align: left; margin-bottom: 10px; color: var(--texto-oscuro); font-weight:800; text-transform:uppercase;">¿Requieres una Cotización?</h2>
-            <p style="margin-bottom: 30px; color: var(--texto-claro); font-size: 1.1rem;">Ideal para constructoras, contratistas o compras de alto volumen.</p>
-            
-            <form id="form-cotizacion" onsubmit="enviarCotizacion(event)">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
-                    <input type="text" id="cot-nombre" placeholder="Nombre o Razón Social" class="form-control" required>
-                    <input type="email" id="cot-correo" placeholder="Correo Electrónico" class="form-control" required>
-                    <input type="tel" id="cot-tel" placeholder="Teléfono / WhatsApp" class="form-control" required>
-                </div>
-                <textarea id="cot-mensaje" placeholder="Describe los materiales, marcas o cantidades de obra que necesitas..." class="form-control" style="height: 140px; resize: none; margin-top: 5px;" required></textarea>
-                <button type="submit" id="btn-enviar-cot" class="btn-buy" style="width: max-content; padding: 15px 40px; border-radius: 30px;"><i class="fa-solid fa-paper-plane"></i> Enviar Solicitud</button>
-            </form>
-        </div>
-
     </div>
 
-    <!-- FOOTER -->
+    <!-- CARRITO Y CHECKOUT POR WHATSAPP -->
+    <div class="container cart-section fade-in" id="cart-section-target">
+        <h3 style="font-size: 2rem; margin-bottom: 25px; color: var(--texto-oscuro); text-transform:uppercase; font-weight:800;"><i class="fa-solid fa-basket-shopping" style="color: var(--primario);"></i> Tu Carrito</h3>
+        
+        <div style="background: #fff3e0; padding: 15px 20px; border-radius: 10px; border-left: 5px solid var(--primario); margin-bottom: 25px;">
+            <p style="color: var(--secundario); font-size: 0.95rem; margin: 0;">
+                <i class="fa-solid fa-circle-info" style="color: var(--primario);"></i> <b>Nota:</b> El total es un estimado. Si eres mayorista, el sistema calculará tus descuentos por volumen en tiempo real.
+            </p>
+        </div>
+
+        <ul id="cart-items" style="list-style: none; margin: 15px 0; padding-left: 0;">
+            <li style="color: var(--texto-claro); background: var(--fondo-gris); padding: 30px; border-radius: 12px; text-align: center; border: 2px dashed var(--borde-card); font-weight: 500;">El carrito está vacío. Agrega material para continuar.</li>
+        </ul>
+        <div style="background: var(--secundario); color: white; padding: 25px; border-radius: 15px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; border-left: 6px solid var(--primario); box-shadow: var(--sombra-suave);">
+            <span style="font-size: 1.5rem; font-weight: 700;">Total Estimado:</span>
+            <span style="font-size: 2.5rem; font-weight: 800; color: var(--primario); text-shadow: 0 0 10px rgba(255,102,0,0.3);">$<span id="cart-total">0.00</span></span>
+        </div>
+        
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
+            <button class="btn-buy" style="background: linear-gradient(135deg, #25D366, #128C7E); width: 100%; font-size: 1.2rem; padding: 20px; border-radius: 30px; box-shadow: 0 5px 15px rgba(37,211,102,0.3);" onclick="procesarPedidoWhatsApp()">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.5rem;"></i> Enviar Pedido por WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- COTIZACIONES -->
+    <div class="container quote-section fade-in" style="margin-bottom: 50px;">
+        <h2 style="text-align: left; margin-bottom: 10px; color: var(--texto-oscuro); font-weight:800; text-transform:uppercase;">¿Requieres una Cotización?</h2>
+        <p style="margin-bottom: 30px; color: var(--texto-claro); font-size: 1.1rem;">Ideal para constructoras, contratistas o compras de alto volumen.</p>
+        
+        <form id="form-cotizacion" onsubmit="enviarCotizacion(event)">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+                <input type="text" id="cot-nombre" placeholder="Nombre o Razón Social" class="form-control" required>
+                <input type="email" id="cot-correo" placeholder="Correo Electrónico" class="form-control" required>
+                <input type="tel" id="cot-tel" placeholder="Teléfono / WhatsApp" class="form-control" required>
+            </div>
+            <textarea id="cot-mensaje" placeholder="Describe los materiales o cantidades de obra que necesitas..." class="form-control" style="height: 140px; resize: none; margin-top: 5px;" required></textarea>
+            <button type="submit" id="btn-enviar-cot" class="btn-buy" style="width: max-content; padding: 15px 40px; border-radius: 30px;"><i class="fa-solid fa-paper-plane"></i> Enviar Solicitud</button>
+        </form>
+    </div>
+
     <footer>
         <div class="logo" style="justify-content: center; margin-bottom: 25px; color: white;">
             <i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE
         </div>
-        <div class="links" style="margin-bottom: 20px;">
-            <a href="#" onclick="alert('Envíos a obra de 24 a 48 horas en la zona, aplican restricciones por volumen.')">Políticas de Envío</a>
-            <a href="#" onclick="alert('Garantía directa con la marca en maquinaria pesada y herramientas eléctricas.')">Políticas de Garantía</a>
-            <a href="#" onclick="alert('Tus datos están protegidos conforme a la ley de privacidad vigente.')">Aviso de Privacidad</a>
-        </div>
         <p style="color: #6b7280; margin-top: 15px; font-size: 0.9rem;">&copy; 2026 Ferreteral del Sureste. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- LÓGICA BASE Y JAVASCRIPT -->
+    <!-- LÓGICA BASE Y JAVASCRIPT UI -->
     <script>
         var isMayoreo = false;
         var total = 0; 
-        var count = 0;
         var cart = [];
-        var cartItemsElement = document.getElementById('cart-items');
-        var currentQuickViewCard = null;
+        var productosDB = []; // Memoria de productos cargados desde Firebase
+        var currentQuickViewId = null;
 
         function openMayoreoModal() { document.getElementById('mayoreoModal').classList.add('active'); }
         function closeMayoreoModal(e) { if(e) e.stopPropagation(); document.getElementById('mayoreoModal').classList.remove('active'); }
@@ -581,47 +270,11 @@
         function enableMayoreoMode(nombreUsuario) {
             document.body.classList.add('mayoreo-active');
             document.querySelector('header .logo').innerHTML = `<i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE <span style="font-size:11px; background:var(--amarillo); color:black; padding:4px 10px; border-radius:20px; margin-left:10px; vertical-align:middle; text-shadow:none;">MAYOREO: ${nombreUsuario}</span>`;
-            
-            // MOSTRAR TABLAS DE VOLUMEN
-            let cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                let tablaEscalas = card.querySelector('.tabla-escalas');
-                if(tablaEscalas && tablaEscalas.innerHTML.includes('A partir de')) {
-                    tablaEscalas.style.display = 'block'; 
-                }
-            });
+            renderProductos(); // Re-dibuja los productos mostrando precios de mayoreo
             renderCart(); 
         }
 
-        // ANIMACIÓN SCROLL Y CARRUSEL
-        let currentSlideIndex = 0;
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-        function changeSlide(index) {
-            slides[currentSlideIndex].classList.remove('active');
-            dots[currentSlideIndex].classList.remove('active');
-            currentSlideIndex = index;
-            slides[currentSlideIndex].classList.add('active');
-            dots[currentSlideIndex].classList.add('active');
-        }
-        setInterval(() => { changeSlide((currentSlideIndex + 1) % slides.length); }, 5000);
-
-        const faders = document.querySelectorAll('.fade-in');
-        const appearOnScroll = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add('visible');
-                obs.unobserve(entry.target);
-            });
-        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-        faders.forEach(fader => appearOnScroll.observe(fader));
-
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 500) document.getElementById("backToTop").classList.add("show");
-            else document.getElementById("backToTop").classList.remove("show");
-        });
-
-        // FILTROS
+        // BÚSQUEDA Y FILTROS
         let currentBrand = 'ALL';
         function filterByBrand(brand, btnElement) {
             document.querySelectorAll('.brand-item').forEach(btn => btn.classList.remove('active'));
@@ -629,7 +282,6 @@
             currentBrand = brand.toLowerCase();
             document.getElementById('catalog-title').innerText = (brand === 'ALL') ? 'General' : brand;
             applyFilters();
-            document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth' });
         }
         function removeAccents(str) { return str.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
         function applyFilters() {
@@ -639,29 +291,38 @@
                 let matchBrand = (currentBrand === 'all' || removeAccents(card.getAttribute('data-brand') || '').includes(currentBrand));
                 let matchSearch = searchTerms.length === 0 || searchTerms.every(term => removeAccents(card.getAttribute('data-name') || '').includes(term));
                 if (matchBrand && matchSearch) {
-                    card.style.display = 'flex'; card.classList.add('visible'); visibleCount++;
+                    card.style.display = 'flex'; visibleCount++;
                 } else {
-                    card.style.display = 'none'; card.classList.remove('visible');
+                    card.style.display = 'none';
                 }
             });
             document.getElementById('no-results').style.display = (visibleCount === 0) ? 'block' : 'none';
         }
 
         // VISTA RÁPIDA 
-        function openQuickView(element) {
-            let card = element.closest('.card');
-            currentQuickViewCard = card; 
+        window.openQuickView = function(id) {
+            let prod = productosDB.find(p => p.id === id);
+            if(!prod) return;
+            currentQuickViewId = id;
 
-            let name = card.getAttribute('data-name');
-            let price = parseFloat(card.getAttribute('data-price'));
-            let dept = card.getAttribute('data-dept') || 'General';
-            let img = card.getAttribute('data-img') || 'https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen';
+            let img1 = prod.img1 || 'https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen';
+            let img2 = prod.img2 || '';
+            let img3 = prod.img3 || '';
 
-            document.getElementById('qv-img').src = img;
-            document.getElementById('qv-title').innerText = name;
-            document.getElementById('qv-dept').innerText = "Depto: " + dept;
-            document.getElementById('qv-price').innerText = "$" + price.toFixed(2);
-            
+            document.getElementById('qv-img').src = img1;
+            document.getElementById('qv-title').innerText = prod.nombre;
+            document.getElementById('qv-dept').innerText = "Depto: " + prod.departamento;
+            document.getElementById('qv-price').innerText = "$" + parseFloat(prod.precio).toFixed(2);
+            document.getElementById('qv-desc').innerHTML = prod.desc || 'Características no disponibles para este producto.';
+
+            let galleryContainer = document.getElementById('qv-gallery');
+            galleryContainer.innerHTML = '';
+            if (img2 && img2 !== '0') {
+                galleryContainer.innerHTML += `<img src="${img1}" class="gallery-img" onclick="document.getElementById('qv-img').src='${img1}'">`;
+                galleryContainer.innerHTML += `<img src="${img2}" class="gallery-img" onclick="document.getElementById('qv-img').src='${img2}'">`;
+                if(img3 && img3 !== '0') galleryContainer.innerHTML += `<img src="${img3}" class="gallery-img" onclick="document.getElementById('qv-img').src='${img3}'">`;
+            }
+
             document.getElementById('quickViewModal').classList.add('active');
             document.body.style.overflow = 'hidden'; 
         }
@@ -673,8 +334,8 @@
         }
 
         document.getElementById('qv-add-btn').onclick = function() {
-            if(currentQuickViewCard) {
-                addToCart(currentQuickViewCard);
+            if(currentQuickViewId) {
+                addToCart(currentQuickViewId);
                 closeQuickView();
             }
         };
@@ -683,10 +344,7 @@
         function calculateItemPrice(item) {
             let price = item.basePrice;
             if (!window.isMayoreo) return price; 
-
-            let q = item.qty;
-            let t = item.tiers;
-            
+            let q = item.qty, t = item.tiers;
             if (q >= 100 && t[100] > 0) price = t[100];
             else if (q >= 50 && t[50] > 0) price = t[50];
             else if (q >= 25 && t[25] > 0) price = t[25];
@@ -695,85 +353,44 @@
             else if (q >= 10 && t[10] > 0) price = t[10];
             else if (q >= 5 && t[5] > 0) price = t[5];
             else if (q >= 3 && t[3] > 0) price = t[3];
-
             return price;
         }
 
-        // LÓGICA DE ACTUALIZAR LA ETIQUETA VISUAL DE STOCK
-        function updateStockUI() {
-            document.querySelectorAll('.card').forEach(card => {
-                let name = card.getAttribute('data-name');
-                let maxStock = parseFloat(card.getAttribute('data-stock'));
-                
-                let inCartItem = cart.find(i => i.name === name);
-                let inCartQty = inCartItem ? inCartItem.qty : 0;
-                
-                let available = maxStock - inCartQty;
-                
-                let badge = card.querySelector('.stock-badge');
-                if (badge) {
-                    badge.innerHTML = `<i class="fa-solid fa-box"></i> ${available.toFixed(1).replace('.0','')} disp.`;
-                    if (available <= 0 && maxStock > 0) {
-                        badge.style.background = "#e11d48"; // Rojo si se acabaron
-                    } else {
-                        badge.style.background = "var(--secundario)";
-                    }
-                }
-            });
-        }
+        // CARRITO LÓGICA
+        window.addToCart = function(id) {
+            let prod = productosDB.find(p => p.id === id);
+            if(!prod) return;
 
-        // LÓGICA DEL CARRITO CON CONTROL DE INVENTARIO
-        function addToCart(element) {
-            let card = element.closest('.card');
-            let name = card.getAttribute('data-name');
-            let basePrice = parseFloat(card.getAttribute('data-price'));
-            let maxStock = parseFloat(card.getAttribute('data-stock'));
-            
-            let tiers = {
-                3: parseFloat(card.getAttribute('data-t3')) || 0,
-                5: parseFloat(card.getAttribute('data-t5')) || 0,
-                10: parseFloat(card.getAttribute('data-t10')) || 0,
-                12: parseFloat(card.getAttribute('data-t12')) || 0,
-                20: parseFloat(card.getAttribute('data-t20')) || 0,
-                25: parseFloat(card.getAttribute('data-t25')) || 0,
-                50: parseFloat(card.getAttribute('data-t50')) || 0,
-                100: parseFloat(card.getAttribute('data-t100')) || 0,
-            };
-
-            let existingItem = cart.find(i => i.name === name);
+            let existingItem = cart.find(i => i.id === id);
             let currentQty = existingItem ? existingItem.qty : 0;
 
-            if (currentQty + 1 > maxStock) {
-                alert(`No hay suficiente inventario disponible. Solo quedan ${maxStock}.`);
+            if (currentQty + 1 > prod.stock) {
+                alert(`No hay suficiente inventario disponible. Solo quedan ${prod.stock}.`);
                 return;
             }
 
             if (existingItem) {
                 existingItem.qty++;
             } else {
-                cart.push({ name: name, basePrice: basePrice, maxStock: maxStock, qty: 1, tiers: tiers });
+                let tiers = { 3: prod.t3||0, 5: prod.t5||0, 10: prod.t10||0, 12: prod.t12||0, 20: prod.t20||0, 25: prod.t25||0, 50: prod.t50||0, 100: prod.t100||0 };
+                cart.push({ id: prod.id, name: prod.nombre, basePrice: parseFloat(prod.precio), maxStock: parseFloat(prod.stock), qty: 1, tiers: tiers });
             }
             
             renderCart();
-            showToast(`Agregado al carrito: ${name}`);
+            showToast(`Agregado al carrito: ${prod.nombre}`);
             let cartIcon = document.querySelector('.nav-cart');
             cartIcon.style.transform = 'scale(1.15)';
             setTimeout(() => { cartIcon.style.transform = 'scale(1)'; }, 250);
         }
 
-        // BOTONES DE MAS Y MENOS EN CARRITO
         window.changeQty = function(index, delta) {
             let item = cart[index];
-            
             if (delta > 0 && item.qty + delta > item.maxStock) {
                 alert(`Límite alcanzado. Solo hay ${item.maxStock} piezas en inventario.`);
                 return;
             }
-
             item.qty += delta;
-            if (item.qty <= 0) {
-                cart.splice(index, 1);
-            }
+            if (item.qty <= 0) cart.splice(index, 1);
             renderCart();
         };
 
@@ -782,23 +399,20 @@
             renderCart();
         }
 
-        function renderCart() {
+        window.renderCart = function() {
             cartItemsElement.innerHTML = '';
-            total = 0; count = 0;
+            total = 0; let totalQty = 0;
 
             if (cart.length === 0) {
                 cartItemsElement.innerHTML = '<li style="color: var(--texto-claro); background: var(--fondo-gris); padding: 30px; border-radius: 12px; text-align: center; border: 2px dashed var(--borde-card); font-weight: 500;">El carrito está vacío. Agrega material para continuar.</li>';
             } else {
                 cart.forEach((item, index) => {
-                    count += item.qty;
+                    totalQty += item.qty;
                     let unitPrice = calculateItemPrice(item);
                     let subtotal = unitPrice * item.qty;
                     total += subtotal;
                     
-                    let promoBadge = "";
-                    if (window.isMayoreo && unitPrice < item.basePrice) {
-                        promoBadge = `<span style="background:var(--primario); color:white; font-size:10px; padding:2px 5px; border-radius:3px; margin-left:5px;"><i class="fa-solid fa-tag"></i> Descuento Aplicado</span>`;
-                    }
+                    let promoBadge = (window.isMayoreo && unitPrice < item.basePrice) ? `<span style="background:var(--primario); color:white; font-size:10px; padding:2px 5px; border-radius:3px; margin-left:5px;"><i class="fa-solid fa-tag"></i> Desc.</span>` : "";
 
                     let li = document.createElement('li');
                     li.className = 'cart-item-row';
@@ -821,43 +435,44 @@
                 });
             }
             document.getElementById('cart-total').innerText = total.toFixed(2);
-            document.getElementById('cart-count').innerText = count;
+            document.getElementById('cart-count').innerText = totalQty;
+            updateStockUI(); 
+        }
 
-            updateStockUI(); // Refresca las etiquetas de la tienda
+        function updateStockUI() {
+            document.querySelectorAll('.card').forEach(card => {
+                let id = card.getAttribute('data-id');
+                let prod = productosDB.find(p => p.id === id);
+                if(!prod) return;
+                
+                let inCartItem = cart.find(i => i.id === id);
+                let inCartQty = inCartItem ? inCartItem.qty : 0;
+                let available = parseFloat(prod.stock) - inCartQty;
+                
+                let badge = card.querySelector('.stock-badge');
+                if (badge) {
+                    badge.innerHTML = `<i class="fa-solid fa-box"></i> ${available.toFixed(1).replace('.0','')} disp.`;
+                    badge.style.background = (available <= 0 && prod.stock > 0) ? "#e11d48" : "var(--secundario)";
+                }
+            });
         }
 
         function showToast(message) {
             let container = document.getElementById('toast-container');
             let toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.style.cssText = 'background: var(--secundario); color: white; padding: 15px 25px; border-radius: 8px; font-weight: 600; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); border-left: 5px solid var(--primario); animation: slideIn 0.3s forwards;';
+            toast.style.cssText = 'background: var(--secundario); color: white; padding: 15px 25px; border-radius: 8px; font-weight: 600; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); border-left: 5px solid var(--primario); transition: 0.3s;';
             toast.innerHTML = `<div style="background: white; color: var(--primario); border-radius:50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-check"></i></div> <span>${message}</span>`;
-            
-            if(!document.getElementById('toast-style')) {
-                let style = document.createElement('style');
-                style.id = 'toast-style';
-                style.innerHTML = `@keyframes slideIn { from { transform: translateX(-150%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }`;
-                document.head.appendChild(style);
-            }
             container.appendChild(toast);
             setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3000);
         }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll('.card').forEach(card => {
-                card.style.display = 'flex';
-                setTimeout(() => card.classList.add('visible'), 150);
-            });
-            document.getElementById('no-results').style.display = 'none';
-        });
     </script>
 
-    <!-- FIREBASE SDK Y CONEXIÓN -->
+    <!-- FIREBASE SDK, CARGA DE PRODUCTOS Y WHATSAPP -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, query, where, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        // TUS LLAVES EXACTAS DE FIREBASE
+        // TUS LLAVES DE FIREBASE
         const firebaseConfig = {
             apiKey: "AIzaSyDcu8X6gdw7He5Rvwfl2UfICp4TP10O6LM",
             authDomain: "ferreteral-sureste.firebaseapp.com",
@@ -870,120 +485,207 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // LOGIN DE MAYORISTAS
+        // CARGAR PRODUCTOS DESDE FIRESTORE
+        async function cargarCatalogo() {
+            const grid = document.getElementById('product-grid');
+            const marcasContainer = document.getElementById('brands-container');
+            
+            try {
+                const querySnapshot = await getDocs(collection(db, "productos"));
+                window.productosDB = [];
+                let marcasSet = new Set();
+                grid.innerHTML = '';
+
+                if (querySnapshot.empty) {
+                    grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: var(--texto-claro);">No hay productos registrados en tu base de datos aún.</h3></div>';
+                    return;
+                }
+
+                querySnapshot.forEach((documento) => {
+                    let p = documento.data();
+                    p.id = documento.id; // Guardamos el ID de Firebase para poder restar el stock luego
+                    window.productosDB.push(p);
+                    
+                    if(p.marca) marcasSet.add(p.marca.trim().toUpperCase());
+                });
+
+                window.renderProductos();
+
+                // Llenar marcas dinámicamente
+                marcasSet.forEach(marca => {
+                    marcasContainer.innerHTML += `<button class="brand-item" onclick="filterByBrand('${marca}', this)">${marca}</button>`;
+                });
+
+            } catch (e) {
+                console.error("Error cargando Firebase:", e);
+                grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: red;">Error al conectar con la base de datos.</h3></div>';
+            }
+        }
+
+        // RENDERIZAR LAS TARJETAS (Se llama al iniciar y al entrar como mayorista)
+        window.renderProductos = function() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+
+            window.productosDB.forEach(p => {
+                let img1 = p.img1 || 'https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen';
+                let st = parseFloat(p.stock) || 0;
+                let pr = parseFloat(p.precio) || 0;
+                
+                // Construir tabla de escalas
+                let tHtml = "";
+                if(p.t3>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 3 pzas:</span> <b>$${parseFloat(p.t3).toFixed(2)}</b></div>`;
+                if(p.t5>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 5 pzas:</span> <b>$${parseFloat(p.t5).toFixed(2)}</b></div>`;
+                if(p.t10>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 10 pzas:</span> <b>$${parseFloat(p.t10).toFixed(2)}</b></div>`;
+                if(p.t12>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 12 pzas:</span> <b>$${parseFloat(p.t12).toFixed(2)}</b></div>`;
+                if(p.t20>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 20 pzas:</span> <b>$${parseFloat(p.t20).toFixed(2)}</b></div>`;
+                if(p.t25>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 25 pzas:</span> <b>$${parseFloat(p.t25).toFixed(2)}</b></div>`;
+                if(p.t50>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 50 pzas:</span> <b>$${parseFloat(p.t50).toFixed(2)}</b></div>`;
+                if(p.t100>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>100+ pzas:</span> <b>$${parseFloat(p.t100).toFixed(2)}</b></div>`;
+                
+                let displayTabla = (window.isMayoreo && tHtml !== "") ? "block" : "none";
+                let cuadroEscalas = tHtml !== "" ? `<div class="tabla-escalas" style="display:${displayTabla}; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div>${tHtml}</div>` : "";
+
+                let btnHtml = st > 0 
+                    ? `<button class="btn-buy" onclick="addToCart('${p.id}')"><i class="fa-solid fa-cart-plus"></i> Agregar</button>` 
+                    : `<button class="btn-buy" disabled style="background:#94a3b8; cursor:not-allowed; box-shadow:none;"><i class="fa-solid fa-ban"></i> Agotado</button>`;
+
+                // Etiqueta tachada si es mayorista
+                let precioHtml = `<p class="price-text">$${pr.toFixed(2)}</p>`;
+                if (window.isMayoreo && (p.t3>0 || p.t5>0 || p.t10>0)) {
+                     precioHtml = `<p class="price-text"><span style="font-size:1rem; text-decoration:line-through; color:var(--texto-claro);">$$${pr.toFixed(2)}</span> $${pr.toFixed(2)}</p>`;
+                }
+
+                let cardHtml = `
+                <div class="card fade-in visible" data-id="${p.id}" data-brand="${p.marca || ''}" data-name="${p.nombre}">
+                    <div>
+                        <div class="img-wrapper" onclick="openQuickView('${p.id}')">
+                            <img src="${img1}" class="product-img">
+                            <span class="stock-badge" style="background:${st<=0?'#e11d48':'var(--secundario)'}"><i class="fa-solid fa-box"></i> ${st} disp.</span>
+                            <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Detalles</div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800;">CÓDIGO: ${p.codigo || ''}</span>
+                            <span style="font-size:10px; color:var(--texto-claro); font-weight:700;">${(p.departamento || '').substring(0,15)}</span>
+                        </div>
+                        <h3 class="product-title">${p.nombre}</h3>
+                        ${precioHtml}
+                        ${cuadroEscalas}
+                        <span class="escala-mayoreo-etiqueta"><i class="fa-solid fa-layer-group"></i> Escalas Disponibles</span>
+                    </div>
+                    ${btnHtml}
+                </div>`;
+                grid.innerHTML += cardHtml;
+            });
+            updateStockUI();
+        };
+
+        // LLAMAMOS LA FUNCIÓN AL CARGAR LA PÁGINA
+        cargarCatalogo();
+
+        // LOGINS Y COTIZACIONES (Igual que antes)
         window.loginMayoreo = async function() {
             let user = document.getElementById('mayoreo-user').value.trim().toUpperCase();
             let pwd = document.getElementById('mayoreo-pwd').value.trim();
-            
             const btn = document.querySelector("#mayoreoModal .btn-buy");
             const originalText = btn.innerHTML;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Verificando...';
-
             try {
                 const q = query(collection(db, "mayoristas"), where("usuario", "==", user), where("password", "==", pwd));
                 const querySnapshot = await getDocs(q);
-
                 if (!querySnapshot.empty) {
                     window.isMayoreo = true; 
                     document.getElementById('mayoreoModal').classList.remove('active');
                     enableMayoreoMode(user);
                     alert("¡Bienvenido Mayorista: " + user + "!");
-                } else {
-                    alert("❌ Usuario o contraseña incorrectos. Verifica tus accesos.");
-                }
-            } catch(error) {
-                console.error("Error de base de datos:", error);
-                alert("Error al conectar con la base de datos.");
-            } finally {
-                btn.innerHTML = originalText;
-            }
+                } else alert("❌ Usuario o contraseña incorrectos.");
+            } catch(e) { alert("Error de conexión."); } 
+            finally { btn.innerHTML = originalText; }
         };
 
-        // ENVIAR COTIZACIÓN
         window.enviarCotizacion = async function(event) {
             event.preventDefault();
             const btn = document.getElementById("btn-enviar-cot");
             const originalText = btn.innerHTML;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
             btn.disabled = true;
-
-            const nombre = document.getElementById("cot-nombre").value;
-            const correo = document.getElementById("cot-correo").value;
-            const telefono = document.getElementById("cot-tel").value;
-            const mensaje = document.getElementById("cot-mensaje").value;
-
             try {
                 await addDoc(collection(db, "cotizaciones"), {
-                    nombre: nombre, correo: correo, telefono: telefono, mensaje: mensaje,
+                    nombre: document.getElementById("cot-nombre").value,
+                    correo: document.getElementById("cot-correo").value,
+                    telefono: document.getElementById("cot-tel").value,
+                    mensaje: document.getElementById("cot-mensaje").value,
                     fecha: new Date().toLocaleString("es-MX", { timeZone: "America/Mexico_City" }),
                     estado: "Nueva"
                 });
-                alert("¡Cotización Enviada! Nos pondremos en contacto contigo a la brevedad.");
+                alert("¡Cotización Enviada!");
                 document.getElementById("form-cotizacion").reset();
-            } catch (e) {
-                alert("Hubo un problema. Intenta de nuevo.");
-            } finally {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            }
+            } catch (e) { alert("Hubo un problema."); } 
+            finally { btn.innerHTML = originalText; btn.disabled = false; }
         };
 
-        // PROCESAR PEDIDO POR WHATSAPP Y GUARDAR EN FIREBASE
+        // PROCESAR PEDIDO Y DESCONTAR STOCK REAL EN FIREBASE
         window.procesarPedidoWhatsApp = async function() {
-            if (window.cart.length === 0) {
-                alert("Tu carrito está vacío. Agrega productos antes de enviar el pedido.");
-                return;
-            }
+            if (window.cart.length === 0) { alert("Tu carrito está vacío."); return; }
             
             const btn = document.querySelector('.cart-section .btn-buy');
             const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Procesando Pedido...';
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Descontando Stock...';
             btn.disabled = true;
 
             try {
                 let clienteNombre = window.isMayoreo ? document.getElementById('mayoreo-user').value.trim().toUpperCase() : "Público General";
 
-                // Guardar en Firestore para control de Stock real
-                let pedidoData = {
+                // 1. Guardar el pedido en Firebase
+                await addDoc(collection(db, "pedidos"), {
                     fecha: new Date().toLocaleString("es-MX", { timeZone: "America/Mexico_City" }),
                     total_estimado: window.total,
                     cliente: clienteNombre,
                     esMayoreo: window.isMayoreo,
                     productos: window.cart,
-                    estado: "Pendiente"
-                };
+                    estado: "Por pagar"
+                });
 
-                await addDoc(collection(db, "pedidos"), pedidoData);
+                // 2. DESCONTAR STOCK EN FIREBASE AUTOMÁTICAMENTE
+                for (let item of window.cart) {
+                    if (item.id) {
+                        const productRef = doc(db, "productos", item.id);
+                        await updateDoc(productRef, {
+                            stock: increment(-item.qty) // Resta la cantidad comprada
+                        });
+                        
+                        // Actualiza la memoria visual
+                        let prodLocal = window.productosDB.find(p => p.id === item.id);
+                        if (prodLocal) prodLocal.stock -= item.qty;
+                    }
+                }
 
-                // Crear el mensaje de WhatsApp detallado
+                // 3. Crear el mensaje de WhatsApp
                 let mensajeWA = `*NUEVO PEDIDO - FERRETERAL DEL SURESTE*%0A`;
                 mensajeWA += `-----------------------------------%0A`;
-                if(window.isMayoreo) {
-                    mensajeWA += `👷‍♂️ *Cliente Mayorista:* ${clienteNombre}%0A`;
-                }
+                if(window.isMayoreo) mensajeWA += `👷‍♂️ *Cliente:* ${clienteNombre}%0A`;
                 mensajeWA += `🛍️ *Productos Solicitados:*%0A`;
-                
                 window.cart.forEach((item) => {
                     let unitPrice = window.isMayoreo ? calculateItemPrice(item) : item.basePrice;
                     let subtotal = unitPrice * item.qty;
-                    mensajeWA += `▪ ${item.qty}x ${item.name} - $${subtotal.toFixed(2)} ($${unitPrice.toFixed(2)} c/u)%0A`;
+                    mensajeWA += `▪ ${item.qty}x ${item.name} - $${subtotal.toFixed(2)}%0A`;
                 });
-                
                 mensajeWA += `-----------------------------------%0A`;
-                mensajeWA += `💰 *TOTAL ESTIMADO:* $${window.total.toFixed(2)}%0A%0A`;
-                mensajeWA += `Por favor, confírmenme la disponibilidad para proceder con mi pago.`;
+                mensajeWA += `💰 *TOTAL:* $${window.total.toFixed(2)}%0A%0A`;
+                mensajeWA += `Stock apartado. Confírmenme para proceder con el pago.`;
 
-                // Limpiar el carrito
+                // 4. Limpiar el carrito y recargar la UI
                 window.cart = [];
                 window.renderCart();
+                window.renderProductos(); // Re-dibuja para actualizar el stock visible
 
-                // Redirigir a WhatsApp
+                // 5. Enviar a WhatsApp
                 let numeroWhatsApp = "529641091387";
                 window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeWA}`, '_blank');
 
             } catch(e) {
-                console.error("Error al procesar pedido:", e);
-                alert("Hubo un error al registrar el pedido. Intenta de nuevo.");
+                console.error(e);
+                alert("Hubo un error de conexión al apartar el stock. Intenta de nuevo.");
             } finally {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
