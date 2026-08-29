@@ -228,7 +228,7 @@
         .marquee-container{margin-top:45px;padding:35px 0}
         footer{padding:45px 20px}
         @media(max-width:1050px){.category-strip{grid-template-columns:repeat(4,1fr)}header{padding:10px 20px}.logo{min-width:240px}.logo img{width:230px;height:72px}.sub-header{padding:14px 20px;gap:12px}}
-        @media(max-width:700px){header{flex-direction:column;min-height:auto}.logo{min-width:0;max-width:none}.logo img{width:260px;height:70px}header nav{width:100%;justify-content:center;flex-wrap:wrap}.header-container{position:sticky}.sub-header{flex-direction:column;align-items:stretch}.filter-section{width:100%}.hero-slider{height:360px}.slide{padding:0 25px}.slide h1{font-size:2.15rem}.slide p{font-size:.95rem}.trust-bar{grid-template-columns:1fr;margin:-20px 15px 30px}.category-strip{display:flex;overflow-x:auto;padding-bottom:8px}.category-card{min-width:145px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{padding:10px}.product-img{height:145px}.cart-section,.quote-section,.reviews-section{padding:20px}}
+        @media(max-width:700px){.catalog-head{align-items:flex-start;flex-direction:column}.catalog-head>div{width:100%;justify-content:space-between}.catalog-head .section-header{margin-bottom:8px!important}header{flex-direction:column;min-height:auto}.logo{min-width:0;max-width:none}.logo img{width:260px;height:70px}header nav{width:100%;justify-content:center;flex-wrap:wrap}.header-container{position:sticky}.sub-header{flex-direction:column;align-items:stretch}.filter-section{width:100%}.hero-slider{height:360px}.slide{padding:0 25px}.slide h1{font-size:2.15rem}.slide p{font-size:.95rem}.trust-bar{grid-template-columns:1fr;margin:-20px 15px 30px}.category-strip{display:flex;overflow-x:auto;padding-bottom:8px}.category-card{min-width:145px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{padding:10px}.product-img{height:145px}.cart-section,.quote-section,.reviews-section{padding:20px}}
     </style>
 </head>
 <body>
@@ -403,8 +403,14 @@
     <!-- CATÁLOGO DE PRODUCTOS -->
     <div class="container" id="catalog-section" style="margin-top: 0;">
         <div class="catalog-head">
-            <h2 class="section-header fade-in" style="font-size: 2.2rem; margin-bottom: 30px; font-weight:800; text-transform:uppercase;">Productos <span id="catalog-title" style="color:var(--primario);">Destacados</span></h2>
-            <button class="view-all" onclick="window.resetAllFilters();">Ver todos <i class="fa-solid fa-chevron-right"></i></button>
+            <h2 class="section-header fade-in" style="font-size: 2.2rem; margin-bottom: 0; font-weight:800; text-transform:uppercase;">Productos <span id="catalog-title" style="color:var(--primario);">Destacados</span></h2>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end;">
+                <span id="catalog-cache-status" style="font-size:.75rem;color:var(--texto-claro);font-weight:600;"><i class="fa-solid fa-cloud"></i> Catálogo conectado</span>
+                <button type="button" onclick="window.borrarCacheCatalogo()" style="border:1px solid #d8dce2;background:#fff;color:var(--texto-oscuro);padding:9px 12px;border-radius:8px;cursor:pointer;font-weight:700;font-size:.78rem;">
+                    <i class="fa-solid fa-rotate"></i> Actualizar
+                </button>
+                <button class="view-all" onclick="window.resetAllFilters();">Ver todos <i class="fa-solid fa-chevron-right"></i></button>
+            </div>
         </div>
         
         <div id="no-results" style="display: none; text-align: center; padding: 60px 20px; background: white; border-radius: 20px; box-shadow: var(--sombra-suave);">
@@ -879,52 +885,126 @@
             container.innerHTML=list.map(cat=>`<button class="category-card" onclick="window.filterByCategory('${cat.replace(/'/g,"\\'")}', null); document.getElementById('catalog-section').scrollIntoView({behavior:'smooth'});"><div class="category-icon"><i class="fa-solid ${getIcon(cat)}"></i></div><strong>${cat}</strong></button>`).join('');
         };
 
-        // CARGAR PRODUCTOS DESDE FIRESTORE
-        async function cargarCatalogo() {
+        // ===== CACHÉ LOCAL PARA REDUCIR LECTURAS DE FIRESTORE =====
+        const CATALOGO_CACHE_KEY = 'ferreteral_catalogo_cache_v1';
+        const CATALOGO_CACHE_TTL = 6 * 60 * 60 * 1000; // 6 horas
+
+        function obtenerCatalogoCache() {
+            try {
+                const raw = localStorage.getItem(CATALOGO_CACHE_KEY);
+                if (!raw) return null;
+                const data = JSON.parse(raw);
+                if (!data || !Array.isArray(data.productos) || !data.timestamp) return null;
+                if ((Date.now() - data.timestamp) > CATALOGO_CACHE_TTL) return null;
+                return data;
+            } catch (e) {
+                console.warn('No se pudo leer el caché local:', e);
+                return null;
+            }
+        }
+
+        function guardarCatalogoCache(productos) {
+            try {
+                localStorage.setItem(CATALOGO_CACHE_KEY, JSON.stringify({ timestamp: Date.now(), productos }));
+                window.actualizarEstadoCache();
+            } catch (e) {
+                console.warn('No se pudo guardar el caché local:', e);
+            }
+        }
+
+        window.borrarCacheCatalogo = function() {
+            try { localStorage.removeItem(CATALOGO_CACHE_KEY); } catch (e) {}
+            cargarCatalogo(true);
+        };
+
+        window.actualizarEstadoCache = function() {
+            const el = document.getElementById('catalog-cache-status');
+            if (!el) return;
+            try {
+                const raw = localStorage.getItem(CATALOGO_CACHE_KEY);
+                const data = raw ? JSON.parse(raw) : null;
+                if (!data || !data.timestamp) {
+                    el.innerHTML = '<i class="fa-solid fa-cloud"></i> Catálogo conectado';
+                    return;
+                }
+                const horas = Math.max(0, Math.round((Date.now() - data.timestamp) / 3600000));
+                el.innerHTML = `<i class="fa-solid fa-bolt"></i> Catálogo local · ${horas === 0 ? 'actualizado hace menos de 1 h' : 'actualizado hace ' + horas + ' h'}`;
+            } catch (e) {
+                el.innerHTML = '<i class="fa-solid fa-cloud"></i> Catálogo conectado';
+            }
+        };
+
+        function pintarCatalogo(productos) {
             const grid = document.getElementById('product-grid');
             const marcasContainer = document.getElementById('modal-brands-container');
             const catContainer = document.getElementById('modal-categories-container');
-            
+            const marcasSet = new Set();
+            const catSet = new Set();
+
+            window.productosDB = Array.isArray(productos) ? productos : [];
+            window.productosDB.forEach(p => {
+                if (p.marca && String(p.marca).trim() !== '') marcasSet.add(String(p.marca).trim().toUpperCase());
+                if (p.departamento && String(p.departamento).trim() !== '') catSet.add(String(p.departamento).trim().toUpperCase());
+            });
+
+            window.productosDB.sort((a, b) => String(a.nombre || '').localeCompare(String(b.nombre || '')));
+            window.filteredProductos = [...window.productosDB];
+
+            if (!window.productosDB.length) {
+                grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: var(--texto-claro);">Aún no hay productos en la base de datos. Utiliza el Subidor de Excel para sincronizarlos.</h3></div>';
+                return;
+            }
+
+            window.renderProductos();
+            window.renderCategoryCards(catSet);
+
+            marcasContainer.innerHTML = `<button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>`;
+            Array.from(marcasSet).sort().forEach(marca => {
+                const safe = marca.replace(/'/g, "\\'");
+                marcasContainer.innerHTML += `<button class="brand-item" onclick="window.filterByBrand('${safe}', this)">${marca}</button>`;
+            });
+
+            catContainer.innerHTML = `<button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>`;
+            Array.from(catSet).sort().forEach(cat => {
+                const safe = cat.replace(/'/g, "\\'");
+                catContainer.innerHTML += `<button class="brand-item" onclick="window.filterByCategory('${safe}', this)">${cat}</button>`;
+            });
+        }
+
+        // CARGAR PRODUCTOS: primero caché local; Firestore solo cuando vence o se solicita actualización
+        async function cargarCatalogo(forzarActualizacion = false) {
+            const grid = document.getElementById('product-grid');
+            const cache = forzarActualizacion ? null : obtenerCatalogoCache();
+
+            if (cache) {
+                pintarCatalogo(cache.productos);
+                window.actualizarEstadoCache();
+                return;
+            }
+
             try {
+                grid.innerHTML = '<div style="width:100%; text-align:center; grid-column:1/-1;"><i class="fa-solid fa-spinner fa-spin loading-spinner"></i><h3 style="color:var(--texto-claro);">Actualizando catálogo...</h3></div>';
                 const querySnapshot = await getDocs(collection(db, "productos"));
-                window.productosDB = [];
-                let marcasSet = new Set();
-                let catSet = new Set();
-                grid.innerHTML = '';
-
-                if (querySnapshot.empty) {
-                    grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: var(--texto-claro);">Aún no hay productos en la base de datos. Utiliza el Subidor de Excel para sincronizarlos.</h3></div>';
-                    return;
-                }
-
-                querySnapshot.forEach((documento) => {
-                    let p = documento.data();
-                    p.id = documento.id; 
-                    window.productosDB.push(p);
-                    if(p.marca && p.marca.trim() !== "") marcasSet.add(p.marca.trim().toUpperCase());
-                    if(p.departamento && p.departamento.trim() !== "") catSet.add(p.departamento.trim().toUpperCase());
+                const productos = [];
+                querySnapshot.forEach(documento => {
+                    const p = documento.data();
+                    p.id = documento.id;
+                    productos.push(p);
                 });
-
-                window.productosDB.sort((a, b) => a.nombre.localeCompare(b.nombre));
-                window.filteredProductos = [...window.productosDB];
-
-                window.renderProductos();
-                window.renderCategoryCards(catSet);
-
-                // LLENAR BOTONES DE MARCA EN MODAL
-                marcasContainer.innerHTML = `<button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>`;
-                Array.from(marcasSet).sort().forEach(marca => {
-                    marcasContainer.innerHTML += `<button class="brand-item" onclick="window.filterByBrand('${marca}', this)">${marca}</button>`;
-                });
-
-                // LLENAR BOTONES DE CATEGORÍA EN MODAL
-                catContainer.innerHTML = `<button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>`;
-                Array.from(catSet).sort().forEach(cat => {
-                    catContainer.innerHTML += `<button class="brand-item" onclick="window.filterByCategory('${cat}', this)">${cat}</button>`;
-                });
-
+                guardarCatalogoCache(productos);
+                pintarCatalogo(productos);
+                window.actualizarEstadoCache();
             } catch (e) {
                 console.error("Error cargando Firebase:", e);
+                try {
+                    const raw = localStorage.getItem(CATALOGO_CACHE_KEY);
+                    const cacheVencido = raw ? JSON.parse(raw) : null;
+                    if (cacheVencido && Array.isArray(cacheVencido.productos)) {
+                        pintarCatalogo(cacheVencido.productos);
+                        grid.insertAdjacentHTML('afterbegin', '<div style="grid-column:1/-1;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:10px 15px;border-radius:8px;text-align:center;margin-bottom:10px;"><i class="fa-solid fa-circle-info"></i> Mostrando el último catálogo guardado mientras Firebase vuelve a conectarse.</div>');
+                        return;
+                    }
+                } catch (_) {}
                 grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: red;">Error al conectar. Verifica las reglas de Firestore.</h3></div>';
             }
         }
