@@ -1,1012 +1,164 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ferreteral del Sureste - Tienda Online Premium</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --primario: #ff6600; 
-            --primario-hover: #e65c00;
-            --gradiente-naranja: linear-gradient(135deg, #ff8c00 0%, #ff5500 100%);
-            --secundario: #111111; 
-            --fondo-gris: #f8f9fa; 
-            --texto-oscuro: #1f2937;
-            --texto-claro: #6b7280;
-            --borde-card: #e5e7eb;
-            --blanco: #ffffff;
-            --amarillo: #facc15; 
-            --sombra-suave: 0 10px 25px rgba(0,0,0,0.05);
-            --sombra-fuerte: 0 15px 35px rgba(255, 102, 0, 0.2);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-        body { background-color: var(--fondo-gris); color: var(--texto-oscuro); overflow-x: hidden; }
-
-        /* MODO MAYOREO */
-        body.mayoreo-active { border-top: 6px solid var(--amarillo); }
-        body.mayoreo-active .btn-buy:not([disabled]) { background: var(--amarillo); color: var(--secundario); box-shadow: 0 8px 20px rgba(250, 204, 21, 0.4); }
-        body.mayoreo-active .btn-buy:not([disabled]):hover { background: #eab308; transform: translateY(-3px); }
-
-        /* CONTENEDOR DE CABECERA (SE MUEVE CON LA PÁGINA) */
-        .header-container { position: sticky; top: 0; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.1); background: var(--blanco); }
-        
-        /* CABECERA NEGRA */
-        header { padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; background: rgba(17, 17, 17, 1); color: var(--blanco); }
-        .logo { font-size: 26px; color: var(--blanco); font-weight: 800; display: flex; align-items: center; gap: 12px; letter-spacing: 1px;}
-        .logo i { font-size: 32px; color: var(--primario); }
-        nav { color: var(--blanco); font-weight: 600; display: flex; align-items: center; gap: 15px;}
-        nav div { padding: 10px 20px; border-radius: 30px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
-        .nav-mayoreo { color: var(--amarillo); background: rgba(250, 204, 21, 0.1); border: 1px solid rgba(250, 204, 21, 0.3); }
-        .nav-mayoreo:hover { background: var(--amarillo); color: var(--secundario); }
-        .nav-cart { background: var(--gradiente-naranja); color: white; box-shadow: 0 4px 15px rgba(255,102,0,0.3); }
-        .nav-cart:hover { transform: scale(1.05); box-shadow: var(--sombra-fuerte); }
-
-        /* CABECERA BLANCA (BUSCADOR Y BOTONES DESPLEGABLES) */
-        .sub-header { display: flex; gap: 20px; padding: 12px 50px; background: var(--blanco); border-bottom: 4px solid var(--primario); align-items: center; flex-wrap: wrap; }
-        .search-wrapper-top { position: relative; flex: 1; min-width: 250px; max-width: 500px; }
-        .search-wrapper-top i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--primario); font-size: 1.1rem; }
-        .search-wrapper-top input { width: 100%; padding: 12px 15px 12px 45px; border: 2px solid var(--borde-card); border-radius: 30px; font-size: 0.95rem; outline: none; background: var(--fondo-gris); transition: 0.3s; color: var(--texto-oscuro);}
-        .search-wrapper-top input:focus { border-color: var(--primario); background: white; box-shadow: 0 0 0 4px rgba(255,102,0,0.1); }
-        
-        .filter-section { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; max-width: 300px; }
-        .filter-label { font-size: 0.85rem; font-weight: 800; color: var(--texto-oscuro); text-transform: uppercase; display: flex; align-items: center; gap: 5px; min-width: max-content;}
-        
-        .dropdown-btn { flex: 1; width: 100%; padding: 12px 20px; border-radius: 30px; border: 2px solid var(--borde-card); background: var(--fondo-gris); color: var(--texto-oscuro); cursor: pointer; font-weight: 700; transition: 0.3s; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; overflow: hidden; white-space: nowrap;}
-        .dropdown-btn:hover { border-color: var(--primario); background: white; }
-        .dropdown-btn.active-filter { background: var(--secundario); color: white; border-color: var(--secundario); }
-
-        /* GRID PARA MODALES DE FILTROS */
-        .brands-grid { display: flex; flex-wrap: wrap; gap: 12px; }
-        .brand-item { white-space: nowrap; padding: 10px 20px; font-size: 0.85rem; border-radius: 30px; border: 1px solid var(--borde-card); background: var(--fondo-gris); color: var(--texto-claro); cursor: pointer; font-weight: 700; transition: 0.3s; text-transform: uppercase;}
-        .brand-item:hover, .brand-item.active { background: var(--secundario); color: white; border-color: var(--secundario); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-
-        /* SLIDER CARRUSEL HERO */
-        .hero-slider { position: relative; width: 100%; height: 500px; overflow: hidden; }
-        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; padding: 0 20px; opacity: 0; transition: opacity 1s ease-in-out, transform 3s ease-in-out; background-size: cover; background-position: center; transform: scale(1.05); }
-        .slide.active { opacity: 1; z-index: 1; transform: scale(1); }
-        .slide h1 { font-size: 4rem; margin-bottom: 15px; text-shadow: 0 5px 15px rgba(0,0,0,0.6); font-weight: 800; transform: translateY(30px); opacity: 0; transition: 0.8s 0.3s ease-out; text-transform: uppercase; letter-spacing: 2px;}
-        .slide p { font-size: 1.5rem; max-width: 800px; font-weight: 500; text-shadow: 0 3px 8px rgba(0,0,0,0.6); transform: translateY(30px); opacity: 0; transition: 0.8s 0.5s ease-out; }
-        .slide.active h1, .slide.active p { transform: translateY(0); opacity: 1; }
-
-        /* FRANJA DE CONFIANZA */
-        .trust-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1100px; margin: -50px auto 40px auto; padding: 0 20px; position: relative; z-index: 10; }
-        .trust-box { background: var(--blanco); padding: 25px 20px; border-radius: 15px; text-align: center; box-shadow: var(--sombra-suave); transition: 0.3s; display: flex; flex-direction: column; align-items: center; border: 1px solid var(--borde-card);}
-        .trust-box:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,0,0,0.08); border-color: var(--primario); }
-        .icon-circle { width: 70px; height: 70px; background: rgba(255,102,0,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; transition: 0.3s;}
-        .trust-box:hover .icon-circle { background: var(--gradiente-naranja); }
-        .trust-box i { font-size: 30px; color: var(--primario); transition: 0.3s;}
-        .trust-box:hover i { color: white; }
-        .trust-box h4 { font-size: 17px; margin-bottom: 5px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase;}
-        .trust-box p { font-size: 14px; color: var(--texto-claro); }
-
-        /* TARJETAS DE PRODUCTO PREMIUM */
-        .container { max-width: 1250px; margin: 40px auto; padding: 0 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 30px; }
-        .card { border: none; padding: 25px; text-align: center; border-radius: 20px; background: var(--blanco); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--sombra-suave); position: relative; overflow: hidden;}
-        .card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--gradiente-naranja); transform: scaleX(0); transition: 0.4s; transform-origin: left;}
-        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-        .card:hover::before { transform: scaleX(1); }
-        
-        .img-wrapper { position: relative; overflow: hidden; border-radius: 12px; margin-bottom: 20px; cursor: pointer; background: #fff; padding: 10px; border: 1px solid var(--fondo-gris);}
-        .product-img { width: 100%; height: 200px; object-fit: contain; transition: 0.5s; }
-        .img-wrapper:hover .product-img { transform: scale(1.1); }
-        .stock-badge { position: absolute; bottom: 10px; right: 10px; background: var(--secundario); color: var(--blanco); font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 20px; z-index: 3; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: background 0.3s;}
-        
-        .quick-view-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); background: rgba(255, 255, 255, 0.95); color: var(--secundario); padding: 12px 25px; border-radius: 30px; font-size: 0.9rem; font-weight: 700; transition: 0.3s; opacity: 0; z-index: 4; text-transform: uppercase; box-shadow: 0 5px 15px rgba(0,0,0,0.2);}
-        .img-wrapper:hover .quick-view-btn { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        .quick-view-btn:hover { background: var(--primario); color: white; }
-        
-        .product-title { font-size: 1.1rem; color: var(--texto-oscuro); margin-bottom: 10px; line-height: 1.4; font-weight: 700; text-transform: uppercase; height: 45px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
-        .price-text { margin: 15px 0; color: var(--primario); font-size: 1.8rem; font-weight: 800; }
-        .btn-buy { background: var(--gradiente-naranja); color: white; border: none; padding: 15px 25px; cursor: pointer; border-radius: 12px; font-weight: 700; transition: 0.3s; width: 100%; font-size: 1.05rem; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(255,102,0,0.25);}
-        .btn-buy:not([disabled]):hover { background: var(--secundario); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
-        .escala-mayoreo-etiqueta { display: none; background: rgba(255,102,0,0.1); color: var(--primario); padding: 5px 10px; border-radius: 8px; font-size: 10.5px; font-weight: 700; margin-bottom: 15px; border: 1px solid rgba(255,102,0,0.2); }
-        body.mayoreo-active .escala-mayoreo-etiqueta { display: inline-block; }
-
-        /* CARRITO, FORMULARIOS Y RESEÑAS */
-        .cart-section, .quote-section, .reviews-section { background: var(--blanco); padding: 50px; margin-top: 50px; border-radius: 20px; border: none; box-shadow: var(--sombra-suave); }
-        .cart-item-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; background: var(--fondo-gris); padding: 15px 20px; border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--borde-card); }
-        .qty-btn { background: var(--borde-card); border: none; width: 30px; height: 30px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; color: var(--secundario);}
-        .qty-btn:hover { background: var(--primario); color: white; }
-        .form-control { width: 100%; padding: 18px; border: 2px solid var(--borde-card); border-radius: 10px; margin-bottom: 15px; outline: none; background: var(--fondo-gris); color: var(--texto-oscuro); font-size: 1rem; transition: 0.3s; }
-        .form-control:focus { border-color: var(--primario); background: var(--blanco); box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.1); }
-        
-        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .review-card { background: var(--fondo-gris); padding: 30px; border-radius: 15px; border-left: 5px solid var(--primario); position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.02);}
-        .review-card::after { content: "\f10d"; font-family: "FontAwesome"; position: absolute; top: 20px; right: 20px; font-size: 30px; color: rgba(0,0,0,0.05); }
-        .stars { color: var(--amarillo); margin-bottom: 15px; font-size: 1.2rem; }
-
-        /* CARRUSEL INFINITO DE MARCAS */
-        .marquee-container { background: var(--secundario); padding: 50px 0; margin-top: 70px; overflow: hidden; color: white;}
-        .marquee-container h2 { text-align: center; color: var(--blanco); font-size: 1.6rem; font-weight: 800; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px;}
-        .marquee { display: flex; width: max-content; animation: scroll 25s linear infinite; }
-        .marquee:hover { animation-play-state: paused; }
-        .brand-logo { font-size: 2.5rem; font-weight: 800; color: rgba(255,255,255,0.2); margin: 0 50px; text-transform: uppercase; transition: 0.3s; cursor: pointer; }
-        .brand-logo:hover { color: var(--primario); text-shadow: 0 0 15px rgba(255,102,0,0.5); }
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-        /* SPINNER DE CARGA RÁPIDA */
-        .loading-spinner { font-size: 3rem; color: var(--primario); margin: 50px auto; display: block; text-align: center; }
-
-        /* MODALES */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 17, 17, 0.85); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.4s; backdrop-filter: blur(8px); padding: 20px; }
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-content { background: var(--blanco); width: 900px; max-width: 100%; border-radius: 20px; overflow: hidden; display: flex; flex-wrap: wrap; position: relative; transform: translateY(50px) scale(0.9); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 30px 60px rgba(0,0,0,0.4); max-height: 90vh; overflow-y: auto;}
-        .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
-        .modal-close { position: absolute; top: 20px; right: 20px; background: var(--fondo-gris); border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; color: var(--texto-oscuro); transition: 0.2s; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.1);}
-        .modal-close:hover { background: var(--primario); color: white; transform: rotate(90deg);}
-        
-        .modal-left { flex: 1; min-width: 350px; background: #fff; padding: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .modal-left img.main-modal-img { max-width: 100%; max-height: 350px; object-fit: contain; margin-bottom: 20px; transition: 0.3s;}
-        .gallery-container { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-        .gallery-img { width: 60px; height: 60px; object-fit: contain; cursor: pointer; border: 2px solid var(--borde-card); border-radius: 8px; transition: 0.3s; padding: 5px; }
-        .gallery-img:hover { border-color: var(--primario); transform: translateY(-2px); }
-        .modal-right { flex: 1; min-width: 350px; padding: 50px; display: flex; flex-direction: column; justify-content: center; background: var(--fondo-gris); border-left: 1px solid var(--borde-card);}
-        .features-box { background: white; padding: 15px; border-radius: 10px; font-size: 0.95rem; color: var(--texto-claro); margin-bottom: 20px; border: 1px solid var(--borde-card); max-height: 150px; overflow-y: auto; line-height: 1.5; }
-        
-        /* BOTONES FLOTANTES Y FOOTER */
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 65px; height: 65px; border-radius: 50px; text-align: center; font-size: 35px; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s; }
-        .whatsapp-float:hover { transform: scale(1.1) rotate(-10deg); background: #20ba5a; }
-        .back-to-top { position: fixed; bottom: 110px; right: 35px; background: var(--secundario); color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; opacity: 0; visibility: hidden; z-index: 99; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
-        .back-to-top.show { opacity: 1; visibility: visible; }
-        .back-to-top:hover { background: var(--primario); transform: translateY(-5px); }
-
-        footer { text-align: center; padding: 60px 20px; background: #0a0a0a; color: white; border-top: 5px solid var(--primario);}
-        footer a { color: var(--texto-claro); text-decoration: none; font-size: 15px; font-weight: 600; margin: 0 15px; transition: 0.3s;}
-        footer a:hover { color: var(--primario); }
-
-        /* AJUSTES PARA CELULARES */
-        @media (max-width: 900px) {
-            header { padding: 15px 20px; flex-direction: column; gap: 15px; }
-            .sub-header { flex-direction: column; padding: 15px 20px; align-items: stretch; gap: 15px; }
-            .search-wrapper-top { max-width: 100%; }
-            .filter-section { width: 100%; justify-content: space-between; max-width: 100%; }
-            .dropdown-btn { width: 100%; }
-        }
-        
-        /* EFECTOS DE ANIMACIÓN SCROLL */
-        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Ferreteral del Sureste — herramientas, materiales y equipo para construcción, industria y hogar.">
+<meta name="theme-color" content="#111111">
+<title>Ferreteral del Sureste | Herramientas y materiales</title>
+<link rel="icon" href="assets/logo-ferreteral-original.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{--orange:#f56b00;--orange2:#ff8a00;--black:#0d0d0d;--white:#fff;--bg:#f5f6f8;--muted:#6b7280;--line:#e5e7eb;--green:#18a957;--yellow:#ffcc00;--red:#e11d48;--shadow:0 10px 30px rgba(0,0,0,.08);--shadow2:0 18px 45px rgba(0,0,0,.12)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#171717}button,input,select,textarea{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}
+.top{position:sticky;top:0;z-index:1000;background:var(--black);color:#fff;box-shadow:0 4px 18px rgba(0,0,0,.18)}
+.topbar{max-width:1440px;margin:auto;padding:10px 28px;display:flex;align-items:center;gap:28px;min-height:94px}.brand{width:290px;flex:0 0 290px}.brand img{width:285px;height:82px;object-fit:contain;display:block}.nav{margin-left:auto;display:flex;align-items:center;gap:10px}.nav-btn{border:1px solid rgba(255,255,255,.13);background:transparent;color:#fff;padding:12px 16px;border-radius:12px;font-weight:800;display:inline-flex;align-items:center;gap:9px}.nav-btn:hover{background:#202020}.nav-btn.wholesale{border-color:rgba(255,204,0,.6);color:var(--yellow)}.nav-btn.cart{background:linear-gradient(135deg,var(--orange2),var(--orange));border:0;box-shadow:0 7px 20px rgba(245,107,0,.35)}.nav-btn.admin{display:none}
+.searchbar{background:#fff;border-bottom:4px solid var(--orange)}.search-inner{max-width:1440px;margin:auto;padding:14px 28px;display:grid;grid-template-columns:minmax(280px,1.45fr) repeat(3,minmax(180px,.7fr));gap:14px}.field{position:relative}.field input,.field select{width:100%;height:52px;padding:0 16px;border:1px solid #d8dde5;border-radius:10px;background:#fff;outline:none}.field.search input{padding-left:50px}.field.search i{position:absolute;left:18px;top:17px;color:var(--orange)}.field label{display:block;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.2px;margin:0 0 6px 2px}.field select{appearance:auto}
+.hero{max-width:1440px;margin:auto;position:relative;overflow:hidden;height:340px}.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity .5s;background-size:cover;background-position:center;display:flex;align-items:center}.hero-slide.active{opacity:1;z-index:2}.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,10,.92) 0%,rgba(10,10,10,.7) 48%,rgba(245,107,0,.18) 100%)}.hero-copy{position:relative;z-index:2;color:#fff;padding:0 60px;max-width:850px}.hero-copy .eyebrow{font-size:13px;font-weight:900;letter-spacing:1.2px;color:#ffb36e;text-transform:uppercase}.hero-copy h1{font-family:Poppins,sans-serif;font-size:50px;line-height:1.02;margin:8px 0 12px;font-weight:900;text-transform:uppercase}.hero-copy p{font-size:18px;max-width:680px;margin:0 0 22px;color:#e8e8e8}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}.btn{border:0;border-radius:10px;padding:13px 20px;font-weight:900}.btn.primary{background:linear-gradient(135deg,var(--orange2),var(--orange));color:#fff}.btn.outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}.hero-dots{position:absolute;z-index:4;bottom:16px;left:0;right:0;text-align:center}.hero-dots button{width:11px;height:11px;border-radius:50%;border:0;margin:0 5px;padding:0;background:#fff;opacity:.8}.hero-dots button.active{background:var(--orange);transform:scale(1.2)}
+.wrap{max-width:1440px;margin:auto;padding:0 28px}.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:-28px auto 30px;position:relative;z-index:8}.trust-card{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:18px;display:flex;gap:14px;align-items:center}.trust-icon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:rgba(245,107,0,.1);color:var(--orange);font-size:21px}.trust-card strong{display:block;font-size:13px}.trust-card span{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.section{margin:34px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:16px}.section-head h2{font-family:Poppins,sans-serif;font-size:24px;margin:0;font-weight:900;text-transform:uppercase}.section-head h2:after{content:"";display:block;width:64px;height:4px;background:var(--orange);border-radius:6px;margin-top:7px}.section-head .minor{font-size:13px;color:var(--muted)}
+.categories{display:grid;grid-template-columns:repeat(8,minmax(120px,1fr));gap:12px}.cat{border:1px solid var(--line);background:#fff;border-radius:12px;min-height:158px;padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:.25s}.cat:hover{transform:translateY(-4px);border-color:#bbb;box-shadow:var(--shadow)}.cat img{width:90px;height:80px;object-fit:contain;margin-bottom:10px}.cat .fallback{font-size:38px;color:#777;margin-bottom:9px;height:80px;display:grid;place-items:center}.cat strong{font-size:11px;line-height:1.2}
+.featured-grid,.products{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}.products{grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}.card{position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:.25s;box-shadow:0 3px 10px rgba(0,0,0,.04);display:flex;flex-direction:column}.card:hover{transform:translateY(-5px);box-shadow:var(--shadow2)}.badge{position:absolute;left:10px;top:10px;background:var(--orange);color:#fff;border-radius:7px;padding:5px 8px;font-size:11px;font-weight:900;z-index:2}.fav{position:absolute;right:10px;top:10px;width:34px;height:34px;border-radius:50%;border:1px solid #ddd;background:#fff;color:#999;z-index:2}.fav.active{color:var(--red);border-color:#fecdd3;background:#fff1f2}.pic{height:190px;padding:14px;display:grid;place-items:center;background:#fff;border-bottom:1px solid #eee;cursor:pointer}.pic img{max-height:165px;max-width:100%;object-fit:contain}.body{padding:13px 14px;display:flex;flex-direction:column;flex:1}.meta{font-size:10px;font-weight:800;color:#8a8f98;display:flex;justify-content:space-between;gap:10px}.title{font-size:13px;font-weight:800;line-height:1.35;margin:7px 0 8px;min-height:36px}.brand{font-size:11px;color:var(--muted);width:auto;flex:none}.price{font-family:Poppins,sans-serif;font-size:22px;font-weight:900;color:var(--orange);margin:4px 0}.old{color:#9ca3af;text-decoration:line-through;font-size:12px;font-family:Inter;font-weight:700;margin-right:5px}.stock{font-size:11px;font-weight:800;color:#444;margin-bottom:10px}.stock.low{color:#b45309}.stock.out{color:var(--red)}.card-actions{margin-top:auto;display:grid;grid-template-columns:1fr 42px;gap:8px}.add{border:0;background:var(--black);color:#fff;border-radius:9px;font-size:12px;font-weight:900;padding:11px 8px}.add:hover{background:var(--orange)}.details{border:1px solid #ddd;background:#fff;border-radius:9px;color:#555}.details:hover{border-color:#bbb}.qty-inline{display:none}
+.view-more{text-align:center;margin-top:18px}.view-more button{border:1px solid #ddd;background:#fff;border-radius:10px;padding:12px 20px;font-weight:900}.view-more button:hover{border-color:var(--orange);color:var(--orange)}
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.chip{border:1px solid #ddd;background:#fff;border-radius:999px;padding:7px 12px;font-size:11px;font-weight:800}.chip.active{background:#111;color:#fff;border-color:#111}.results-count{margin-left:auto;font-size:12px;color:var(--muted)}
+.brands{background:#0d0d0d;color:#fff;margin:45px 0 0;padding:34px 0;overflow:hidden}.brand-track{display:flex;gap:50px;white-space:nowrap;animation:scroll 22s linear infinite;width:max-content}.brand-name{font-size:26px;font-weight:900;color:#606060}.brand-name:hover{color:var(--orange)}@keyframes scroll{to{transform:translateX(-50%)}}
+.cart-drawer{position:fixed;inset:0;z-index:2000;pointer-events:none}.shade{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;transition:.25s}.drawer{position:absolute;right:0;top:0;height:100%;width:min(460px,100%);background:#fff;transform:translateX(100%);transition:.3s;display:flex;flex-direction:column}.cart-drawer.open{pointer-events:auto}.cart-drawer.open .shade{opacity:1}.cart-drawer.open .drawer{transform:translateX(0)}.drawer-head{padding:18px 20px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}.drawer-head h3{margin:0;font-family:Poppins;font-size:18px}.icon-btn{border:1px solid #ddd;background:#fff;border-radius:9px;width:38px;height:38px}.drawer-list{padding:16px 20px;overflow:auto;flex:1}.cart-row{display:grid;grid-template-columns:60px 1fr auto;gap:12px;padding:12px 0;border-bottom:1px solid #eee}.cart-row img{width:60px;height:60px;object-fit:contain;border:1px solid #eee;border-radius:8px}.cart-name{font-size:12px;font-weight:800}.cart-price{font-size:12px;color:var(--orange);font-weight:900;margin-top:4px}.qtybox{display:flex;gap:6px;align-items:center;margin-top:7px}.qtybox button{width:26px;height:26px;border:1px solid #ddd;background:#fff;border-radius:6px}.drawer-foot{padding:16px 20px;border-top:1px solid #eee}.sum{display:flex;justify-content:space-between;font-weight:900;font-size:17px;margin-bottom:12px}.whats{width:100%;background:var(--green);color:#fff;border:0;border-radius:10px;padding:14px;font-weight:900}.empty{padding:40px 10px;text-align:center;color:var(--muted)}
+.modal{position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.58);display:none;align-items:center;justify-content:center;padding:18px}.modal.open{display:flex}.modal-box{width:min(980px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.25);position:relative}.close{position:absolute;right:14px;top:14px;width:40px;height:40px;border-radius:50%;border:1px solid #ddd;background:#fff;z-index:5}.product-modal{display:grid;grid-template-columns:1fr 1fr}.modal-image{min-height:400px;background:#fff;display:grid;place-items:center;padding:30px}.modal-image img{max-width:100%;max-height:430px;object-fit:contain}.modal-info{background:#f7f8fa;padding:34px}.modal-info .meta{margin-bottom:8px}.modal-info h2{font-family:Poppins;font-size:27px;margin:0 0 10px}.modal-info .desc{color:#555;line-height:1.6;font-size:13px;white-space:pre-wrap}.modal-info .mprice{font-family:Poppins;font-size:34px;font-weight:900;color:var(--orange);margin:17px 0}.tier{background:#fff3df;border:1px solid #ffd59d;border-radius:10px;padding:12px;font-size:12px;margin-bottom:14px}.tier div{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed #f6c37a}.tier div:last-child{border-bottom:0}.modal-buttons{display:flex;gap:10px}.modal-buttons .btn{flex:1}.modal-buttons .whats2{background:#fff;color:#111;border:1px solid #ddd}
+.footer{background:#090909;color:#fff;padding:42px 0}.footer-grid{max-width:1440px;margin:auto;padding:0 28px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:35px}.footer .logofoot img{width:280px;height:82px;object-fit:contain;object-position:left}.footer p,.footer li{color:#a1a1a1;font-size:12px;line-height:1.6}.footer h4{margin:0 0 12px;font-family:Poppins}.footer ul{list-style:none;padding:0;margin:0}.copyright{text-align:center;border-top:1px solid #202020;margin-top:26px;padding-top:18px;color:#737373;font-size:11px}
+.toast{position:fixed;left:20px;bottom:20px;z-index:5000;background:#111;color:#fff;border-left:4px solid var(--orange);padding:12px 16px;border-radius:9px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:.25s;pointer-events:none;font-weight:800;font-size:12px}.toast.show{opacity:1;transform:translateY(0)}
+.float{position:fixed;right:20px;bottom:20px;z-index:1100;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.22)}.wa{background:#20bd5a}.topbtn{right:20px;bottom:88px;background:#111;display:none}.topbtn.show{display:grid}
+.mobile-menu{display:none}
+@media(max-width:1150px){.categories{grid-template-columns:repeat(4,1fr)}.featured-grid{grid-template-columns:repeat(3,1fr)}.products{grid-template-columns:repeat(4,1fr)}.search-inner{grid-template-columns:1.3fr repeat(2,1fr)}.filter-extra{display:none}.trust{grid-template-columns:repeat(2,1fr)}.brand{width:240px;flex-basis:240px}.brand img{width:235px}}
+@media(max-width:760px){.topbar{padding:8px 14px;min-height:74px;gap:10px}.brand{width:170px;flex-basis:170px}.brand img{width:165px;height:60px}.nav-btn{padding:10px 11px;font-size:11px}.nav-btn.hide-m{display:none}.mobile-menu{display:block}.search-inner{grid-template-columns:1fr;padding:12px 14px}.hero{height:360px}.hero-copy{padding:0 22px}.hero-copy h1{font-size:34px}.hero-copy p{font-size:14px}.wrap{padding:0 14px}.trust{grid-template-columns:1fr;margin-top:-18px}.categories{grid-template-columns:repeat(2,1fr)}.featured-grid{grid-template-columns:repeat(2,1fr)}.products{grid-template-columns:repeat(2,1fr)}.pic{height:160px}.section-head h2{font-size:20px}.product-modal{grid-template-columns:1fr}.modal-image{min-height:300px}.modal-info{padding:22px}.footer-grid{grid-template-columns:1fr}.footer .logofoot img{object-position:center}.drawer{width:100%}.results-count{width:100%;margin-left:0}.brand-track{gap:25px}.brand-name{font-size:20px}}
+</style>
 </head>
 <body>
-
-    <div id="toast-container" style="position: fixed; bottom: 30px; left: 30px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;"></div>
-    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="Volver Arriba"><i class="fa-solid fa-chevron-up"></i></button>
-    
-    <!-- MODAL MAYOREO -->
-    <div class="modal-overlay" id="mayoreoModal" onclick="closeMayoreoModal(event)">
-        <div class="modal-content" style="max-width: 450px; padding: 50px; text-align: center; display: block;" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeMayoreoModal(event)"><i class="fa-solid fa-xmark"></i></button>
-            <div class="icon-circle" style="width:90px; height:90px; margin: 0 auto 20px auto; background:var(--gradiente-naranja); border-radius:50%; display:flex; align-items:center; justify-content:center;">
-                <i class="fa-solid fa-hard-hat" style="font-size: 3rem; color: white;"></i>
-            </div>
-            <h2 style="margin-bottom: 10px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase;">Portal Mayoristas</h2>
-            <p style="color: var(--texto-claro); font-size: 1rem; margin-bottom: 30px;">Ingresa tus accesos para desbloquear precios de distribuidor o constructora.</p>
-            <input type="text" id="mayoreo-user" class="form-control" placeholder="Usuario" style="text-align: center; font-weight: bold; text-transform: uppercase;">
-            <input type="password" id="mayoreo-pwd" class="form-control" placeholder="Contraseña" style="text-align: center; font-weight: bold; letter-spacing: 2px;">
-            <button class="btn-buy" style="margin-top: 10px;" onclick="loginMayoreo()">Iniciar Sesión <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
-        </div>
+<header class="top">
+  <div class="topbar">
+    <a class="brand" href="#inicio" aria-label="Ferreteral del Sureste"><img src="assets/logo-ferreteral-original.png" alt="Ferreteral del Sureste"></a>
+    <nav class="nav">
+      <button class="nav-btn wholesale" id="wholesaleBtn"><i class="fa-solid fa-user-group"></i><span>Mayoreo</span></button>
+      <button class="nav-btn hide-m" onclick="document.getElementById('quote').scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-file-invoice"></i><span>Cotizaciones</span></button>
+      <button class="nav-btn hide-m" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-circle-info"></i><span>Nosotros</span></button>
+      <button class="nav-btn cart" id="openCart"><i class="fa-solid fa-cart-shopping"></i><span>Carrito (<b id="cartCount">0</b>)</span></button>
+    </nav>
+  </div>
+  <div class="searchbar">
+    <div class="search-inner">
+      <div class="field search"><i class="fa-solid fa-magnifying-glass"></i><input id="search" placeholder="Buscar productos, códigos, marcas..." autocomplete="off"></div>
+      <div class="field"><label>Marca</label><select id="brandFilter"><option value="ALL">Todas las marcas</option></select></div>
+      <div class="field"><label>Categoría</label><select id="catFilter"><option value="ALL">Todas las categorías</option></select></div>
+      <div class="field filter-extra"><label>Filtrar por</label><select id="stockFilter"><option value="ALL">Todos los productos</option><option value="stock">En existencia</option><option value="low">Pocas piezas</option><option value="featured">Destacados</option><option value="offers">En oferta</option></select></div>
     </div>
-
-    <!-- MODAL CATEGORÍAS (DEPARTAMENTOS) -->
-    <div class="modal-overlay" id="categoriesModal" onclick="closeCategoriesModal(event)">
-        <div class="modal-content" style="max-width: 650px; padding: 40px; display: block;" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeCategoriesModal(event)"><i class="fa-solid fa-xmark"></i></button>
-            <h2 style="margin-bottom: 25px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase; text-align: center;"><i class="fa-solid fa-list" style="color: var(--primario);"></i> Departamentos</h2>
-            <div class="brands-grid" id="modal-categories-container" style="justify-content: flex-start; max-height: 50vh; overflow-y: auto; padding-right: 10px;">
-                <button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>
-                <!-- Se llena con Firebase -->
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL MARCAS -->
-    <div class="modal-overlay" id="brandsModal" onclick="closeBrandsModal(event)">
-        <div class="modal-content" style="max-width: 650px; padding: 40px; display: block;" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeBrandsModal(event)"><i class="fa-solid fa-xmark"></i></button>
-            <h2 style="margin-bottom: 25px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase; text-align: center;"><i class="fa-solid fa-tag" style="color: var(--primario);"></i> Marcas</h2>
-            <div class="brands-grid" id="modal-brands-container" style="justify-content: flex-start; max-height: 50vh; overflow-y: auto; padding-right: 10px;">
-                <button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>
-                <!-- Se llena con Firebase -->
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL VISTA RÁPIDA -->
-    <div class="modal-overlay" id="quickViewModal" onclick="closeQuickView(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeQuickView(event)"><i class="fa-solid fa-xmark"></i></button>
-            
-            <div class="modal-left">
-                <img id="qv-img" src="" alt="Producto" class="main-modal-img">
-                <div class="gallery-container" id="qv-gallery"></div>
-            </div>
-
-            <div class="modal-right">
-                <span class="escala-mayoreo-etiqueta" style="width: max-content; display:inline-block;"><i class="fa-solid fa-layer-group"></i> Escalas Por Volumen</span>
-                <span class="modal-dept" id="qv-dept" style="color:var(--texto-claro); font-weight:800; font-size:0.95rem; text-transform:uppercase; letter-spacing: 1px;">DEPARTAMENTO</span>
-                <h2 class="modal-title" id="qv-title" style="font-size:1.8rem; font-weight:800; color:var(--texto-oscuro); margin:10px 0; text-transform:uppercase; line-height: 1.2;">Nombre del Producto</h2>
-                
-                <div class="features-box" id="qv-desc"></div>
-
-                <div class="modal-price" id="qv-price" style="font-size:3rem; color:var(--primario); font-weight:800; margin-bottom:20px; text-shadow: 0 2px 5px rgba(255,102,0,0.1);">$0.00</div>
-                <button class="btn-buy" id="qv-add-btn" style="padding: 20px; font-size: 1.2rem; box-shadow: var(--sombra-fuerte);">
-                    <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- BOTÓN WHATSAPP FLOTANTE -->
-    <a href="https://wa.me/529641091387?text=Hola,%20vengo%20de%20la%20tienda%20Ferreteral%20del%20Sureste%20y%20quiero%20hacer%20un%20pedido" class="whatsapp-float" target="_blank" title="¡Escríbenos por WhatsApp!"><i class="fa-brands fa-whatsapp"></i></a>
-
-    <!-- ========================================== -->
-    <!-- CABECERA PEGAJOSA (SE MUEVE CON LA PÁGINA) -->
-    <!-- ========================================== -->
-    <div class="header-container">
-        
-        <!-- BARRA NEGRA PRINCIPAL -->
-        <header>
-            <div class="logo"><i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE</div>
-            <nav>
-                <div class="nav-mayoreo" onclick="openMayoreoModal()"><i class="fa-solid fa-hard-hat"></i> Constructores / Mayoreo</div>
-                <div class="nav-cart" onclick="document.getElementById('cart-section-target').scrollIntoView({ behavior: 'smooth' });"><i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">0</span> Prod.</div>
-            </nav>
-        </header>
-
-        <!-- BARRA BLANCA DE BUSCADOR Y FILTROS -->
-        <div class="sub-header">
-            <div class="search-wrapper-top">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" placeholder="Buscar herramienta, material..." onkeyup="window.applyFilters()">
-            </div>
-            
-            <div class="filter-section">
-                <span class="filter-label"><i class="fa-solid fa-list"></i> Deptos:</span>
-                <button id="btn-select-category" class="dropdown-btn" onclick="openCategoriesModal()">Todos <i class="fa-solid fa-chevron-down"></i></button>
-            </div>
-
-            <div class="filter-section">
-                <span class="filter-label"><i class="fa-solid fa-tag"></i> Marcas:</span>
-                <button id="btn-select-brand" class="dropdown-btn" onclick="openBrandsModal()">Todas <i class="fa-solid fa-chevron-down"></i></button>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- ========================================== -->
-    <!-- CARRUSEL HERO (EL BANNER GIGANTE) -->
-    <!-- ========================================== -->
-    <section class="hero-slider">
-        <div class="slide active" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(255, 102, 0, 0.6)), url('https://images.unsplash.com/photo-1581166397007-0bc07644d5d4?auto=format&fit=crop&w=1920&q=80');">
-            <h1>Herramienta Profesional</h1>
-            <p>Equípate con las mejores marcas para construcción, carpintería y herrería.</p>
-            <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
-        </div>
-        <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(250, 204, 21, 0.6)), url('https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1920&q=80');">
-            <h1>Material Eléctrico e Iluminación</h1>
-            <p>Todo el cableado, iluminación y accesorios Volteck para tus proyectos.</p>
-            <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
-        </div>
-        <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(220, 38, 38, 0.6)), url('https://images.unsplash.com/photo-1533626904905-cc52fd99285e?auto=format&fit=crop&w=1920&q=80');">
-            <h1>Maquinaria Pesada</h1>
-            <p>Potencia garantizada. Soldadoras, compresoras y generadores eléctricos.</p>
-            <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
-        </div>
-        <div class="slider-dots">
-            <span class="dot active" onclick="changeSlide(0)"></span>
-            <span class="dot" onclick="changeSlide(1)"></span>
-            <span class="dot" onclick="changeSlide(2)"></span>
-        </div>
+  </div>
+</header>
+<main id="inicio">
+  <section class="hero">
+    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=1800&q=80')"><div class="hero-overlay"></div><div class="hero-copy"><div class="eyebrow">Desde 1950 · Ferreteral del Sureste</div><h1>Herramientas de calidad para grandes proyectos</h1><p>Equípate con marcas reconocidas para construcción, carpintería, herrería, industria y mantenimiento.</p><div class="hero-actions"><button class="btn primary" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Ver catálogo <i class="fa-solid fa-arrow-down"></i></button><button class="btn outline" onclick="document.getElementById('quote').scrollIntoView({behavior:'smooth'})">Solicitar cotización</button></div></div></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1800&q=80')"><div class="hero-overlay"></div><div class="hero-copy"><div class="eyebrow">Suministro eléctrico e industrial</div><h1>Todo para tu obra en un solo lugar</h1><p>Material eléctrico, iluminación, herramientas manuales, protección y mucho más.</p><div class="hero-actions"><button class="btn primary" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Comprar ahora</button></div></div></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1559131397-f94da358f7ca?auto=format&fit=crop&w=1800&q=80')"><div class="hero-overlay"></div><div class="hero-copy"><div class="eyebrow">Atención a constructoras</div><h1>Precios por volumen y cotizaciones especiales</h1><p>Accede a precios de mayoreo y atención personalizada para compras grandes.</p><div class="hero-actions"><button class="btn primary" id="heroWholesale">Acceder a mayoreo</button></div></div></div>
+    <div class="hero-dots"><button class="active" data-slide="0"></button><button data-slide="1"></button><button data-slide="2"></button></div>
+  </section>
+  <div class="wrap">
+    <section class="trust">
+      <div class="trust-card"><div class="trust-icon"><i class="fa-solid fa-truck-fast"></i></div><div><strong>Envíos a obra</strong><span>Entrega según zona y volumen</span></div></div>
+      <div class="trust-card"><div class="trust-icon"><i class="fa-solid fa-shield-halved"></i></div><div><strong>Marcas reconocidas</strong><span>Productos con respaldo de fábrica</span></div></div>
+      <div class="trust-card"><div class="trust-icon"><i class="fa-solid fa-user-gear"></i></div><div><strong>Asesoría técnica</strong><span>Te ayudamos a elegir equipo</span></div></div>
+      <div class="trust-card"><div class="trust-icon"><i class="fa-solid fa-tags"></i></div><div><strong>Precios por volumen</strong><span>Descuentos para constructoras</span></div></div>
     </section>
 
-    <!-- FRANJA DE CONFIANZA -->
-    <div class="trust-bar fade-in">
-        <div class="trust-box">
-            <div class="icon-circle"><i class="fa-solid fa-truck-pickup"></i></div>
-            <h4>Envíos a Obra</h4>
-            <p>Llevamos el material hasta tu proyecto</p>
-        </div>
-        <div class="trust-box">
-            <div class="icon-circle"><i class="fa-solid fa-shield-halved"></i></div>
-            <h4>Garantía de Fábrica</h4>
-            <p>Respaldados por las mejores marcas</p>
-        </div>
-        <div class="trust-box">
-            <div class="icon-circle"><i class="fa-solid fa-helmet-safety"></i></div>
-            <h4>Asesoría Técnica</h4>
-            <p>Te ayudamos a elegir el equipo ideal</p>
-        </div>
-    </div>
-
-    <!-- CATÁLOGO DE PRODUCTOS -->
-    <div class="container" id="catalog-section" style="margin-top: 0;">
-        <h2 class="section-header fade-in" style="font-size: 2.2rem; margin-bottom: 30px; font-weight:800; text-transform:uppercase;">Catálogo <span id="catalog-title" style="color:var(--primario);">General</span></h2>
-        
-        <div id="no-results" style="display: none; text-align: center; padding: 60px 20px; background: white; border-radius: 20px; box-shadow: var(--sombra-suave);">
-            <i class="fa-solid fa-box-open" style="font-size: 4rem; color: #cbd5e1; margin-bottom: 20px; display: block;"></i>
-            <h3 style="font-size: 1.5rem; color: var(--texto-oscuro);">No encontramos resultados</h3>
-            <p style="color: var(--texto-claro);">Intenta buscar con otra palabra o selecciona "Todos" en los filtros de arriba.</p>
-        </div>
-        
-        <div class="grid" id="product-grid">
-            <div style="width: 100%; text-align: center; grid-column: 1 / -1;">
-                <i class="fa-solid fa-spinner fa-spin loading-spinner"></i>
-                <h3 style="color: var(--texto-claro);">Cargando tu inventario en tiempo real...</h3>
-            </div>
-        </div>
-    </div>
-
-    <!-- CARRUSEL INFINITO DE MARCAS -->
-    <div class="marquee-container fade-in">
-        <h2>Nuestros Distribuidores Oficiales</h2>
-        <div class="marquee">
-            <div class="marquee-content">
-                <span class="brand-logo">TRUPER</span>
-                <span class="brand-logo">VOLTECK</span>
-                <span class="brand-logo">PRETUL</span>
-                <span class="brand-logo">MAKITA</span>
-                <span class="brand-logo">DEWALT</span>
-                <span class="brand-logo">URREA</span>
-                <span class="brand-logo">SURTEK</span>
-                <span class="brand-logo">3M</span>
-                <span class="brand-logo">BOSCH</span>
-                <span class="brand-logo">CONDUMEX</span>
-                <!-- Duplicate for infinite effect -->
-                <span class="brand-logo">TRUPER</span>
-                <span class="brand-logo">VOLTECK</span>
-                <span class="brand-logo">PRETUL</span>
-                <span class="brand-logo">MAKITA</span>
-                <span class="brand-logo">DEWALT</span>
-                <span class="brand-logo">URREA</span>
-                <span class="brand-logo">SURTEK</span>
-                <span class="brand-logo">3M</span>
-                <span class="brand-logo">BOSCH</span>
-                <span class="brand-logo">CONDUMEX</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- CARRITO Y CHECKOUT POR WHATSAPP -->
-    <div class="container cart-section fade-in" id="cart-section-target">
-        <h3 style="font-size: 2rem; margin-bottom: 25px; color: var(--texto-oscuro); text-transform:uppercase; font-weight:800;"><i class="fa-solid fa-basket-shopping" style="color: var(--primario);"></i> Tu Carrito</h3>
-        
-        <div style="background: #fff3e0; padding: 15px 20px; border-radius: 10px; border-left: 5px solid var(--primario); margin-bottom: 25px;">
-            <p style="color: var(--secundario); font-size: 0.95rem; margin: 0;">
-                <i class="fa-solid fa-circle-info" style="color: var(--primario);"></i> <b>Nota:</b> El total es un estimado. Si eres mayorista, el sistema calculará tus descuentos por volumen en tiempo real.
-            </p>
-        </div>
-
-        <ul id="cart-items" style="list-style: none; margin: 15px 0; padding-left: 0;">
-            <li style="color: var(--texto-claro); background: var(--fondo-gris); padding: 30px; border-radius: 12px; text-align: center; border: 2px dashed var(--borde-card); font-weight: 500;">El carrito está vacío. Agrega material para continuar.</li>
-        </ul>
-        <div style="background: var(--secundario); color: white; padding: 25px; border-radius: 15px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; border-left: 6px solid var(--primario); box-shadow: var(--sombra-suave);">
-            <span style="font-size: 1.5rem; font-weight: 700;">Total Estimado:</span>
-            <span style="font-size: 2.5rem; font-weight: 800; color: var(--primario); text-shadow: 0 0 10px rgba(255,102,0,0.3);">$<span id="cart-total">0.00</span></span>
-        </div>
-        
-        <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
-            <button class="btn-buy" style="background: linear-gradient(135deg, #25D366, #128C7E); width: 100%; font-size: 1.2rem; padding: 20px; border-radius: 30px; box-shadow: 0 5px 15px rgba(37,211,102,0.3);" onclick="procesarPedidoWhatsApp()">
-                <i class="fa-brands fa-whatsapp" style="font-size: 1.5rem;"></i> Enviar Pedido por WhatsApp
-            </button>
-        </div>
-    </div>
-
-    <!-- COTIZACIONES -->
-    <div class="container quote-section fade-in">
-        <h2 style="text-align: left; margin-bottom: 10px; color: var(--texto-oscuro); font-weight:800; text-transform:uppercase;">¿Requieres una Cotización Especial?</h2>
-        <p style="margin-bottom: 30px; color: var(--texto-claro); font-size: 1.1rem;">Ideal para constructoras, contratistas o compras de alto volumen.</p>
-        
-        <form id="form-cotizacion" onsubmit="enviarCotizacion(event)">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
-                <input type="text" id="cot-nombre" placeholder="Nombre o Razón Social" class="form-control" required>
-                <input type="email" id="cot-correo" placeholder="Correo Electrónico" class="form-control" required>
-                <input type="tel" id="cot-tel" placeholder="Teléfono / WhatsApp" class="form-control" required>
-            </div>
-            <textarea id="cot-mensaje" placeholder="Describe los materiales o cantidades de obra que necesitas..." class="form-control" style="height: 140px; resize: none; margin-top: 5px;" required></textarea>
-            <button type="submit" id="btn-enviar-cot" class="btn-buy" style="width: max-content; padding: 15px 40px; border-radius: 30px;"><i class="fa-solid fa-paper-plane"></i> Enviar Solicitud</button>
-        </form>
-    </div>
-
-    <!-- RESEÑAS -->
-    <div class="container reviews-section fade-in" style="margin-bottom: 50px;">
-        <h2 style="text-align: center; color: var(--texto-oscuro); margin-bottom: 40px; font-weight:800; text-transform:uppercase;">Lo que opinan nuestros clientes</h2>
-        <div class="reviews-grid">
-            <div class="review-card">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p style="font-size: 1.05rem; font-weight: 500; color: var(--texto-oscuro); margin-bottom: 15px;">"Excelente surtido de herramienta Truper y me cotizaron súper rápido todo el material eléctrico para mi obra en Tapachula."</p>
-                <strong style="color: var(--primario); font-size: 1.1rem;">- Arq. Roberto M.</strong>
-            </div>
-            <div class="review-card">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
-                <p style="font-size: 1.05rem; font-weight: 500; color: var(--texto-oscuro); margin-bottom: 15px;">"Muy confiables. Compré un taladro y discos de corte, llegaron el mismo día hasta donde estábamos trabajando."</p>
-                <strong style="color: var(--primario); font-size: 1.1rem;">- Carlos R.</strong>
-            </div>
-        </div>
-    </div>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="logo" style="justify-content: center; margin-bottom: 25px; color: white;">
-            <i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE
-        </div>
-        <div class="links" style="margin-bottom: 20px;">
-            <a href="#" onclick="alert('Envíos a obra de 24 a 48 horas en la zona, aplican restricciones por volumen.')">Políticas de Envío</a>
-            <a href="#" onclick="alert('Garantía directa con la marca en maquinaria pesada y herramientas eléctricas.')">Políticas de Garantía</a>
-            <a href="#" onclick="alert('Tus datos están protegidos conforme a la ley de privacidad vigente.')">Aviso de Privacidad</a>
-        </div>
-        <p style="color: #6b7280; margin-top: 15px; font-size: 0.9rem;">&copy; 2026 Ferreteral del Sureste. Todos los derechos reservados. Huixtla, Chiapas.</p>
-    </footer>
-
-    <!-- LÓGICA DE JAVASCRIPT GLOBAL -->
-    <script>
-        window.isMayoreo = false;
-        window.total = 0; 
-        window.cart = [];
-        window.productosDB = []; 
-        window.filteredProductos = [];
-        window.currentQuickViewId = null;
-        window.currentBrand = 'ALL';
-        window.currentCategory = 'ALL';
-        
-        // Paginación
-        window.productosPorPagina = 24;
-        window.productosMostrados = 24;
-
-        // MODALES LOGIN MAYOREO
-        function openMayoreoModal() { document.getElementById('mayoreoModal').classList.add('active'); }
-        function closeMayoreoModal(e) { if(e) e.stopPropagation(); document.getElementById('mayoreoModal').classList.remove('active'); }
-
-        window.enableMayoreoMode = function(nombreUsuario) {
-            document.body.classList.add('mayoreo-active');
-            document.querySelector('header .logo').innerHTML = `<i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE <span style="font-size:11px; background:var(--amarillo); color:black; padding:4px 10px; border-radius:20px; margin-left:10px; vertical-align:middle; text-shadow:none;">MAYOREO: ${nombreUsuario}</span>`;
-            if(window.renderProductos) window.renderProductos(); 
-            if(window.renderCart) window.renderCart(); 
-        }
-
-        // MODALES DE FILTROS (MARCAS Y CATEGORÍAS)
-        window.openBrandsModal = function() { document.getElementById('brandsModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
-        window.closeBrandsModal = function(e) { if(e) e.stopPropagation(); document.getElementById('brandsModal').classList.remove('active'); document.body.style.overflow = 'auto'; }
-        
-        window.openCategoriesModal = function() { document.getElementById('categoriesModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
-        window.closeCategoriesModal = function(e) { if(e) e.stopPropagation(); document.getElementById('categoriesModal').classList.remove('active'); document.body.style.overflow = 'auto'; }
-
-        // BÚSQUEDA Y FILTROS INTELIGENTES
-        window.removeAccents = function(str) { 
-            return str.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); 
-        }
-
-        window.applyFilters = function() {
-            let searchInput = document.getElementById('searchInput');
-            let searchTerms = [];
-            if(searchInput) {
-                searchTerms = window.removeAccents(searchInput.value.toLowerCase()).split(' ').filter(t => t.trim() !== '');
-            }
-
-            window.filteredProductos = window.productosDB.filter(p => {
-                let b = window.removeAccents(p.marca || '').toLowerCase();
-                let n = window.removeAccents(p.nombre || '').toLowerCase();
-                let d = window.removeAccents(p.departamento || '').toLowerCase();
-
-                let matchBrand = (window.currentBrand === 'ALL' || b === window.currentBrand);
-                let matchCat = (window.currentCategory === 'ALL' || d === window.currentCategory);
-                let matchSearch = searchTerms.length === 0 || searchTerms.every(term => n.includes(term) || b.includes(term) || d.includes(term));
-
-                return matchBrand && matchCat && matchSearch;
-            });
-
-            window.productosMostrados = window.productosPorPagina; 
-            if(window.renderProductos) window.renderProductos();
-        };
-
-        window.filterByBrand = function(brand, btnElement) {
-            document.getElementById('modal-brands-container').querySelectorAll('.brand-item').forEach(btn => btn.classList.remove('active'));
-            if(btnElement) btnElement.classList.add('active');
-            
-            window.currentBrand = brand === 'ALL' ? 'ALL' : window.removeAccents(brand).toLowerCase();
-            
-            let btnUI = document.getElementById('btn-select-brand');
-            btnUI.innerHTML = (brand === 'ALL' ? 'Todas' : brand) + ' <i class="fa-solid fa-chevron-down"></i>';
-            if(brand !== 'ALL') btnUI.classList.add('active-filter'); else btnUI.classList.remove('active-filter');
-
-            let title = "General";
-            if(window.currentCategory !== 'ALL') title = document.getElementById('btn-select-category').innerText.replace(' \uf078', '');
-            if(brand !== 'ALL') title += " - " + brand;
-            document.getElementById('catalog-title').innerText = title;
-
-            window.closeBrandsModal();
-            window.applyFilters();
-            
-            let offset = document.querySelector('.header-container').offsetHeight + 20;
-            let element = document.getElementById('catalog-section');
-            let topPos = element.getBoundingClientRect().top + window.pageYOffset - offset;
-            window.scrollTo({ top: topPos, behavior: 'smooth' });
-        };
-
-        window.filterByCategory = function(category, btnElement) {
-            document.getElementById('modal-categories-container').querySelectorAll('.brand-item').forEach(btn => btn.classList.remove('active'));
-            if(btnElement) btnElement.classList.add('active');
-            
-            window.currentCategory = category === 'ALL' ? 'ALL' : window.removeAccents(category).toLowerCase();
-            
-            let btnUI = document.getElementById('btn-select-category');
-            btnUI.innerHTML = (category === 'ALL' ? 'Todos' : category) + ' <i class="fa-solid fa-chevron-down"></i>';
-            if(category !== 'ALL') btnUI.classList.add('active-filter'); else btnUI.classList.remove('active-filter');
-
-            let title = category === 'ALL' ? "General" : category;
-            if(window.currentBrand !== 'ALL') title += " - " + document.getElementById('btn-select-brand').innerText.replace(' \uf078', '');
-            document.getElementById('catalog-title').innerText = title;
-
-            window.closeCategoriesModal();
-            window.applyFilters();
-
-            let offset = document.querySelector('.header-container').offsetHeight + 20;
-            let element = document.getElementById('catalog-section');
-            let topPos = element.getBoundingClientRect().top + window.pageYOffset - offset;
-            window.scrollTo({ top: topPos, behavior: 'smooth' });
-        };
-
-        window.cargarMas = function() {
-            window.productosMostrados += window.productosPorPagina;
-            window.renderProductos();
-        };
-
-        // SCROLL ANIMATIONS Y SLIDER
-        let currentSlideIndex = 0;
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-        function changeSlide(index) {
-            slides[currentSlideIndex].classList.remove('active');
-            if(dots.length) dots[currentSlideIndex].classList.remove('active');
-            currentSlideIndex = index;
-            slides[currentSlideIndex].classList.add('active');
-            if(dots.length) dots[currentSlideIndex].classList.add('active');
-        }
-        if(slides.length > 0) { setInterval(() => { changeSlide((currentSlideIndex + 1) % slides.length); }, 5000); }
-
-        const faders = document.querySelectorAll('.fade-in');
-        const appearOnScroll = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add('visible');
-                obs.unobserve(entry.target);
-            });
-        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-        faders.forEach(fader => appearOnScroll.observe(fader));
-
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 500) document.getElementById("backToTop").classList.add("show");
-            else document.getElementById("backToTop").classList.remove("show");
-        });
-
-        // VISTA RÁPIDA Y GALERÍA
-        window.openQuickView = function(id) {
-            let prod = window.productosDB.find(p => p.id === id);
-            if(!prod) return;
-            window.currentQuickViewId = id;
-
-            let img1 = prod.img1 || 'https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen';
-            let img2 = prod.img2 || '';
-            let img3 = prod.img3 || '';
-
-            document.getElementById('qv-img').src = img1;
-            document.getElementById('qv-title').innerText = prod.nombre;
-            document.getElementById('qv-dept').innerText = "Depto: " + prod.departamento;
-            document.getElementById('qv-price').innerText = "$" + parseFloat(prod.precio).toFixed(2);
-            document.getElementById('qv-desc').innerHTML = prod.desc || 'Características no disponibles para este producto.';
-
-            let galleryContainer = document.getElementById('qv-gallery');
-            galleryContainer.innerHTML = '';
-            if (img2 && img2 !== '0') {
-                galleryContainer.innerHTML += `<img src="${img1}" class="gallery-img" onclick="document.getElementById('qv-img').src='${img1}'">`;
-                galleryContainer.innerHTML += `<img src="${img2}" class="gallery-img" onclick="document.getElementById('qv-img').src='${img2}'">`;
-                if(img3 && img3 !== '0') galleryContainer.innerHTML += `<img src="${img3}" class="gallery-img" onclick="document.getElementById('qv-img').src='${img3}'">`;
-            }
-
-            document.getElementById('quickViewModal').classList.add('active');
-            document.body.style.overflow = 'hidden'; 
-        }
-
-        window.closeQuickView = function(e) {
-            if(e) e.stopPropagation();
-            document.getElementById('quickViewModal').classList.remove('active');
-            document.body.style.overflow = 'auto'; 
-        }
-
-        document.getElementById('qv-add-btn').onclick = function() {
-            if(window.currentQuickViewId) {
-                window.addToCart(window.currentQuickViewId);
-                window.closeQuickView();
-            }
-        };
-
-        // CALCULAR PRECIOS
-        window.calculateItemPrice = function(item) {
-            let price = item.basePrice;
-            if (!window.isMayoreo) return price; 
-            let q = item.qty, t = item.tiers;
-            if (q >= 100 && t[100] > 0) price = t[100];
-            else if (q >= 50 && t[50] > 0) price = t[50];
-            else if (q >= 25 && t[25] > 0) price = t[25];
-            else if (q >= 20 && t[20] > 0) price = t[20];
-            else if (q >= 12 && t[12] > 0) price = t[12];
-            else if (q >= 10 && t[10] > 0) price = t[10];
-            else if (q >= 5 && t[5] > 0) price = t[5];
-            else if (q >= 3 && t[3] > 0) price = t[3];
-            return price;
-        }
-
-        // CARRITO LÓGICA
-        window.addToCart = function(id) {
-            let prod = window.productosDB.find(p => p.id === id);
-            if(!prod) return;
-
-            let existingItem = window.cart.find(i => i.id === id);
-            let currentQty = existingItem ? existingItem.qty : 0;
-
-            if (currentQty + 1 > prod.stock) {
-                alert(`No hay suficiente inventario disponible. Solo quedan ${prod.stock}.`);
-                return;
-            }
-
-            if (existingItem) {
-                existingItem.qty++;
-            } else {
-                let tiers = { 3: prod.t3||0, 5: prod.t5||0, 10: prod.t10||0, 12: prod.t12||0, 20: prod.t20||0, 25: prod.t25||0, 50: prod.t50||0, 100: prod.t100||0 };
-                window.cart.push({ id: prod.id, name: prod.nombre, basePrice: parseFloat(prod.precio), maxStock: parseFloat(prod.stock), qty: 1, tiers: tiers });
-            }
-            
-            if(window.renderCart) window.renderCart();
-            showToast(`Agregado al carrito: ${prod.nombre}`);
-            let cartIcon = document.querySelector('.nav-cart');
-            cartIcon.style.transform = 'scale(1.15)';
-            setTimeout(() => { cartIcon.style.transform = 'scale(1)'; }, 250);
-        }
-
-        window.changeQty = function(index, delta) {
-            let item = window.cart[index];
-            if (delta > 0 && item.qty + delta > item.maxStock) {
-                alert(`Límite alcanzado. Solo hay ${item.maxStock} piezas en inventario.`);
-                return;
-            }
-            item.qty += delta;
-            if (item.qty <= 0) window.cart.splice(index, 1);
-            if(window.renderCart) window.renderCart();
-        };
-
-        window.removeFromCart = function(index) {
-            window.cart.splice(index, 1);
-            if(window.renderCart) window.renderCart();
-        }
-
-        window.renderCart = function() {
-            let cartItemsElement = document.getElementById('cart-items');
-            cartItemsElement.innerHTML = '';
-            window.total = 0; let totalQty = 0;
-
-            if (window.cart.length === 0) {
-                cartItemsElement.innerHTML = '<li style="color: var(--texto-claro); background: var(--fondo-gris); padding: 30px; border-radius: 12px; text-align: center; border: 2px dashed var(--borde-card); font-weight: 500;">El carrito está vacío. Agrega material para continuar.</li>';
-            } else {
-                window.cart.forEach((item, index) => {
-                    totalQty += item.qty;
-                    let unitPrice = window.calculateItemPrice(item);
-                    let subtotal = unitPrice * item.qty;
-                    window.total += subtotal;
-                    
-                    let promoBadge = (window.isMayoreo && unitPrice < item.basePrice) ? `<span style="background:var(--primario); color:white; font-size:10px; padding:2px 5px; border-radius:3px; margin-left:5px;"><i class="fa-solid fa-tag"></i> Desc.</span>` : "";
-
-                    let li = document.createElement('li');
-                    li.className = 'cart-item-row';
-                    li.innerHTML = `
-                        <div style="flex:1; min-width: 200px;">
-                            <strong style="font-size: 0.95rem; display:block; color:var(--texto-oscuro);">${item.name} ${promoBadge}</strong>
-                            <span style="color:var(--texto-claro); font-size:0.85rem;">$${unitPrice.toFixed(2)} c/u</span>
-                        </div>
-                        <div style="display:flex; align-items:center; gap:5px; margin: 10px 15px;">
-                            <button onclick="window.changeQty(${index}, -1)" class="qty-btn">-</button>
-                            <span style="font-weight:800; font-size:1.1rem; min-width:30px; text-align:center;">${item.qty}</span>
-                            <button onclick="window.changeQty(${index}, 1)" class="qty-btn">+</button>
-                        </div>
-                        <div style="font-weight:800; color:var(--primario); font-size:1.2rem; min-width:80px; text-align:right;">
-                            $${subtotal.toFixed(2)}
-                        </div>
-                        <button onclick="window.removeFromCart(${index})" style="margin-left:15px; padding:8px 12px; background:#fee2e2; color:#e11d48; border:none; border-radius:8px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
-                    `;
-                    cartItemsElement.appendChild(li);
-                });
-            }
-            document.getElementById('cart-total').innerText = window.total.toFixed(2);
-            document.getElementById('cart-count').innerText = totalQty;
-            if(window.updateStockUI) window.updateStockUI(); 
-        }
-
-        window.updateStockUI = function() {
-            document.querySelectorAll('.card').forEach(card => {
-                let id = card.getAttribute('data-id');
-                let prod = window.productosDB.find(p => p.id === id);
-                if(!prod) return;
-                
-                let inCartItem = window.cart.find(i => i.id === id);
-                let inCartQty = inCartItem ? inCartItem.qty : 0;
-                let available = parseFloat(prod.stock) - inCartQty;
-                
-                let badge = card.querySelector('.stock-badge');
-                if (badge) {
-                    badge.innerHTML = `<i class="fa-solid fa-box"></i> ${available.toFixed(1).replace('.0','')} disp.`;
-                    badge.style.background = (available <= 0 && prod.stock > 0) ? "#e11d48" : "var(--secundario)";
-                }
-            });
-        }
-
-        function showToast(message) {
-            let container = document.getElementById('toast-container');
-            let toast = document.createElement('div');
-            toast.style.cssText = 'background: var(--secundario); color: white; padding: 15px 25px; border-radius: 8px; font-weight: 600; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); border-left: 5px solid var(--primario); transition: 0.3s;';
-            toast.innerHTML = `<div style="background: white; color: var(--primario); border-radius:50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-check"></i></div> <span>${message}</span>`;
-            container.appendChild(toast);
-            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3000);
-        }
-    </script>
-
-    <!-- FIREBASE SDK Y CARGA SÚPER RÁPIDA -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, query, where, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDcu8X6gdw7He5Rvwfl2UfICp4TP10O6LM",
-            authDomain: "ferreteral-sureste.firebaseapp.com",
-            projectId: "ferreteral-sureste",
-            storageBucket: "ferreteral-sureste.firebasestorage.app",
-            messagingSenderId: "520677026154",
-            appId: "1:520677026154:web:563d2788f799c0fe441d13"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // CARGAR PRODUCTOS DESDE FIRESTORE
-        async function cargarCatalogo() {
-            const grid = document.getElementById('product-grid');
-            const marcasContainer = document.getElementById('modal-brands-container');
-            const catContainer = document.getElementById('modal-categories-container');
-            
-            try {
-                const querySnapshot = await getDocs(collection(db, "productos"));
-                window.productosDB = [];
-                let marcasSet = new Set();
-                let catSet = new Set();
-                grid.innerHTML = '';
-
-                if (querySnapshot.empty) {
-                    grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: var(--texto-claro);">Aún no hay productos en la base de datos. Utiliza el Subidor de Excel para sincronizarlos.</h3></div>';
-                    return;
-                }
-
-                querySnapshot.forEach((documento) => {
-                    let p = documento.data();
-                    p.id = documento.id; 
-                    window.productosDB.push(p);
-                    if(p.marca && p.marca.trim() !== "") marcasSet.add(p.marca.trim().toUpperCase());
-                    if(p.departamento && p.departamento.trim() !== "") catSet.add(p.departamento.trim().toUpperCase());
-                });
-
-                window.productosDB.sort((a, b) => a.nombre.localeCompare(b.nombre));
-                window.filteredProductos = [...window.productosDB];
-
-                window.renderProductos();
-
-                // LLENAR BOTONES DE MARCA EN MODAL
-                marcasContainer.innerHTML = `<button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>`;
-                Array.from(marcasSet).sort().forEach(marca => {
-                    marcasContainer.innerHTML += `<button class="brand-item" onclick="window.filterByBrand('${marca}', this)">${marca}</button>`;
-                });
-
-                // LLENAR BOTONES DE CATEGORÍA EN MODAL
-                catContainer.innerHTML = `<button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>`;
-                Array.from(catSet).sort().forEach(cat => {
-                    catContainer.innerHTML += `<button class="brand-item" onclick="window.filterByCategory('${cat}', this)">${cat}</button>`;
-                });
-
-            } catch (e) {
-                console.error("Error cargando Firebase:", e);
-                grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: red;">Error al conectar. Verifica las reglas de Firestore.</h3></div>';
-            }
-        }
-
-        // RENDERIZAR LAS TARJETAS (PAGINACIÓN)
-        window.renderProductos = function() {
-            const grid = document.getElementById('product-grid');
-            const noResults = document.getElementById('no-results');
-            
-            if(window.filteredProductos.length === 0) {
-                grid.innerHTML = '';
-                noResults.style.display = 'block';
-                return;
-            } else {
-                noResults.style.display = 'none';
-            }
-
-            let htmlBuffer = "";
-            let productosARenderizar = window.filteredProductos.slice(0, window.productosMostrados);
-
-            productosARenderizar.forEach(p => {
-                let img1 = p.img1 || 'https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen';
-                let st = parseFloat(p.stock) || 0;
-                let pr = parseFloat(p.precio) || 0;
-                let depto = p.departamento || '';
-                let marca = p.marca || '';
-                
-                let tHtml = "";
-                if(p.t3>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 3 pzas:</span> <b>$${parseFloat(p.t3).toFixed(2)}</b></div>`;
-                if(p.t5>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 5 pzas:</span> <b>$${parseFloat(p.t5).toFixed(2)}</b></div>`;
-                if(p.t10>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 10 pzas:</span> <b>$${parseFloat(p.t10).toFixed(2)}</b></div>`;
-                if(p.t12>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 12 pzas:</span> <b>$${parseFloat(p.t12).toFixed(2)}</b></div>`;
-                if(p.t20>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 20 pzas:</span> <b>$${parseFloat(p.t20).toFixed(2)}</b></div>`;
-                if(p.t25>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 25 pzas:</span> <b>$${parseFloat(p.t25).toFixed(2)}</b></div>`;
-                if(p.t50>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>A partir de 50 pzas:</span> <b>$${parseFloat(p.t50).toFixed(2)}</b></div>`;
-                if(p.t100>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>100+ pzas:</span> <b>$${parseFloat(p.t100).toFixed(2)}</b></div>`;
-                
-                let displayTabla = (window.isMayoreo && tHtml !== "") ? "block" : "none";
-                let cuadroEscalas = tHtml !== "" ? `<div class="tabla-escalas" style="display:${displayTabla}; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div>${tHtml}</div>` : "";
-
-                let btnHtml = st > 0 
-                    ? `<button class="btn-buy" onclick="window.addToCart('${p.id}')"><i class="fa-solid fa-cart-plus"></i> Agregar</button>` 
-                    : `<button class="btn-buy" disabled style="background:#94a3b8; cursor:not-allowed; box-shadow:none;"><i class="fa-solid fa-ban"></i> Agotado</button>`;
-
-                let precioHtml = `<p class="price-text">$${pr.toFixed(2)}</p>`;
-                if (window.isMayoreo && (p.t3>0 || p.t5>0 || p.t10>0)) {
-                     precioHtml = `<p class="price-text"><span style="font-size:1rem; text-decoration:line-through; color:var(--texto-claro);">$$${pr.toFixed(2)}</span> $${pr.toFixed(2)}</p>`;
-                }
-
-                let cardHtml = `
-                <div class="card fade-in visible" data-id="${p.id}" data-brand="${marca}" data-name="${p.nombre}" data-dept="${depto}">
-                    <div>
-                        <div class="img-wrapper" onclick="window.openQuickView('${p.id}')">
-                            <img src="${img1}" class="product-img" loading="lazy">
-                            <span class="stock-badge" style="background:${st<=0?'#e11d48':'var(--secundario)'}"><i class="fa-solid fa-box"></i> ${st} disp.</span>
-                            <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Detalles</div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                            <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800;">CÓDIGO: ${p.codigo || ''}</span>
-                            <span style="font-size:10px; color:var(--texto-claro); font-weight:700;">${depto.substring(0,15)}</span>
-                        </div>
-                        <h3 class="product-title">${p.nombre}</h3>
-                        ${precioHtml}
-                        ${cuadroEscalas}
-                        <span class="escala-mayoreo-etiqueta"><i class="fa-solid fa-layer-group"></i> Escalas Disponibles</span>
-                    </div>
-                    ${btnHtml}
-                </div>`;
-                htmlBuffer += cardHtml;
-            });
-            
-            grid.innerHTML = htmlBuffer;
-
-            // BOTÓN VER MÁS
-            if (window.productosMostrados < window.filteredProductos.length) {
-                grid.innerHTML += `
-                <div style="width: 100%; text-align: center; grid-column: 1 / -1; margin-top: 30px;">
-                    <button class="btn-buy" style="width: auto; padding: 15px 40px; border-radius: 30px;" onclick="window.cargarMas()">
-                        <i class="fa-solid fa-rotate-right"></i> Ver más productos
-                    </button>
-                </div>`;
-            }
-
-            if(window.updateStockUI) window.updateStockUI();
-        };
-
-        cargarCatalogo();
-
-        // LOGINS Y COTIZACIONES
-        window.loginMayoreo = async function() {
-            let user = document.getElementById('mayoreo-user').value.trim().toUpperCase();
-            let pwd = document.getElementById('mayoreo-pwd').value.trim();
-            const btn = document.querySelector("#mayoreoModal .btn-buy");
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Verificando...';
-            try {
-                const q = query(collection(db, "mayoristas"), where("usuario", "==", user), where("password", "==", pwd));
-                const querySnapshot = await getDocs(q);
-                if (!querySnapshot.empty) {
-                    window.isMayoreo = true; 
-                    document.getElementById('mayoreoModal').classList.remove('active');
-                    window.enableMayoreoMode(user);
-                    alert("¡Bienvenido Mayorista: " + user + "!");
-                } else alert("❌ Usuario o contraseña incorrectos.");
-            } catch(e) { alert("Error de conexión."); } 
-            finally { btn.innerHTML = originalText; }
-        };
-
-        window.enviarCotizacion = async function(event) {
-            event.preventDefault();
-            const btn = document.getElementById("btn-enviar-cot");
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
-            btn.disabled = true;
-            try {
-                await addDoc(collection(db, "cotizaciones"), {
-                    nombre: document.getElementById("cot-nombre").value,
-                    correo: document.getElementById("cot-correo").value,
-                    telefono: document.getElementById("cot-tel").value,
-                    mensaje: document.getElementById("cot-mensaje").value,
-                    fecha: new Date().toLocaleString("es-MX", { timeZone: "America/Mexico_City" }),
-                    estado: "Nueva"
-                });
-                alert("¡Cotización Enviada!");
-                document.getElementById("form-cotizacion").reset();
-            } catch (e) { alert("Hubo un problema."); } 
-            finally { btn.innerHTML = originalText; btn.disabled = false; }
-        };
-
-        // PROCESAR PEDIDO Y DESCONTAR STOCK REAL EN FIREBASE
-        window.procesarPedidoWhatsApp = async function() {
-            if (window.cart.length === 0) { alert("Tu carrito está vacío."); return; }
-            
-            const btn = document.querySelector('.cart-section .btn-buy');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Descontando Stock...';
-            btn.disabled = true;
-
-            try {
-                let clienteNombre = window.isMayoreo ? document.getElementById('mayoreo-user').value.trim().toUpperCase() : "Público General";
-
-                await addDoc(collection(db, "pedidos"), {
-                    fecha: new Date().toLocaleString("es-MX", { timeZone: "America/Mexico_City" }),
-                    total_estimado: window.total,
-                    cliente: clienteNombre,
-                    esMayoreo: window.isMayoreo,
-                    productos: window.cart,
-                    estado: "Por confirmar"
-                });
-
-                // DESCONTAR STOCK EN FIREBASE
-                for (let item of window.cart) {
-                    if (item.id) {
-                        const productRef = doc(db, "productos", item.id);
-                        await updateDoc(productRef, {
-                            stock: increment(-item.qty)
-                        });
-                        
-                        let prodLocal = window.productosDB.find(p => p.id === item.id);
-                        if (prodLocal) prodLocal.stock -= item.qty;
-                    }
-                }
-
-                // MENSAJE WA
-                let mensajeWA = `*NUEVO PEDIDO - FERRETERAL DEL SURESTE*%0A`;
-                mensajeWA += `-----------------------------------%0A`;
-                if(window.isMayoreo) mensajeWA += `👷‍♂️ *Cliente:* ${clienteNombre}%0A`;
-                mensajeWA += `🛍️ *Productos Solicitados:*%0A`;
-                window.cart.forEach((item) => {
-                    let unitPrice = window.isMayoreo ? window.calculateItemPrice(item) : item.basePrice;
-                    let subtotal = unitPrice * item.qty;
-                    mensajeWA += `▪ ${item.qty}x ${item.name} - $${subtotal.toFixed(2)}%0A`;
-                });
-                mensajeWA += `-----------------------------------%0A`;
-                mensajeWA += `💰 *TOTAL ESTIMADO:* $${window.total.toFixed(2)}%0A%0A`;
-                mensajeWA += `Stock apartado. Confírmenme para proceder con el pago.`;
-
-                window.cart = [];
-                window.renderCart();
-                window.renderProductos(); 
-
-                let numeroWhatsApp = "529641091387";
-                window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeWA}`, '_blank');
-
-            } catch(e) {
-                console.error(e);
-                alert("Hubo un error de conexión al apartar el stock. Intenta de nuevo.");
-            } finally {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            }
-        };
-    </script>
+    <section class="section" id="categoriesSection"><div class="section-head"><div><h2>Categorías principales</h2><div class="minor" id="categoryHint">Explora el catálogo por departamento</div></div><button class="chip" id="allCats">Ver todas <i class="fa-solid fa-arrow-right"></i></button></div><div class="categories" id="categories"></div></section>
+
+    <section class="section" id="featuredSection"><div class="section-head"><div><h2>Productos destacados</h2><div class="minor">Selección para tu próximo proyecto</div></div><button class="chip" id="showFeatured">Ver destacados</button></div><div class="featured-grid" id="featured"></div></section>
+
+    <section class="section" id="catalog"><div class="section-head"><div><h2>Catálogo</h2><div class="minor" id="catalogInfo">Cargando inventario en tiempo real…</div></div><div class="toolbar"><button class="chip active" data-chip="ALL">Todos</button><button class="chip" data-chip="stock">Con stock</button><button class="chip" data-chip="offers">Ofertas</button><span class="results-count" id="resultsCount"></span></div></div><div class="products" id="products"><div style="grid-column:1/-1;padding:70px;text-align:center;color:#777"><i class="fa-solid fa-spinner fa-spin" style="font-size:35px;color:#f56b00"></i><p>Cargando inventario…</p></div></div><div class="view-more"><button id="loadMore" style="display:none">Cargar más productos</button></div></section>
+  </div>
+
+  <section class="brands"><div class="wrap"><div style="text-align:center;font-size:12px;font-weight:900;letter-spacing:1.2px;color:#c5c5c5;margin-bottom:16px;text-transform:uppercase">Marcas que encontrarás en nuestra tienda</div><div class="brand-track" id="brandTrack"></div></div></section>
+
+  <div class="wrap">
+    <section class="section" id="quote"><div style="background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:var(--shadow)"><div class="section-head"><div><h2>¿Necesitas una cotización especial?</h2><div class="minor">Constructoras, contratistas y compras de alto volumen</div></div></div><form id="quoteForm"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px"><input required id="qNombre" placeholder="Nombre o razón social" style="height:48px;border:1px solid #ddd;border-radius:9px;padding:0 13px"><input required type="email" id="qCorreo" placeholder="Correo electrónico" style="height:48px;border:1px solid #ddd;border-radius:9px;padding:0 13px"><input required id="qTelefono" placeholder="Teléfono / WhatsApp" style="height:48px;border:1px solid #ddd;border-radius:9px;padding:0 13px"></div><textarea required id="qMensaje" placeholder="Describe materiales, cantidades y fecha requerida" style="margin-top:12px;width:100%;height:110px;border:1px solid #ddd;border-radius:9px;padding:13px;resize:vertical"></textarea><button class="btn primary" style="margin-top:12px"><i class="fa-solid fa-paper-plane"></i> Enviar solicitud</button></form></div></section>
+    <section class="section" id="about"><div style="display:grid;grid-template-columns:1.2fr 1fr;gap:20px"><div style="background:#111;color:#fff;border-radius:16px;padding:30px"><div style="font-size:12px;color:#ffb36e;font-weight:900;letter-spacing:1px;text-transform:uppercase">Ferreteral del Sureste</div><h2 style="font-family:Poppins;font-size:30px;margin:7px 0 12px">Soluciones para obra, industria y hogar</h2><p style="color:#c7c7c7;line-height:1.7;font-size:13px">Una experiencia de compra pensada para encontrar rápidamente herramientas, materiales y equipo. El catálogo y el inventario se actualizan desde Firebase.</p></div><div style="background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px"><h3 style="margin-top:0;font-family:Poppins">Atención directa</h3><p style="color:#666;font-size:13px;line-height:1.6">WhatsApp para pedidos, dudas de producto y cotizaciones. El horario y políticas pueden personalizarse desde esta sección.</p><button class="btn" style="background:#111;color:#fff" onclick="openWhatsApp('Hola, quiero información de productos de Ferreteral del Sureste')"><i class="fa-brands fa-whatsapp"></i> Escribir por WhatsApp</button></div></div></section>
+  </div>
+</main>
+<footer class="footer"><div class="footer-grid"><div class="logofoot"><img src="assets/logo-ferreteral-original.png" alt="Ferreteral del Sureste"><p>Herramientas y materiales para tus proyectos. Huixtla, Chiapas.</p></div><div><h4>Ayuda</h4><ul><li>Políticas de envío</li><li>Garantías</li><li>Aviso de privacidad</li></ul></div><div><h4>Contacto</h4><ul><li>WhatsApp: 964 109 1387</li><li>Huixtla, Chiapas</li><li>Atención a constructoras y mayoristas</li></ul></div></div><div class="copyright">© 2026 Ferreteral del Sureste. Todos los derechos reservados.</div></footer>
+
+<a class="float wa" href="https://wa.me/529641091387?text=Hola%2C%20vengo%20de%20la%20tienda%20Ferreteral%20del%20Sureste" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a><button class="float topbtn" id="topbtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Ir arriba"><i class="fa-solid fa-arrow-up"></i></button>
+<div class="toast" id="toast"></div>
+
+<div class="cart-drawer" id="cartDrawer"><div class="shade" id="cartShade"></div><aside class="drawer"><div class="drawer-head"><h3>Tu carrito</h3><button class="icon-btn" id="closeCart"><i class="fa-solid fa-xmark"></i></button></div><div class="drawer-list" id="cartList"></div><div class="drawer-foot"><div class="sum"><span>Total estimado</span><span>$<span id="cartTotal">0.00</span></span></div><button class="whats" id="sendOrder"><i class="fa-brands fa-whatsapp"></i> Enviar pedido por WhatsApp</button></div></aside></div>
+
+<div class="modal" id="productModal"><div class="modal-box"><button class="close" data-close="productModal"><i class="fa-solid fa-xmark"></i></button><div class="product-modal"><div class="modal-image"><img id="mImg" alt="Producto"></div><div class="modal-info"><div class="meta"><span id="mBrand"></span><span id="mCode"></span></div><h2 id="mTitle"></h2><div class="desc" id="mDesc"></div><div class="mprice" id="mPrice"></div><div class="tier" id="mTier" style="display:none"></div><div class="modal-buttons"><button class="btn primary" id="mAdd"><i class="fa-solid fa-cart-plus"></i> Agregar</button><button class="btn whats2" id="mWhats"><i class="fa-brands fa-whatsapp"></i> Consultar</button></div></div></div></div></div>
+
+<div class="modal" id="wholesaleModal"><div class="modal-box" style="width:min(460px,100%);padding:26px"><button class="close" data-close="wholesaleModal"><i class="fa-solid fa-xmark"></i></button><h2 style="font-family:Poppins;margin:0 0 8px">Portal de mayoreo</h2><p style="color:#666;font-size:13px">Ingresa con tu cuenta de Firebase Authentication para ver tus precios y condiciones.</p><input id="wsEmail" type="email" placeholder="Correo" style="width:100%;height:46px;border:1px solid #ddd;border-radius:9px;padding:0 13px;margin-top:10px"><input id="wsPwd" type="password" placeholder="Contraseña" style="width:100%;height:46px;border:1px solid #ddd;border-radius:9px;padding:0 13px;margin-top:10px"><button class="btn primary" style="width:100%;margin-top:12px" id="wsLogin">Iniciar sesión</button><button class="btn" style="width:100%;margin-top:8px;background:#111;color:#fff" id="wsLogout">Cerrar sesión</button><div id="wsStatus" style="font-size:12px;color:#666;margin-top:10px"></div></div></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getFirestore, collection, getDocs, query, orderBy, limit, startAfter, where, addDoc, doc, getDoc, runTransaction, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDcu8X6gdw7He5Rvwfl2UfICp4TP10O6LM",
+  authDomain: "ferreteral-sureste.firebaseapp.com",
+  projectId: "ferreteral-sureste",
+  storageBucket: "ferreteral-sureste.firebasestorage.app",
+  messagingSenderId: "520677026154",
+  appId: "1:520677026154:web:563d2788f799c0fe441d13"
+};
+
+
+const app=initializeApp(firebaseConfig), db=getFirestore(app), auth=getAuth(app);
+const $=id=>document.getElementById(id);
+const normalize=s=>(s??'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+let products=[], filtered=[], cart=[], lastDoc=null, pageSize=30, isMayoreo=false, current=null;
+const money=n=>new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(Number(n)||0);
+const toast=msg=>{const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove('show'),2600)};
+const stockOf=p=>Number(p.stock)||0;
+const isFeatured=p=>p.destacado===true||String(p.destacado||'').toLowerCase()==='true'||Number(p.prioridad)>0;
+const discountOf=p=>Number(p.descuento||p.discount||0);
+const tierPrice=(p,qty)=>{if(!isMayoreo)return Number(p.precio)||0;const map=[[100,p.t100],[50,p.t50],[25,p.t25],[20,p.t20],[12,p.t12],[10,p.t10],[5,p.t5],[3,p.t3]];let out=Number(p.precio)||0;for(const [min,v] of map)if(qty>=min&&Number(v)>0){out=Number(v);break}return out};
+
+function productImage(p){return p.img1||p.imagen||'https://dummyimage.com/700x600/f3f4f6/999&text=Sin+imagen'}
+function renderCard(p){const st=stockOf(p), d=discountOf(p), pr=Number(p.precio)||0, fav=localStorage.getItem('fav_'+p.id)==='1';return `<article class="card"><button class="fav ${fav?'active':''}" onclick="toggleFav('${p.id}',this)"><i class="fa-solid fa-heart"></i></button>${d>0?`<span class="badge">-${d}%</span>`:''}<div class="pic" onclick="openProduct('${p.id}')"><img loading="lazy" src="${productImage(p)}" alt="${esc(p.nombre)}"></div><div class="body"><div class="meta"><span class="brand">${esc(p.marca||'')}</span><span>${esc(p.codigo||'')}</span></div><div class="title">${esc(p.nombre||'Producto')}</div><div class="price">${d>0?`<span class="old">${money(pr)}</span>`:''}${money(d>0?pr*(1-d/100):pr)}</div><div class="stock ${st<=0?'out':st<6?'low':''}">${st<=0?'Agotado':st<6?'Últimas '+st+' piezas':st+' piezas disponibles'}</div><div class="card-actions"><button class="add" ${st<=0?'disabled':''} onclick="addToCart('${p.id}')"><i class="fa-solid fa-cart-plus"></i> ${st<=0?'Agotado':'Agregar'}</button><button class="details" onclick="openProduct('${p.id}')" title="Detalles"><i class="fa-solid fa-eye"></i></button></div></div></article>`}
+function esc(s){return (s??'').toString().replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;')}
+function populateFilters(){const brands=[...new Set(products.map(p=>String(p.marca||'').trim().toUpperCase()).filter(Boolean))].sort();const cats=[...new Set(products.map(p=>String(p.departamento||'').trim().toUpperCase()).filter(Boolean))].sort();$('brandFilter').innerHTML='<option value="ALL">Todas las marcas</option>'+brands.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('');$('catFilter').innerHTML='<option value="ALL">Todas las categorías</option>'+cats.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('');$('brandTrack').innerHTML=[...brands,...brands].map(x=>`<span class="brand-name">${esc(x)}</span>`).join('');$('categories').innerHTML=cats.slice(0,8).map(cat=>`<button class="cat" onclick="selectCategory('${esc(cat)}')"><div class="fallback"><i class="fa-solid fa-layer-group"></i></div><strong>${esc(cat)}</strong></button>`).join('')||'<div style="grid-column:1/-1;color:#777">Sin categorías disponibles.</div>'}
+function applyFilters(){const q=normalize($('search').value), b=$('brandFilter').value, c=$('catFilter').value, sf=$('stockFilter').value;filtered=products.filter(p=>{const text=normalize([p.nombre,p.codigo,p.marca,p.departamento,p.desc].join(' '));const okQ=!q||q.split(/\s+/).every(w=>text.includes(w));const okB=b==='ALL'||normalize(p.marca)===normalize(b);const okC=c==='ALL'||normalize(p.departamento)===normalize(c);const st=stockOf(p);const okS=sf==='ALL'||(sf==='stock'&&st>0)||(sf==='low'&&st>0&&st<6)||(sf==='featured'&&isFeatured(p))||(sf==='offers'&&discountOf(p)>0);return okQ&&okB&&okC&&okS});$('resultsCount').textContent=`${filtered.length} resultados`;renderProducts()}
+function renderProducts(){const list=filtered.slice(0,window.visibleCount||pageSize);$('products').innerHTML=list.map(renderCard).join('')||'<div style="grid-column:1/-1;padding:70px;text-align:center;color:#777"><i class="fa-solid fa-box-open" style="font-size:40px"></i><p>No encontramos productos con esos filtros.</p></div>';$('loadMore').style.display=list.length<filtered.length?'inline-block':'none';$('catalogInfo').textContent=isMayoreo?'Sesión de mayoreo activa — precios por volumen aplicados':'Inventario conectado en tiempo real con Firebase'}
+window.visibleCount=pageSize;
+async function loadInitial(){try{const qs=await getDocs(query(collection(db,'productos'),orderBy('nombre'),limit(pageSize)));products=qs.docs.map(d=>({id:d.id,...d.data()}));lastDoc=qs.docs.at(-1)||null;window.visibleCount=pageSize;populateFilters();filtered=[...products];renderProducts();renderFeatured();renderCategories();}catch(e){console.error(e);$('products').innerHTML='<div style="grid-column:1/-1;padding:70px;text-align:center;color:#b91c1c">No fue posible cargar el inventario. Revisa la conexión y las reglas de Firestore.</div>'}}
+async function loadMoreFirestore(){if(!lastDoc)return;try{const qs=await getDocs(query(collection(db,'productos'),orderBy('nombre'),startAfter(lastDoc),limit(pageSize)));const more=qs.docs.map(d=>({id:d.id,...d.data()}));if(!more.length){lastDoc=null;$('loadMore').style.display='none';return}products.push(...more);lastDoc=qs.docs.at(-1);populateFilters();applyFilters();toast(`${more.length} productos adicionales cargados`)}catch(e){console.error(e);toast('No se pudieron cargar más productos')}}
+function renderFeatured(){const src=products.filter(isFeatured).slice(0,6);const fallback=src.length?src:products.filter(p=>stockOf(p)>0).slice(0,6);$('featured').innerHTML=fallback.map(renderCard).join('')||'<div style="grid-column:1/-1;color:#777">Aún no hay productos destacados.</div>'}
+function renderCategories(){const counts={};products.forEach(p=>{const c=String(p.departamento||'').trim().toUpperCase();if(c)counts[c]=(counts[c]||0)+1});const cats=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,8);$('categories').innerHTML=cats.map(([c,n])=>`<button class="cat" onclick="selectCategory('${esc(c)}')"><div class="fallback"><i class="fa-solid fa-layer-group"></i></div><strong>${esc(c)}</strong><span style="margin-top:4px;font-size:10px;color:#999">${n} productos</span></button>`).join('')}
+window.selectCategory=c=>{$('catFilter').value=c;applyFilters();$('catalog').scrollIntoView({behavior:'smooth',block:'start'})}
+window.addToCart=id=>{const p=products.find(x=>x.id===id);if(!p||stockOf(p)<=0)return;const x=cart.find(i=>i.id===id);const q=(x?.qty||0)+1;if(q>stockOf(p)){toast('No hay suficiente inventario disponible');return}if(x)x.qty=q;else cart.push({id:p.id,qty:1});persistCart();renderCart();toast('Producto agregado al carrito')}
+window.changeCart=(id,delta)=>{const x=cart.find(i=>i.id===id),p=products.find(q=>q.id===id);if(!x||!p)return;const q=x.qty+delta;if(q<=0)cart=cart.filter(i=>i.id!==id);else if(q<=stockOf(p))x.qty=q;else toast('Límite de inventario alcanzado');persistCart();renderCart()}
+window.toggleFav=(id,btn)=>{const key='fav_'+id;const on=localStorage.getItem(key)==='1';localStorage.setItem(key,on?'0':'1');btn.classList.toggle('active',!on)}
+function persistCart(){localStorage.setItem('ferreteral_cart',JSON.stringify(cart))}
+function restoreCart(){try{cart=JSON.parse(localStorage.getItem('ferreteral_cart')||'[]').filter(x=>products.some(p=>p.id===x.id))}catch{cart=[]}}
+function renderCart(){let total=0,qty=0;restoreCart();if(!cart.length)$('cartList').innerHTML='<div class="empty"><i class="fa-solid fa-cart-shopping" style="font-size:35px"></i><p>Tu carrito está vacío.</p></div>';else{$('cartList').innerHTML=cart.map(i=>{const p=products.find(x=>x.id===i.id);const unit=tierPrice(p,i.qty);const sub=unit*i.qty;total+=sub;qty+=i.qty;return `<div class="cart-row"><img src="${productImage(p)}" alt=""><div><div class="cart-name">${esc(p.nombre)}</div><div class="cart-price">${money(unit)} c/u</div><div class="qtybox"><button onclick="changeCart('${p.id}',-1)">−</button><b>${i.qty}</b><button onclick="changeCart('${p.id}',1)">+</button></div></div><div style="font-weight:900;font-size:12px">${money(sub)}</div></div>`}).join('')}$('cartTotal').textContent=total.toFixed(2);$('cartCount').textContent=qty}
+function openCart(){restoreCart();renderCart();$('cartDrawer').classList.add('open');document.body.style.overflow='hidden'}function closeCart(){ $('cartDrawer').classList.remove('open');document.body.style.overflow=''}
+function openProduct(id){const p=products.find(x=>x.id===id);if(!p)return;current=p;$('mImg').src=productImage(p);$('mBrand').textContent=p.marca||'';$('mCode').textContent=p.codigo?`Código: ${p.codigo}`:'';$('mTitle').textContent=p.nombre||'Producto';$('mDesc').textContent=p.desc||p.descripcion||'Sin descripción disponible.';$('mPrice').textContent=money(tierPrice(p,1));let tiers='';[[3,p.t3],[5,p.t5],[10,p.t10],[12,p.t12],[20,p.t20],[25,p.t25],[50,p.t50],[100,p.t100]].forEach(([n,v])=>{if(Number(v)>0)tiers+=`<div><span>${n}+ piezas</span><b>${money(v)}</b></div>`});$('mTier').style.display=isMayoreo&&tiers?'block':'none';$('mTier').innerHTML=tiers?`<strong style="display:block;margin-bottom:4px;color:#a65b00">Precios por volumen</strong>${tiers}`:'';$('productModal').classList.add('open');document.body.style.overflow='hidden'}window.openProduct=openProduct;
+$('mAdd').onclick=()=>{if(current){addToCart(current.id);closeModal('productModal')}};$('mWhats').onclick=()=>{if(current)openWhatsApp(`Hola, quisiera información sobre ${current.nombre} (código ${current.codigo||'N/D'})`)}
+function closeModal(id){$(id).classList.remove('open');document.body.style.overflow=''}window.closeModal=closeModal;
+window.openWhatsApp=msg=>window.open('https://wa.me/529641091387?text='+encodeURIComponent(msg),'_blank');
+async function sendOrder(){if(!cart.length){toast('Tu carrito está vacío');return}let total=0;cart.forEach(i=>{const p=products.find(x=>x.id===i.id);total+=tierPrice(p,i.qty)*i.qty});const lines=cart.map(i=>{const p=products.find(x=>x.id===i.id);const sub=tierPrice(p,i.qty)*i.qty;return `• ${i.qty} x ${p.nombre} — ${money(sub)}`}).join('\n');const msg=`NUEVO PEDIDO - FERRETERAL DEL SURESTE\n\n${lines}\n\nTOTAL ESTIMADO: ${money(total)}\nCliente: ${auth.currentUser?.email||'Público general'}\n\nPor favor confirmen disponibilidad y forma de pago.`;try{await addDoc(collection(db,'pedidos'),{fecha:new Date(),cliente:auth.currentUser?.email||'Público General',uid:auth.currentUser?.uid||null,total_estimado:total,esMayoreo:isMayoreo,productos:cart,estado:'Por confirmar'});toast('Pedido registrado. Abriendo WhatsApp…')}catch(e){console.error(e);toast('No se pudo guardar el pedido, se abrirá WhatsApp de todas formas')}openWhatsApp(msg);cart=[];persistCart();renderCart();closeCart()}
+
+async function quoteSubmit(ev){ev.preventDefault();const btn=ev.submitter;btn.disabled=true;try{await addDoc(collection(db,'cotizaciones'),{nombre:$('qNombre').value.trim(),correo:$('qCorreo').value.trim(),telefono:$('qTelefono').value.trim(),mensaje:$('qMensaje').value.trim(),fecha:new Date(),estado:'Nueva'});$('quoteForm').reset();toast('Cotización enviada correctamente')}catch(e){console.error(e);toast('No fue posible enviar la cotización')}finally{btn.disabled=false}}
+
+async function loginWholesale(){const email=$('wsEmail').value.trim(),pwd=$('wsPwd').value;const btn=$('wsLogin');btn.disabled=true;btn.textContent='Verificando…';try{await signInWithEmailAndPassword(auth,email,pwd);toast('Sesión iniciada')}catch(e){console.error(e);$('wsStatus').textContent='No fue posible iniciar sesión. Verifica tus datos.'}finally{btn.disabled=false;btn.textContent='Iniciar sesión'}}
+async function refreshWholesale(user){isMayoreo=false;if(!user){$('wsStatus').textContent='Sin sesión activa';renderProducts();renderCart();return}try{const d=await getDoc(doc(db,'mayoristas',user.uid));if(d.exists()&&d.data().activo!==false){isMayoreo=true;$('wsStatus').textContent=`Sesión activa: ${d.data().nombre||user.email}`;document.body.dataset.mayoreo='1'}else{$('wsStatus').textContent='Cuenta autenticada, pero no está habilitada como mayorista.';document.body.dataset.mayoreo='0'}}catch(e){$('wsStatus').textContent='No se pudo consultar el perfil de mayoreo.'}applyFilters();renderCart()}
+onAuthStateChanged(auth,refreshWholesale);
+
+$('search').addEventListener('input',()=>{window.visibleCount=pageSize;applyFilters()});$('brandFilter').addEventListener('change',applyFilters);$('catFilter').addEventListener('change',applyFilters);$('stockFilter').addEventListener('change',applyFilters);document.querySelectorAll('[data-chip]').forEach(x=>x.addEventListener('click',()=>{document.querySelectorAll('[data-chip]').forEach(y=>y.classList.remove('active'));x.classList.add('active');$('stockFilter').value=x.dataset.chip==='ALL'?'ALL':x.dataset.chip==='stock'?'stock':'offers';applyFilters()}));$('allCats').onclick=()=>{$('catFilter').value='ALL';applyFilters();$('catalog').scrollIntoView({behavior:'smooth'})};$('showFeatured').onclick=()=>{$('stockFilter').value='featured';applyFilters();$('catalog').scrollIntoView({behavior:'smooth'})};$('loadMore').onclick=()=>{window.visibleCount+=pageSize; if(window.visibleCount>products.length&&lastDoc)loadMoreFirestore(); else renderProducts()};$('openCart').onclick=openCart;$('closeCart').onclick=closeCart;$('cartShade').onclick=closeCart;$('sendOrder').onclick=sendOrder;$('quoteForm').addEventListener('submit',quoteSubmit);$('wholesaleBtn').onclick=()=>{$('wholesaleModal').classList.add('open');document.body.style.overflow='hidden'};$('heroWholesale').onclick=()=>$('wholesaleModal').classList.add('open');$('wsLogin').onclick=loginWholesale;$('wsLogout').onclick=()=>signOut(auth);document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>closeModal(b.dataset.close));
+window.addEventListener('scroll',()=>{if(scrollY>500)$('topbtn').classList.add('show');else $('topbtn').classList.remove('show')});
+// slider
+let si=0;const slides=[...document.querySelectorAll('.hero-slide')],dots=[...document.querySelectorAll('.hero-dots button')];function go(n){slides[si].classList.remove('active');dots[si].classList.remove('active');si=n;slides[si].classList.add('active');dots[si].classList.add('active')}dots.forEach(d=>d.onclick=()=>go(Number(d.dataset.slide)));setInterval(()=>go((si+1)%slides.length),5500);
+restoreCart();loadInitial();
+</script>
 </body>
 </html>
+
