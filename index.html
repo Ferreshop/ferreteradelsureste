@@ -61,7 +61,7 @@
         .brand-item { white-space: nowrap; padding: 6px 15px; font-size: 0.8rem; border-radius: 20px; border: 1px solid var(--borde-card); background: var(--fondo-gris); color: var(--texto-claro); cursor: pointer; font-weight: 700; transition: 0.3s; text-transform: uppercase;}
         .brand-item:hover, .brand-item.active { background: var(--secundario); color: white; border-color: var(--secundario); }
 
-        /* SLIDER CARRUSEL HERO (EL BANNER GIGANTE) */
+        /* SLIDER CARRUSEL HERO */
         .hero-slider { position: relative; width: 100%; height: 500px; overflow: hidden; }
         .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; padding: 0 20px; opacity: 0; transition: opacity 1s ease-in-out, transform 3s ease-in-out; background-size: cover; background-position: center; transform: scale(1.05); }
         .slide.active { opacity: 1; z-index: 1; transform: scale(1); }
@@ -104,7 +104,7 @@
         .escala-mayoreo-etiqueta { display: none; background: rgba(255,102,0,0.1); color: var(--primario); padding: 5px 10px; border-radius: 8px; font-size: 10.5px; font-weight: 700; margin-bottom: 15px; border: 1px solid rgba(255,102,0,0.2); }
         body.mayoreo-active .escala-mayoreo-etiqueta { display: inline-block; }
 
-        /* CARRITO, FORMULARIOS Y RESEÑAS */
+        /* CARRITO Y RESEÑAS */
         .cart-section, .quote-section, .reviews-section { background: var(--blanco); padding: 50px; margin-top: 50px; border-radius: 20px; border: none; box-shadow: var(--sombra-suave); }
         .cart-item-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; background: var(--fondo-gris); padding: 15px 20px; border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--borde-card); }
         .qty-btn { background: var(--borde-card); border: none; width: 30px; height: 30px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; color: var(--secundario);}
@@ -185,7 +185,7 @@
         </div>
     </div>
 
-    <!-- MODAL VISTA RÁPIDA (CON GALERÍA Y CARACTERÍSTICAS) -->
+    <!-- MODAL VISTA RÁPIDA -->
     <div class="modal-overlay" id="quickViewModal" onclick="closeQuickView(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeQuickView(event)"><i class="fa-solid fa-xmark"></i></button>
@@ -238,7 +238,7 @@
                 <span class="filter-label"><i class="fa-solid fa-list"></i> Deptos:</span>
                 <div class="scroll-pills" id="categories-container">
                     <button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>
-                    <!-- Llenado dinámico por Firebase -->
+                    <!-- Se llena con Firebase -->
                 </div>
             </div>
 
@@ -246,7 +246,7 @@
                 <span class="filter-label"><i class="fa-solid fa-tag"></i> Marcas:</span>
                 <div class="scroll-pills" id="brands-container">
                     <button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>
-                    <!-- Llenado dinámico por Firebase -->
+                    <!-- Se llena con Firebase -->
                 </div>
             </div>
         </div>
@@ -266,16 +266,6 @@
             <h1>Material Eléctrico e Iluminación</h1>
             <p>Todo el cableado, iluminación y accesorios Volteck para tus proyectos.</p>
             <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
-        </div>
-        <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(220, 38, 38, 0.6)), url('https://images.unsplash.com/photo-1533626904905-cc52fd99285e?auto=format&fit=crop&w=1920&q=80');">
-            <h1>Maquinaria Pesada</h1>
-            <p>Potencia garantizada. Soldadoras, compresoras y generadores eléctricos.</p>
-            <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
-        </div>
-        <div class="slider-dots">
-            <span class="dot active" onclick="changeSlide(0)"></span>
-            <span class="dot" onclick="changeSlide(1)"></span>
-            <span class="dot" onclick="changeSlide(2)"></span>
         </div>
     </section>
 
@@ -298,8 +288,8 @@
         </div>
     </div>
 
-    <!-- CATÁLOGO DE PRODUCTOS (LLENADO POR FIREBASE) -->
-    <div class="container" id="catalog-section">
+    <!-- CATÁLOGO DE PRODUCTOS -->
+    <div class="container" id="catalog-section" style="margin-top: 0;">
         <h2 class="section-header fade-in" style="font-size: 2.2rem; margin-bottom: 30px; font-weight:800; text-transform:uppercase;">Catálogo <span id="catalog-title" style="color:var(--primario);">General</span></h2>
         
         <div id="no-results" style="display: none; text-align: center; padding: 60px 20px; background: white; border-radius: 20px; box-shadow: var(--sombra-suave);">
@@ -423,9 +413,14 @@
         window.total = 0; 
         window.cart = [];
         window.productosDB = []; 
+        window.filteredProductos = [];
         window.currentQuickViewId = null;
         window.currentBrand = 'ALL';
         window.currentCategory = 'ALL';
+        
+        // Paginación para no trabar la compu
+        window.productosPorPagina = 24;
+        window.productosMostrados = 24;
 
         function openMayoreoModal() { document.getElementById('mayoreoModal').classList.add('active'); }
         function closeMayoreoModal(e) { if(e) e.stopPropagation(); document.getElementById('mayoreoModal').classList.remove('active'); }
@@ -437,36 +432,32 @@
             if(window.renderCart) window.renderCart(); 
         }
 
-        // BÚSQUEDA Y FILTROS INTELIGENTES
+        // BÚSQUEDA Y FILTROS INTELIGENTES EN MEMORIA
         window.removeAccents = function(str) { 
             return str.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); 
         }
 
         window.applyFilters = function() {
             let searchInput = document.getElementById('searchInput');
-            if(!searchInput) return;
-            let searchTerms = window.removeAccents(searchInput.value.toLowerCase()).split(' ').filter(t => t.trim() !== '');
-            let visibleCount = 0;
+            let searchTerms = [];
+            if(searchInput) {
+                searchTerms = window.removeAccents(searchInput.value.toLowerCase()).split(' ').filter(t => t.trim() !== '');
+            }
 
-            document.querySelectorAll('.card').forEach(card => {
-                let b = window.removeAccents(card.getAttribute('data-brand') || '').toLowerCase();
-                let n = window.removeAccents(card.getAttribute('data-name') || '').toLowerCase();
-                let d = window.removeAccents(card.getAttribute('data-dept') || '').toLowerCase();
+            window.filteredProductos = window.productosDB.filter(p => {
+                let b = window.removeAccents(p.marca || '').toLowerCase();
+                let n = window.removeAccents(p.nombre || '').toLowerCase();
+                let d = window.removeAccents(p.departamento || '').toLowerCase();
 
                 let matchBrand = (window.currentBrand === 'ALL' || b === window.currentBrand);
                 let matchCat = (window.currentCategory === 'ALL' || d === window.currentCategory);
-                
                 let matchSearch = searchTerms.length === 0 || searchTerms.every(term => n.includes(term) || b.includes(term) || d.includes(term));
 
-                if (matchBrand && matchCat && matchSearch) {
-                    card.style.display = 'flex'; 
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
+                return matchBrand && matchCat && matchSearch;
             });
 
-            document.getElementById('no-results').style.display = (visibleCount === 0) ? 'block' : 'none';
+            window.productosMostrados = window.productosPorPagina; // Reiniciar cuenta al filtrar
+            if(window.renderProductos) window.renderProductos();
         };
 
         window.filterByBrand = function(brand, btnElement) {
@@ -482,7 +473,6 @@
 
             window.applyFilters();
             
-            // Animación suave de scroll hacia el catálogo
             let offset = document.querySelector('.header-container').offsetHeight + 20;
             let element = document.getElementById('catalog-section');
             let topPos = element.getBoundingClientRect().top + window.pageYOffset - offset;
@@ -501,11 +491,15 @@
 
             window.applyFilters();
 
-            // Animación suave de scroll hacia el catálogo
             let offset = document.querySelector('.header-container').offsetHeight + 20;
             let element = document.getElementById('catalog-section');
             let topPos = element.getBoundingClientRect().top + window.pageYOffset - offset;
             window.scrollTo({ top: topPos, behavior: 'smooth' });
+        };
+
+        window.cargarMas = function() {
+            window.productosMostrados += window.productosPorPagina;
+            window.renderProductos();
         };
 
         // SCROLL ANIMATIONS Y SLIDER
@@ -705,7 +699,7 @@
         }
     </script>
 
-    <!-- FIREBASE SDK Y CARGA SÚPER RÁPIDA -->
+    <!-- FIREBASE SDK Y CARGA DE PRODUCTOS -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
@@ -733,7 +727,6 @@
                 window.productosDB = [];
                 let marcasSet = new Set();
                 let catSet = new Set();
-                grid.innerHTML = '';
 
                 if (querySnapshot.empty) {
                     grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: var(--texto-claro);">Aún no hay productos en la base de datos. Utiliza el Subidor de Excel para sincronizarlos.</h3></div>';
@@ -749,16 +742,16 @@
                 });
 
                 window.productosDB.sort((a, b) => a.nombre.localeCompare(b.nombre));
+                window.filteredProductos = [...window.productosDB];
 
                 window.renderProductos();
 
-                // LLENAR BOTONES DE MARCA DINÁMICAMENTE
+                // LLENAR BOTONES DINÁMICOS
                 marcasContainer.innerHTML = `<button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>`;
                 Array.from(marcasSet).sort().forEach(marca => {
                     marcasContainer.innerHTML += `<button class="brand-item" onclick="window.filterByBrand('${marca}', this)">${marca}</button>`;
                 });
 
-                // LLENAR BOTONES DE CATEGORÍA DINÁMICAMENTE
                 catContainer.innerHTML = `<button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>`;
                 Array.from(catSet).sort().forEach(cat => {
                     catContainer.innerHTML += `<button class="brand-item" onclick="window.filterByCategory('${cat}', this)">${cat}</button>`;
@@ -770,12 +763,23 @@
             }
         }
 
-        // RENDERIZAR LAS TARJETAS EN UN SOLO GOLPE
+        // RENDERIZAR LAS TARJETAS (PAGINACIÓN)
         window.renderProductos = function() {
             const grid = document.getElementById('product-grid');
-            let htmlBuffer = "";
+            const noResults = document.getElementById('no-results');
+            
+            if(window.filteredProductos.length === 0) {
+                grid.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            } else {
+                noResults.style.display = 'none';
+            }
 
-            window.productosDB.forEach(p => {
+            let htmlBuffer = "";
+            let productosARenderizar = window.filteredProductos.slice(0, window.productosMostrados);
+
+            productosARenderizar.forEach(p => {
                 let img1 = p.img1 || 'https://dummyimage.com/500x500/cccccc/000000&text=Sin+Imagen';
                 let st = parseFloat(p.stock) || 0;
                 let pr = parseFloat(p.precio) || 0;
@@ -827,8 +831,18 @@
             });
             
             grid.innerHTML = htmlBuffer;
+
+            // BOTÓN VER MÁS
+            if (window.productosMostrados < window.filteredProductos.length) {
+                grid.innerHTML += `
+                <div style="width: 100%; text-align: center; grid-column: 1 / -1; margin-top: 30px;">
+                    <button class="btn-buy" style="width: auto; padding: 15px 40px; border-radius: 30px;" onclick="window.cargarMas()">
+                        <i class="fa-solid fa-rotate-right"></i> Ver más productos
+                    </button>
+                </div>`;
+            }
+
             if(window.updateStockUI) window.updateStockUI();
-            if(window.applyFilters) window.applyFilters();
         };
 
         cargarCatalogo();
