@@ -31,12 +31,11 @@
         body.mayoreo-active .btn-buy:not([disabled]) { background: var(--amarillo); color: var(--secundario); box-shadow: 0 8px 20px rgba(250, 204, 21, 0.4); }
         body.mayoreo-active .btn-buy:not([disabled]):hover { background: #eab308; transform: translateY(-3px); }
 
-        /* CABECERA (HEADER) PRINCIPAL */
-        header { 
-            padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; 
-            background: rgba(17, 17, 17, 1); color: var(--blanco); border-bottom: 3px solid var(--primario); 
-            position: relative; z-index: 1001; box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-        }
+        /* CONTENEDOR DE CABECERA (SE MUEVE CON LA PÁGINA) */
+        .header-container { position: sticky; top: 0; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.1); background: var(--blanco); }
+        
+        /* CABECERA NEGRA (LOGO Y CARRITO) */
+        header { padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; background: rgba(17, 17, 17, 1); color: var(--blanco); }
         .logo { font-size: 26px; color: var(--blanco); font-weight: 800; display: flex; align-items: center; gap: 12px; letter-spacing: 1px;}
         .logo i { font-size: 32px; color: var(--primario); }
         nav { color: var(--blanco); font-weight: 600; display: flex; align-items: center; gap: 15px;}
@@ -46,24 +45,24 @@
         .nav-cart { background: var(--gradiente-naranja); color: white; box-shadow: 0 4px 15px rgba(255,102,0,0.3); }
         .nav-cart:hover { transform: scale(1.05); box-shadow: var(--sombra-fuerte); }
 
-        /* SUB-HEADER (BUSCADOR Y FILTROS) */
-        .sub-header { background: var(--blanco); padding: 20px 50px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); position: relative; z-index: 1000; border-bottom: 1px solid var(--borde-card);}
-        .search-wrapper-top { position: relative; max-width: 900px; margin: 0 auto 20px auto; }
-        .search-wrapper-top i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--primario); font-size: 1.2rem; }
-        .search-wrapper-top input { width: 100%; padding: 16px 20px 16px 55px; border: 2px solid var(--borde-card); border-radius: 30px; font-size: 1.05rem; outline: none; transition: 0.3s; background: var(--fondo-gris); color: var(--texto-oscuro);}
-        .search-wrapper-top input:focus { border-color: var(--primario); background: white; box-shadow: 0 0 0 5px rgba(255,102,0,0.1); }
+        /* CABECERA BLANCA (BUSCADOR Y FILTROS) */
+        .sub-header { display: flex; gap: 20px; padding: 12px 50px; background: var(--blanco); border-bottom: 4px solid var(--primario); align-items: center; }
         
-        .filters-wrapper { display: flex; flex-direction: column; gap: 15px; max-width: 1200px; margin: 0 auto; }
-        .filter-group { display: flex; align-items: center; gap: 15px; }
-        .filter-label { font-weight: 800; color: var(--texto-oscuro); font-size: 0.9rem; min-width: 140px; text-align: right; text-transform: uppercase; letter-spacing: 1px; }
+        .search-wrapper-top { position: relative; flex: 1; min-width: 250px; max-width: 400px; }
+        .search-wrapper-top i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--primario); font-size: 1.1rem; }
+        .search-wrapper-top input { width: 100%; padding: 10px 15px 10px 45px; border: 2px solid var(--borde-card); border-radius: 30px; font-size: 0.95rem; outline: none; background: var(--fondo-gris); transition: 0.3s; color: var(--texto-oscuro);}
+        .search-wrapper-top input:focus { border-color: var(--primario); background: white; box-shadow: 0 0 0 4px rgba(255,102,0,0.1); }
         
-        .scroll-pills { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
-        .scroll-pills::-webkit-scrollbar { display: none; } /* Oculta scrollbar en Chrome/Safari */
-        .brand-item { white-space: nowrap; padding: 8px 20px; font-size: 0.85rem; border-radius: 20px; border: 1px solid var(--borde-card); background: var(--fondo-gris); color: var(--texto-claro); cursor: pointer; font-weight: 600; transition: 0.3s; text-transform: uppercase;}
-        .brand-item:hover, .brand-item.active { background: var(--secundario); color: white; border-color: var(--secundario); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
+        .filter-section { display: flex; align-items: center; gap: 10px; flex: 1; overflow: hidden; }
+        .filter-label { font-size: 0.85rem; font-weight: 800; color: var(--texto-oscuro); text-transform: uppercase; display: flex; align-items: center; gap: 5px; min-width: max-content;}
+        
+        .scroll-pills { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; flex: 1; }
+        .scroll-pills::-webkit-scrollbar { display: none; }
+        .brand-item { white-space: nowrap; padding: 6px 15px; font-size: 0.8rem; border-radius: 20px; border: 1px solid var(--borde-card); background: var(--fondo-gris); color: var(--texto-claro); cursor: pointer; font-weight: 700; transition: 0.3s; text-transform: uppercase;}
+        .brand-item:hover, .brand-item.active { background: var(--secundario); color: white; border-color: var(--secundario); }
 
-        /* SLIDER CARRUSEL HERO */
-        .hero-slider { position: relative; width: 100%; height: 450px; overflow: hidden; }
+        /* SLIDER CARRUSEL HERO (EL BANNER GIGANTE) */
+        .hero-slider { position: relative; width: 100%; height: 500px; overflow: hidden; }
         .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; padding: 0 20px; opacity: 0; transition: opacity 1s ease-in-out, transform 3s ease-in-out; background-size: cover; background-position: center; transform: scale(1.05); }
         .slide.active { opacity: 1; z-index: 1; transform: scale(1); }
         .slide h1 { font-size: 4rem; margin-bottom: 15px; text-shadow: 0 5px 15px rgba(0,0,0,0.6); font-weight: 800; transform: translateY(30px); opacity: 0; transition: 0.8s 0.3s ease-out; text-transform: uppercase; letter-spacing: 2px;}
@@ -157,12 +156,12 @@
         footer a { color: var(--texto-claro); text-decoration: none; font-size: 15px; font-weight: 600; margin: 0 15px; transition: 0.3s;}
         footer a:hover { color: var(--primario); }
 
-        /* AJUSTES RESPONSIVOS */
-        @media (max-width: 768px) {
-            .filter-group { flex-direction: column; align-items: flex-start; gap: 5px; }
-            .filter-label { text-align: left; }
+        /* AJUSTES PARA CELULARES */
+        @media (max-width: 900px) {
             header { padding: 15px 20px; flex-direction: column; gap: 15px; }
-            .sub-header { padding: 20px; }
+            .sub-header { flex-direction: column; padding: 15px 20px; align-items: stretch; gap: 15px; }
+            .search-wrapper-top { max-width: 100%; }
+            .filter-section { overflow: visible; }
         }
     </style>
 </head>
@@ -186,7 +185,7 @@
         </div>
     </div>
 
-    <!-- MODAL VISTA RÁPIDA -->
+    <!-- MODAL VISTA RÁPIDA (CON GALERÍA Y CARACTERÍSTICAS) -->
     <div class="modal-overlay" id="quickViewModal" onclick="closeQuickView(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeQuickView(event)"><i class="fa-solid fa-xmark"></i></button>
@@ -214,54 +213,69 @@
     <!-- BOTÓN WHATSAPP FLOTANTE -->
     <a href="https://wa.me/529641091387?text=Hola,%20vengo%20de%20la%20tienda%20Ferreteral%20del%20Sureste%20y%20quiero%20hacer%20un%20pedido" class="whatsapp-float" target="_blank" title="¡Escríbenos por WhatsApp!"><i class="fa-brands fa-whatsapp"></i></a>
 
-    <!-- CABECERA PRINCIPAL -->
-    <header>
-        <div class="logo"><i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE</div>
-        <nav>
-            <div class="nav-mayoreo" onclick="openMayoreoModal()"><i class="fa-solid fa-hard-hat"></i> Constructores / Mayoreo</div>
-            <div class="nav-cart" onclick="document.getElementById('cart-section-target').scrollIntoView();"><i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">0</span> Prod.</div>
-        </nav>
-    </header>
-
-    <!-- NUEVO SUB-HEADER DE BUSQUEDA Y FILTROS ELEGANTES -->
-    <div class="sub-header">
-        <div class="search-wrapper-top">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="¿Qué material buscas hoy? Ej. Taladro, cable, pintura..." onkeyup="window.applyFilters()">
-        </div>
+    <!-- ========================================== -->
+    <!-- CABECERA PEGAJOSA (SE MUEVE CON LA PÁGINA) -->
+    <!-- ========================================== -->
+    <div class="header-container">
         
-        <div class="filters-wrapper">
-            <!-- Pestañas Deslizables de Departamentos -->
-            <div class="filter-group">
-                <span class="filter-label"><i class="fa-solid fa-list"></i> Departamentos:</span>
-                <div class="scroll-pills" id="categories-container">
-                    <button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>
-                    <!-- Se llena con Firebase -->
-                </div>
+        <!-- BARRA NEGRA PRINCIPAL -->
+        <header>
+            <div class="logo"><i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE</div>
+            <nav>
+                <div class="nav-mayoreo" onclick="openMayoreoModal()"><i class="fa-solid fa-hard-hat"></i> Constructores / Mayoreo</div>
+                <div class="nav-cart" onclick="document.getElementById('cart-section-target').scrollIntoView({ behavior: 'smooth' });"><i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">0</span> Prod.</div>
+            </nav>
+        </header>
+
+        <!-- BARRA BLANCA DE BUSCADOR Y FILTROS -->
+        <div class="sub-header">
+            <div class="search-wrapper-top">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="Buscar herramienta, material..." onkeyup="window.applyFilters()">
             </div>
             
-            <!-- Pestañas Deslizables de Marcas -->
-            <div class="filter-group">
+            <div class="filter-section">
+                <span class="filter-label"><i class="fa-solid fa-list"></i> Deptos:</span>
+                <div class="scroll-pills" id="categories-container">
+                    <button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>
+                    <!-- Llenado dinámico por Firebase -->
+                </div>
+            </div>
+
+            <div class="filter-section">
                 <span class="filter-label"><i class="fa-solid fa-tag"></i> Marcas:</span>
                 <div class="scroll-pills" id="brands-container">
                     <button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>
-                    <!-- Se llena con Firebase -->
+                    <!-- Llenado dinámico por Firebase -->
                 </div>
             </div>
         </div>
+
     </div>
 
-    <!-- CARRUSEL HERO -->
+    <!-- ========================================== -->
+    <!-- CARRUSEL HERO (EL BANNER GIGANTE) -->
+    <!-- ========================================== -->
     <section class="hero-slider">
         <div class="slide active" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(255, 102, 0, 0.6)), url('https://images.unsplash.com/photo-1581166397007-0bc07644d5d4?auto=format&fit=crop&w=1920&q=80');">
             <h1>Herramienta Profesional</h1>
             <p>Equípate con las mejores marcas para construcción, carpintería y herrería.</p>
-            <button onclick="document.getElementById('catalog-section').scrollIntoView();" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+            <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
         </div>
         <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(250, 204, 21, 0.6)), url('https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1920&q=80');">
             <h1>Material Eléctrico e Iluminación</h1>
             <p>Todo el cableado, iluminación y accesorios Volteck para tus proyectos.</p>
-            <button onclick="document.getElementById('catalog-section').scrollIntoView();" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+            <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+        </div>
+        <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(220, 38, 38, 0.6)), url('https://images.unsplash.com/photo-1533626904905-cc52fd99285e?auto=format&fit=crop&w=1920&q=80');">
+            <h1>Maquinaria Pesada</h1>
+            <p>Potencia garantizada. Soldadoras, compresoras y generadores eléctricos.</p>
+            <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+        </div>
+        <div class="slider-dots">
+            <span class="dot active" onclick="changeSlide(0)"></span>
+            <span class="dot" onclick="changeSlide(1)"></span>
+            <span class="dot" onclick="changeSlide(2)"></span>
         </div>
     </section>
 
@@ -285,7 +299,7 @@
     </div>
 
     <!-- CATÁLOGO DE PRODUCTOS (LLENADO POR FIREBASE) -->
-    <div class="container" id="catalog-section" style="margin-top: 0;">
+    <div class="container" id="catalog-section">
         <h2 class="section-header fade-in" style="font-size: 2.2rem; margin-bottom: 30px; font-weight:800; text-transform:uppercase;">Catálogo <span id="catalog-title" style="color:var(--primario);">General</span></h2>
         
         <div id="no-results" style="display: none; text-align: center; padding: 60px 20px; background: white; border-radius: 20px; box-shadow: var(--sombra-suave);">
@@ -390,7 +404,7 @@
         </div>
     </div>
 
-    <!-- FOOTER COMPLETO -->
+    <!-- FOOTER -->
     <footer>
         <div class="logo" style="justify-content: center; margin-bottom: 25px; color: white;">
             <i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE
@@ -405,7 +419,6 @@
 
     <!-- LÓGICA DE JAVASCRIPT GLOBAL -->
     <script>
-        // VARIABLES GLOBALES
         window.isMayoreo = false;
         window.total = 0; 
         window.cart = [];
@@ -424,7 +437,7 @@
             if(window.renderCart) window.renderCart(); 
         }
 
-        // LÓGICA INTELIGENTE DE FILTROS Y BUSCADOR
+        // BÚSQUEDA Y FILTROS INTELIGENTES
         window.removeAccents = function(str) { 
             return str.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); 
         }
@@ -470,7 +483,10 @@
             window.applyFilters();
             
             // Animación suave de scroll hacia el catálogo
-            document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            let offset = document.querySelector('.header-container').offsetHeight + 20;
+            let element = document.getElementById('catalog-section');
+            let topPos = element.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: topPos, behavior: 'smooth' });
         };
 
         window.filterByCategory = function(category, btnElement) {
@@ -486,10 +502,25 @@
             window.applyFilters();
 
             // Animación suave de scroll hacia el catálogo
-            document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            let offset = document.querySelector('.header-container').offsetHeight + 20;
+            let element = document.getElementById('catalog-section');
+            let topPos = element.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: topPos, behavior: 'smooth' });
         };
 
-        // SCROLL ANIMATIONS
+        // SCROLL ANIMATIONS Y SLIDER
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        function changeSlide(index) {
+            slides[currentSlideIndex].classList.remove('active');
+            if(dots.length) dots[currentSlideIndex].classList.remove('active');
+            currentSlideIndex = index;
+            slides[currentSlideIndex].classList.add('active');
+            if(dots.length) dots[currentSlideIndex].classList.add('active');
+        }
+        if(slides.length > 0) { setInterval(() => { changeSlide((currentSlideIndex + 1) % slides.length); }, 5000); }
+
         const faders = document.querySelectorAll('.fade-in');
         const appearOnScroll = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
@@ -674,7 +705,7 @@
         }
     </script>
 
-    <!-- FIREBASE SDK Y CARGA DE PRODUCTOS RÁPIDA -->
+    <!-- FIREBASE SDK Y CARGA SÚPER RÁPIDA -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
@@ -717,7 +748,6 @@
                     if(p.departamento && p.departamento.trim() !== "") catSet.add(p.departamento.trim().toUpperCase());
                 });
 
-                // ORDENAR ALFABÉTICAMENTE EL CATÁLOGO ANTES DE PINTAR
                 window.productosDB.sort((a, b) => a.nombre.localeCompare(b.nombre));
 
                 window.renderProductos();
@@ -740,7 +770,7 @@
             }
         }
 
-        // RENDERIZAR LAS TARJETAS (ANTI-TRABADO)
+        // RENDERIZAR LAS TARJETAS EN UN SOLO GOLPE
         window.renderProductos = function() {
             const grid = document.getElementById('product-grid');
             let htmlBuffer = "";
