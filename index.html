@@ -34,7 +34,7 @@
         /* CONTENEDOR DE CABECERA (SE MUEVE CON LA PÁGINA) */
         .header-container { position: sticky; top: 0; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.1); background: var(--blanco); }
         
-        /* CABECERA NEGRA (LOGO Y CARRITO) */
+        /* CABECERA NEGRA */
         header { padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; background: rgba(17, 17, 17, 1); color: var(--blanco); }
         .logo { font-size: 26px; color: var(--blanco); font-weight: 800; display: flex; align-items: center; gap: 12px; letter-spacing: 1px;}
         .logo i { font-size: 32px; color: var(--primario); }
@@ -45,21 +45,24 @@
         .nav-cart { background: var(--gradiente-naranja); color: white; box-shadow: 0 4px 15px rgba(255,102,0,0.3); }
         .nav-cart:hover { transform: scale(1.05); box-shadow: var(--sombra-fuerte); }
 
-        /* CABECERA BLANCA (BUSCADOR Y FILTROS) */
-        .sub-header { display: flex; gap: 20px; padding: 12px 50px; background: var(--blanco); border-bottom: 4px solid var(--primario); align-items: center; }
-        
-        .search-wrapper-top { position: relative; flex: 1; min-width: 250px; max-width: 400px; }
+        /* CABECERA BLANCA (BUSCADOR Y BOTONES DESPLEGABLES) */
+        .sub-header { display: flex; gap: 20px; padding: 12px 50px; background: var(--blanco); border-bottom: 4px solid var(--primario); align-items: center; flex-wrap: wrap; }
+        .search-wrapper-top { position: relative; flex: 1; min-width: 250px; max-width: 500px; }
         .search-wrapper-top i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--primario); font-size: 1.1rem; }
-        .search-wrapper-top input { width: 100%; padding: 10px 15px 10px 45px; border: 2px solid var(--borde-card); border-radius: 30px; font-size: 0.95rem; outline: none; background: var(--fondo-gris); transition: 0.3s; color: var(--texto-oscuro);}
+        .search-wrapper-top input { width: 100%; padding: 12px 15px 12px 45px; border: 2px solid var(--borde-card); border-radius: 30px; font-size: 0.95rem; outline: none; background: var(--fondo-gris); transition: 0.3s; color: var(--texto-oscuro);}
         .search-wrapper-top input:focus { border-color: var(--primario); background: white; box-shadow: 0 0 0 4px rgba(255,102,0,0.1); }
         
-        .filter-section { display: flex; align-items: center; gap: 10px; flex: 1; overflow: hidden; }
+        .filter-section { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; max-width: 300px; }
         .filter-label { font-size: 0.85rem; font-weight: 800; color: var(--texto-oscuro); text-transform: uppercase; display: flex; align-items: center; gap: 5px; min-width: max-content;}
         
-        .scroll-pills { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; flex: 1; }
-        .scroll-pills::-webkit-scrollbar { display: none; }
-        .brand-item { white-space: nowrap; padding: 6px 15px; font-size: 0.8rem; border-radius: 20px; border: 1px solid var(--borde-card); background: var(--fondo-gris); color: var(--texto-claro); cursor: pointer; font-weight: 700; transition: 0.3s; text-transform: uppercase;}
-        .brand-item:hover, .brand-item.active { background: var(--secundario); color: white; border-color: var(--secundario); }
+        .dropdown-btn { flex: 1; width: 100%; padding: 12px 20px; border-radius: 30px; border: 2px solid var(--borde-card); background: var(--fondo-gris); color: var(--texto-oscuro); cursor: pointer; font-weight: 700; transition: 0.3s; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; overflow: hidden; white-space: nowrap;}
+        .dropdown-btn:hover { border-color: var(--primario); background: white; }
+        .dropdown-btn.active-filter { background: var(--secundario); color: white; border-color: var(--secundario); }
+
+        /* GRID PARA MODALES DE FILTROS */
+        .brands-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+        .brand-item { white-space: nowrap; padding: 10px 20px; font-size: 0.85rem; border-radius: 30px; border: 1px solid var(--borde-card); background: var(--fondo-gris); color: var(--texto-claro); cursor: pointer; font-weight: 700; transition: 0.3s; text-transform: uppercase;}
+        .brand-item:hover, .brand-item.active { background: var(--secundario); color: white; border-color: var(--secundario); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
         /* SLIDER CARRUSEL HERO */
         .hero-slider { position: relative; width: 100%; height: 500px; overflow: hidden; }
@@ -69,7 +72,7 @@
         .slide p { font-size: 1.5rem; max-width: 800px; font-weight: 500; text-shadow: 0 3px 8px rgba(0,0,0,0.6); transform: translateY(30px); opacity: 0; transition: 0.8s 0.5s ease-out; }
         .slide.active h1, .slide.active p { transform: translateY(0); opacity: 1; }
 
-        /* FRANJA DE CONFIANZA FLOTANTE */
+        /* FRANJA DE CONFIANZA */
         .trust-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1100px; margin: -50px auto 40px auto; padding: 0 20px; position: relative; z-index: 10; }
         .trust-box { background: var(--blanco); padding: 25px 20px; border-radius: 15px; text-align: center; box-shadow: var(--sombra-suave); transition: 0.3s; display: flex; flex-direction: column; align-items: center; border: 1px solid var(--borde-card);}
         .trust-box:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,0,0,0.08); border-color: var(--primario); }
@@ -104,7 +107,7 @@
         .escala-mayoreo-etiqueta { display: none; background: rgba(255,102,0,0.1); color: var(--primario); padding: 5px 10px; border-radius: 8px; font-size: 10.5px; font-weight: 700; margin-bottom: 15px; border: 1px solid rgba(255,102,0,0.2); }
         body.mayoreo-active .escala-mayoreo-etiqueta { display: inline-block; }
 
-        /* CARRITO Y RESEÑAS */
+        /* CARRITO, FORMULARIOS Y RESEÑAS */
         .cart-section, .quote-section, .reviews-section { background: var(--blanco); padding: 50px; margin-top: 50px; border-radius: 20px; border: none; box-shadow: var(--sombra-suave); }
         .cart-item-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; background: var(--fondo-gris); padding: 15px 20px; border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--borde-card); }
         .qty-btn { background: var(--borde-card); border: none; width: 30px; height: 30px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; color: var(--secundario);}
@@ -129,7 +132,7 @@
         /* SPINNER DE CARGA RÁPIDA */
         .loading-spinner { font-size: 3rem; color: var(--primario); margin: 50px auto; display: block; text-align: center; }
 
-        /* MODAL VISTA RÁPIDA Y GALERÍA */
+        /* MODALES */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 17, 17, 0.85); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.4s; backdrop-filter: blur(8px); padding: 20px; }
         .modal-overlay.active { opacity: 1; visibility: visible; }
         .modal-content { background: var(--blanco); width: 900px; max-width: 100%; border-radius: 20px; overflow: hidden; display: flex; flex-wrap: wrap; position: relative; transform: translateY(50px) scale(0.9); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 30px 60px rgba(0,0,0,0.4); max-height: 90vh; overflow-y: auto;}
@@ -161,8 +164,13 @@
             header { padding: 15px 20px; flex-direction: column; gap: 15px; }
             .sub-header { flex-direction: column; padding: 15px 20px; align-items: stretch; gap: 15px; }
             .search-wrapper-top { max-width: 100%; }
-            .filter-section { overflow: visible; }
+            .filter-section { width: 100%; justify-content: space-between; max-width: 100%; }
+            .dropdown-btn { width: 100%; }
         }
+        
+        /* EFECTOS DE ANIMACIÓN SCROLL */
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
@@ -182,6 +190,30 @@
             <input type="text" id="mayoreo-user" class="form-control" placeholder="Usuario" style="text-align: center; font-weight: bold; text-transform: uppercase;">
             <input type="password" id="mayoreo-pwd" class="form-control" placeholder="Contraseña" style="text-align: center; font-weight: bold; letter-spacing: 2px;">
             <button class="btn-buy" style="margin-top: 10px;" onclick="loginMayoreo()">Iniciar Sesión <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+        </div>
+    </div>
+
+    <!-- MODAL CATEGORÍAS (DEPARTAMENTOS) -->
+    <div class="modal-overlay" id="categoriesModal" onclick="closeCategoriesModal(event)">
+        <div class="modal-content" style="max-width: 650px; padding: 40px; display: block;" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeCategoriesModal(event)"><i class="fa-solid fa-xmark"></i></button>
+            <h2 style="margin-bottom: 25px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase; text-align: center;"><i class="fa-solid fa-list" style="color: var(--primario);"></i> Departamentos</h2>
+            <div class="brands-grid" id="modal-categories-container" style="justify-content: flex-start; max-height: 50vh; overflow-y: auto; padding-right: 10px;">
+                <button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>
+                <!-- Se llena con Firebase -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL MARCAS -->
+    <div class="modal-overlay" id="brandsModal" onclick="closeBrandsModal(event)">
+        <div class="modal-content" style="max-width: 650px; padding: 40px; display: block;" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeBrandsModal(event)"><i class="fa-solid fa-xmark"></i></button>
+            <h2 style="margin-bottom: 25px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase; text-align: center;"><i class="fa-solid fa-tag" style="color: var(--primario);"></i> Marcas</h2>
+            <div class="brands-grid" id="modal-brands-container" style="justify-content: flex-start; max-height: 50vh; overflow-y: auto; padding-right: 10px;">
+                <button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>
+                <!-- Se llena con Firebase -->
+            </div>
         </div>
     </div>
 
@@ -236,18 +268,12 @@
             
             <div class="filter-section">
                 <span class="filter-label"><i class="fa-solid fa-list"></i> Deptos:</span>
-                <div class="scroll-pills" id="categories-container">
-                    <button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>
-                    <!-- Se llena con Firebase -->
-                </div>
+                <button id="btn-select-category" class="dropdown-btn" onclick="openCategoriesModal()">Todos <i class="fa-solid fa-chevron-down"></i></button>
             </div>
 
             <div class="filter-section">
                 <span class="filter-label"><i class="fa-solid fa-tag"></i> Marcas:</span>
-                <div class="scroll-pills" id="brands-container">
-                    <button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>
-                    <!-- Se llena con Firebase -->
-                </div>
+                <button id="btn-select-brand" class="dropdown-btn" onclick="openBrandsModal()">Todas <i class="fa-solid fa-chevron-down"></i></button>
             </div>
         </div>
 
@@ -266,6 +292,16 @@
             <h1>Material Eléctrico e Iluminación</h1>
             <p>Todo el cableado, iluminación y accesorios Volteck para tus proyectos.</p>
             <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+        </div>
+        <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(220, 38, 38, 0.6)), url('https://images.unsplash.com/photo-1533626904905-cc52fd99285e?auto=format&fit=crop&w=1920&q=80');">
+            <h1>Maquinaria Pesada</h1>
+            <p>Potencia garantizada. Soldadoras, compresoras y generadores eléctricos.</p>
+            <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+        </div>
+        <div class="slider-dots">
+            <span class="dot active" onclick="changeSlide(0)"></span>
+            <span class="dot" onclick="changeSlide(1)"></span>
+            <span class="dot" onclick="changeSlide(2)"></span>
         </div>
     </section>
 
@@ -418,10 +454,11 @@
         window.currentBrand = 'ALL';
         window.currentCategory = 'ALL';
         
-        // Paginación para no trabar la compu
+        // Paginación
         window.productosPorPagina = 24;
         window.productosMostrados = 24;
 
+        // MODALES LOGIN MAYOREO
         function openMayoreoModal() { document.getElementById('mayoreoModal').classList.add('active'); }
         function closeMayoreoModal(e) { if(e) e.stopPropagation(); document.getElementById('mayoreoModal').classList.remove('active'); }
 
@@ -432,7 +469,14 @@
             if(window.renderCart) window.renderCart(); 
         }
 
-        // BÚSQUEDA Y FILTROS INTELIGENTES EN MEMORIA
+        // MODALES DE FILTROS (MARCAS Y CATEGORÍAS)
+        window.openBrandsModal = function() { document.getElementById('brandsModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
+        window.closeBrandsModal = function(e) { if(e) e.stopPropagation(); document.getElementById('brandsModal').classList.remove('active'); document.body.style.overflow = 'auto'; }
+        
+        window.openCategoriesModal = function() { document.getElementById('categoriesModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
+        window.closeCategoriesModal = function(e) { if(e) e.stopPropagation(); document.getElementById('categoriesModal').classList.remove('active'); document.body.style.overflow = 'auto'; }
+
+        // BÚSQUEDA Y FILTROS INTELIGENTES
         window.removeAccents = function(str) { 
             return str.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); 
         }
@@ -456,21 +500,26 @@
                 return matchBrand && matchCat && matchSearch;
             });
 
-            window.productosMostrados = window.productosPorPagina; // Reiniciar cuenta al filtrar
+            window.productosMostrados = window.productosPorPagina; 
             if(window.renderProductos) window.renderProductos();
         };
 
         window.filterByBrand = function(brand, btnElement) {
-            document.getElementById('brands-container').querySelectorAll('.brand-item').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('modal-brands-container').querySelectorAll('.brand-item').forEach(btn => btn.classList.remove('active'));
             if(btnElement) btnElement.classList.add('active');
             
             window.currentBrand = brand === 'ALL' ? 'ALL' : window.removeAccents(brand).toLowerCase();
             
+            let btnUI = document.getElementById('btn-select-brand');
+            btnUI.innerHTML = (brand === 'ALL' ? 'Todas' : brand) + ' <i class="fa-solid fa-chevron-down"></i>';
+            if(brand !== 'ALL') btnUI.classList.add('active-filter'); else btnUI.classList.remove('active-filter');
+
             let title = "General";
-            if(window.currentCategory !== 'ALL') title = document.querySelector('#categories-container .active').innerText;
+            if(window.currentCategory !== 'ALL') title = document.getElementById('btn-select-category').innerText.replace(' \uf078', '');
             if(brand !== 'ALL') title += " - " + brand;
             document.getElementById('catalog-title').innerText = title;
 
+            window.closeBrandsModal();
             window.applyFilters();
             
             let offset = document.querySelector('.header-container').offsetHeight + 20;
@@ -480,15 +529,20 @@
         };
 
         window.filterByCategory = function(category, btnElement) {
-            document.getElementById('categories-container').querySelectorAll('.brand-item').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('modal-categories-container').querySelectorAll('.brand-item').forEach(btn => btn.classList.remove('active'));
             if(btnElement) btnElement.classList.add('active');
             
             window.currentCategory = category === 'ALL' ? 'ALL' : window.removeAccents(category).toLowerCase();
             
+            let btnUI = document.getElementById('btn-select-category');
+            btnUI.innerHTML = (category === 'ALL' ? 'Todos' : category) + ' <i class="fa-solid fa-chevron-down"></i>';
+            if(category !== 'ALL') btnUI.classList.add('active-filter'); else btnUI.classList.remove('active-filter');
+
             let title = category === 'ALL' ? "General" : category;
-            if(window.currentBrand !== 'ALL') title += " - " + document.querySelector('#brands-container .active').innerText;
+            if(window.currentBrand !== 'ALL') title += " - " + document.getElementById('btn-select-brand').innerText.replace(' \uf078', '');
             document.getElementById('catalog-title').innerText = title;
 
+            window.closeCategoriesModal();
             window.applyFilters();
 
             let offset = document.querySelector('.header-container').offsetHeight + 20;
@@ -699,7 +753,7 @@
         }
     </script>
 
-    <!-- FIREBASE SDK Y CARGA DE PRODUCTOS -->
+    <!-- FIREBASE SDK Y CARGA SÚPER RÁPIDA -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
@@ -719,14 +773,15 @@
         // CARGAR PRODUCTOS DESDE FIRESTORE
         async function cargarCatalogo() {
             const grid = document.getElementById('product-grid');
-            const marcasContainer = document.getElementById('brands-container');
-            const catContainer = document.getElementById('categories-container');
+            const marcasContainer = document.getElementById('modal-brands-container');
+            const catContainer = document.getElementById('modal-categories-container');
             
             try {
                 const querySnapshot = await getDocs(collection(db, "productos"));
                 window.productosDB = [];
                 let marcasSet = new Set();
                 let catSet = new Set();
+                grid.innerHTML = '';
 
                 if (querySnapshot.empty) {
                     grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: var(--texto-claro);">Aún no hay productos en la base de datos. Utiliza el Subidor de Excel para sincronizarlos.</h3></div>';
@@ -746,12 +801,13 @@
 
                 window.renderProductos();
 
-                // LLENAR BOTONES DINÁMICOS
+                // LLENAR BOTONES DE MARCA EN MODAL
                 marcasContainer.innerHTML = `<button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>`;
                 Array.from(marcasSet).sort().forEach(marca => {
                     marcasContainer.innerHTML += `<button class="brand-item" onclick="window.filterByBrand('${marca}', this)">${marca}</button>`;
                 });
 
+                // LLENAR BOTONES DE CATEGORÍA EN MODAL
                 catContainer.innerHTML = `<button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>`;
                 Array.from(catSet).sort().forEach(cat => {
                     catContainer.innerHTML += `<button class="brand-item" onclick="window.filterByCategory('${cat}', this)">${cat}</button>`;
@@ -759,7 +815,7 @@
 
             } catch (e) {
                 console.error("Error cargando Firebase:", e);
-                grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: red;">Error al conectar. Verifica las reglas de Firestore (Paso 1).</h3></div>';
+                grid.innerHTML = '<div style="width: 100%; text-align: center; grid-column: 1 / -1;"><h3 style="color: red;">Error al conectar. Verifica las reglas de Firestore.</h3></div>';
             }
         }
 
