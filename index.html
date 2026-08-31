@@ -67,15 +67,12 @@
         .brand-item:hover, .brand-item.active { background: var(--secundario); color: white; border-color: var(--secundario); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
         /* SLIDER CARRUSEL HERO */
-        .hero-slider { position: relative; width: 100%; height: 500px; overflow: hidden; }
-        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; padding: 0 20px; opacity: 0; transition: opacity 1s ease-in-out, transform 3s ease-in-out; background-size: cover; background-position: center; transform: scale(1.05); }
+        .hero-slider { position: relative; width: 100%; height: 500px; overflow: hidden; background-color: white;}
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; padding: 0 20px; opacity: 0; transition: opacity 1s ease-in-out, transform 3s ease-in-out; transform: scale(1.05); }
         .slide.active { opacity: 1; z-index: 1; transform: scale(1); }
-        .slide h1 { font-size: 4rem; margin-bottom: 15px; text-shadow: 0 5px 15px rgba(0,0,0,0.6); font-weight: 800; transform: translateY(30px); opacity: 0; transition: 0.8s 0.3s ease-out; text-transform: uppercase; letter-spacing: 2px;}
-        .slide p { font-size: 1.5rem; max-width: 800px; font-weight: 500; text-shadow: 0 3px 8px rgba(0,0,0,0.6); transform: translateY(30px); opacity: 0; transition: 0.8s 0.5s ease-out; }
-        .slide.active h1, .slide.active p { transform: translateY(0); opacity: 1; }
-
+        
         /* FRANJA DE CONFIANZA */
-        .trust-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1100px; margin: -50px auto 40px auto; padding: 0 20px; position: relative; z-index: 10; }
+        .trust-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1100px; margin: -20px auto 40px auto; padding: 0 20px; position: relative; z-index: 10; }
         .trust-box { background: var(--blanco); padding: 25px 20px; border-radius: 15px; text-align: center; box-shadow: var(--sombra-suave); transition: 0.3s; display: flex; flex-direction: column; align-items: center; border: 1px solid var(--borde-card);}
         .trust-box:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,0,0,0.08); border-color: var(--primario); }
         .icon-circle { width: 70px; height: 70px; background: rgba(255,102,0,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; transition: 0.3s;}
@@ -285,31 +282,61 @@
     <!-- CARRUSEL HERO (EL BANNER GIGANTE) -->
     <!-- ========================================== -->
     <section class="hero-slider">
-        <!-- SLIDE 1: FOCOS LED E ILUMINACIÓN -->
-        <div class="slide active" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(255, 102, 0, 0.6)), url('https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&w=1920&q=80');">
-            <h1>Iluminación LED Premium</h1>
-            <p>Ahorra energía con nuestra amplia gama de focos, paneles y reflectores de alta eficiencia.</p>
-            <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+        
+        <!-- SLIDE 1: CABLEADO -->
+        <div class="slide active" style="background: linear-gradient(135deg, #ffffff 0%, #fef3c7 100%);">
+            <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap; gap: 30px; padding: 0 20px;">
+                <div style="flex: 1; min-width: 300px; text-align: left;">
+                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Conductores Volteck</span>
+                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; text-shadow: none; line-height: 1.1;">Conductores de Cobre Puro</h1>
+                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; text-shadow: none; margin-bottom: 30px;">Cable THW-LS / THHW-LS calibre 12 AWG con aislamiento termoplástico. Máxima conductividad y seguridad para tus proyectos.</p>
+                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+                </div>
+                <div style="flex: 1; min-width: 300px; text-align: center;">
+                    <!-- Se invoca la imagen del cable rojo -->
+                    <img src="CAB-12R+FC2.jpg" alt="Cable Rojo 12 AWG" style="max-height: 450px; max-width: 100%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); transform: scale(1.1);">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: ACOMETIDAS -->
+        <div class="slide" style="background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);">
+            <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap-reverse; gap: 30px; padding: 0 20px;">
+                <div style="flex: 1; min-width: 300px; text-align: center;">
+                    <!-- Se invoca la imagen de la base de medidor -->
+                    <img src="BASE-4.jpg" alt="Base para Medidor Volteck" style="max-height: 420px; max-width: 100%; mix-blend-mode: multiply; filter: drop-shadow(0 25px 35px rgba(0,0,0,0.15));">
+                </div>
+                <div style="flex: 1; min-width: 300px; text-align: left;">
+                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Acometidas y Recepción</span>
+                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; text-shadow: none; line-height: 1.1;">Bases para Medidor</h1>
+                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; text-shadow: none; margin-bottom: 30px;">Bases de 4 terminales preparadas para 600V~ y 100-125A. Materiales de alta resistencia aprobados para instalaciones seguras.</p>
+                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: PROTECCIÓN (INTERRUPTORES) -->
+        <div class="slide" style="background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 100%);">
+            <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap; gap: 30px; padding: 0 20px;">
+                <div style="flex: 1; min-width: 300px; text-align: left;">
+                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Seguridad Industrial y Doméstica</span>
+                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; text-shadow: none; line-height: 1.1;">Protección Eléctrica</h1>
+                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; text-shadow: none; margin-bottom: 30px;">Protege tus circuitos con nuestros interruptores de seguridad de 2 polos y pastillas termomagnéticas de alta respuesta.</p>
+                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+                </div>
+                <div style="flex: 1; min-width: 300px; text-align: center; position: relative;">
+                    <!-- Se invocan las dos imágenes de interruptores haciendo una composición -->
+                    <img src="IS-230.jpg" alt="Interruptor de Seguridad" style="max-height: 380px; max-width: 55%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); position: relative; z-index: 1;">
+                    <img src="IT-130.jpg" alt="Pastilla Termomagnética" style="max-height: 250px; max-width: 45%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); position: absolute; bottom: 0; right: 10%; z-index: 2;">
+                </div>
+            </div>
         </div>
         
-        <!-- SLIDE 2: HERRAMIENTAS GENERALES -->
-        <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(250, 204, 21, 0.6)), url('https://images.unsplash.com/photo-1508873699372-7aeab60b44ab?auto=format&fit=crop&w=1920&q=80');">
-            <h1>Herramienta Profesional</h1>
-            <p>Equípate con las mejores marcas para construcción, carpintería y herrería.</p>
-            <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
-        </div>
-        
-        <!-- SLIDE 3: MATERIAL ELÉCTRICO -->
-        <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(220, 38, 38, 0.6)), url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1920&q=80');">
-            <h1>Material Eléctrico</h1>
-            <p>Todo el cableado, interruptores y placas para proyectos seguros y duraderos.</p>
-            <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
-        </div>
-        
-        <div class="slider-dots">
-            <span class="dot active" onclick="changeSlide(0)"></span>
-            <span class="dot" onclick="changeSlide(1)"></span>
-            <span class="dot" onclick="changeSlide(2)"></span>
+        <!-- Puntos del slider -->
+        <div class="slider-dots" style="bottom: 20px;">
+            <span class="dot active" style="background: var(--primario);" onclick="changeSlide(0)"></span>
+            <span class="dot" style="background: #9ca3af;" onclick="changeSlide(1)"></span>
+            <span class="dot" style="background: #9ca3af;" onclick="changeSlide(2)"></span>
         </div>
     </section>
 
