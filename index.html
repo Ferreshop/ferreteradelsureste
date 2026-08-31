@@ -38,7 +38,6 @@
         header { padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; background: rgba(17, 17, 17, 1); color: var(--blanco); }
         .logo { font-size: 26px; color: var(--blanco); font-weight: 800; display: flex; align-items: center; gap: 12px; letter-spacing: 1px;}
         .logo i { font-size: 32px; color: var(--primario); }
-        /* TAMAÑO DEL LOGO A 80px */
         .logo img { height: 80px; object-fit: contain; }
         nav { color: var(--blanco); font-weight: 600; display: flex; align-items: center; gap: 15px;}
         nav div { padding: 10px 20px; border-radius: 30px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
@@ -283,60 +282,84 @@
     <!-- ========================================== -->
     <section class="hero-slider">
         
-        <!-- SLIDE 1: CABLEADO -->
+        <!-- SLIDE 1: CABLES (2 Imágenes de cables) -->
         <div class="slide active" style="background: linear-gradient(135deg, #ffffff 0%, #fef3c7 100%);">
             <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap; gap: 30px; padding: 0 20px;">
                 <div style="flex: 1; min-width: 300px; text-align: left;">
-                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Conductores Volteck</span>
+                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Conductores Eléctricos</span>
                     <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; text-shadow: none; line-height: 1.1;">Conductores de Cobre Puro</h1>
-                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; text-shadow: none; margin-bottom: 30px;">Cable THW-LS / THHW-LS calibre 12 AWG con aislamiento termoplástico. Máxima conductividad y seguridad para tus proyectos.</p>
+                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; text-shadow: none; margin-bottom: 30px;">Cable THW-LS y cordones duplex con aislamiento termoplástico. Máxima conductividad y seguridad garantizada en cada instalación.</p>
                     <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
-                <div style="flex: 1; min-width: 300px; text-align: center;">
-                    <!-- Se invoca la imagen del cable rojo -->
-                    <img src="CAB-12R+FC2.jpg" alt="Cable Rojo 12 AWG" style="max-height: 450px; max-width: 100%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); transform: scale(1.1);">
+                <div style="flex: 1; min-width: 300px; text-align: center; position: relative;">
+                    <!-- Cable rojo -->
+                    <img src="https://i.imgur.com/TgXnCOt.jpeg" alt="Cable Rojo" style="max-height: 380px; max-width: 70%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); position: relative; z-index: 2;">
+                    <!-- Cable blanco -->
+                    <img src="https://i.imgur.com/uQdOVpE.jpeg" alt="Cable Blanco" style="max-height: 250px; max-width: 50%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); position: absolute; bottom: -20px; right: 0; z-index: 1;">
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 2: ACOMETIDAS -->
+        <!-- SLIDE 2: ACOMETIDA Y DISTRIBUCIÓN (Base Medidor + Centro Carga) -->
         <div class="slide" style="background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);">
             <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap-reverse; gap: 30px; padding: 0 20px;">
-                <div style="flex: 1; min-width: 300px; text-align: center;">
-                    <!-- Se invoca la imagen de la base de medidor -->
-                    <img src="BASE-4.jpg" alt="Base para Medidor Volteck" style="max-height: 420px; max-width: 100%; mix-blend-mode: multiply; filter: drop-shadow(0 25px 35px rgba(0,0,0,0.15));">
+                <div style="flex: 1; min-width: 300px; text-align: center; position: relative;">
+                    <!-- Base medidor -->
+                    <img src="https://i.imgur.com/cE69EjB.jpeg" alt="Base Medidor" style="max-height: 400px; max-width: 60%; mix-blend-mode: multiply; filter: drop-shadow(0 25px 35px rgba(0,0,0,0.15)); position: relative; z-index: 2;">
+                    <!-- Centro de carga -->
+                    <img src="https://i.imgur.com/vB1nmbB.jpeg" alt="Centro de Carga" style="max-height: 280px; max-width: 50%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.2)); position: absolute; top: 10%; right: 5%; z-index: 1;">
                 </div>
                 <div style="flex: 1; min-width: 300px; text-align: left;">
-                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Acometidas y Recepción</span>
-                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; text-shadow: none; line-height: 1.1;">Bases para Medidor</h1>
-                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; text-shadow: none; margin-bottom: 30px;">Bases de 4 terminales preparadas para 600V~ y 100-125A. Materiales de alta resistencia aprobados para instalaciones seguras.</p>
+                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Acometidas y Distribución</span>
+                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; text-shadow: none; line-height: 1.1;">Bases y Centros de Carga</h1>
+                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; text-shadow: none; margin-bottom: 30px;">Equipos robustos preparados para recepción y distribución. Materiales de alta resistencia aprobados para un flujo eléctrico seguro.</p>
                     <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 3: PROTECCIÓN (INTERRUPTORES) -->
+        <!-- SLIDE 3: PROTECCIÓN ELÉCTRICA (Interruptor + Pastilla) -->
         <div class="slide" style="background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 100%);">
             <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap; gap: 30px; padding: 0 20px;">
                 <div style="flex: 1; min-width: 300px; text-align: left;">
                     <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Seguridad Industrial y Doméstica</span>
                     <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; text-shadow: none; line-height: 1.1;">Protección Eléctrica</h1>
-                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; text-shadow: none; margin-bottom: 30px;">Protege tus circuitos con nuestros interruptores de seguridad de 2 polos y pastillas termomagnéticas de alta respuesta.</p>
+                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; text-shadow: none; margin-bottom: 30px;">Protege tus circuitos y equipos con nuestros interruptores de seguridad y pastillas termomagnéticas de rápida respuesta.</p>
                     <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
                 <div style="flex: 1; min-width: 300px; text-align: center; position: relative;">
-                    <!-- Se invocan las dos imágenes de interruptores haciendo una composición -->
-                    <img src="IS-230.jpg" alt="Interruptor de Seguridad" style="max-height: 380px; max-width: 55%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); position: relative; z-index: 1;">
-                    <img src="IT-130.jpg" alt="Pastilla Termomagnética" style="max-height: 250px; max-width: 45%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); position: absolute; bottom: 0; right: 10%; z-index: 2;">
+                    <!-- Interruptor -->
+                    <img src="https://i.imgur.com/AWeMj6Q.jpeg" alt="Interruptor de Seguridad" style="max-height: 380px; max-width: 55%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); position: relative; z-index: 1;">
+                    <!-- Pastilla -->
+                    <img src="https://i.imgur.com/VfSJzhL.jpeg" alt="Pastilla Termomagnética" style="max-height: 250px; max-width: 45%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); position: absolute; bottom: 0; right: 10%; z-index: 2;">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: ACCESORIOS (Extensión + Clavija) -->
+        <div class="slide" style="background: linear-gradient(135deg, #ffffff 0%, #dcfce7 100%);">
+            <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap-reverse; gap: 30px; padding: 0 20px;">
+                <div style="flex: 1; min-width: 300px; text-align: center; position: relative;">
+                    <!-- Extensión -->
+                    <img src="https://i.imgur.com/fkHDXdS.jpeg" alt="Extensión Eléctrica" style="max-height: 380px; max-width: 55%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); position: relative; z-index: 1;">
+                    <!-- Clavija -->
+                    <img src="https://i.imgur.com/NGKA1xu.jpeg" alt="Clavija Industrial" style="max-height: 220px; max-width: 45%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); position: absolute; bottom: 10%; left: -5%; z-index: 2;">
+                </div>
+                <div style="flex: 1; min-width: 300px; text-align: left;">
+                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Accesorios Indispensables</span>
+                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; text-shadow: none; line-height: 1.1;">Conexiones Confiables</h1>
+                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; text-shadow: none; margin-bottom: 30px;">Extensiones de uso rudo y doméstico junto con clavijas polarizadas. Listas para brindar energía de forma portátil y segura.</p>
+                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
             </div>
         </div>
         
-        <!-- Puntos del slider -->
+        <!-- Puntos del slider (Actualizado a 4 puntos) -->
         <div class="slider-dots" style="bottom: 20px;">
             <span class="dot active" style="background: var(--primario);" onclick="changeSlide(0)"></span>
             <span class="dot" style="background: #9ca3af;" onclick="changeSlide(1)"></span>
             <span class="dot" style="background: #9ca3af;" onclick="changeSlide(2)"></span>
+            <span class="dot" style="background: #9ca3af;" onclick="changeSlide(3)"></span>
         </div>
     </section>
 
