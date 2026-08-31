@@ -38,7 +38,7 @@
         header { padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; background: rgba(17, 17, 17, 1); color: var(--blanco); }
         .logo { font-size: 26px; color: var(--blanco); font-weight: 800; display: flex; align-items: center; gap: 12px; letter-spacing: 1px;}
         .logo i { font-size: 32px; color: var(--primario); }
-        /* AQUÍ SE MODIFICÓ EL TAMAÑO DEL LOGO A 80px */
+        /* TAMAÑO DEL LOGO A 80px */
         .logo img { height: 80px; object-fit: contain; }
         nav { color: var(--blanco); font-weight: 600; display: flex; align-items: center; gap: 15px;}
         nav div { padding: 10px 20px; border-radius: 30px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
@@ -575,7 +575,7 @@
             slides[currentSlideIndex].classList.add('active');
             if(dots.length) dots[currentSlideIndex].classList.add('active');
         }
-        if(slides.length > 0) { setInterval(() => { changeSlide((currentSlideIndex + 1) % slides.length); }, 5000); }
+        if(slides.length > 0) { setInterval(() => { changeSlide((currentSlideIndex + 1) % slides.length); }, 8000); }
 
         const faders = document.querySelectorAll('.fade-in');
         const appearOnScroll = new IntersectionObserver((entries, obs) => {
