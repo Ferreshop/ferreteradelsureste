@@ -38,6 +38,8 @@
         header { padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; background: rgba(17, 17, 17, 1); color: var(--blanco); }
         .logo { font-size: 26px; color: var(--blanco); font-weight: 800; display: flex; align-items: center; gap: 12px; letter-spacing: 1px;}
         .logo i { font-size: 32px; color: var(--primario); }
+        /* AQUÍ SE MODIFICÓ EL TAMAÑO DEL LOGO A 80px */
+        .logo img { height: 80px; object-fit: contain; }
         nav { color: var(--blanco); font-weight: 600; display: flex; align-items: center; gap: 15px;}
         nav div { padding: 10px 20px; border-radius: 30px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
         .nav-mayoreo { color: var(--amarillo); background: rgba(250, 204, 21, 0.1); border: 1px solid rgba(250, 204, 21, 0.3); }
@@ -252,7 +254,7 @@
         
         <!-- BARRA NEGRA PRINCIPAL -->
         <header>
-            <div class="logo"><i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE</div>
+            <div class="logo"><img src="https://i.imgur.com/ybCK68C.png" alt="Logo Ferreteral del Sureste"> FERRETERAL DEL SURESTE</div>
             <nav>
                 <div class="nav-mayoreo" onclick="openMayoreoModal()"><i class="fa-solid fa-hard-hat"></i> Constructores / Mayoreo</div>
                 <div class="nav-cart" onclick="document.getElementById('cart-section-target').scrollIntoView({ behavior: 'smooth' });"><i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">0</span> Prod.</div>
@@ -433,7 +435,7 @@
     <!-- FOOTER -->
     <footer>
         <div class="logo" style="justify-content: center; margin-bottom: 25px; color: white;">
-            <i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE
+            <img src="https://i.imgur.com/ybCK68C.png" alt="Logo" style="height: 45px; margin-right: 15px;"> FERRETERAL DEL SURESTE
         </div>
         <div class="links" style="margin-bottom: 20px;">
             <a href="#" onclick="alert('Envíos a obra de 24 a 48 horas en la zona, aplican restricciones por volumen.')">Políticas de Envío</a>
@@ -464,7 +466,7 @@
 
         window.enableMayoreoMode = function(nombreUsuario) {
             document.body.classList.add('mayoreo-active');
-            document.querySelector('header .logo').innerHTML = `<i class="fa-solid fa-screwdriver-wrench"></i> FERRETERAL DEL SURESTE <span style="font-size:11px; background:var(--amarillo); color:black; padding:4px 10px; border-radius:20px; margin-left:10px; vertical-align:middle; text-shadow:none;">MAYOREO: ${nombreUsuario}</span>`;
+            document.querySelector('header .logo').innerHTML = `<img src="https://i.imgur.com/ybCK68C.png" alt="Logo" style="height: 80px;"> FERRETERAL DEL SURESTE <span style="font-size:11px; background:var(--amarillo); color:black; padding:4px 10px; border-radius:20px; margin-left:10px; vertical-align:middle; text-shadow:none;">MAYOREO: ${nombreUsuario}</span>`;
             if(window.renderProductos) window.renderProductos(); 
             if(window.renderCart) window.renderCart(); 
         }
