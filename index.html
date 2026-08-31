@@ -285,21 +285,27 @@
     <!-- CARRUSEL HERO (EL BANNER GIGANTE) -->
     <!-- ========================================== -->
     <section class="hero-slider">
-        <div class="slide active" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(255, 102, 0, 0.6)), url('https://images.unsplash.com/photo-1581166397007-0bc07644d5d4?auto=format&fit=crop&w=1920&q=80');">
+        <!-- SLIDE 1: FOCOS LED E ILUMINACIÓN -->
+        <div class="slide active" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(255, 102, 0, 0.6)), url('https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&w=1920&q=80');">
+            <h1>Iluminación LED Premium</h1>
+            <p>Ahorra energía con nuestra amplia gama de focos, paneles y reflectores de alta eficiencia.</p>
+            <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+        </div>
+        
+        <!-- SLIDE 2: HERRAMIENTAS GENERALES -->
+        <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(250, 204, 21, 0.6)), url('https://images.unsplash.com/photo-1508873699372-7aeab60b44ab?auto=format&fit=crop&w=1920&q=80');">
             <h1>Herramienta Profesional</h1>
             <p>Equípate con las mejores marcas para construcción, carpintería y herrería.</p>
             <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
         </div>
-        <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(250, 204, 21, 0.6)), url('https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1920&q=80');">
-            <h1>Material Eléctrico e Iluminación</h1>
-            <p>Todo el cableado, iluminación y accesorios Volteck para tus proyectos.</p>
+        
+        <!-- SLIDE 3: MATERIAL ELÉCTRICO -->
+        <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(220, 38, 38, 0.6)), url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1920&q=80');">
+            <h1>Material Eléctrico</h1>
+            <p>Todo el cableado, interruptores y placas para proyectos seguros y duraderos.</p>
             <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
         </div>
-        <div class="slide" style="background-image: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(220, 38, 38, 0.6)), url('https://images.unsplash.com/photo-1533626904905-cc52fd99285e?auto=format&fit=crop&w=1920&q=80');">
-            <h1>Maquinaria Pesada</h1>
-            <p>Potencia garantizada. Soldadoras, compresoras y generadores eléctricos.</p>
-            <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; margin-top: 30px; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
-        </div>
+        
         <div class="slider-dots">
             <span class="dot active" onclick="changeSlide(0)"></span>
             <span class="dot" onclick="changeSlide(1)"></span>
