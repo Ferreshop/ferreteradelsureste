@@ -24,7 +24,44 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-        body { background-color: var(--fondo-gris); color: var(--texto-oscuro); overflow-x: hidden; }
+        body { background-color: var(--fondo-gris); color: var(--texto-oscuro); overflow-x: hidden; transition: background 0.3s, color 0.3s; }
+
+        /* MODO OSCURO GLOBAL */
+        body.dark-mode {
+            background-color: #0d1117;
+            color: #f0f6fc;
+        }
+        body.dark-mode .header-container,
+        body.dark-mode header,
+        body.dark-mode .sub-header,
+        body.dark-mode .card,
+        body.dark-mode .trust-box,
+        body.dark-mode .cart-section,
+        body.dark-mode .quote-section,
+        body.dark-mode .reviews-section,
+        body.dark-mode .modal-content,
+        body.dark-mode .modal-left,
+        body.dark-mode .modal-right {
+            background-color: #161b22 !important;
+            color: #f0f6fc !important;
+            border-color: #30363d !important;
+        }
+        body.dark-mode .product-title,
+        body.dark-mode .trust-box h4,
+        body.dark-mode h2, body.dark-mode h3, body.dark-mode h4 {
+            color: #f0f6fc !important;
+        }
+        body.dark-mode .form-control {
+            background-color: #0d1117 !important;
+            color: #f0f6fc !important;
+            border-color: #30363d !important;
+        }
+        body.dark-mode .dropdown-btn,
+        body.dark-mode .search-wrapper-top input {
+            background-color: #0d1117 !important;
+            color: #f0f6fc !important;
+            border-color: #30363d !important;
+        }
 
         /* MODO MAYOREO */
         body.mayoreo-active { border-top: 6px solid var(--amarillo); }
@@ -32,7 +69,7 @@
         body.mayoreo-active .btn-buy:not([disabled]):hover { background: #eab308; transform: translateY(-3px); }
 
         /* CONTENEDOR DE CABECERA (SE MUEVE CON LA PÁGINA) */
-        .header-container { position: sticky; top: 0; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.1); background: var(--blanco); }
+        .header-container { position: sticky; top: 0; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.1); background: var(--blanco); transition: background 0.3s; }
         
         /* CABECERA NEGRA */
         header { padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; background: rgba(17, 17, 17, 1); color: var(--blanco); }
@@ -47,7 +84,7 @@
         .nav-cart:hover { transform: scale(1.05); box-shadow: var(--sombra-fuerte); }
 
         /* CABECERA BLANCA (BUSCADOR Y BOTONES DESPLEGABLES) */
-        .sub-header { display: flex; gap: 20px; padding: 12px 50px; background: var(--blanco); border-bottom: 4px solid var(--primario); align-items: center; flex-wrap: wrap; }
+        .sub-header { display: flex; gap: 20px; padding: 12px 50px; background: var(--blanco); border-bottom: 4px solid var(--primario); align-items: center; flex-wrap: wrap; transition: background 0.3s; }
         .search-wrapper-top { position: relative; flex: 1; min-width: 250px; max-width: 500px; }
         .search-wrapper-top i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--primario); font-size: 1.1rem; }
         .search-wrapper-top input { width: 100%; padding: 12px 15px 12px 45px; border: 2px solid var(--borde-card); border-radius: 30px; font-size: 0.95rem; outline: none; background: var(--fondo-gris); transition: 0.3s; color: var(--texto-oscuro);}
@@ -66,10 +103,15 @@
         .brand-item:hover, .brand-item.active { background: var(--secundario); color: white; border-color: var(--secundario); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
         /* SLIDER CARRUSEL HERO */
-        .hero-slider { position: relative; width: 100%; height: 500px; overflow: hidden; background-color: white;}
+        .hero-slider { position: relative; width: 100%; height: 500px; overflow: hidden; background-color: white; }
         .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; padding: 0 20px; opacity: 0; transition: opacity 1s ease-in-out, transform 3s ease-in-out; transform: scale(1.05); }
         .slide.active { opacity: 1; z-index: 1; transform: scale(1); }
         
+        /* Puntos del carrusel */
+        .slider-dots { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 10; }
+        .dot { width: 12px; height: 12px; background: #9ca3af; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+        .dot.active { background: var(--primario); transform: scale(1.2); }
+
         /* FRANJA DE CONFIANZA */
         .trust-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1100px; margin: -20px auto 40px auto; padding: 0 20px; position: relative; z-index: 10; }
         .trust-box { background: var(--blanco); padding: 25px 20px; border-radius: 15px; text-align: center; box-shadow: var(--sombra-suave); transition: 0.3s; display: flex; flex-direction: column; align-items: center; border: 1px solid var(--borde-card);}
@@ -241,7 +283,7 @@
     </div>
 
     <!-- BOTÓN WHATSAPP FLOTANTE -->
-    <a href="https://wa.me/529641091387?text=Hola,%20vengo%20de%20la%20tienda%20Ferreteral%20del%20Sureste%20y%20quiero%20hacer%20un%20pedido" class="whatsapp-float" target="_blank" title="¡Escríbenos por WhatsApp!"><i class="fa-brands fa-whatsapp"></i></a>
+    <a href="https://wa.me/529621093834?text=Hola,%20vengo%20de%20la%20tienda%20Ferreteral%20del%20Sureste%20y%20quiero%20hacer%20un%20pedido" class="whatsapp-float" target="_blank" title="¡Escríbenos por WhatsApp!"><i class="fa-brands fa-whatsapp"></i></a>
 
     <!-- ========================================== -->
     <!-- CABECERA PEGAJOSA (SE MUEVE CON LA PÁGINA) -->
@@ -252,6 +294,9 @@
         <header>
             <div class="logo"><img src="https://i.imgur.com/ybCK68C.png" alt="Logo Ferreteral del Sureste"> FERRETERAL DEL SURESTE</div>
             <nav>
+                <div class="nav-theme" onclick="toggleTheme()" title="Cambiar Modo" style="background: rgba(255,255,255,0.1); cursor: pointer; padding: 10px 15px; border-radius: 30px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-moon" id="theme-icon"></i>
+                </div>
                 <div class="nav-mayoreo" onclick="openMayoreoModal()"><i class="fa-solid fa-hard-hat"></i> Constructores / Mayoreo</div>
                 <div class="nav-cart" onclick="document.getElementById('cart-section-target').scrollIntoView({ behavior: 'smooth' });"><i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">0</span> Prod.</div>
             </nav>
@@ -278,88 +323,80 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- CARRUSEL HERO (EL BANNER GIGANTE) -->
+    <!-- CARRUSEL HERO (BANNER GIGANTE INTERACTIVO) -->
     <!-- ========================================== -->
     <section class="hero-slider">
         
-        <!-- SLIDE 1: CABLES (2 Imágenes de cables) -->
+        <!-- SLIDE 1: CONDUCTORES ELÉCTRICOS -->
         <div class="slide active" style="background: linear-gradient(135deg, #ffffff 0%, #fef3c7 100%);">
             <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap; gap: 30px; padding: 0 20px;">
                 <div style="flex: 1; min-width: 300px; text-align: left;">
-                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Conductores Eléctricos</span>
-                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; text-shadow: none; line-height: 1.1;">Conductores de Cobre Puro</h1>
-                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; text-shadow: none; margin-bottom: 30px;">Cable THW-LS y cordones duplex con aislamiento termoplástico. Máxima conductividad y seguridad garantizada en cada instalación.</p>
+                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
+                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Conductores de Cobre Puro</h1>
+                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; margin-bottom: 30px;">Cable THW-LS y cordones duplex con aislamiento termoplástico. Máxima conductividad y seguridad garantizada.</p>
                     <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
-                <div style="flex: 1; min-width: 300px; text-align: center; position: relative;">
-                    <!-- Cable rojo -->
-                    <img src="https://i.imgur.com/TgXnCOt.jpeg" alt="Cable Rojo" style="max-height: 380px; max-width: 70%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); position: relative; z-index: 2;">
-                    <!-- Cable blanco -->
-                    <img src="https://i.imgur.com/uQdOVpE.jpeg" alt="Cable Blanco" style="max-height: 250px; max-width: 50%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); position: absolute; bottom: -20px; right: 0; z-index: 1;">
+                <div style="flex: 1; min-width: 300px; text-align: center; position: relative; height: 350px;">
+                    <img src="https://i.imgur.com/TgXnCOt.jpeg" alt="Cable Rojo" style="max-height: 320px; max-width: 65%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); position: absolute; top: 10%; left: 10%; z-index: 2;">
+                    <img src="https://i.imgur.com/uQdOVpE.jpeg" alt="Cable Blanco" style="max-height: 220px; max-width: 50%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); position: absolute; bottom: 0; right: 5%; z-index: 1;">
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 2: ACOMETIDA Y DISTRIBUCIÓN (Base Medidor + Centro Carga) -->
+        <!-- SLIDE 2: ACOMETIDA Y DISTRIBUCIÓN -->
         <div class="slide" style="background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);">
             <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap-reverse; gap: 30px; padding: 0 20px;">
-                <div style="flex: 1; min-width: 300px; text-align: center; position: relative;">
-                    <!-- Base medidor -->
-                    <img src="https://i.imgur.com/cE69EjB.jpeg" alt="Base Medidor" style="max-height: 400px; max-width: 60%; mix-blend-mode: multiply; filter: drop-shadow(0 25px 35px rgba(0,0,0,0.15)); position: relative; z-index: 2;">
-                    <!-- Centro de carga -->
-                    <img src="https://i.imgur.com/vB1nmbB.jpeg" alt="Centro de Carga" style="max-height: 280px; max-width: 50%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.2)); position: absolute; top: 10%; right: 5%; z-index: 1;">
+                <div style="flex: 1; min-width: 300px; text-align: center; position: relative; height: 350px;">
+                    <img src="https://i.imgur.com/cE69EjB.jpeg" alt="Base Medidor" style="max-height: 320px; max-width: 60%; mix-blend-mode: multiply; filter: drop-shadow(0 25px 35px rgba(0,0,0,0.15)); position: absolute; top: 5%; left: 5%; z-index: 2;">
+                    <img src="https://i.imgur.com/vB1nmbB.jpeg" alt="Centro de Carga" style="max-height: 240px; max-width: 50%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.2)); position: absolute; bottom: 5%; right: 10%; z-index: 1;">
                 </div>
                 <div style="flex: 1; min-width: 300px; text-align: left;">
-                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Acometidas y Distribución</span>
-                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; text-shadow: none; line-height: 1.1;">Bases y Centros de Carga</h1>
-                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; text-shadow: none; margin-bottom: 30px;">Equipos robustos preparados para recepción y distribución. Materiales de alta resistencia aprobados para un flujo eléctrico seguro.</p>
+                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
+                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Bases y Centros de Carga</h1>
+                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; margin-bottom: 30px;">Equipos robustos preparados para recepción y distribución segura de energía en tus proyectos de construcción.</p>
                     <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 3: PROTECCIÓN ELÉCTRICA (Interruptor + Pastilla) -->
+        <!-- SLIDE 3: PROTECCIÓN ELÉCTRICA -->
         <div class="slide" style="background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 100%);">
             <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap; gap: 30px; padding: 0 20px;">
                 <div style="flex: 1; min-width: 300px; text-align: left;">
-                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Seguridad Industrial y Doméstica</span>
-                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; text-shadow: none; line-height: 1.1;">Protección Eléctrica</h1>
-                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; text-shadow: none; margin-bottom: 30px;">Protege tus circuitos y equipos con nuestros interruptores de seguridad y pastillas termomagnéticas de rápida respuesta.</p>
+                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
+                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Protección Eléctrica</h1>
+                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; margin-bottom: 30px;">Protege tus circuitos y equipos con nuestros interruptores de seguridad y pastillas termomagnéticas de alta respuesta.</p>
                     <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
-                <div style="flex: 1; min-width: 300px; text-align: center; position: relative;">
-                    <!-- Interruptor -->
-                    <img src="https://i.imgur.com/AWeMj6Q.jpeg" alt="Interruptor de Seguridad" style="max-height: 380px; max-width: 55%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); position: relative; z-index: 1;">
-                    <!-- Pastilla -->
-                    <img src="https://i.imgur.com/VfSJzhL.jpeg" alt="Pastilla Termomagnética" style="max-height: 250px; max-width: 45%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); position: absolute; bottom: 0; right: 10%; z-index: 2;">
+                <div style="flex: 1; min-width: 300px; text-align: center; position: relative; height: 350px;">
+                    <img src="https://i.imgur.com/AWeMj6Q.jpeg" alt="Interruptor" style="max-height: 320px; max-width: 55%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); position: absolute; top: 10%; left: 15%; z-index: 1;">
+                    <img src="https://i.imgur.com/VfSJzhL.jpeg" alt="Pastilla" style="max-height: 220px; max-width: 45%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); position: absolute; bottom: 5%; right: 15%; z-index: 2;">
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 4: ACCESORIOS (Extensión + Clavija) -->
+        <!-- SLIDE 4: ACCESORIOS ELÉCTRICOS -->
         <div class="slide" style="background: linear-gradient(135deg, #ffffff 0%, #dcfce7 100%);">
             <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap-reverse; gap: 30px; padding: 0 20px;">
-                <div style="flex: 1; min-width: 300px; text-align: center; position: relative;">
-                    <!-- Extensión -->
-                    <img src="https://i.imgur.com/fkHDXdS.jpeg" alt="Extensión Eléctrica" style="max-height: 380px; max-width: 55%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); position: relative; z-index: 1;">
-                    <!-- Clavija -->
-                    <img src="https://i.imgur.com/NGKA1xu.jpeg" alt="Clavija Industrial" style="max-height: 220px; max-width: 45%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); position: absolute; bottom: 10%; left: -5%; z-index: 2;">
+                <div style="flex: 1; min-width: 300px; text-align: center; position: relative; height: 350px;">
+                    <img src="https://i.imgur.com/fkHDXdS.jpeg" alt="Extensión" style="max-height: 320px; max-width: 55%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); position: absolute; top: 10%; left: 10%; z-index: 1;">
+                    <img src="https://i.imgur.com/NGKA1xu.jpeg" alt="Clavija" style="max-height: 180px; max-width: 40%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); position: absolute; bottom: 10%; right: 10%; z-index: 2;">
                 </div>
                 <div style="flex: 1; min-width: 300px; text-align: left;">
-                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Accesorios Indispensables</span>
-                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; text-shadow: none; line-height: 1.1;">Conexiones Confiables</h1>
-                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; text-shadow: none; margin-bottom: 30px;">Extensiones de uso rudo y doméstico junto con clavijas polarizadas. Listas para brindar energía de forma portátil y segura.</p>
+                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
+                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Conexiones Confiables</h1>
+                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; margin-bottom: 30px;">Extensiones de uso rudo y clavijas polarizadas de alta durabilidad para brindar energía portátil y segura.</p>
                     <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
             </div>
         </div>
         
-        <!-- Puntos del slider (Actualizado a 4 puntos) -->
-        <div class="slider-dots" style="bottom: 20px;">
-            <span class="dot active" style="background: var(--primario);" onclick="changeSlide(0)"></span>
-            <span class="dot" style="background: #9ca3af;" onclick="changeSlide(1)"></span>
-            <span class="dot" style="background: #9ca3af;" onclick="changeSlide(2)"></span>
-            <span class="dot" style="background: #9ca3af;" onclick="changeSlide(3)"></span>
+        <!-- Puntos de navegación del carrusel -->
+        <div class="slider-dots">
+            <span class="dot active" onclick="changeSlide(0)"></span>
+            <span class="dot" onclick="changeSlide(1)"></span>
+            <span class="dot" onclick="changeSlide(2)"></span>
+            <span class="dot" onclick="changeSlide(3)"></span>
         </div>
     </section>
 
@@ -495,7 +532,7 @@
         </div>
         <div class="links" style="margin-bottom: 20px;">
             <a href="#" onclick="alert('Envíos a obra de 24 a 48 horas en la zona, aplican restricciones por volumen.')">Políticas de Envío</a>
-            <a href="#" onclick="alert('Garantía cuenta con 3 meses de garantia en tienda culaquiera de las marca trupery des pues de 3 meses directa con la marca en maquinaria pesada y herramientas eléctricas.')">Políticas de Garantía</a>
+            <a href="#" onclick="alert('Garantía directa con la marca en maquinaria pesada y herramientas eléctricas.')">Políticas de Garantía</a>
             <a href="#" onclick="alert('Tus datos están protegidos conforme a la ley de privacidad vigente.')">Aviso de Privacidad</a>
         </div>
         <p style="color: #6b7280; margin-top: 15px; font-size: 0.9rem;">&copy; 2026 Ferreteral del Sureste. Todos los derechos reservados. Huixtla, Chiapas.</p>
@@ -515,6 +552,19 @@
         // Paginación
         window.productosPorPagina = 24;
         window.productosMostrados = 24;
+
+        // FUNCIÓN MODO OSCURO / CLARO
+        window.toggleTheme = function() {
+            document.body.classList.toggle('dark-mode');
+            let icon = document.getElementById('theme-icon');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        };
 
         // MODALES LOGIN MAYOREO
         function openMayoreoModal() { document.getElementById('mayoreoModal').classList.add('active'); }
