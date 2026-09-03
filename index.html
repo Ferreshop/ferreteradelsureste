@@ -453,32 +453,13 @@
         </div>
     </div>
 
-    <!-- CARRUSEL INFINITO DE MARCAS INTERACTIVO -->
+    <!-- CARRUSEL INFINITO DE MARCAS DINÁMICO -->
     <div class="marquee-container fade-in">
         <h2>Nuestros Distribuidores Oficiales</h2>
         <div class="marquee">
-            <div class="marquee-content">
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('TRUPER')">TRUPER</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('VOLTECK')">VOLTECK</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('PRETUL')">PRETUL</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('MAKITA')">MAKITA</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('DEWALT')">DEWALT</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('URREA')">URREA</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('SURTEK')">SURTEK</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('3M')">3M</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('BOSCH')">BOSCH</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('CONDUMEX')">CONDUMEX</span>
-                <!-- Duplicados para efecto infinito -->
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('TRUPER')">TRUPER</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('VOLTECK')">VOLTECK</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('PRETUL')">PRETUL</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('MAKITA')">MAKITA</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('DEWALT')">DEWALT</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('URREA')">URREA</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('SURTEK')">SURTEK</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('3M')">3M</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('BOSCH')">BOSCH</span>
-                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('CONDUMEX')">CONDUMEX</span>
+            <div class="marquee-content" id="marquee-brands-content">
+                <!-- Se llena automáticamente con las marcas reales de Firebase -->
+                <span class="brand-logo">CARGANDO...</span>
             </div>
         </div>
     </div>
@@ -582,7 +563,7 @@
             }
         };
 
-        // FILTRAR DESDE EL CARRUSEL DE MARCAS
+        // FILTRAR DESDE EL CARRUSEL DINÁMICO DE MARCAS
         window.filterByBrandFromMarquee = function(brandName) {
             window.currentBrand = window.removeAccents(brandName).toLowerCase();
             
@@ -916,6 +897,7 @@
             const grid = document.getElementById('product-grid');
             const marcasContainer = document.getElementById('modal-brands-container');
             const catContainer = document.getElementById('modal-categories-container');
+            const marqueeContainer = document.getElementById('marquee-brands-content');
             
             try {
                 const querySnapshot = await getDocs(collection(db, "productos"));
@@ -953,6 +935,21 @@
                 Array.from(catSet).sort().forEach(cat => {
                     catContainer.innerHTML += `<button class="brand-item" onclick="window.filterByCategory('${cat}', this)">${cat}</button>`;
                 });
+
+                // LLENAR EL CARRUSEL DE MARCAS DINÁMICAMENTE (SOLO LAS QUE ESTÁN EN FIREBASE)
+                let sortedMarcas = Array.from(marcasSet).sort();
+                if (sortedMarcas.length > 0) {
+                    let marqueeHtml = "";
+                    // Repetimos dos veces para el efecto infinito continuo
+                    for(let i=0; i<2; i++) {
+                        sortedMarcas.forEach(marca => {
+                            marqueeHtml += `<span class="brand-logo" onclick="window.filterByBrandFromMarquee('${marca}')">${marca}</span>`;
+                        });
+                    }
+                    marqueeContainer.innerHTML = marqueeHtml;
+                } else {
+                    marqueeContainer.innerHTML = `<span class="brand-logo">SIN MARCAS REGISTRADAS</span>`;
+                }
 
             } catch (e) {
                 console.error("Error cargando Firebase:", e);
