@@ -142,7 +142,7 @@
         .img-wrapper { position: relative; overflow: hidden; border-radius: 10px; margin-bottom: 10px; cursor: pointer; background: #fff; padding: 5px; border: 1px solid var(--fondo-gris);}
         .product-img { width: 100%; height: 130px; object-fit: contain; transition: 0.5s; }
         .img-wrapper:hover .product-img { transform: scale(1.1); }
-        .stock-badge { position: absolute.bottom: 5px; right: 5px; background: var(--secundario); color: var(--blanco); font-size: 9px; font-weight: 700; padding: 3px 7px; border-radius: 20px; z-index: 3; box-shadow: 0 2px 5px rgba(0,0,0,0.2);}
+        .stock-badge { position: absolute; bottom: 5px; right: 5px; background: var(--secundario); color: var(--blanco); font-size: 9px; font-weight: 700; padding: 3px 7px; border-radius: 20px; z-index: 3; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         
         .quick-view-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); background: rgba(255, 255, 255, 0.95); color: var(--secundario); padding: 8px 15px; border-radius: 30px; font-size: 0.75rem; font-weight: 700; transition: 0.3s; opacity: 0; z-index: 4; text-transform: uppercase; box-shadow: 0 5px 15px rgba(0,0,0,0.2);}
         .img-wrapper:hover .quick-view-btn { opacity: 1; transform: translate(-50%, -50%) scale(1); }
@@ -453,32 +453,32 @@
         </div>
     </div>
 
-    <!-- CARRUSEL INFINITO DE MARCAS -->
+    <!-- CARRUSEL INFINITO DE MARCAS INTERACTIVO -->
     <div class="marquee-container fade-in">
         <h2>Nuestros Distribuidores Oficiales</h2>
         <div class="marquee">
             <div class="marquee-content">
-                <span class="brand-logo">TRUPER</span>
-                <span class="brand-logo">VOLTECK</span>
-                <span class="brand-logo">PRETUL</span>
-                <span class="brand-logo">MAKITA</span>
-                <span class="brand-logo">DEWALT</span>
-                <span class="brand-logo">URREA</span>
-                <span class="brand-logo">SURTEK</span>
-                <span class="brand-logo">3M</span>
-                <span class="brand-logo">BOSCH</span>
-                <span class="brand-logo">CONDUMEX</span>
-                <!-- Duplicate for infinite effect -->
-                <span class="brand-logo">TRUPER</span>
-                <span class="brand-logo">VOLTECK</span>
-                <span class="brand-logo">PRETUL</span>
-                <span class="brand-logo">MAKITA</span>
-                <span class="brand-logo">DEWALT</span>
-                <span class="brand-logo">URREA</span>
-                <span class="brand-logo">SURTEK</span>
-                <span class="brand-logo">3M</span>
-                <span class="brand-logo">BOSCH</span>
-                <span class="brand-logo">CONDUMEX</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('TRUPER')">TRUPER</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('VOLTECK')">VOLTECK</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('PRETUL')">PRETUL</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('MAKITA')">MAKITA</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('DEWALT')">DEWALT</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('URREA')">URREA</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('SURTEK')">SURTEK</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('3M')">3M</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('BOSCH')">BOSCH</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('CONDUMEX')">CONDUMEX</span>
+                <!-- Duplicados para efecto infinito -->
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('TRUPER')">TRUPER</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('VOLTECK')">VOLTECK</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('PRETUL')">PRETUL</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('MAKITA')">MAKITA</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('DEWALT')">DEWALT</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('URREA')">URREA</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('SURTEK')">SURTEK</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('3M')">3M</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('BOSCH')">BOSCH</span>
+                <span class="brand-logo" onclick="window.filterByBrandFromMarquee('CONDUMEX')">CONDUMEX</span>
             </div>
         </div>
     </div>
@@ -580,6 +580,23 @@
                 icon.classList.remove('fa-sun');
                 icon.classList.add('fa-moon');
             }
+        };
+
+        // FILTRAR DESDE EL CARRUSEL DE MARCAS
+        window.filterByBrandFromMarquee = function(brandName) {
+            window.currentBrand = window.removeAccents(brandName).toLowerCase();
+            
+            let btnUI = document.getElementById('btn-select-brand');
+            btnUI.innerHTML = brandName + ' <i class="fa-solid fa-chevron-down"></i>';
+            btnUI.classList.add('active-filter');
+
+            document.getElementById('catalog-title').innerText = "General - " + brandName;
+            window.applyFilters();
+
+            let offset = document.querySelector('.header-container').offsetHeight + 20;
+            let element = document.getElementById('catalog-section');
+            let topPos = element.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: topPos, behavior: 'smooth' });
         };
 
         // MODALES LOGIN MAYOREO
