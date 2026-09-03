@@ -68,32 +68,32 @@
         body.mayoreo-active .btn-buy:not([disabled]) { background: var(--amarillo); color: var(--secundario); box-shadow: 0 8px 20px rgba(250, 204, 21, 0.4); }
         body.mayoreo-active .btn-buy:not([disabled]):hover { background: #eab308; transform: translateY(-3px); }
 
-        /* CONTENEDOR DE CABECERA (SE MUEVE CON LA PÁGINA) */
+        /* CONTENEDOR DE CABECERA */
         .header-container { position: sticky; top: 0; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.1); background: var(--blanco); transition: background 0.3s; }
         
         /* CABECERA NEGRA */
-        header { padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; background: rgba(17, 17, 17, 1); color: var(--blanco); }
-        .logo { font-size: 26px; color: var(--blanco); font-weight: 800; display: flex; align-items: center; gap: 12px; letter-spacing: 1px;}
-        .logo i { font-size: 32px; color: var(--primario); }
-        .logo img { height: 80px; object-fit: contain; }
-        nav { color: var(--blanco); font-weight: 600; display: flex; align-items: center; gap: 15px;}
-        nav div { padding: 10px 20px; border-radius: 30px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        header { padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; background: rgba(17, 17, 17, 1); color: var(--blanco); flex-wrap: wrap; gap: 10px; }
+        .logo { font-size: 20px; color: var(--blanco); font-weight: 800; display: flex; align-items: center; gap: 10px; letter-spacing: 0.5px; }
+        .logo img { height: 50px; object-fit: contain; }
+        
+        nav { color: var(--blanco); font-weight: 600; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        nav div { padding: 8px 14px; border-radius: 30px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 6px; font-size: 0.85rem; }
         .nav-mayoreo { color: var(--amarillo); background: rgba(250, 204, 21, 0.1); border: 1px solid rgba(250, 204, 21, 0.3); }
         .nav-mayoreo:hover { background: var(--amarillo); color: var(--secundario); }
         .nav-cart { background: var(--gradiente-naranja); color: white; box-shadow: 0 4px 15px rgba(255,102,0,0.3); }
         .nav-cart:hover { transform: scale(1.05); box-shadow: var(--sombra-fuerte); }
 
-        /* CABECERA BLANCA (BUSCADOR Y BOTONES DESPLEGABLES) */
-        .sub-header { display: flex; gap: 20px; padding: 12px 50px; background: var(--blanco); border-bottom: 4px solid var(--primario); align-items: center; flex-wrap: wrap; transition: background 0.3s; }
-        .search-wrapper-top { position: relative; flex: 1; min-width: 250px; max-width: 500px; }
+        /* CABECERA BLANCA (BUSCADOR Y BOTONES) */
+        .sub-header { display: flex; gap: 12px; padding: 10px 20px; background: var(--blanco); border-bottom: 4px solid var(--primario); align-items: center; flex-wrap: wrap; }
+        .search-wrapper-top { position: relative; flex: 1; min-width: 100%; }
         .search-wrapper-top i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--primario); font-size: 1.1rem; }
         .search-wrapper-top input { width: 100%; padding: 12px 15px 12px 45px; border: 2px solid var(--borde-card); border-radius: 30px; font-size: 0.95rem; outline: none; background: var(--fondo-gris); transition: 0.3s; color: var(--texto-oscuro);}
         .search-wrapper-top input:focus { border-color: var(--primario); background: white; box-shadow: 0 0 0 4px rgba(255,102,0,0.1); }
         
-        .filter-section { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; max-width: 300px; }
-        .filter-label { font-size: 0.85rem; font-weight: 800; color: var(--texto-oscuro); text-transform: uppercase; display: flex; align-items: center; gap: 5px; min-width: max-content;}
+        .filter-section { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 48%; }
+        .filter-label { font-size: 0.75rem; font-weight: 800; color: var(--texto-oscuro); text-transform: uppercase; display: flex; align-items: center; gap: 4px; }
         
-        .dropdown-btn { flex: 1; width: 100%; padding: 12px 20px; border-radius: 30px; border: 2px solid var(--borde-card); background: var(--fondo-gris); color: var(--texto-oscuro); cursor: pointer; font-weight: 700; transition: 0.3s; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; overflow: hidden; white-space: nowrap;}
+        .dropdown-btn { flex: 1; width: 100%; padding: 10px 15px; border-radius: 30px; border: 2px solid var(--borde-card); background: var(--fondo-gris); color: var(--texto-oscuro); cursor: pointer; font-weight: 700; transition: 0.3s; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; overflow: hidden; white-space: nowrap;}
         .dropdown-btn:hover { border-color: var(--primario); background: white; }
         .dropdown-btn.active-filter { background: var(--secundario); color: white; border-color: var(--secundario); }
 
@@ -102,110 +102,120 @@
         .brand-item { white-space: nowrap; padding: 10px 20px; font-size: 0.85rem; border-radius: 30px; border: 1px solid var(--borde-card); background: var(--fondo-gris); color: var(--texto-claro); cursor: pointer; font-weight: 700; transition: 0.3s; text-transform: uppercase;}
         .brand-item:hover, .brand-item.active { background: var(--secundario); color: white; border-color: var(--secundario); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-        /* SLIDER CARRUSEL HERO */
-        .hero-slider { position: relative; width: 100%; height: 500px; overflow: hidden; background-color: white; }
-        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; padding: 0 20px; opacity: 0; transition: opacity 1s ease-in-out, transform 3s ease-in-out; transform: scale(1.05); }
+        /* SLIDER CARRUSEL HERO OPTIMIZADO PARA MÓVIL */
+        .hero-slider { position: relative; width: 100%; height: auto; min-height: 420px; overflow: hidden; background-color: white; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; padding: 20px 15px; opacity: 0; transition: opacity 1s ease-in-out, transform 3s ease-in-out; transform: scale(1.05); }
         .slide.active { opacity: 1; z-index: 1; transform: scale(1); }
         
         /* Puntos del carrusel */
-        .slider-dots { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 10; }
-        .dot { width: 12px; height: 12px; background: #9ca3af; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+        .slider-dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+        .dot { width: 10px; height: 10px; background: #9ca3af; border-radius: 50%; cursor: pointer; transition: 0.3s; }
         .dot.active { background: var(--primario); transform: scale(1.2); }
 
         /* FRANJA DE CONFIANZA */
-        .trust-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1100px; margin: -20px auto 40px auto; padding: 0 20px; position: relative; z-index: 10; }
-        .trust-box { background: var(--blanco); padding: 25px 20px; border-radius: 15px; text-align: center; box-shadow: var(--sombra-suave); transition: 0.3s; display: flex; flex-direction: column; align-items: center; border: 1px solid var(--borde-card);}
+        .trust-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1100px; margin: 20px auto; padding: 0 15px; position: relative; z-index: 10; }
+        .trust-box { background: var(--blanco); padding: 20px 15px; border-radius: 15px; text-align: center; box-shadow: var(--sombra-suave); transition: 0.3s; display: flex; flex-direction: column; align-items: center; border: 1px solid var(--borde-card);}
         .trust-box:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,0,0,0.08); border-color: var(--primario); }
-        .icon-circle { width: 70px; height: 70px; background: rgba(255,102,0,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; transition: 0.3s;}
+        .icon-circle { width: 60px; height: 60px; background: rgba(255,102,0,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: 0.3s;}
         .trust-box:hover .icon-circle { background: var(--gradiente-naranja); }
-        .trust-box i { font-size: 30px; color: var(--primario); transition: 0.3s;}
+        .trust-box i { font-size: 26px; color: var(--primario); transition: 0.3s;}
         .trust-box:hover i { color: white; }
-        .trust-box h4 { font-size: 17px; margin-bottom: 5px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase;}
-        .trust-box p { font-size: 14px; color: var(--texto-claro); }
+        .trust-box h4 { font-size: 15px; margin-bottom: 4px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase;}
+        .trust-box p { font-size: 13px; color: var(--texto-claro); }
 
         /* TARJETAS DE PRODUCTO PREMIUM */
-        .container { max-width: 1250px; margin: 40px auto; padding: 0 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 30px; }
-        .card { border: none; padding: 25px; text-align: center; border-radius: 20px; background: var(--blanco); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--sombra-suave); position: relative; overflow: hidden;}
+        .container { max-width: 1250px; margin: 30px auto; padding: 0 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .card { border: none; padding: 20px; text-align: center; border-radius: 20px; background: var(--blanco); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--sombra-suave); position: relative; overflow: hidden;}
         .card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--gradiente-naranja); transform: scaleX(0); transition: 0.4s; transform-origin: left;}
         .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
         .card:hover::before { transform: scaleX(1); }
         
-        .img-wrapper { position: relative; overflow: hidden; border-radius: 12px; margin-bottom: 20px; cursor: pointer; background: #fff; padding: 10px; border: 1px solid var(--fondo-gris);}
-        .product-img { width: 100%; height: 200px; object-fit: contain; transition: 0.5s; }
+        .img-wrapper { position: relative; overflow: hidden; border-radius: 12px; margin-bottom: 15px; cursor: pointer; background: #fff; padding: 10px; border: 1px solid var(--fondo-gris);}
+        .product-img { width: 100%; height: 180px; object-fit: contain; transition: 0.5s; }
         .img-wrapper:hover .product-img { transform: scale(1.1); }
-        .stock-badge { position: absolute; bottom: 10px; right: 10px; background: var(--secundario); color: var(--blanco); font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 20px; z-index: 3; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: background 0.3s;}
+        .stock-badge { position: absolute; bottom: 8px; right: 8px; background: var(--secundario); color: var(--blanco); font-size: 10px; font-weight: 700; padding: 5px 10px; border-radius: 20px; z-index: 3; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: background 0.3s;}
         
-        .quick-view-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); background: rgba(255, 255, 255, 0.95); color: var(--secundario); padding: 12px 25px; border-radius: 30px; font-size: 0.9rem; font-weight: 700; transition: 0.3s; opacity: 0; z-index: 4; text-transform: uppercase; box-shadow: 0 5px 15px rgba(0,0,0,0.2);}
+        .quick-view-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); background: rgba(255, 255, 255, 0.95); color: var(--secundario); padding: 10px 20px; border-radius: 30px; font-size: 0.85rem; font-weight: 700; transition: 0.3s; opacity: 0; z-index: 4; text-transform: uppercase; box-shadow: 0 5px 15px rgba(0,0,0,0.2);}
         .img-wrapper:hover .quick-view-btn { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         .quick-view-btn:hover { background: var(--primario); color: white; }
         
-        .product-title { font-size: 1.1rem; color: var(--texto-oscuro); margin-bottom: 10px; line-height: 1.4; font-weight: 700; text-transform: uppercase; height: 45px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
-        .price-text { margin: 15px 0; color: var(--primario); font-size: 1.8rem; font-weight: 800; }
-        .btn-buy { background: var(--gradiente-naranja); color: white; border: none; padding: 15px 25px; cursor: pointer; border-radius: 12px; font-weight: 700; transition: 0.3s; width: 100%; font-size: 1.05rem; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(255,102,0,0.25);}
+        .product-title { font-size: 1rem; color: var(--texto-oscuro); margin-bottom: 8px; line-height: 1.3; font-weight: 700; text-transform: uppercase; height: 40px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
+        .price-text { margin: 10px 0; color: var(--primario); font-size: 1.6rem; font-weight: 800; }
+        .btn-buy { background: var(--gradiente-naranja); color: white; border: none; padding: 12px 20px; cursor: pointer; border-radius: 12px; font-weight: 700; transition: 0.3s; width: 100%; font-size: 0.95rem; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(255,102,0,0.25);}
         .btn-buy:not([disabled]):hover { background: var(--secundario); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
-        .escala-mayoreo-etiqueta { display: none; background: rgba(255,102,0,0.1); color: var(--primario); padding: 5px 10px; border-radius: 8px; font-size: 10.5px; font-weight: 700; margin-bottom: 15px; border: 1px solid rgba(255,102,0,0.2); }
+        .escala-mayoreo-etiqueta { display: none; background: rgba(255,102,0,0.1); color: var(--primario); padding: 4px 8px; border-radius: 8px; font-size: 10px; font-weight: 700; margin-bottom: 12px; border: 1px solid rgba(255,102,0,0.2); }
         body.mayoreo-active .escala-mayoreo-etiqueta { display: inline-block; }
 
         /* CARRITO, FORMULARIOS Y RESEÑAS */
-        .cart-section, .quote-section, .reviews-section { background: var(--blanco); padding: 50px; margin-top: 50px; border-radius: 20px; border: none; box-shadow: var(--sombra-suave); }
-        .cart-item-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; background: var(--fondo-gris); padding: 15px 20px; border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--borde-card); }
-        .qty-btn { background: var(--borde-card); border: none; width: 30px; height: 30px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; color: var(--secundario);}
+        .cart-section, .quote-section, .reviews-section { background: var(--blanco); padding: 25px 20px; margin-top: 30px; border-radius: 20px; border: none; box-shadow: var(--sombra-suave); }
+        .cart-item-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; background: var(--fondo-gris); padding: 12px 15px; border-radius: 12px; margin-bottom: 10px; border: 1px solid var(--borde-card); }
+        .qty-btn { background: var(--borde-card); border: none; width: 28px; height: 28px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; color: var(--secundario);}
         .qty-btn:hover { background: var(--primario); color: white; }
-        .form-control { width: 100%; padding: 18px; border: 2px solid var(--borde-card); border-radius: 10px; margin-bottom: 15px; outline: none; background: var(--fondo-gris); color: var(--texto-oscuro); font-size: 1rem; transition: 0.3s; }
+        .form-control { width: 100%; padding: 14px; border: 2px solid var(--borde-card); border-radius: 10px; margin-bottom: 12px; outline: none; background: var(--fondo-gris); color: var(--texto-oscuro); font-size: 0.95rem; transition: 0.3s; }
         .form-control:focus { border-color: var(--primario); background: var(--blanco); box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.1); }
         
-        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .review-card { background: var(--fondo-gris); padding: 30px; border-radius: 15px; border-left: 5px solid var(--primario); position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.02);}
-        .review-card::after { content: "\f10d"; font-family: "FontAwesome"; position: absolute; top: 20px; right: 20px; font-size: 30px; color: rgba(0,0,0,0.05); }
-        .stars { color: var(--amarillo); margin-bottom: 15px; font-size: 1.2rem; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .review-card { background: var(--fondo-gris); padding: 20px; border-radius: 15px; border-left: 5px solid var(--primario); position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.02);}
+        .review-card::after { content: "\f10d"; font-family: "FontAwesome"; position: absolute; top: 15px; right: 15px; font-size: 24px; color: rgba(0,0,0,0.05); }
+        .stars { color: var(--amarillo); margin-bottom: 10px; font-size: 1rem; }
 
         /* CARRUSEL INFINITO DE MARCAS */
-        .marquee-container { background: var(--secundario); padding: 50px 0; margin-top: 70px; overflow: hidden; color: white;}
-        .marquee-container h2 { text-align: center; color: var(--blanco); font-size: 1.6rem; font-weight: 800; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px;}
+        .marquee-container { background: var(--secundario); padding: 35px 0; margin-top: 50px; overflow: hidden; color: white;}
+        .marquee-container h2 { text-align: center; color: var(--blanco); font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;}
         .marquee { display: flex; width: max-content; animation: scroll 25s linear infinite; }
         .marquee:hover { animation-play-state: paused; }
-        .brand-logo { font-size: 2.5rem; font-weight: 800; color: rgba(255,255,255,0.2); margin: 0 50px; text-transform: uppercase; transition: 0.3s; cursor: pointer; }
+        .brand-logo { font-size: 2rem; font-weight: 800; color: rgba(255,255,255,0.2); margin: 0 30px; text-transform: uppercase; transition: 0.3s; cursor: pointer; }
         .brand-logo:hover { color: var(--primario); text-shadow: 0 0 15px rgba(255,102,0,0.5); }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* SPINNER DE CARGA RÁPIDA */
-        .loading-spinner { font-size: 3rem; color: var(--primario); margin: 50px auto; display: block; text-align: center; }
+        .loading-spinner { font-size: 2.5rem; color: var(--primario); margin: 40px auto; display: block; text-align: center; }
 
         /* MODALES */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 17, 17, 0.85); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.4s; backdrop-filter: blur(8px); padding: 20px; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 17, 17, 0.85); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.4s; backdrop-filter: blur(8px); padding: 15px; }
         .modal-overlay.active { opacity: 1; visibility: visible; }
         .modal-content { background: var(--blanco); width: 900px; max-width: 100%; border-radius: 20px; overflow: hidden; display: flex; flex-wrap: wrap; position: relative; transform: translateY(50px) scale(0.9); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 30px 60px rgba(0,0,0,0.4); max-height: 90vh; overflow-y: auto;}
         .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
-        .modal-close { position: absolute; top: 20px; right: 20px; background: var(--fondo-gris); border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; color: var(--texto-oscuro); transition: 0.2s; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.1);}
+        .modal-close { position: absolute; top: 15px; right: 15px; background: var(--fondo-gris); border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; color: var(--texto-oscuro); transition: 0.2s; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.1);}
         .modal-close:hover { background: var(--primario); color: white; transform: rotate(90deg);}
         
-        .modal-left { flex: 1; min-width: 350px; background: #fff; padding: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .modal-left img.main-modal-img { max-width: 100%; max-height: 350px; object-fit: contain; margin-bottom: 20px; transition: 0.3s;}
-        .gallery-container { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-        .gallery-img { width: 60px; height: 60px; object-fit: contain; cursor: pointer; border: 2px solid var(--borde-card); border-radius: 8px; transition: 0.3s; padding: 5px; }
+        .modal-left { flex: 1; min-width: 280px; background: #fff; padding: 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .modal-left img.main-modal-img { max-width: 100%; max-height: 280px; object-fit: contain; margin-bottom: 15px; transition: 0.3s;}
+        .gallery-container { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .gallery-img { width: 50px; height: 50px; object-fit: contain; cursor: pointer; border: 2px solid var(--borde-card); border-radius: 8px; transition: 0.3s; padding: 4px; }
         .gallery-img:hover { border-color: var(--primario); transform: translateY(-2px); }
-        .modal-right { flex: 1; min-width: 350px; padding: 50px; display: flex; flex-direction: column; justify-content: center; background: var(--fondo-gris); border-left: 1px solid var(--borde-card);}
-        .features-box { background: white; padding: 15px; border-radius: 10px; font-size: 0.95rem; color: var(--texto-claro); margin-bottom: 20px; border: 1px solid var(--borde-card); max-height: 150px; overflow-y: auto; line-height: 1.5; }
+        .modal-right { flex: 1; min-width: 280px; padding: 25px; display: flex; flex-direction: column; justify-content: center; background: var(--fondo-gris); border-left: 1px solid var(--borde-card);}
+        .features-box { background: white; padding: 12px; border-radius: 10px; font-size: 0.85rem; color: var(--texto-claro); margin-bottom: 15px; border: 1px solid var(--borde-card); max-height: 120px; overflow-y: auto; line-height: 1.4; }
         
         /* BOTONES FLOTANTES Y FOOTER */
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 65px; height: 65px; border-radius: 50px; text-align: center; font-size: 35px; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s; }
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50px; text-align: center; font-size: 28px; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s; }
         .whatsapp-float:hover { transform: scale(1.1) rotate(-10deg); background: #20ba5a; }
-        .back-to-top { position: fixed; bottom: 110px; right: 35px; background: var(--secundario); color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; opacity: 0; visibility: hidden; z-index: 99; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
+        .back-to-top { position: fixed; bottom: 85px; right: 22px; background: var(--secundario); color: white; width: 45px; height: 45px; border-radius: 50%; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; opacity: 0; visibility: hidden; z-index: 99; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
         .back-to-top.show { opacity: 1; visibility: visible; }
         .back-to-top:hover { background: var(--primario); transform: translateY(-5px); }
 
-        footer { text-align: center; padding: 60px 20px; background: #0a0a0a; color: white; border-top: 5px solid var(--primario);}
-        footer a { color: var(--texto-claro); text-decoration: none; font-size: 15px; font-weight: 600; margin: 0 15px; transition: 0.3s;}
+        footer { text-align: center; padding: 40px 15px; background: #0a0a0a; color: white; border-top: 5px solid var(--primario);}
+        footer a { color: var(--texto-claro); text-decoration: none; font-size: 13px; font-weight: 600; margin: 0 10px; transition: 0.3s;}
         footer a:hover { color: var(--primario); }
 
-        /* AJUSTES PARA CELULARES */
-        @media (max-width: 900px) {
-            header { padding: 15px 20px; flex-direction: column; gap: 15px; }
-            .sub-header { flex-direction: column; padding: 15px 20px; align-items: stretch; gap: 15px; }
-            .search-wrapper-top { max-width: 100%; }
-            .filter-section { width: 100%; justify-content: space-between; max-width: 100%; }
-            .dropdown-btn { width: 100%; }
+        /* RESPONSIVO ESPECÍFICO PARA TELÉFONOS */
+        @media (max-width: 768px) {
+            header { padding: 10px 15px; justify-content: center; text-align: center; }
+            .logo { font-size: 17px; justify-content: center; width: 100%; margin-bottom: 5px; }
+            .logo img { height: 42px; }
+            nav { width: 100%; justify-content: center; gap: 6px; }
+            nav div { padding: 6px 10px; font-size: 0.75rem; }
+            .sub-header { padding: 8px 15px; gap: 8px; }
+            .filter-section { min-width: 100%; }
+            .hero-slider { height: 380px !important; }
+            .slide > div { flex-direction: column !important; text-align: center !important; gap: 10px !important; padding: 0 10px !important; }
+            .slide h1 { font-size: 1.8rem !important; margin-bottom: 8px !important; }
+            .slide p { font-size: 0.9rem !important; margin-bottom: 15px !important; }
+            .slide button { margin: 0 auto !important; padding: 10px 25px !important; font-size: 0.95rem !important; }
+            .slide img { max-height: 180px !important; }
+            .container { padding: 0 10px; margin: 20px auto; }
+            .cart-section, .quote-section, .reviews-section { padding: 20px 15px; }
         }
         
         /* EFECTOS DE ANIMACIÓN SCROLL */
@@ -220,39 +230,37 @@
     
     <!-- MODAL MAYOREO -->
     <div class="modal-overlay" id="mayoreoModal" onclick="closeMayoreoModal(event)">
-        <div class="modal-content" style="max-width: 450px; padding: 50px; text-align: center; display: block;" onclick="event.stopPropagation()">
+        <div class="modal-content" style="max-width: 450px; padding: 30px; text-align: center; display: block;" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeMayoreoModal(event)"><i class="fa-solid fa-xmark"></i></button>
-            <div class="icon-circle" style="width:90px; height:90px; margin: 0 auto 20px auto; background:var(--gradiente-naranja); border-radius:50%; display:flex; align-items:center; justify-content:center;">
-                <i class="fa-solid fa-hard-hat" style="font-size: 3rem; color: white;"></i>
+            <div class="icon-circle" style="width:70px; height:70px; margin: 0 auto 15px auto; background:var(--gradiente-naranja); border-radius:50%; display:flex; align-items:center; justify-content:center;">
+                <i class="fa-solid fa-hard-hat" style="font-size: 2.2rem; color: white;"></i>
             </div>
-            <h2 style="margin-bottom: 10px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase;">Portal Mayoristas</h2>
-            <p style="color: var(--texto-claro); font-size: 1rem; margin-bottom: 30px;">Ingresa tus accesos para desbloquear precios de distribuidor o constructora.</p>
+            <h2 style="margin-bottom: 10px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase; font-size: 1.3rem;">Portal Mayoristas</h2>
+            <p style="color: var(--texto-claro); font-size: 0.9rem; margin-bottom: 20px;">Ingresa tus accesos para desbloquear precios de distribuidor o constructora.</p>
             <input type="text" id="mayoreo-user" class="form-control" placeholder="Usuario" style="text-align: center; font-weight: bold; text-transform: uppercase;">
             <input type="password" id="mayoreo-pwd" class="form-control" placeholder="Contraseña" style="text-align: center; font-weight: bold; letter-spacing: 2px;">
-            <button class="btn-buy" style="margin-top: 10px;" onclick="loginMayoreo()">Iniciar Sesión <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+            <button class="btn-buy" style="margin-top: 5px;" onclick="loginMayoreo()">Iniciar Sesión <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
         </div>
     </div>
 
     <!-- MODAL CATEGORÍAS (DEPARTAMENTOS) -->
     <div class="modal-overlay" id="categoriesModal" onclick="closeCategoriesModal(event)">
-        <div class="modal-content" style="max-width: 650px; padding: 40px; display: block;" onclick="event.stopPropagation()">
+        <div class="modal-content" style="max-width: 650px; padding: 25px; display: block;" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeCategoriesModal(event)"><i class="fa-solid fa-xmark"></i></button>
-            <h2 style="margin-bottom: 25px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase; text-align: center;"><i class="fa-solid fa-list" style="color: var(--primario);"></i> Departamentos</h2>
-            <div class="brands-grid" id="modal-categories-container" style="justify-content: flex-start; max-height: 50vh; overflow-y: auto; padding-right: 10px;">
+            <h2 style="margin-bottom: 20px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase; text-align: center; font-size: 1.3rem;"><i class="fa-solid fa-list" style="color: var(--primario);"></i> Departamentos</h2>
+            <div class="brands-grid" id="modal-categories-container" style="justify-content: flex-start; max-height: 50vh; overflow-y: auto; padding-right: 5px;">
                 <button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>
-                <!-- Se llena con Firebase -->
             </div>
         </div>
     </div>
 
     <!-- MODAL MARCAS -->
     <div class="modal-overlay" id="brandsModal" onclick="closeBrandsModal(event)">
-        <div class="modal-content" style="max-width: 650px; padding: 40px; display: block;" onclick="event.stopPropagation()">
+        <div class="modal-content" style="max-width: 650px; padding: 25px; display: block;" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeBrandsModal(event)"><i class="fa-solid fa-xmark"></i></button>
-            <h2 style="margin-bottom: 25px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase; text-align: center;"><i class="fa-solid fa-tag" style="color: var(--primario);"></i> Marcas</h2>
-            <div class="brands-grid" id="modal-brands-container" style="justify-content: flex-start; max-height: 50vh; overflow-y: auto; padding-right: 10px;">
+            <h2 style="margin-bottom: 20px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase; text-align: center; font-size: 1.3rem;"><i class="fa-solid fa-tag" style="color: var(--primario);"></i> Marcas</h2>
+            <div class="brands-grid" id="modal-brands-container" style="justify-content: flex-start; max-height: 50vh; overflow-y: auto; padding-right: 5px;">
                 <button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>
-                <!-- Se llena con Firebase -->
             </div>
         </div>
     </div>
@@ -269,13 +277,13 @@
 
             <div class="modal-right">
                 <span class="escala-mayoreo-etiqueta" style="width: max-content; display:inline-block;"><i class="fa-solid fa-layer-group"></i> Escalas Por Volumen</span>
-                <span class="modal-dept" id="qv-dept" style="color:var(--texto-claro); font-weight:800; font-size:0.95rem; text-transform:uppercase; letter-spacing: 1px;">DEPARTAMENTO</span>
-                <h2 class="modal-title" id="qv-title" style="font-size:1.8rem; font-weight:800; color:var(--texto-oscuro); margin:10px 0; text-transform:uppercase; line-height: 1.2;">Nombre del Producto</h2>
+                <span class="modal-dept" id="qv-dept" style="color:var(--texto-claro); font-weight:800; font-size:0.85rem; text-transform:uppercase; letter-spacing: 1px;">DEPARTAMENTO</span>
+                <h2 class="modal-title" id="qv-title" style="font-size:1.4rem; font-weight:800; color:var(--texto-oscuro); margin:8px 0; text-transform:uppercase; line-height: 1.2;">Nombre del Producto</h2>
                 
                 <div class="features-box" id="qv-desc"></div>
 
-                <div class="modal-price" id="qv-price" style="font-size:3rem; color:var(--primario); font-weight:800; margin-bottom:20px; text-shadow: 0 2px 5px rgba(255,102,0,0.1);">$0.00</div>
-                <button class="btn-buy" id="qv-add-btn" style="padding: 20px; font-size: 1.2rem; box-shadow: var(--sombra-fuerte);">
+                <div class="modal-price" id="qv-price" style="font-size:2.2rem; color:var(--primario); font-weight:800; margin-bottom:15px;">$0.00</div>
+                <button class="btn-buy" id="qv-add-btn" style="padding: 15px; font-size: 1.05rem; box-shadow: var(--sombra-fuerte);">
                     <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
                 </button>
             </div>
@@ -286,7 +294,7 @@
     <a href="https://wa.me/529621093834?text=Hola,%20vengo%20de%20la%20tienda%20Ferreteral%20del%20Sureste%20y%20quiero%20hacer%20un%20pedido" class="whatsapp-float" target="_blank" title="¡Escríbenos por WhatsApp!"><i class="fa-brands fa-whatsapp"></i></a>
 
     <!-- ========================================== -->
-    <!-- CABECERA PEGAJOSA (SE MUEVE CON LA PÁGINA) -->
+    <!-- CABECERA PEGAJOSA -->
     <!-- ========================================== -->
     <div class="header-container">
         
@@ -294,10 +302,10 @@
         <header>
             <div class="logo"><img src="https://i.imgur.com/ybCK68C.png" alt="Logo Ferreteral del Sureste"> FERRETERAL DEL SURESTE</div>
             <nav>
-                <div class="nav-theme" onclick="toggleTheme()" title="Cambiar Modo" style="background: rgba(255,255,255,0.1); cursor: pointer; padding: 10px 15px; border-radius: 30px; display: flex; align-items: center; gap: 8px;">
+                <div class="nav-theme" onclick="toggleTheme()" title="Cambiar Modo" style="background: rgba(255,255,255,0.1); cursor: pointer; padding: 6px 10px; border-radius: 30px; display: flex; align-items: center; gap: 6px;">
                     <i class="fa-solid fa-moon" id="theme-icon"></i>
                 </div>
-                <div class="nav-mayoreo" onclick="openMayoreoModal()"><i class="fa-solid fa-hard-hat"></i> Constructores / Mayoreo</div>
+                <div class="nav-mayoreo" onclick="openMayoreoModal()"><i class="fa-solid fa-hard-hat"></i> Mayoreo</div>
                 <div class="nav-cart" onclick="document.getElementById('cart-section-target').scrollIntoView({ behavior: 'smooth' });"><i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">0</span> Prod.</div>
             </nav>
         </header>
@@ -329,64 +337,64 @@
         
         <!-- SLIDE 1: CONDUCTORES ELÉCTRICOS -->
         <div class="slide active" style="background: linear-gradient(135deg, #ffffff 0%, #fef3c7 100%);">
-            <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap; gap: 30px; padding: 0 20px;">
-                <div style="flex: 1; min-width: 300px; text-align: left;">
-                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
-                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Conductores de Cobre Puro</h1>
-                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; margin-bottom: 30px;">Cable THW-LS y cordones duplex con aislamiento termoplástico. Máxima conductividad y seguridad garantizada.</p>
-                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+            <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap; gap: 20px;">
+                <div style="flex: 1; min-width: 280px; text-align: left;">
+                    <span style="background: var(--primario); color: white; padding: 5px 14px; border-radius: 30px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 12px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
+                    <h1 style="color: var(--secundario); font-size: 2.2rem; margin-bottom: 10px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Conductores de Cobre Puro</h1>
+                    <p style="color: var(--texto-oscuro); font-size: 1rem; font-weight: 500; margin-bottom: 20px;">Cable THW-LS y cordones duplex con aislamiento termoplástico. Máxima conductividad.</p>
+                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 12px 30px; font-size: 1rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
-                <div style="flex: 1; min-width: 300px; text-align: center; position: relative; height: 350px;">
-                    <img src="https://i.imgur.com/TgXnCOt.jpeg" alt="Cable Rojo" style="max-height: 320px; max-width: 65%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); position: absolute; top: 10%; left: 10%; z-index: 2;">
-                    <img src="https://i.imgur.com/uQdOVpE.jpeg" alt="Cable Blanco" style="max-height: 220px; max-width: 50%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); position: absolute; bottom: 0; right: 5%; z-index: 1;">
+                <div style="flex: 1; min-width: 280px; text-align: center; position: relative; height: 200px;">
+                    <img src="https://i.imgur.com/TgXnCOt.jpeg" alt="Cable Rojo" style="max-height: 180px; max-width: 60%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 20px rgba(0,0,0,0.15)); position: absolute; top: 10%; left: 15%; z-index: 2;">
+                    <img src="https://i.imgur.com/uQdOVpE.jpeg" alt="Cable Blanco" style="max-height: 130px; max-width: 45%; mix-blend-mode: multiply; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); position: absolute; bottom: 0; right: 15%; z-index: 1;">
                 </div>
             </div>
         </div>
 
         <!-- SLIDE 2: ACOMETIDA Y DISTRIBUCIÓN -->
         <div class="slide" style="background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);">
-            <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap-reverse; gap: 30px; padding: 0 20px;">
-                <div style="flex: 1; min-width: 300px; text-align: center; position: relative; height: 350px;">
-                    <img src="https://i.imgur.com/cE69EjB.jpeg" alt="Base Medidor" style="max-height: 320px; max-width: 60%; mix-blend-mode: multiply; filter: drop-shadow(0 25px 35px rgba(0,0,0,0.15)); position: absolute; top: 5%; left: 5%; z-index: 2;">
-                    <img src="https://i.imgur.com/vB1nmbB.jpeg" alt="Centro de Carga" style="max-height: 240px; max-width: 50%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.2)); position: absolute; bottom: 5%; right: 10%; z-index: 1;">
+            <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap-reverse; gap: 20px;">
+                <div style="flex: 1; min-width: 280px; text-align: center; position: relative; height: 200px;">
+                    <img src="https://i.imgur.com/cE69EjB.jpeg" alt="Base Medidor" style="max-height: 180px; max-width: 55%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 20px rgba(0,0,0,0.15)); position: absolute; top: 5%; left: 15%; z-index: 2;">
+                    <img src="https://i.imgur.com/vB1nmbB.jpeg" alt="Centro de Carga" style="max-height: 140px; max-width: 45%; mix-blend-mode: multiply; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); position: absolute; bottom: 5%; right: 15%; z-index: 1;">
                 </div>
-                <div style="flex: 1; min-width: 300px; text-align: left;">
-                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
-                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Bases y Centros de Carga</h1>
-                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; margin-bottom: 30px;">Equipos robustos preparados para recepción y distribución segura de energía en tus proyectos de construcción.</p>
-                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+                <div style="flex: 1; min-width: 280px; text-align: left;">
+                    <span style="background: var(--primario); color: white; padding: 5px 14px; border-radius: 30px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 12px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
+                    <h1 style="color: var(--secundario); font-size: 2.2rem; margin-bottom: 10px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Bases y Centros de Carga</h1>
+                    <p style="color: var(--texto-oscuro); font-size: 1rem; font-weight: 500; margin-bottom: 20px;">Equipos robustos preparados para recepción y distribución segura de energía en tus obras.</p>
+                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 12px 30px; font-size: 1rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
             </div>
         </div>
 
         <!-- SLIDE 3: PROTECCIÓN ELÉCTRICA -->
         <div class="slide" style="background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 100%);">
-            <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap; gap: 30px; padding: 0 20px;">
-                <div style="flex: 1; min-width: 300px; text-align: left;">
-                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
-                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Protección Eléctrica</h1>
-                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; margin-bottom: 30px;">Protege tus circuitos y equipos con nuestros interruptores de seguridad y pastillas termomagnéticas de alta respuesta.</p>
-                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+            <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap; gap: 20px;">
+                <div style="flex: 1; min-width: 280px; text-align: left;">
+                    <span style="background: var(--primario); color: white; padding: 5px 14px; border-radius: 30px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 12px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
+                    <h1 style="color: var(--secundario); font-size: 2.2rem; margin-bottom: 10px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Protección Eléctrica</h1>
+                    <p style="color: var(--texto-oscuro); font-size: 1rem; font-weight: 500; margin-bottom: 20px;">Protege tus circuitos y equipos con interruptores de seguridad y pastillas termomagnéticas.</p>
+                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 12px 30px; font-size: 1rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
-                <div style="flex: 1; min-width: 300px; text-align: center; position: relative; height: 350px;">
-                    <img src="https://i.imgur.com/AWeMj6Q.jpeg" alt="Interruptor" style="max-height: 320px; max-width: 55%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); position: absolute; top: 10%; left: 15%; z-index: 1;">
-                    <img src="https://i.imgur.com/VfSJzhL.jpeg" alt="Pastilla" style="max-height: 220px; max-width: 45%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); position: absolute; bottom: 5%; right: 15%; z-index: 2;">
+                <div style="flex: 1; min-width: 280px; text-align: center; position: relative; height: 200px;">
+                    <img src="https://i.imgur.com/AWeMj6Q.jpeg" alt="Interruptor" style="max-height: 180px; max-width: 50%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 20px rgba(0,0,0,0.15)); position: absolute; top: 10%; left: 15%; z-index: 1;">
+                    <img src="https://i.imgur.com/VfSJzhL.jpeg" alt="Pastilla" style="max-height: 130px; max-width: 40%; mix-blend-mode: multiply; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); position: absolute; bottom: 5%; right: 15%; z-index: 2;">
                 </div>
             </div>
         </div>
 
         <!-- SLIDE 4: ACCESORIOS ELÉCTRICOS -->
         <div class="slide" style="background: linear-gradient(135deg, #ffffff 0%, #dcfce7 100%);">
-            <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap-reverse; gap: 30px; padding: 0 20px;">
-                <div style="flex: 1; min-width: 300px; text-align: center; position: relative; height: 350px;">
-                    <img src="https://i.imgur.com/fkHDXdS.jpeg" alt="Extensión" style="max-height: 320px; max-width: 55%; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); position: absolute; top: 10%; left: 10%; z-index: 1;">
-                    <img src="https://i.imgur.com/NGKA1xu.jpeg" alt="Clavija" style="max-height: 180px; max-width: 40%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); position: absolute; bottom: 10%; right: 10%; z-index: 2;">
+            <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap-reverse; gap: 20px;">
+                <div style="flex: 1; min-width: 280px; text-align: center; position: relative; height: 200px;">
+                    <img src="https://i.imgur.com/fkHDXdS.jpeg" alt="Extensión" style="max-height: 180px; max-width: 50%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 20px rgba(0,0,0,0.15)); position: absolute; top: 10%; left: 15%; z-index: 1;">
+                    <img src="https://i.imgur.com/NGKA1xu.jpeg" alt="Clavija" style="max-height: 110px; max-width: 35%; mix-blend-mode: multiply; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); position: absolute; bottom: 10%; right: 15%; z-index: 2;">
                 </div>
-                <div style="flex: 1; min-width: 300px; text-align: left;">
-                    <span style="background: var(--primario); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
-                    <h1 style="color: var(--secundario); font-size: 3.2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Conexiones Confiables</h1>
-                    <p style="color: var(--texto-oscuro); font-size: 1.2rem; font-weight: 500; margin-bottom: 30px;">Extensiones de uso rudo y clavijas polarizadas de alta durabilidad para brindar energía portátil y segura.</p>
-                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+                <div style="flex: 1; min-width: 280px; text-align: left;">
+                    <span style="background: var(--primario); color: white; padding: 5px 14px; border-radius: 30px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 12px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
+                    <h1 style="color: var(--secundario); font-size: 2.2rem; margin-bottom: 10px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Conexiones Confiables</h1>
+                    <p style="color: var(--texto-oscuro); font-size: 1rem; font-weight: 500; margin-bottom: 20px;">Extensiones de uso rudo y clavijas polarizadas de alta durabilidad para energía portátil y segura.</p>
+                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 12px 30px; font-size: 1rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
             </div>
         </div>
@@ -421,12 +429,12 @@
 
     <!-- CATÁLOGO DE PRODUCTOS -->
     <div class="container" id="catalog-section" style="margin-top: 0;">
-        <h2 class="section-header fade-in" style="font-size: 2.2rem; margin-bottom: 30px; font-weight:800; text-transform:uppercase;">Catálogo <span id="catalog-title" style="color:var(--primario);">General</span></h2>
+        <h2 class="section-header fade-in" style="font-size: 1.8rem; margin-bottom: 20px; font-weight:800; text-transform:uppercase;">Catálogo <span id="catalog-title" style="color:var(--primario);">General</span></h2>
         
-        <div id="no-results" style="display: none; text-align: center; padding: 60px 20px; background: white; border-radius: 20px; box-shadow: var(--sombra-suave);">
-            <i class="fa-solid fa-box-open" style="font-size: 4rem; color: #cbd5e1; margin-bottom: 20px; display: block;"></i>
-            <h3 style="font-size: 1.5rem; color: var(--texto-oscuro);">No encontramos resultados</h3>
-            <p style="color: var(--texto-claro);">Intenta buscar con otra palabra o selecciona "Todos" en los filtros de arriba.</p>
+        <div id="no-results" style="display: none; text-align: center; padding: 40px 15px; background: white; border-radius: 20px; box-shadow: var(--sombra-suave);">
+            <i class="fa-solid fa-box-open" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 15px; display: block;"></i>
+            <h3 style="font-size: 1.3rem; color: var(--texto-oscuro);">No encontramos resultados</h3>
+            <p style="color: var(--texto-claro); font-size: 0.9rem;">Intenta buscar con otra palabra o selecciona "Todos" en los filtros de arriba.</p>
         </div>
         
         <div class="grid" id="product-grid">
@@ -469,73 +477,73 @@
 
     <!-- CARRITO Y CHECKOUT POR WHATSAPP -->
     <div class="container cart-section fade-in" id="cart-section-target">
-        <h3 style="font-size: 2rem; margin-bottom: 25px; color: var(--texto-oscuro); text-transform:uppercase; font-weight:800;"><i class="fa-solid fa-basket-shopping" style="color: var(--primario);"></i> Tu Carrito</h3>
+        <h3 style="font-size: 1.6rem; margin-bottom: 20px; color: var(--texto-oscuro); text-transform:uppercase; font-weight:800;"><i class="fa-solid fa-basket-shopping" style="color: var(--primario);"></i> Tu Carrito</h3>
         
-        <div style="background: #fff3e0; padding: 15px 20px; border-radius: 10px; border-left: 5px solid var(--primario); margin-bottom: 25px;">
-            <p style="color: var(--secundario); font-size: 0.95rem; margin: 0;">
-                <i class="fa-solid fa-circle-info" style="color: var(--primario);"></i> <b>Nota:</b> El total es un estimado. Si eres mayorista, el sistema calculará tus descuentos por volumen en tiempo real.
+        <div style="background: #fff3e0; padding: 12px 15px; border-radius: 10px; border-left: 5px solid var(--primario); margin-bottom: 20px;">
+            <p style="color: var(--secundario); font-size: 0.85rem; margin: 0;">
+                <i class="fa-solid fa-circle-info" style="color: var(--primario);"></i> <b>Nota:</b> El total es un estimado. Si eres mayorista, el sistema calculará tus descuentos por volumen.
             </p>
         </div>
 
         <ul id="cart-items" style="list-style: none; margin: 15px 0; padding-left: 0;">
-            <li style="color: var(--texto-claro); background: var(--fondo-gris); padding: 30px; border-radius: 12px; text-align: center; border: 2px dashed var(--borde-card); font-weight: 500;">El carrito está vacío. Agrega material para continuar.</li>
+            <li style="color: var(--texto-claro); background: var(--fondo-gris); padding: 25px 15px; border-radius: 12px; text-align: center; border: 2px dashed var(--borde-card); font-weight: 500; font-size: 0.9rem;">El carrito está vacío. Agrega material para continuar.</li>
         </ul>
-        <div style="background: var(--secundario); color: white; padding: 25px; border-radius: 15px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; border-left: 6px solid var(--primario); box-shadow: var(--sombra-suave);">
-            <span style="font-size: 1.5rem; font-weight: 700;">Total Estimado:</span>
-            <span style="font-size: 2.5rem; font-weight: 800; color: var(--primario); text-shadow: 0 0 10px rgba(255,102,0,0.3);">$<span id="cart-total">0.00</span></span>
+        <div style="background: var(--secundario); color: white; padding: 20px; border-radius: 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; border-left: 6px solid var(--primario); box-shadow: var(--sombra-suave);">
+            <span style="font-size: 1.2rem; font-weight: 700;">Total Estimado:</span>
+            <span style="font-size: 2rem; font-weight: 800; color: var(--primario);">$<span id="cart-total">0.00</span></span>
         </div>
         
         <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
-            <button class="btn-buy" style="background: linear-gradient(135deg, #25D366, #128C7E); width: 100%; font-size: 1.2rem; padding: 20px; border-radius: 30px; box-shadow: 0 5px 15px rgba(37,211,102,0.3);" onclick="procesarPedidoWhatsApp()">
-                <i class="fa-brands fa-whatsapp" style="font-size: 1.5rem;"></i> Enviar Pedido por WhatsApp
+            <button class="btn-buy" style="background: linear-gradient(135deg, #25D366, #128C7E); width: 100%; font-size: 1.1rem; padding: 18px; border-radius: 30px; box-shadow: 0 5px 15px rgba(37,211,102,0.3);" onclick="procesarPedidoWhatsApp()">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem;"></i> Enviar Pedido por WhatsApp
             </button>
         </div>
     </div>
 
     <!-- COTIZACIONES -->
     <div class="container quote-section fade-in">
-        <h2 style="text-align: left; margin-bottom: 10px; color: var(--texto-oscuro); font-weight:800; text-transform:uppercase;">¿Requieres una Cotización Especial?</h2>
-        <p style="margin-bottom: 30px; color: var(--texto-claro); font-size: 1.1rem;">Ideal para constructoras, contratistas o compras de alto volumen.</p>
+        <h2 style="text-align: left; margin-bottom: 8px; color: var(--texto-oscuro); font-weight:800; text-transform:uppercase; font-size: 1.3rem;">¿Requieres una Cotización Especial?</h2>
+        <p style="margin-bottom: 25px; color: var(--texto-claro); font-size: 0.95rem;">Ideal para constructoras, contratistas o compras de alto volumen.</p>
         
         <form id="form-cotizacion" onsubmit="enviarCotizacion(event)">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+            <div style="display: grid; grid-template-columns: 1fr; gap: 12px;">
                 <input type="text" id="cot-nombre" placeholder="Nombre o Razón Social" class="form-control" required>
                 <input type="email" id="cot-correo" placeholder="Correo Electrónico" class="form-control" required>
                 <input type="tel" id="cot-tel" placeholder="Teléfono / WhatsApp" class="form-control" required>
             </div>
-            <textarea id="cot-mensaje" placeholder="Describe los materiales o cantidades de obra que necesitas..." class="form-control" style="height: 140px; resize: none; margin-top: 5px;" required></textarea>
-            <button type="submit" id="btn-enviar-cot" class="btn-buy" style="width: max-content; padding: 15px 40px; border-radius: 30px;"><i class="fa-solid fa-paper-plane"></i> Enviar Solicitud</button>
+            <textarea id="cot-mensaje" placeholder="Describe los materiales o cantidades de obra que necesitas..." class="form-control" style="height: 120px; resize: none; margin-top: 5px;" required></textarea>
+            <button type="submit" id="btn-enviar-cot" class="btn-buy" style="width: 100%; padding: 15px; border-radius: 30px;"><i class="fa-solid fa-paper-plane"></i> Enviar Solicitud</button>
         </form>
     </div>
 
     <!-- RESEÑAS -->
-    <div class="container reviews-section fade-in" style="margin-bottom: 50px;">
-        <h2 style="text-align: center; color: var(--texto-oscuro); margin-bottom: 40px; font-weight:800; text-transform:uppercase;">Lo que opinan nuestros clientes</h2>
+    <div class="container reviews-section fade-in" style="margin-bottom: 40px;">
+        <h2 style="text-align: center; color: var(--texto-oscuro); margin-bottom: 30px; font-weight:800; text-transform:uppercase; font-size: 1.3rem;">Lo que opinan nuestros clientes</h2>
         <div class="reviews-grid">
             <div class="review-card">
                 <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p style="font-size: 1.05rem; font-weight: 500; color: var(--texto-oscuro); margin-bottom: 15px;">"Excelente surtido de herramienta Truper y me cotizaron súper rápido todo el material eléctrico para mi obra en Tapachula."</p>
-                <strong style="color: var(--primario); font-size: 1.1rem;">- Arq. Roberto M.</strong>
+                <p style="font-size: 0.95rem; font-weight: 500; color: var(--texto-oscuro); margin-bottom: 12px;">"Excelente surtido de herramienta Truper y me cotizaron súper rápido todo el material eléctrico para mi obra."</p>
+                <strong style="color: var(--primario); font-size: 1rem;">- Arq. Roberto M.</strong>
             </div>
             <div class="review-card">
                 <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
-                <p style="font-size: 1.05rem; font-weight: 500; color: var(--texto-oscuro); margin-bottom: 15px;">"Muy confiables. Compré un taladro y discos de corte, llegaron el mismo día hasta donde estábamos trabajando."</p>
-                <strong style="color: var(--primario); font-size: 1.1rem;">- Carlos R.</strong>
+                <p style="font-size: 0.95rem; font-weight: 500; color: var(--texto-oscuro); margin-bottom: 12px;">"Muy confiables. Compré un taladro y discos de corte, llegaron el mismo día hasta donde estábamos trabajando."</p>
+                <strong style="color: var(--primario); font-size: 1rem;">- Carlos R.</strong>
             </div>
         </div>
     </div>
 
     <!-- FOOTER -->
     <footer>
-        <div class="logo" style="justify-content: center; margin-bottom: 25px; color: white;">
-            <img src="https://i.imgur.com/ybCK68C.png" alt="Logo" style="height: 45px; margin-right: 15px;"> FERRETERAL DEL SURESTE
+        <div class="logo" style="justify-content: center; margin-bottom: 20px; color: white;">
+            <img src="https://i.imgur.com/ybCK68C.png" alt="Logo" style="height: 38px; margin-right: 10px;"> FERRETERAL DEL SURESTE
         </div>
-        <div class="links" style="margin-bottom: 20px;">
+        <div class="links" style="margin-bottom: 15px; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
             <a href="#" onclick="alert('Envíos a obra de 24 a 48 horas en la zona, aplican restricciones por volumen.')">Políticas de Envío</a>
             <a href="#" onclick="alert('Garantía directa con la marca en maquinaria pesada y herramientas eléctricas.')">Políticas de Garantía</a>
             <a href="#" onclick="alert('Tus datos están protegidos conforme a la ley de privacidad vigente.')">Aviso de Privacidad</a>
         </div>
-        <p style="color: #6b7280; margin-top: 15px; font-size: 0.9rem;">&copy; 2026 Ferreteral del Sureste. Todos los derechos reservados. Huixtla, Chiapas.</p>
+        <p style="color: #6b7280; margin-top: 10px; font-size: 0.8rem;">&copy; 2026 Ferreteral del Sureste. Todos los derechos reservados. Huixtla, Chiapas.</p>
     </footer>
 
     <!-- LÓGICA DE JAVASCRIPT GLOBAL -->
@@ -572,7 +580,7 @@
 
         window.enableMayoreoMode = function(nombreUsuario) {
             document.body.classList.add('mayoreo-active');
-            document.querySelector('header .logo').innerHTML = `<img src="https://i.imgur.com/ybCK68C.png" alt="Logo" style="height: 80px;"> FERRETERAL DEL SURESTE <span style="font-size:11px; background:var(--amarillo); color:black; padding:4px 10px; border-radius:20px; margin-left:10px; vertical-align:middle; text-shadow:none;">MAYOREO: ${nombreUsuario}</span>`;
+            document.querySelector('header .logo').innerHTML = `<img src="https://i.imgur.com/ybCK68C.png" alt="Logo" style="height: 50px;"> FERRETERAL DEL SURESTE <span style="font-size:10px; background:var(--amarillo); color:black; padding:3px 8px; border-radius:20px; margin-left:5px; vertical-align:middle; text-shadow:none;">MAYOREO: ${nombreUsuario}</span>`;
             if(window.renderProductos) window.renderProductos(); 
             if(window.renderCart) window.renderCart(); 
         }
@@ -798,7 +806,7 @@
             window.total = 0; let totalQty = 0;
 
             if (window.cart.length === 0) {
-                cartItemsElement.innerHTML = '<li style="color: var(--texto-claro); background: var(--fondo-gris); padding: 30px; border-radius: 12px; text-align: center; border: 2px dashed var(--borde-card); font-weight: 500;">El carrito está vacío. Agrega material para continuar.</li>';
+                cartItemsElement.innerHTML = '<li style="color: var(--texto-claro); background: var(--fondo-gris); padding: 25px 15px; border-radius: 12px; text-align: center; border: 2px dashed var(--borde-card); font-weight: 500; font-size: 0.9rem;">El carrito está vacío. Agrega material para continuar.</li>';
             } else {
                 window.cart.forEach((item, index) => {
                     totalQty += item.qty;
@@ -806,24 +814,24 @@
                     let subtotal = unitPrice * item.qty;
                     window.total += subtotal;
                     
-                    let promoBadge = (window.isMayoreo && unitPrice < item.basePrice) ? `<span style="background:var(--primario); color:white; font-size:10px; padding:2px 5px; border-radius:3px; margin-left:5px;"><i class="fa-solid fa-tag"></i> Desc.</span>` : "";
+                    let promoBadge = (window.isMayoreo && unitPrice < item.basePrice) ? `<span style="background:var(--primario); color:white; font-size:9px; padding:2px 4px; border-radius:3px; margin-left:4px;">Desc.</span>` : "";
 
                     let li = document.createElement('li');
                     li.className = 'cart-item-row';
                     li.innerHTML = `
-                        <div style="flex:1; min-width: 200px;">
-                            <strong style="font-size: 0.95rem; display:block; color:var(--texto-oscuro);">${item.name} ${promoBadge}</strong>
-                            <span style="color:var(--texto-claro); font-size:0.85rem;">$${unitPrice.toFixed(2)} c/u</span>
+                        <div style="flex:1; min-width: 150px;">
+                            <strong style="font-size: 0.85rem; display:block; color:var(--texto-oscuro);">${item.name} ${promoBadge}</strong>
+                            <span style="color:var(--texto-claro); font-size:0.75rem;">$${unitPrice.toFixed(2)} c/u</span>
                         </div>
-                        <div style="display:flex; align-items:center; gap:5px; margin: 10px 15px;">
+                        <div style="display:flex; align-items:center; gap:4px; margin: 8px 10px;">
                             <button onclick="window.changeQty(${index}, -1)" class="qty-btn">-</button>
-                            <span style="font-weight:800; font-size:1.1rem; min-width:30px; text-align:center;">${item.qty}</span>
+                            <span style="font-weight:800; font-size:1rem; min-width:25px; text-align:center;">${item.qty}</span>
                             <button onclick="window.changeQty(${index}, 1)" class="qty-btn">+</button>
                         </div>
-                        <div style="font-weight:800; color:var(--primario); font-size:1.2rem; min-width:80px; text-align:right;">
+                        <div style="font-weight:800; color:var(--primario); font-size:1.05rem; min-width:70px; text-align:right;">
                             $${subtotal.toFixed(2)}
                         </div>
-                        <button onclick="window.removeFromCart(${index})" style="margin-left:15px; padding:8px 12px; background:#fee2e2; color:#e11d48; border:none; border-radius:8px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
+                        <button onclick="window.removeFromCart(${index})" style="margin-left:8px; padding:6px 10px; background:#fee2e2; color:#e11d48; border:none; border-radius:6px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
                     `;
                     cartItemsElement.appendChild(li);
                 });
@@ -854,8 +862,8 @@
         function showToast(message) {
             let container = document.getElementById('toast-container');
             let toast = document.createElement('div');
-            toast.style.cssText = 'background: var(--secundario); color: white; padding: 15px 25px; border-radius: 8px; font-weight: 600; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); border-left: 5px solid var(--primario); transition: 0.3s;';
-            toast.innerHTML = `<div style="background: white; color: var(--primario); border-radius:50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-check"></i></div> <span>${message}</span>`;
+            toast.style.cssText = 'background: var(--secundario); color: white; padding: 12px 20px; border-radius: 8px; font-weight: 600; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); border-left: 5px solid var(--primario); transition: 0.3s; font-size: 0.9rem;';
+            toast.innerHTML = `<div style="background: white; color: var(--primario); border-radius:50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-check" style="font-size: 0.8rem;"></i></div> <span>${message}</span>`;
             container.appendChild(toast);
             setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3000);
         }
@@ -961,7 +969,7 @@
                 if(p.t100>0) tHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ffcc80; padding:3px 0;"><span>100+ pzas:</span> <b>$${parseFloat(p.t100).toFixed(2)}</b></div>`;
                 
                 let displayTabla = (window.isMayoreo && tHtml !== "") ? "block" : "none";
-                let cuadroEscalas = tHtml !== "" ? `<div class="tabla-escalas" style="display:${displayTabla}; text-align:left; font-size:12px; background:#fff3e0; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:5px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div>${tHtml}</div>` : "";
+                let cuadroEscalas = tHtml !== "" ? `<div class="tabla-escalas" style="display:${displayTabla}; text-align:left; font-size:11px; background:#fff3e0; padding:8px; border-radius:8px; margin-bottom:12px; border:1px solid #ffcc80;"><div style="color:var(--primario); font-weight:800; margin-bottom:4px;"><i class="fa-solid fa-tags"></i> PRECIOS POR VOLUMEN:</div>${tHtml}</div>` : "";
 
                 let btnHtml = st > 0 
                     ? `<button class="btn-buy" onclick="window.addToCart('${p.id}')"><i class="fa-solid fa-cart-plus"></i> Agregar</button>` 
@@ -969,7 +977,7 @@
 
                 let precioHtml = `<p class="price-text">$${pr.toFixed(2)}</p>`;
                 if (window.isMayoreo && (p.t3>0 || p.t5>0 || p.t10>0)) {
-                     precioHtml = `<p class="price-text"><span style="font-size:1rem; text-decoration:line-through; color:var(--texto-claro);">$$${pr.toFixed(2)}</span> $${pr.toFixed(2)}</p>`;
+                     precioHtml = `<p class="price-text"><span style="font-size:0.9rem; text-decoration:line-through; color:var(--texto-claro);">$${pr.toFixed(2)}</span> $${pr.toFixed(2)}</p>`;
                 }
 
                 let cardHtml = `
@@ -980,9 +988,9 @@
                             <span class="stock-badge" style="background:${st<=0?'#e11d48':'var(--secundario)'}"><i class="fa-solid fa-box"></i> ${st} disp.</span>
                             <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Detalles</div>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                            <span style="font-size:11px; color:white; background: var(--secundario); padding: 4px 8px; border-radius: 4px; font-weight:800;">CÓDIGO: ${p.codigo || ''}</span>
-                            <span style="font-size:10px; color:var(--texto-claro); font-weight:700;">${depto.substring(0,15)}</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size:10px; color:white; background: var(--secundario); padding: 3px 6px; border-radius: 4px; font-weight:800;">CÓD.: ${p.codigo || ''}</span>
+                            <span style="font-size:10px; color:var(--texto-claro); font-weight:700;">${depto.substring(0,12)}</span>
                         </div>
                         <h3 class="product-title">${p.nombre}</h3>
                         ${precioHtml}
@@ -999,8 +1007,8 @@
             // BOTÓN VER MÁS
             if (window.productosMostrados < window.filteredProductos.length) {
                 grid.innerHTML += `
-                <div style="width: 100%; text-align: center; grid-column: 1 / -1; margin-top: 30px;">
-                    <button class="btn-buy" style="width: auto; padding: 15px 40px; border-radius: 30px;" onclick="window.cargarMas()">
+                <div style="width: 100%; text-align: center; grid-column: 1 / -1; margin-top: 25px;">
+                    <button class="btn-buy" style="width: auto; padding: 12px 30px; border-radius: 30px; font-size: 0.9rem;" onclick="window.cargarMas()">
                         <i class="fa-solid fa-rotate-right"></i> Ver más productos
                     </button>
                 </div>`;
