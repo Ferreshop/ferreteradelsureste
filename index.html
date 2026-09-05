@@ -339,7 +339,7 @@
                 </button>
                 <div id="dropdown-categories" class="dropdown-menu-list">
                     <div class="brands-grid" id="modal-categories-container">
-                        <button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>
+                        <button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos los Departamentos</button>
                     </div>
                 </div>
             </div>
@@ -351,7 +351,7 @@
                 </button>
                 <div id="dropdown-brands" class="dropdown-menu-list">
                     <div class="brands-grid" id="modal-brands-container">
-                        <button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>
+                        <button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas las Marcas</button>
                     </div>
                 </div>
             </div>
@@ -389,7 +389,7 @@
                     <span style="background: var(--primario); color: white; padding: 5px 14px; border-radius: 30px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 12px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
                     <h1 style="color: var(--secundario); font-size: 2.2rem; margin-bottom: 10px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Conductores de Cobre Puro</h1>
                     <p style="color: var(--texto-oscuro); font-size: 1rem; font-weight: 500; margin-bottom: 20px;">Cable THW-LS y cordones duplex con aislamiento termoplástico. Máxima conductividad.</p>
-                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 12px 30px; font-size: 1rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+                    <button onclick="window.buscarYDesplazar('cable, cordón')" class="btn-buy" style="width: max-content; padding: 12px 30px; font-size: 1rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
                 <div style="flex: 1; min-width: 280px; text-align: center; position: relative; height: 200px;">
                     <img src="https://i.imgur.com/TgXnCOt.jpeg" alt="Cable Rojo" style="max-height: 180px; max-width: 60%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 20px rgba(0,0,0,0.15)); position: absolute; top: 10%; left: 15%; z-index: 2;">
@@ -409,7 +409,7 @@
                     <span style="background: var(--primario); color: white; padding: 5px 14px; border-radius: 30px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 12px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
                     <h1 style="color: var(--secundario); font-size: 2.2rem; margin-bottom: 10px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Bases y Centros de Carga</h1>
                     <p style="color: var(--texto-oscuro); font-size: 1rem; font-weight: 500; margin-bottom: 20px;">Equipos robustos preparados para recepción y distribución segura de energía en tus obras.</p>
-                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 12px 30px; font-size: 1rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+                    <button onclick="window.buscarYDesplazar('base, carga')" class="btn-buy" style="width: max-content; padding: 12px 30px; font-size: 1rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
             </div>
         </div>
@@ -421,7 +421,7 @@
                     <span style="background: var(--primario); color: white; padding: 5px 14px; border-radius: 30px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 12px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
                     <h1 style="color: var(--secundario); font-size: 2.2rem; margin-bottom: 10px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Protección Eléctrica</h1>
                     <p style="color: var(--texto-oscuro); font-size: 1rem; font-weight: 500; margin-bottom: 20px;">Protege tus circuitos y equipos con interruptores de seguridad y pastillas termomagnéticas.</p>
-                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 12px 30px; font-size: 1rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+                    <button onclick="window.buscarYDesplazar('interruptor, pastilla')" class="btn-buy" style="width: max-content; padding: 12px 30px; font-size: 1rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
                 <div style="flex: 1; min-width: 280px; text-align: center; position: relative; height: 200px;">
                     <img src="https://i.imgur.com/AWeMj6Q.jpeg" alt="Interruptor" style="max-height: 180px; max-width: 50%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 20px rgba(0,0,0,0.15)); position: absolute; top: 10%; left: 15%; z-index: 1;">
@@ -441,7 +441,7 @@
                     <span style="background: var(--primario); color: white; padding: 5px 14px; border-radius: 30px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 12px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
                     <h1 style="color: var(--secundario); font-size: 2.2rem; margin-bottom: 10px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Conexiones Confiables</h1>
                     <p style="color: var(--texto-oscuro); font-size: 1rem; font-weight: 500; margin-bottom: 20px;">Extensiones de uso rudo y clavijas polarizadas de alta durabilidad para energía portátil y segura.</p>
-                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="width: max-content; padding: 12px 30px; font-size: 1rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+                    <button onclick="window.buscarYDesplazar('extensión, clavija')" class="btn-buy" style="width: max-content; padding: 12px 30px; font-size: 1rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
             </div>
         </div>
@@ -675,16 +675,25 @@
             if(window.renderCart) window.renderCart(); 
         }
 
-        // BÚSQUEDA Y FILTROS INTELIGENTES
+        // BÚSQUEDA Y FILTROS INTELIGENTES (AHORA SOPORTA COMAS PARA BÚSQUEDAS MULTIPLES)
         window.removeAccents = function(str) { 
             return str.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); 
         }
 
         window.applyFilters = function() {
             let searchInput = document.getElementById('searchInput');
-            let searchTerms = [];
+            let searchTermsAND = [];
+            let searchTermsOR = [];
+
             if(searchInput) {
-                searchTerms = window.removeAccents(searchInput.value.toLowerCase()).split(' ').filter(t => t.trim() !== '');
+                let val = searchInput.value.toLowerCase();
+                // Si el usuario (o el botón) puso una coma, buscamos como "O" (OR)
+                if (val.includes(',')) {
+                    searchTermsOR = val.split(',').map(t => window.removeAccents(t.trim())).filter(t => t !== '');
+                } else {
+                    // Si no hay coma, buscamos normal por espacio "Y" (AND)
+                    searchTermsAND = window.removeAccents(val).split(' ').filter(t => t.trim() !== '');
+                }
             }
 
             window.filteredProductos = window.productosDB.filter(p => {
@@ -694,7 +703,15 @@
 
                 let matchBrand = (window.currentBrand === 'ALL' || b === window.currentBrand);
                 let matchCat = (window.currentCategory === 'ALL' || d === window.currentCategory);
-                let matchSearch = searchTerms.length === 0 || searchTerms.every(term => n.includes(term) || b.includes(term) || d.includes(term));
+                
+                let matchSearch = true;
+                if (searchTermsOR.length > 0) {
+                    // Muestra el producto si coincide con CUALQUIERA de las palabras separadas por coma
+                    matchSearch = searchTermsOR.some(term => n.includes(term) || b.includes(term) || d.includes(term));
+                } else if (searchTermsAND.length > 0) {
+                    // Muestra el producto si coincide con TODAS las palabras separadas por espacio
+                    matchSearch = searchTermsAND.every(term => n.includes(term) || b.includes(term) || d.includes(term));
+                }
 
                 return matchBrand && matchCat && matchSearch;
             });
