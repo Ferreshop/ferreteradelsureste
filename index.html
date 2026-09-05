@@ -91,7 +91,7 @@
         .search-wrapper-top input:focus { background: white; border-color: var(--primario); box-shadow: 0 0 0 4px rgba(255,102,0,0.1); }
         
         .filter-section { display: flex; align-items: center; flex: 1; min-width: 220px; max-width: 300px; }
-        .filter-label { display: none; } /* Ocultamos el texto suelto para un diseño más limpio */
+        .filter-label { display: none; } 
         
         .dropdown-btn { width: 100%; padding: 14px 20px; border-radius: 50px; border: 2px solid var(--borde-card); background: white; color: var(--texto-oscuro); cursor: pointer; font-weight: 600; transition: 0.3s; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; letter-spacing: 0.5px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
         .dropdown-btn:hover { border-color: var(--primario); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,102,0,0.15); }
@@ -99,10 +99,13 @@
         .dropdown-btn.active-filter { background: var(--secundario); color: white; border-color: var(--secundario); }
         .dropdown-btn.active-filter i { color: white; }
 
-        /* GRID PARA MODALES DE FILTROS */
-        .brands-grid { display: flex; flex-wrap: wrap; gap: 12px; }
-        .brand-item { white-space: nowrap; padding: 10px 20px; font-size: 0.85rem; border-radius: 30px; border: 1px solid var(--borde-card); background: var(--fondo-gris); color: var(--texto-claro); cursor: pointer; font-weight: 700; transition: 0.3s; text-transform: uppercase;}
-        .brand-item:hover, .brand-item.active { background: var(--secundario); color: white; border-color: var(--secundario); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        /* GRID PARA MODALES DE FILTROS EN LISTA VERTICAL */
+        .brands-grid { display: flex; flex-direction: column; gap: 8px; }
+        .brand-item { width: 100%; text-align: left; white-space: normal; padding: 14px 20px; font-size: 0.9rem; border-radius: 12px; border: 1px solid var(--borde-card); background: var(--fondo-gris); color: var(--texto-claro); cursor: pointer; font-weight: 700; transition: 0.3s; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center;}
+        .brand-item::after { content: "\f054"; font-family: "FontAwesome"; color: var(--primario); opacity: 0; transition: 0.3s; transform: translateX(-10px); font-size: 0.8rem; }
+        .brand-item:hover::after, .brand-item.active::after { opacity: 1; transform: translateX(0); }
+        .brand-item:hover, .brand-item.active { background: var(--secundario); color: white; border-color: var(--secundario); transform: translateX(5px); box-shadow: -4px 4px 10px rgba(0,0,0,0.1); }
+        .brand-item:hover::after, .brand-item.active::after { color: white; }
 
         /* SLIDER CARRUSEL HERO OPTIMIZADO PARA MÓVIL */
         .hero-slider { position: relative; width: 100%; height: auto; min-height: 420px; overflow: hidden; background-color: white; }
@@ -261,7 +264,7 @@
         <div class="modal-content" style="max-width: 650px; padding: 25px; display: block;" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeCategoriesModal(event)"><i class="fa-solid fa-xmark"></i></button>
             <h2 style="margin-bottom: 20px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase; text-align: center; font-size: 1.3rem;"><i class="fa-solid fa-list" style="color: var(--primario);"></i> Departamentos</h2>
-            <div class="brands-grid" id="modal-categories-container" style="justify-content: flex-start; max-height: 50vh; overflow-y: auto; padding-right: 5px;">
+            <div class="brands-grid" id="modal-categories-container" style="justify-content: flex-start; max-height: 50vh; overflow-y: auto; padding-right: 15px;">
                 <button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>
             </div>
         </div>
@@ -272,7 +275,7 @@
         <div class="modal-content" style="max-width: 650px; padding: 25px; display: block;" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeBrandsModal(event)"><i class="fa-solid fa-xmark"></i></button>
             <h2 style="margin-bottom: 20px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase; text-align: center; font-size: 1.3rem;"><i class="fa-solid fa-tag" style="color: var(--primario);"></i> Marcas</h2>
-            <div class="brands-grid" id="modal-brands-container" style="justify-content: flex-start; max-height: 50vh; overflow-y: auto; padding-right: 5px;">
+            <div class="brands-grid" id="modal-brands-container" style="justify-content: flex-start; max-height: 50vh; overflow-y: auto; padding-right: 15px;">
                 <button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>
             </div>
         </div>
