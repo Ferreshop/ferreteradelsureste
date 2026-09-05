@@ -83,19 +83,21 @@
         .nav-cart { background: var(--gradiente-naranja); color: white; box-shadow: 0 4px 15px rgba(255,102,0,0.3); }
         .nav-cart:hover { transform: scale(1.05); box-shadow: var(--sombra-fuerte); }
 
-        /* CABECERA BLANCA (BUSCADOR Y BOTONES) */
-        .sub-header { display: flex; gap: 12px; padding: 10px 20px; background: var(--blanco); border-bottom: 4px solid var(--primario); align-items: center; flex-wrap: wrap; }
-        .search-wrapper-top { position: relative; flex: 1; min-width: 100%; }
-        .search-wrapper-top i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--primario); font-size: 1.1rem; }
-        .search-wrapper-top input { width: 100%; padding: 12px 15px 12px 45px; border: 2px solid var(--borde-card); border-radius: 30px; font-size: 0.95rem; outline: none; background: var(--fondo-gris); transition: 0.3s; color: var(--texto-oscuro);}
-        .search-wrapper-top input:focus { border-color: var(--primario); background: white; box-shadow: 0 0 0 4px rgba(255,102,0,0.1); }
+        /* CABECERA BLANCA (BUSCADOR Y BOTONES DESPLEGABLES) ESTILO MODERNO */
+        .sub-header { display: flex; gap: 15px; padding: 15px 50px; background: var(--blanco); border-bottom: 4px solid var(--primario); align-items: center; justify-content: center; flex-wrap: wrap; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: background 0.3s; }
+        .search-wrapper-top { position: relative; flex: 2; min-width: 280px; max-width: 600px; }
+        .search-wrapper-top i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--primario); font-size: 1.2rem; }
+        .search-wrapper-top input { width: 100%; padding: 14px 20px 14px 50px; border: 2px solid transparent; border-radius: 50px; font-size: 1rem; outline: none; background: var(--fondo-gris); transition: 0.3s; color: var(--texto-oscuro); box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); }
+        .search-wrapper-top input:focus { background: white; border-color: var(--primario); box-shadow: 0 0 0 4px rgba(255,102,0,0.1); }
         
-        .filter-section { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 48%; }
-        .filter-label { font-size: 0.75rem; font-weight: 800; color: var(--texto-oscuro); text-transform: uppercase; display: flex; align-items: center; gap: 4px; }
+        .filter-section { display: flex; align-items: center; flex: 1; min-width: 220px; max-width: 300px; }
+        .filter-label { display: none; } /* Ocultamos el texto suelto para un diseño más limpio */
         
-        .dropdown-btn { flex: 1; width: 100%; padding: 10px 15px; border-radius: 30px; border: 2px solid var(--borde-card); background: var(--fondo-gris); color: var(--texto-oscuro); cursor: pointer; font-weight: 700; transition: 0.3s; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; overflow: hidden; white-space: nowrap;}
-        .dropdown-btn:hover { border-color: var(--primario); background: white; }
+        .dropdown-btn { width: 100%; padding: 14px 20px; border-radius: 50px; border: 2px solid var(--borde-card); background: white; color: var(--texto-oscuro); cursor: pointer; font-weight: 600; transition: 0.3s; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; letter-spacing: 0.5px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .dropdown-btn:hover { border-color: var(--primario); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,102,0,0.15); }
+        .dropdown-btn i.fa-chevron-down { color: var(--primario); transition: 0.3s; }
         .dropdown-btn.active-filter { background: var(--secundario); color: white; border-color: var(--secundario); }
+        .dropdown-btn.active-filter i { color: white; }
 
         /* GRID PARA MODALES DE FILTROS */
         .brands-grid { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -214,8 +216,11 @@
             .logo img { height: 42px; }
             nav { width: 100%; justify-content: center; gap: 6px; }
             nav div { padding: 6px 10px; font-size: 0.75rem; }
-            .sub-header { padding: 8px 15px; gap: 8px; }
-            .filter-section { min-width: 100%; }
+            .sub-header { padding: 12px 15px; gap: 10px; justify-content: stretch;}
+            .search-wrapper-top { max-width: 100%; flex: 100%; }
+            .search-wrapper-top input { padding: 12px 20px 12px 45px; }
+            .filter-section { min-width: 48%; max-width: 100%; flex: 1; }
+            .dropdown-btn { padding: 10px 15px; font-size: 0.75rem; }
             .hero-slider { height: 380px !important; }
             .slide > div { flex-direction: column !important; text-align: center !important; gap: 10px !important; padding: 0 10px !important; }
             .slide h1 { font-size: 1.8rem !important; margin-bottom: 8px !important; }
@@ -318,7 +323,7 @@
             </nav>
         </header>
 
-        <!-- BARRA BLANCA DE BUSCADOR Y FILTROS -->
+        <!-- BARRA BLANCA DE BUSCADOR Y FILTROS MODERNA -->
         <div class="sub-header">
             <div class="search-wrapper-top">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -326,13 +331,17 @@
             </div>
             
             <div class="filter-section">
-                <span class="filter-label"><i class="fa-solid fa-list"></i> Deptos:</span>
-                <button id="btn-select-category" class="dropdown-btn" onclick="openCategoriesModal()">Todos <i class="fa-solid fa-chevron-down"></i></button>
+                <button id="btn-select-category" class="dropdown-btn" onclick="openCategoriesModal()">
+                    <span><i class="fa-solid fa-list" style="margin-right: 8px; color: var(--texto-claro);"></i> Departamentos</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
             </div>
 
             <div class="filter-section">
-                <span class="filter-label"><i class="fa-solid fa-tag"></i> Marcas:</span>
-                <button id="btn-select-brand" class="dropdown-btn" onclick="openBrandsModal()">Todas <i class="fa-solid fa-chevron-down"></i></button>
+                <button id="btn-select-brand" class="dropdown-btn" onclick="openBrandsModal()">
+                    <span><i class="fa-solid fa-tag" style="margin-right: 8px; color: var(--texto-claro);"></i> Todas las Marcas</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
             </div>
         </div>
 
@@ -571,23 +580,19 @@
 
         // FUNCIÓN BÚSQUEDA Y DESPLAZAMIENTO DESDE BANNER
         window.buscarYDesplazar = function(termino) {
-            // Limpiamos los filtros de marca y departamento primero para que la búsqueda sea general
             window.currentBrand = 'ALL';
             window.currentCategory = 'ALL';
-            document.getElementById('btn-select-brand').innerHTML = 'Todas <i class="fa-solid fa-chevron-down"></i>';
+            document.getElementById('btn-select-brand').innerHTML = '<span><i class="fa-solid fa-tag" style="margin-right: 8px; color: var(--texto-claro);"></i> Todas las Marcas</span> <i class="fa-solid fa-chevron-down"></i>';
             document.getElementById('btn-select-brand').classList.remove('active-filter');
-            document.getElementById('btn-select-category').innerHTML = 'Todos <i class="fa-solid fa-chevron-down"></i>';
+            document.getElementById('btn-select-category').innerHTML = '<span><i class="fa-solid fa-list" style="margin-right: 8px; color: var(--texto-claro);"></i> Departamentos</span> <i class="fa-solid fa-chevron-down"></i>';
             document.getElementById('btn-select-category').classList.remove('active-filter');
             document.getElementById('catalog-title').innerText = "General";
 
-            // Ponemos el término en el buscador
             let searchInput = document.getElementById('searchInput');
             searchInput.value = termino;
             
-            // Aplicamos filtros
             window.applyFilters();
             
-            // Bajamos al catálogo
             let offset = document.querySelector('.header-container').offsetHeight + 20;
             let element = document.getElementById('catalog-section');
             let topPos = element.getBoundingClientRect().top + window.pageYOffset - offset;
@@ -612,7 +617,7 @@
             window.currentBrand = window.removeAccents(brandName).toLowerCase();
             
             let btnUI = document.getElementById('btn-select-brand');
-            btnUI.innerHTML = brandName + ' <i class="fa-solid fa-chevron-down"></i>';
+            btnUI.innerHTML = `<span><i class="fa-solid fa-tag" style="margin-right: 8px; color: white;"></i> ${brandName}</span> <i class="fa-solid fa-chevron-down" style="color: white;"></i>`;
             btnUI.classList.add('active-filter');
 
             document.getElementById('catalog-title').innerText = "General - " + brandName;
@@ -677,11 +682,15 @@
             window.currentBrand = brand === 'ALL' ? 'ALL' : window.removeAccents(brand).toLowerCase();
             
             let btnUI = document.getElementById('btn-select-brand');
-            btnUI.innerHTML = (brand === 'ALL' ? 'Todas' : brand) + ' <i class="fa-solid fa-chevron-down"></i>';
+            let brandText = brand === 'ALL' ? 'Todas las Marcas' : brand;
+            btnUI.innerHTML = `<span><i class="fa-solid fa-tag" style="margin-right: 8px; color: ${brand === 'ALL' ? 'var(--texto-claro)' : 'white'};"></i> ${brandText}</span> <i class="fa-solid fa-chevron-down" style="color: ${brand === 'ALL' ? 'var(--primario)' : 'white'};"></i>`;
             if(brand !== 'ALL') btnUI.classList.add('active-filter'); else btnUI.classList.remove('active-filter');
 
             let title = "General";
-            if(window.currentCategory !== 'ALL') title = document.getElementById('btn-select-category').innerText.replace(' \uf078', '');
+            if(window.currentCategory !== 'ALL') {
+                let catBtnText = document.getElementById('btn-select-category').innerText.trim();
+                title = catBtnText;
+            }
             if(brand !== 'ALL') title += " - " + brand;
             document.getElementById('catalog-title').innerText = title;
 
@@ -701,11 +710,15 @@
             window.currentCategory = category === 'ALL' ? 'ALL' : window.removeAccents(category).toLowerCase();
             
             let btnUI = document.getElementById('btn-select-category');
-            btnUI.innerHTML = (category === 'ALL' ? 'Todos' : category) + ' <i class="fa-solid fa-chevron-down"></i>';
+            let catText = category === 'ALL' ? 'Departamentos' : category;
+            btnUI.innerHTML = `<span><i class="fa-solid fa-list" style="margin-right: 8px; color: ${category === 'ALL' ? 'var(--texto-claro)' : 'white'};"></i> ${catText}</span> <i class="fa-solid fa-chevron-down" style="color: ${category === 'ALL' ? 'var(--primario)' : 'white'};"></i>`;
             if(category !== 'ALL') btnUI.classList.add('active-filter'); else btnUI.classList.remove('active-filter');
 
             let title = category === 'ALL' ? "General" : category;
-            if(window.currentBrand !== 'ALL') title += " - " + document.getElementById('btn-select-brand').innerText.replace(' \uf078', '');
+            if(window.currentBrand !== 'ALL') {
+                let brandBtnText = document.getElementById('btn-select-brand').innerText.trim();
+                title += " - " + brandBtnText;
+            }
             document.getElementById('catalog-title').innerText = title;
 
             window.closeCategoriesModal();
