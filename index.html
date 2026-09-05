@@ -350,7 +350,7 @@
                     <span style="background: #0ea5e9; color: white; padding: 5px 14px; border-radius: 30px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 12px; display: inline-block; box-shadow: var(--sombra-suave);">¡Temporada de Calor!</span>
                     <h1 style="color: var(--secundario); font-size: 2.2rem; margin-bottom: 10px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Que no te falte<br><span style="color: #0284c7;">el agua</span></h1>
                     <p style="color: var(--texto-oscuro); font-size: 1rem; font-weight: 500; margin-bottom: 20px;">Bombas periféricas, centrífugas y sumergibles. Mantén el flujo constante en tu hogar o proyecto con las mejores marcas.</p>
-                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); width: max-content; padding: 12px 30px; font-size: 1rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+                    <button onclick="window.buscarYDesplazar('bomba')" class="btn-buy" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); width: max-content; padding: 12px 30px; font-size: 1rem; border-radius: 50px;">Ver Bombas de Agua <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
                 <div style="flex: 1; min-width: 280px; text-align: center; position: relative; height: 250px;">
                     <img src="https://i.imgur.com/a8qn0HD.jpeg" alt="Bomba Foset" style="max-height: 140px; max-width: 45%; mix-blend-mode: multiply; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15)); position: absolute; top: 0; left: 5%; z-index: 2;">
@@ -568,6 +568,31 @@
         // Paginación
         window.productosPorPagina = 24;
         window.productosMostrados = 24;
+
+        // FUNCIÓN BÚSQUEDA Y DESPLAZAMIENTO DESDE BANNER
+        window.buscarYDesplazar = function(termino) {
+            // Limpiamos los filtros de marca y departamento primero para que la búsqueda sea general
+            window.currentBrand = 'ALL';
+            window.currentCategory = 'ALL';
+            document.getElementById('btn-select-brand').innerHTML = 'Todas <i class="fa-solid fa-chevron-down"></i>';
+            document.getElementById('btn-select-brand').classList.remove('active-filter');
+            document.getElementById('btn-select-category').innerHTML = 'Todos <i class="fa-solid fa-chevron-down"></i>';
+            document.getElementById('btn-select-category').classList.remove('active-filter');
+            document.getElementById('catalog-title').innerText = "General";
+
+            // Ponemos el término en el buscador
+            let searchInput = document.getElementById('searchInput');
+            searchInput.value = termino;
+            
+            // Aplicamos filtros
+            window.applyFilters();
+            
+            // Bajamos al catálogo
+            let offset = document.querySelector('.header-container').offsetHeight + 20;
+            let element = document.getElementById('catalog-section');
+            let topPos = element.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: topPos, behavior: 'smooth' });
+        };
 
         // FUNCIÓN MODO OSCURO / CLARO
         window.toggleTheme = function() {
