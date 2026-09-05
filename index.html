@@ -41,7 +41,8 @@
         body.dark-mode .reviews-section,
         body.dark-mode .modal-content,
         body.dark-mode .modal-left,
-        body.dark-mode .modal-right {
+        body.dark-mode .modal-right,
+        body.dark-mode .dropdown-menu-list {
             background-color: #161b22 !important;
             color: #f0f6fc !important;
             border-color: #30363d !important;
@@ -61,6 +62,11 @@
             background-color: #0d1117 !important;
             color: #f0f6fc !important;
             border-color: #30363d !important;
+        }
+        body.dark-mode .brand-item {
+            background-color: #0d1117 !important;
+            border-color: #30363d !important;
+            color: #f0f6fc !important;
         }
 
         /* MODO MAYOREO */
@@ -90,8 +96,7 @@
         .search-wrapper-top input { width: 100%; padding: 14px 20px 14px 50px; border: 2px solid transparent; border-radius: 50px; font-size: 1rem; outline: none; background: var(--fondo-gris); transition: 0.3s; color: var(--texto-oscuro); box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); }
         .search-wrapper-top input:focus { background: white; border-color: var(--primario); box-shadow: 0 0 0 4px rgba(255,102,0,0.1); }
         
-        .filter-section { display: flex; align-items: center; flex: 1; min-width: 220px; max-width: 300px; }
-        .filter-label { display: none; } 
+        .filter-section { display: flex; align-items: center; flex: 1; min-width: 220px; max-width: 300px; position: relative; }
         
         .dropdown-btn { width: 100%; padding: 14px 20px; border-radius: 50px; border: 2px solid var(--borde-card); background: white; color: var(--texto-oscuro); cursor: pointer; font-weight: 600; transition: 0.3s; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; letter-spacing: 0.5px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
         .dropdown-btn:hover { border-color: var(--primario); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,102,0,0.15); }
@@ -99,13 +104,33 @@
         .dropdown-btn.active-filter { background: var(--secundario); color: white; border-color: var(--secundario); }
         .dropdown-btn.active-filter i { color: white; }
 
-        /* GRID PARA MODALES DE FILTROS EN LISTA VERTICAL */
-        .brands-grid { display: flex; flex-direction: column; gap: 8px; }
-        .brand-item { width: 100%; text-align: left; white-space: normal; padding: 14px 20px; font-size: 0.9rem; border-radius: 12px; border: 1px solid var(--borde-card); background: var(--fondo-gris); color: var(--texto-claro); cursor: pointer; font-weight: 700; transition: 0.3s; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center;}
+        /* LISTAS DESPLEGABLES DIRECTAS (SIN MODAL) */
+        .dropdown-menu-list {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            width: 100%;
+            background: var(--blanco);
+            border: 2px solid var(--borde-card);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            z-index: 1050;
+            max-height: 350px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        .dropdown-menu-list.show {
+            display: block;
+            animation: fadeInDrop 0.2s ease-out forwards;
+        }
+        @keyframes fadeInDrop { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .brands-grid { display: flex; flex-direction: column; gap: 5px; }
+        .brand-item { width: 100%; text-align: left; padding: 12px 15px; font-size: 0.85rem; border-radius: 8px; border: none; background: transparent; color: var(--texto-oscuro); cursor: pointer; font-weight: 600; transition: 0.2s; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center;}
         .brand-item::after { content: "\f054"; font-family: "FontAwesome"; color: var(--primario); opacity: 0; transition: 0.3s; transform: translateX(-10px); font-size: 0.8rem; }
         .brand-item:hover::after, .brand-item.active::after { opacity: 1; transform: translateX(0); }
-        .brand-item:hover, .brand-item.active { background: var(--secundario); color: white; border-color: var(--secundario); transform: translateX(5px); box-shadow: -4px 4px 10px rgba(0,0,0,0.1); }
-        .brand-item:hover::after, .brand-item.active::after { color: white; }
+        .brand-item:hover, .brand-item.active { background: var(--fondo-gris); color: var(--primario); padding-left: 20px; }
 
         /* SLIDER CARRUSEL HERO OPTIMIZADO PARA MÓVIL */
         .hero-slider { position: relative; width: 100%; height: auto; min-height: 420px; overflow: hidden; background-color: white; }
@@ -130,11 +155,7 @@
 
         /* TARJETAS DE PRODUCTO MULTICOLUMNA PARA TELÉFONO */
         .container { max-width: 1250px; margin: 30px auto; padding: 0 10px; }
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 10px; 
-        }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
         @media (min-width: 480px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 12px; } }
         @media (min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 15px; } }
         @media (min-width: 1024px) { .grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; } }
@@ -185,7 +206,7 @@
         /* SPINNER DE CARGA RÁPIDA */
         .loading-spinner { font-size: 2.5rem; color: var(--primario); margin: 40px auto; display: block; text-align: center; }
 
-        /* MODALES */
+        /* MODALES RESTANTES (LOGIN Y VISTA RÁPIDA) */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 17, 17, 0.85); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.4s; backdrop-filter: blur(8px); padding: 15px; }
         .modal-overlay.active { opacity: 1; visibility: visible; }
         .modal-content { background: var(--blanco); width: 900px; max-width: 100%; border-radius: 20px; overflow: hidden; display: flex; flex-wrap: wrap; position: relative; transform: translateY(50px) scale(0.9); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 30px 60px rgba(0,0,0,0.4); max-height: 90vh; overflow-y: auto;}
@@ -259,28 +280,6 @@
         </div>
     </div>
 
-    <!-- MODAL CATEGORÍAS (DEPARTAMENTOS) -->
-    <div class="modal-overlay" id="categoriesModal" onclick="closeCategoriesModal(event)">
-        <div class="modal-content" style="max-width: 650px; padding: 25px; display: block;" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeCategoriesModal(event)"><i class="fa-solid fa-xmark"></i></button>
-            <h2 style="margin-bottom: 20px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase; text-align: center; font-size: 1.3rem;"><i class="fa-solid fa-list" style="color: var(--primario);"></i> Departamentos</h2>
-            <div class="brands-grid" id="modal-categories-container" style="justify-content: flex-start; max-height: 50vh; overflow-y: auto; padding-right: 15px;">
-                <button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL MARCAS -->
-    <div class="modal-overlay" id="brandsModal" onclick="closeBrandsModal(event)">
-        <div class="modal-content" style="max-width: 650px; padding: 25px; display: block;" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeBrandsModal(event)"><i class="fa-solid fa-xmark"></i></button>
-            <h2 style="margin-bottom: 20px; color: var(--texto-oscuro); font-weight: 800; text-transform: uppercase; text-align: center; font-size: 1.3rem;"><i class="fa-solid fa-tag" style="color: var(--primario);"></i> Marcas</h2>
-            <div class="brands-grid" id="modal-brands-container" style="justify-content: flex-start; max-height: 50vh; overflow-y: auto; padding-right: 15px;">
-                <button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>
-            </div>
-        </div>
-    </div>
-
     <!-- MODAL VISTA RÁPIDA -->
     <div class="modal-overlay" id="quickViewModal" onclick="closeQuickView(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
@@ -326,7 +325,7 @@
             </nav>
         </header>
 
-        <!-- BARRA BLANCA DE BUSCADOR Y FILTROS MODERNA -->
+        <!-- BARRA BLANCA DE BUSCADOR Y FILTROS MODERNA CON LISTA DESPLEGABLE -->
         <div class="sub-header">
             <div class="search-wrapper-top">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -334,17 +333,27 @@
             </div>
             
             <div class="filter-section">
-                <button id="btn-select-category" class="dropdown-btn" onclick="openCategoriesModal()">
+                <button id="btn-select-category" class="dropdown-btn" onclick="toggleCategoryDropdown(event)">
                     <span><i class="fa-solid fa-list" style="margin-right: 8px; color: var(--texto-claro);"></i> Departamentos</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
+                <div id="dropdown-categories" class="dropdown-menu-list">
+                    <div class="brands-grid" id="modal-categories-container">
+                        <button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>
+                    </div>
+                </div>
             </div>
 
             <div class="filter-section">
-                <button id="btn-select-brand" class="dropdown-btn" onclick="openBrandsModal()">
+                <button id="btn-select-brand" class="dropdown-btn" onclick="toggleBrandDropdown(event)">
                     <span><i class="fa-solid fa-tag" style="margin-right: 8px; color: var(--texto-claro);"></i> Todas las Marcas</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
+                <div id="dropdown-brands" class="dropdown-menu-list">
+                    <div class="brands-grid" id="modal-brands-container">
+                        <button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -581,6 +590,29 @@
         window.productosPorPagina = 24;
         window.productosMostrados = 24;
 
+        // FUNCIÓN DESPLEGAR MENÚS DE FILTROS (SIN MODAL)
+        window.toggleCategoryDropdown = function(e) {
+            if(e) e.stopPropagation();
+            document.getElementById('dropdown-categories').classList.toggle('show');
+            document.getElementById('dropdown-brands').classList.remove('show');
+        };
+
+        window.toggleBrandDropdown = function(e) {
+            if(e) e.stopPropagation();
+            document.getElementById('dropdown-brands').classList.toggle('show');
+            document.getElementById('dropdown-categories').classList.remove('show');
+        };
+
+        // Cerrar listas si se hace clic fuera
+        document.addEventListener('click', function(e) {
+            if(!e.target.closest('.filter-section')) {
+                let catDrop = document.getElementById('dropdown-categories');
+                let brandDrop = document.getElementById('dropdown-brands');
+                if(catDrop) catDrop.classList.remove('show');
+                if(brandDrop) brandDrop.classList.remove('show');
+            }
+        });
+
         // FUNCIÓN BÚSQUEDA Y DESPLAZAMIENTO DESDE BANNER
         window.buscarYDesplazar = function(termino) {
             window.currentBrand = 'ALL';
@@ -643,13 +675,6 @@
             if(window.renderCart) window.renderCart(); 
         }
 
-        // MODALES DE FILTROS (MARCAS Y CATEGORÍAS)
-        window.openBrandsModal = function() { document.getElementById('brandsModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
-        window.closeBrandsModal = function(e) { if(e) e.stopPropagation(); document.getElementById('brandsModal').classList.remove('active'); document.body.style.overflow = 'auto'; }
-        
-        window.openCategoriesModal = function() { document.getElementById('categoriesModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
-        window.closeCategoriesModal = function(e) { if(e) e.stopPropagation(); document.getElementById('categoriesModal').classList.remove('active'); document.body.style.overflow = 'auto'; }
-
         // BÚSQUEDA Y FILTROS INTELIGENTES
         window.removeAccents = function(str) { 
             return str.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); 
@@ -691,13 +716,14 @@
 
             let title = "General";
             if(window.currentCategory !== 'ALL') {
-                let catBtnText = document.getElementById('btn-select-category').innerText.trim();
-                title = catBtnText;
+                let catBtnText = document.getElementById('btn-select-category').innerText.replace('Departamentos', '').trim();
+                if(catBtnText) title = catBtnText;
             }
             if(brand !== 'ALL') title += " - " + brand;
             document.getElementById('catalog-title').innerText = title;
 
-            window.closeBrandsModal();
+            // Ocultar la lista desplegable después de seleccionar
+            document.getElementById('dropdown-brands').classList.remove('show');
             window.applyFilters();
             
             let offset = document.querySelector('.header-container').offsetHeight + 20;
@@ -719,12 +745,13 @@
 
             let title = category === 'ALL' ? "General" : category;
             if(window.currentBrand !== 'ALL') {
-                let brandBtnText = document.getElementById('btn-select-brand').innerText.trim();
+                let brandBtnText = document.getElementById('btn-select-brand').innerText.replace('Todas las Marcas', '').trim();
                 title += " - " + brandBtnText;
             }
             document.getElementById('catalog-title').innerText = title;
 
-            window.closeCategoriesModal();
+            // Ocultar la lista desplegable después de seleccionar
+            document.getElementById('dropdown-categories').classList.remove('show');
             window.applyFilters();
 
             let offset = document.querySelector('.header-container').offsetHeight + 20;
@@ -984,14 +1011,14 @@
 
                 window.renderProductos();
 
-                // LLENAR BOTONES DE MARCA EN MODAL
-                marcasContainer.innerHTML = `<button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas</button>`;
+                // LLENAR BOTONES DE MARCA EN LA LISTA DESPLEGABLE
+                marcasContainer.innerHTML = `<button class="brand-item active" onclick="window.filterByBrand('ALL', this)">Todas las Marcas</button>`;
                 Array.from(marcasSet).sort().forEach(marca => {
                     marcasContainer.innerHTML += `<button class="brand-item" onclick="window.filterByBrand('${marca}', this)">${marca}</button>`;
                 });
 
-                // LLENAR BOTONES DE CATEGORÍA EN MODAL
-                catContainer.innerHTML = `<button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos</button>`;
+                // LLENAR BOTONES DE CATEGORÍA EN LA LISTA DESPLEGABLE
+                catContainer.innerHTML = `<button class="brand-item active" onclick="window.filterByCategory('ALL', this)">Todos los Departamentos</button>`;
                 Array.from(catSet).sort().forEach(cat => {
                     catContainer.innerHTML += `<button class="brand-item" onclick="window.filterByCategory('${cat}', this)">${cat}</button>`;
                 });
