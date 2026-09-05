@@ -343,8 +343,26 @@
     <!-- ========================================== -->
     <section class="hero-slider">
         
-        <!-- SLIDE 1: CONDUCTORES ELÉCTRICOS -->
-        <div class="slide active" style="background: linear-gradient(135deg, #ffffff 0%, #fef3c7 100%);">
+        <!-- SLIDE 1: TEMPORADA DE CALOR (BOMBAS DE AGUA) -->
+        <div class="slide active" style="background: linear-gradient(135deg, #ffffff 0%, #cffafe 100%);">
+            <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap; gap: 20px;">
+                <div style="flex: 1; min-width: 280px; text-align: left;">
+                    <span style="background: #0ea5e9; color: white; padding: 5px 14px; border-radius: 30px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 12px; display: inline-block; box-shadow: var(--sombra-suave);">¡Temporada de Calor!</span>
+                    <h1 style="color: var(--secundario); font-size: 2.2rem; margin-bottom: 10px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Que no te falte<br><span style="color: #0284c7;">el agua</span></h1>
+                    <p style="color: var(--texto-oscuro); font-size: 1rem; font-weight: 500; margin-bottom: 20px;">Bombas periféricas, centrífugas y sumergibles. Mantén el flujo constante en tu hogar o proyecto con las mejores marcas.</p>
+                    <button onclick="document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="btn-buy" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); width: max-content; padding: 12px 30px; font-size: 1rem; border-radius: 50px;">Ver Catálogo <i class="fa-solid fa-arrow-down"></i></button>
+                </div>
+                <div style="flex: 1; min-width: 280px; text-align: center; position: relative; height: 250px;">
+                    <img src="BOAP-1-2F.jpg" alt="Bomba Foset" style="max-height: 140px; max-width: 45%; mix-blend-mode: multiply; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15)); position: absolute; top: 0; left: 5%; z-index: 2;">
+                    <img src="BOS-3-4LP.jpg" alt="Bomba Sumergible" style="max-height: 160px; max-width: 40%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 20px rgba(0,0,0,0.2)); position: absolute; top: 10%; right: 10%; z-index: 1;">
+                    <img src="BOAC-1A.jpg" alt="Bomba Truper" style="max-height: 150px; max-width: 50%; mix-blend-mode: multiply; filter: drop-shadow(0 15px 20px rgba(0,0,0,0.15)); position: absolute; bottom: 0; left: 20%; z-index: 3;">
+                    <img src="BOAP-1-2P3.jpg" alt="Bomba Pretul" style="max-height: 120px; max-width: 40%; mix-blend-mode: multiply; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); position: absolute; bottom: -10%; right: 5%; z-index: 4;">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: CONDUCTORES ELÉCTRICOS -->
+        <div class="slide" style="background: linear-gradient(135deg, #ffffff 0%, #fef3c7 100%);">
             <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap; gap: 20px;">
                 <div style="flex: 1; min-width: 280px; text-align: left;">
                     <span style="background: var(--primario); color: white; padding: 5px 14px; border-radius: 30px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 12px; display: inline-block; box-shadow: var(--sombra-suave);">Material Eléctrico</span>
@@ -359,7 +377,7 @@
             </div>
         </div>
 
-        <!-- SLIDE 2: ACOMETIDA Y DISTRIBUCIÓN -->
+        <!-- SLIDE 3: ACOMETIDA Y DISTRIBUCIÓN -->
         <div class="slide" style="background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);">
             <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap-reverse; gap: 20px;">
                 <div style="flex: 1; min-width: 280px; text-align: center; position: relative; height: 200px;">
@@ -375,7 +393,7 @@
             </div>
         </div>
 
-        <!-- SLIDE 3: PROTECCIÓN ELÉCTRICA -->
+        <!-- SLIDE 4: PROTECCIÓN ELÉCTRICA -->
         <div class="slide" style="background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 100%);">
             <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap; gap: 20px;">
                 <div style="flex: 1; min-width: 280px; text-align: left;">
@@ -391,7 +409,7 @@
             </div>
         </div>
 
-        <!-- SLIDE 4: ACCESORIOS ELÉCTRICOS -->
+        <!-- SLIDE 5: ACCESORIOS ELÉCTRICOS -->
         <div class="slide" style="background: linear-gradient(135deg, #ffffff 0%, #dcfce7 100%);">
             <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; margin: 0 auto; flex-wrap: wrap-reverse; gap: 20px;">
                 <div style="flex: 1; min-width: 280px; text-align: center; position: relative; height: 200px;">
@@ -413,6 +431,7 @@
             <span class="dot" onclick="changeSlide(1)"></span>
             <span class="dot" onclick="changeSlide(2)"></span>
             <span class="dot" onclick="changeSlide(3)"></span>
+            <span class="dot" onclick="changeSlide(4)"></span>
         </div>
     </section>
 
