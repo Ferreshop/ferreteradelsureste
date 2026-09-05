@@ -132,9 +132,12 @@
         .brand-item:hover::after, .brand-item.active::after { opacity: 1; transform: translateX(0); }
         .brand-item:hover, .brand-item.active { background: var(--fondo-gris); color: var(--primario); padding-left: 20px; }
 
-        /* SLIDER CARRUSEL HERO */
-        .hero-slider { position: relative; width: 100%; height: auto; min-height: 420px; overflow: hidden; background-color: white; }
-        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; padding: 20px 15px; opacity: 0; transition: opacity 1s ease-in-out, transform 3s ease-in-out; transform: scale(1.05); }
+        /* SLIDER CARRUSEL HERO - CON FUNCIÓN TÁCTIL (SWIPE/GRAB) */
+        .hero-slider { position: relative; width: 100%; height: auto; min-height: 420px; overflow: hidden; background-color: white; cursor: grab; }
+        .hero-slider:active { cursor: grabbing; }
+        .hero-slider img { user-select: none; -webkit-user-drag: none; } /* Previene bug al arrastrar en PC */
+        
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; padding: 20px 15px; opacity: 0; transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out; transform: scale(1.05); }
         .slide.active { opacity: 1; z-index: 1; transform: scale(1); }
         
         /* Puntos del carrusel */
@@ -143,8 +146,8 @@
         .dot.active { background: var(--primario); transform: scale(1.2); }
 
         /* FRANJA DE CONFIANZA */
-        .trust-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1100px; margin: 20px auto; padding: 0 15px; position: relative; z-index: 10; }
-        .trust-box { background: var(--blanco); padding: 20px 15px; border-radius: 15px; text-align: center; box-shadow: var(--sombra-suave); transition: 0.3s; display: flex; flex-direction: column; align-items: center; border: 1px solid var(--borde-card);}
+        .trust-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1100px; margin: 20px auto; padding: 0 15px; position: relative; z-index: 10; pointer-events: none; }
+        .trust-box { background: var(--blanco); padding: 20px 15px; border-radius: 15px; text-align: center; box-shadow: var(--sombra-suave); transition: 0.3s; display: flex; flex-direction: column; align-items: center; border: 1px solid var(--borde-card); pointer-events: auto;}
         .trust-box:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,0,0,0.08); border-color: var(--primario); }
         .icon-circle { width: 60px; height: 60px; background: rgba(255,102,0,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: 0.3s;}
         .trust-box:hover .icon-circle { background: var(--gradiente-naranja); }
@@ -233,7 +236,7 @@
         footer a { color: var(--texto-claro); text-decoration: none; font-size: 13px; font-weight: 600; margin: 0 10px; transition: 0.3s;}
         footer a:hover { color: var(--primario); }
 
-        /* RESPONSIVO ESPECÍFICO PARA TELÉFONOS (SOLUCIÓN BANNER AMONTONADO) */
+        /* RESPONSIVO ESPECÍFICO PARA TELÉFONOS */
         @media (max-width: 768px) {
             header { padding: 10px 15px; justify-content: center; text-align: center; }
             .logo { font-size: 17px; justify-content: center; width: 100%; margin-bottom: 5px; }
@@ -252,13 +255,13 @@
             .slide > div { flex-direction: column !important; text-align: center !important; gap: 10px !important; padding: 0 !important; width: 100%; }
             
             /* Textos y Botón más compactos */
-            .slide > div > div:nth-child(1) { flex: none !important; width: 100% !important; z-index: 10; }
+            .slide > div > div:nth-child(1) { flex: none !important; width: 100% !important; z-index: 10; pointer-events: none;}
             .slide > div > div:nth-child(1) span { font-size: 0.65rem !important; padding: 4px 10px !important; margin-bottom: 8px !important; }
             .slide h1 { font-size: 1.55rem !important; margin-bottom: 5px !important; line-height: 1.1 !important; }
             .slide p { font-size: 0.85rem !important; margin-bottom: 12px !important; padding: 0 5px; line-height: 1.3 !important; }
-            .slide button { margin: 0 auto !important; padding: 8px 20px !important; font-size: 0.85rem !important; }
+            .slide button { margin: 0 auto !important; padding: 8px 20px !important; font-size: 0.85rem !important; pointer-events: auto; }
             
-            /* Grupo de Imágenes encogido proporcionalmente (Zoom out) para que no estorbe */
+            /* Grupo de Imágenes encogido proporcionalmente */
             .slide > div > div:nth-child(2) { 
                 flex: none !important; 
                 height: 150px !important; 
@@ -278,7 +281,6 @@
             .bomba-2 { top: 0 !important; right: 5% !important; max-height: 95px !important; }
             .bomba-3 { bottom: 10px !important; left: 5% !important; max-height: 95px !important; }
             .bomba-4 { bottom: 10px !important; right: 5% !important; max-height: 80px !important; }
-            /* ================================================= */
 
             .container { padding: 0 8px; margin: 20px auto; }
             .cart-section, .quote-section, .reviews-section { padding: 20px 15px; }
@@ -354,7 +356,7 @@
             </nav>
         </header>
 
-        <!-- BARRA BLANCA DE BUSCADOR Y FILTROS MODERNA CON LISTA DESPLEGABLE -->
+        <!-- BARRA BLANCA DE BUSCADOR Y FILTROS -->
         <div class="sub-header">
             <div class="search-wrapper-top">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -399,7 +401,7 @@
                 <div style="flex: 1; min-width: 280px; text-align: left;">
                     <span style="background: #0ea5e9; color: white; padding: 5px 14px; border-radius: 30px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 12px; display: inline-block; box-shadow: var(--sombra-suave);">¡Temporada de Calor!</span>
                     <h1 style="color: var(--secundario); font-size: 2.2rem; margin-bottom: 10px; font-weight: 800; text-transform: uppercase; line-height: 1.1;">Que no te falte<br><span style="color: #0284c7;">el agua</span></h1>
-                    <p style="color: var(--texto-oscuro); font-size: 1rem; font-weight: 500; margin-bottom: 20px;">Bombas periféricas, centrífugas y sumergibles. Mantén el flujo constante en tu hogar o proyecto con las mejores marcas.</p>
+                    <p style="color: var(--texto-oscuro); font-size: 1rem; font-weight: 500; margin-bottom: 20px;">Bombas periféricas, centrífugas y sumergibles. Mantén el flujo constante en tu hogar o proyecto.</p>
                     <button onclick="window.buscarYDesplazar('bomba')" class="btn-buy" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); width: max-content; padding: 12px 30px; font-size: 1rem; border-radius: 50px;">Ver Bombas de Agua <i class="fa-solid fa-arrow-down"></i></button>
                 </div>
                 <div class="slide-bombas-img" style="flex: 1; min-width: 280px; text-align: center; position: relative; height: 250px;">
@@ -477,11 +479,11 @@
         
         <!-- Puntos de navegación del carrusel -->
         <div class="slider-dots">
-            <span class="dot active" onclick="changeSlide(0)"></span>
-            <span class="dot" onclick="changeSlide(1)"></span>
-            <span class="dot" onclick="changeSlide(2)"></span>
-            <span class="dot" onclick="changeSlide(3)"></span>
-            <span class="dot" onclick="changeSlide(4)"></span>
+            <span class="dot active" onclick="window.changeSlideManual(0)"></span>
+            <span class="dot" onclick="window.changeSlideManual(1)"></span>
+            <span class="dot" onclick="window.changeSlideManual(2)"></span>
+            <span class="dot" onclick="window.changeSlideManual(3)"></span>
+            <span class="dot" onclick="window.changeSlideManual(4)"></span>
         </div>
     </section>
 
@@ -704,7 +706,7 @@
             if(window.renderCart) window.renderCart(); 
         }
 
-        // BÚSQUEDA Y FILTROS INTELIGENTES (AHORA SOPORTA COMAS PARA BÚSQUEDAS MULTIPLES)
+        // BÚSQUEDA Y FILTROS INTELIGENTES
         window.removeAccents = function(str) { 
             return str.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); 
         }
@@ -716,11 +718,9 @@
 
             if(searchInput) {
                 let val = searchInput.value.toLowerCase();
-                // Si el usuario (o el botón) puso una coma, buscamos como "O" (OR)
                 if (val.includes(',')) {
                     searchTermsOR = val.split(',').map(t => window.removeAccents(t.trim())).filter(t => t !== '');
                 } else {
-                    // Si no hay coma, buscamos normal por espacio "Y" (AND)
                     searchTermsAND = window.removeAccents(val).split(' ').filter(t => t.trim() !== '');
                 }
             }
@@ -735,10 +735,8 @@
                 
                 let matchSearch = true;
                 if (searchTermsOR.length > 0) {
-                    // Muestra el producto si coincide con CUALQUIERA de las palabras separadas por coma
                     matchSearch = searchTermsOR.some(term => n.includes(term) || b.includes(term) || d.includes(term));
                 } else if (searchTermsAND.length > 0) {
-                    // Muestra el producto si coincide con TODAS las palabras separadas por espacio
                     matchSearch = searchTermsAND.every(term => n.includes(term) || b.includes(term) || d.includes(term));
                 }
 
@@ -768,7 +766,6 @@
             if(brand !== 'ALL') title += " - " + brand;
             document.getElementById('catalog-title').innerText = title;
 
-            // Ocultar la lista desplegable después de seleccionar
             document.getElementById('dropdown-brands').classList.remove('show');
             window.applyFilters();
             
@@ -796,7 +793,6 @@
             }
             document.getElementById('catalog-title').innerText = title;
 
-            // Ocultar la lista desplegable después de seleccionar
             document.getElementById('dropdown-categories').classList.remove('show');
             window.applyFilters();
 
@@ -811,18 +807,104 @@
             window.renderProductos();
         };
 
-        // SCROLL ANIMATIONS Y SLIDER
+        // ==========================================
+        // SCROLL ANIMATIONS Y LÓGICA DE SWIPE/GRAB DEL CARRUSEL
+        // ==========================================
         let currentSlideIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
-        function changeSlide(index) {
+        let slideInterval;
+
+        window.changeSlide = function(index) {
             slides[currentSlideIndex].classList.remove('active');
             if(dots.length) dots[currentSlideIndex].classList.remove('active');
+            
             currentSlideIndex = index;
+            // Asegurar que el índice siempre esté dentro de los límites
+            if (currentSlideIndex < 0) currentSlideIndex = slides.length - 1;
+            if (currentSlideIndex >= slides.length) currentSlideIndex = 0;
+
             slides[currentSlideIndex].classList.add('active');
             if(dots.length) dots[currentSlideIndex].classList.add('active');
+        };
+
+        window.nextSlide = function() {
+            window.changeSlide(currentSlideIndex + 1);
+        };
+
+        window.prevSlide = function() {
+            window.changeSlide(currentSlideIndex - 1);
+        };
+
+        window.startInterval = function() {
+            if(slides.length > 0) { 
+                slideInterval = setInterval(() => { window.nextSlide(); }, 8000); 
+            }
+        };
+
+        window.resetInterval = function() {
+            clearInterval(slideInterval);
+            window.startInterval();
+        };
+
+        window.changeSlideManual = function(index) {
+            window.resetInterval();
+            window.changeSlide(index);
+        };
+
+        // Iniciar intervalo automático
+        window.startInterval();
+
+        // LÓGICA DE DESLIZAMIENTO TÁCTIL (SWIPE / GRAB)
+        const heroSlider = document.querySelector('.hero-slider');
+        let startX = 0;
+        let endX = 0;
+        let isDragging = false;
+
+        // Celulares (Touch)
+        heroSlider.addEventListener('touchstart', (e) => {
+            startX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        heroSlider.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, {passive: true});
+
+        // PC (Mouse)
+        heroSlider.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX;
+        });
+
+        heroSlider.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            endX = e.clientX;
+            handleSwipe();
+        });
+
+        heroSlider.addEventListener('mouseleave', (e) => {
+            if (isDragging) {
+                isDragging = false;
+                endX = e.clientX;
+                handleSwipe();
+            }
+        });
+
+        function handleSwipe() {
+            let umbral = 50; // Distancia mínima en píxeles para reconocer el deslizamiento
+            if (startX - endX > umbral) {
+                // Deslizó a la izquierda -> Siguiente
+                window.resetInterval();
+                window.nextSlide();
+            } else if (endX - startX > umbral) {
+                // Deslizó a la derecha -> Anterior
+                window.resetInterval();
+                window.prevSlide();
+            }
         }
-        if(slides.length > 0) { setInterval(() => { changeSlide((currentSlideIndex + 1) % slides.length); }, 8000); }
+        // ==========================================
 
         const faders = document.querySelectorAll('.fade-in');
         const appearOnScroll = new IntersectionObserver((entries, obs) => {
