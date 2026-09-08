@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ferretera del Sureste - Tienda Online Premium</title>
+    <title>Ferreteral del Sureste - Tienda Online Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -289,6 +289,30 @@
         /* EFECTOS DE ANIMACIÓN SCROLL */
         .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== FASE 1: MEJORAS DE CONVERSION ===== */
+.f1-popular-badge{position:absolute;top:10px;left:10px;z-index:6;background:var(--primario);color:#fff;padding:5px 9px;border-radius:20px;font-size:9px;font-weight:800;box-shadow:0 5px 12px rgba(255,102,0,.25);letter-spacing:.3px}
+.f1-fav-btn{position:absolute;top:10px;right:10px;z-index:7;width:36px;height:36px;border:0;border-radius:50%;background:rgba(255,255,255,.96);color:#6b7280;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12);transition:.25s}
+.f1-fav-btn:hover{transform:scale(1.08);color:#e11d48}
+.f1-fav-btn.active{color:#e11d48;background:#fff1f2}
+.f1-fav-btn i{font-size:15px}
+.f1-buy-now{margin-top:8px!important;background:var(--secundario)!important;box-shadow:none!important}
+.f1-buy-now:hover{background:var(--primario)!important}
+.f1-viewed-section{margin:35px auto 10px;max-width:1250px;padding:0 10px}
+.f1-viewed-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
+.f1-viewed-head h2{font-size:1.25rem;font-weight:800;text-transform:uppercase;margin:0}
+.f1-viewed-clear{border:1px solid var(--borde-card);background:var(--blanco);color:var(--texto-claro);padding:7px 12px;border-radius:20px;font-size:.75rem;font-weight:700;cursor:pointer}
+.f1-viewed-clear:hover{border-color:var(--primario);color:var(--primario)}
+.f1-viewed-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.f1-viewed-card{background:var(--blanco);border:1px solid var(--borde-card);border-radius:12px;padding:9px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:.25s;box-shadow:var(--sombra-suave)}
+.f1-viewed-card:hover{transform:translateY(-3px);border-color:var(--primario)}
+.f1-viewed-card img{width:58px;height:58px;object-fit:contain;border-radius:8px;background:#fff}
+.f1-viewed-info{min-width:0;flex:1}.f1-viewed-info strong{display:block;font-size:.72rem;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase}.f1-viewed-info span{display:block;color:var(--primario);font-weight:800;font-size:.8rem;margin-top:4px}
+@media(min-width:768px){.f1-viewed-grid{grid-template-columns:repeat(4,1fr);gap:14px}.f1-viewed-section{padding:0 10px}.f1-viewed-card{padding:11px}.f1-viewed-card img{width:68px;height:68px}}
+@media(max-width:480px){.f1-buy-now{font-size:.72rem!important;padding:9px 8px!important}.f1-fav-btn{width:32px;height:32px}.f1-popular-badge{font-size:8px;padding:4px 7px}}
+body.dark-mode .f1-fav-btn,body.dark-mode .f1-viewed-clear{background:#161b22;color:#f0f6fc;border-color:#30363d}
+body.dark-mode .f1-viewed-card{background:#161b22;border-color:#30363d}
+
     </style>
 </head>
 <body>
@@ -1361,5 +1385,125 @@
             }
         };
     </script>
+
+<script>
+/* ==========================================================
+   FASE 1 - CONVERSION: FAVORITOS, MAS VENDIDOS, COMPRAR AHORA
+   Y PRODUCTOS VISTOS RECIENTEMENTE
+   ========================================================== */
+(function(){
+    'use strict';
+    const KEY_FAV='fds_favoritos_v1';
+    const KEY_VIEW='fds_vistos_v1';
+    const KEY_CLICKS='fds_clicks_v1';
+    const MAX_VIEWED=8;
+
+    const read=(key, fallback)=>{try{return JSON.parse(localStorage.getItem(key)) ?? fallback}catch(e){return fallback}};
+    const write=(key,val)=>{try{localStorage.setItem(key,JSON.stringify(val))}catch(e){}};
+    const esc=(v)=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+    const num=v=>{const n=parseFloat(v);return Number.isFinite(n)?n:0};
+    const getProductById=id=>(window.productosDB||[]).find(p=>String(p.id)===String(id));
+    const productId=card=>card?.dataset?.id||'';
+
+    function favorites(){return read(KEY_FAV,[]).map(String)}
+    function setFavorite(id,on){
+        let arr=favorites(); id=String(id);
+        arr=on?[...new Set([...arr,id])]:arr.filter(x=>x!==id);
+        write(KEY_FAV,arr); renderFavoriteState(); toast(on?'Agregado a favoritos':'Quitado de favoritos');
+    }
+    function clicks(){return read(KEY_CLICKS,{})}
+    function registerClick(id){if(!id)return;const c=clicks();c[id]=(c[id]||0)+1;write(KEY_CLICKS,c)}
+
+    function addViewed(id){
+        if(!id)return;
+        let arr=read(KEY_VIEW,[]).filter(x=>String(x)!==String(id));
+        arr.unshift(String(id)); arr=arr.slice(0,MAX_VIEWED); write(KEY_VIEW,arr); renderViewed();
+    }
+
+    function toast(message){
+        const box=document.getElementById('toast-container');
+        if(!box)return;
+        const el=document.createElement('div');
+        el.style.cssText='background:#111;color:#fff;padding:11px 15px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,.2);font-size:12px;font-weight:700;animation:fadeInDrop .2s ease-out;';
+        el.innerHTML='<i class="fa-solid fa-circle-check" style="color:var(--primario);margin-right:7px"></i>'+esc(message);
+        box.appendChild(el); setTimeout(()=>el.remove(),1800);
+    }
+
+    function enhanceCards(){
+        const fav=favorites(), c=clicks();
+        document.querySelectorAll('#product-grid .card[data-id]').forEach(card=>{
+            if(card.dataset.f1Enhanced==='1'){
+                const b=card.querySelector('.f1-popular-badge'); if(b)b.style.display=(c[productId(card)]||0)>=3?'block':'none';
+                const fb=card.querySelector('.f1-fav-btn'); if(fb)updateFavButton(fb,fav.includes(productId(card)));
+                return;
+            }
+            card.dataset.f1Enhanced='1';
+            const id=productId(card); if(!id)return;
+            const img=card.querySelector('.product-img');
+            const wrap=card.querySelector('.img-wrapper');
+            if(wrap){
+                if((c[id]||0)>=3){const badge=document.createElement('span');badge.className='f1-popular-badge';badge.innerHTML='<i class="fa-solid fa-fire"></i> MÁS VENDIDO';wrap.appendChild(badge)}
+                const favBtn=document.createElement('button'); favBtn.type='button'; favBtn.className='f1-fav-btn'; favBtn.setAttribute('aria-label','Agregar a favoritos');
+                favBtn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();setFavorite(id,!favorites().includes(id));});
+                wrap.appendChild(favBtn); updateFavButton(favBtn,fav.includes(id));
+                wrap.addEventListener('click',()=>{registerClick(id);addViewed(id);},true);
+            }
+            const buy=card.querySelector('.btn-buy:not([disabled])');
+            if(buy){
+                buy.addEventListener('click',()=>{registerClick(id);addViewed(id)},true);
+                const now=buy.cloneNode(true);
+                now.classList.add('f1-buy-now');
+                now.innerHTML='<i class="fa-solid fa-bolt"></i> Comprar ahora';
+                now.addEventListener('click',e=>{
+                    e.preventDefault(); e.stopPropagation(); registerClick(id); addViewed(id);
+                    buy.click();
+                    setTimeout(()=>document.getElementById('cart-section-target')?.scrollIntoView({behavior:'smooth',block:'start'}),180);
+                });
+                buy.parentNode.appendChild(now);
+            }
+        });
+    }
+    function updateFavButton(btn,on){btn.classList.toggle('active',on);btn.innerHTML=on?'<i class="fa-solid fa-heart"></i>':'<i class="fa-regular fa-heart"></i>';btn.title=on?'Quitar de favoritos':'Agregar a favoritos'}
+    function renderFavoriteState(){document.querySelectorAll('.f1-fav-btn').forEach(b=>{const card=b.closest('.card');if(card)updateFavButton(b,favorites().includes(productId(card)))})}
+
+    function renderViewed(){
+        const ids=read(KEY_VIEW,[]); const section=document.getElementById('f1-viewed-section'); const grid=document.getElementById('f1-viewed-grid');
+        if(!section||!grid)return;
+        const products=ids.map(getProductById).filter(Boolean);
+        if(!products.length){section.style.display='none';return}
+        section.style.display='block';
+        grid.innerHTML=products.map(p=>`<div class="f1-viewed-card" data-id="${esc(p.id)}" onclick="window.openQuickView && window.openQuickView('${String(p.id).replace(/'/g,"\\'")}')">
+            <img src="${esc(p.img1||'https://dummyimage.com/120x120/eeeeee/777777&text=Producto')}" alt="${esc(p.nombre)}" loading="lazy">
+            <div class="f1-viewed-info"><strong>${esc(p.nombre)}</strong><span>$${num(p.precio).toFixed(2)}</span></div>
+        </div>`).join('');
+    }
+
+    function installSection(){
+        if(document.getElementById('f1-viewed-section'))return;
+        const catalog=document.getElementById('catalog-section');
+        if(!catalog)return;
+        const sec=document.createElement('section'); sec.id='f1-viewed-section';sec.className='f1-viewed-section';sec.style.display='none';
+        sec.innerHTML='<div class="f1-viewed-head"><h2><i class="fa-solid fa-clock-rotate-left" style="color:var(--primario)"></i> Vistos recientemente</h2><button class="f1-viewed-clear" type="button"><i class="fa-solid fa-trash"></i> Limpiar</button></div><div id="f1-viewed-grid" class="f1-viewed-grid"></div>';
+        sec.querySelector('.f1-viewed-clear').addEventListener('click',()=>{write(KEY_VIEW,[]);renderViewed();toast('Historial de productos limpiado')});
+        catalog.insertAdjacentElement('afterend',sec);renderViewed();
+    }
+
+    const originalRender=window.renderProductos;
+    if(typeof originalRender==='function'){
+        window.renderProductos=function(){originalRender.apply(this,arguments);setTimeout(enhanceCards,0);setTimeout(renderViewed,20)};
+    }
+    window.f1AddViewed=addViewed;
+    window.f1RegisterClick=registerClick;
+
+    document.addEventListener('DOMContentLoaded',()=>{
+        installSection(); setTimeout(enhanceCards,400); setTimeout(renderViewed,500);
+        const grid=document.getElementById('product-grid');
+        if(grid){new MutationObserver(()=>enhanceCards()).observe(grid,{childList:true});}
+    });
+    // Si renderProductos fue declarado después de este script, el observer se encargará de las tarjetas.
+    setTimeout(()=>{installSection();enhanceCards();renderViewed()},1200);
+})();
+</script>
+
 </body>
 </html>
