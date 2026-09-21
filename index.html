@@ -188,6 +188,18 @@
     .hero-product--first { left: 5%; top: 10%; transform: rotate(-2deg); }
     .hero-product--second { right: 4%; top: 12%; transform: rotate(2deg); }
     .hero-product--third { width: 34%; left: 33%; bottom: -4%; transform: rotate(-1deg); }
+    .hero-slide--christmas { background: radial-gradient(circle at 78% 24%, rgba(185,28,28,.2), transparent 33%), radial-gradient(circle at 60% 88%, rgba(22,101,52,.18), transparent 36%); }
+    .hero-slide--christmas .hero-slide__tag { background: #b91c1c; color: #fff; }
+    .hero-slide--christmas h1 span { color: #fb7185; }
+    .hero-slide--rain { background: radial-gradient(circle at 74% 44%, rgba(14,165,233,.23), transparent 39%); }
+    .hero-slide--rain h1 span { color: #38bdf8; }
+    .hero-season-grid { min-height: 390px; display: grid; align-content: center; gap: 11px; }
+    .hero-season-grid--christmas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .hero-season-grid--rain { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .hero-season-card { min-width: 0; overflow: hidden; aspect-ratio: 1.55 / 1; padding: 9px; border: 1px solid rgba(255,255,255,.7); border-radius: 12px; background: linear-gradient(145deg, #fff, #e8edf4); box-shadow: 0 15px 30px rgba(0,0,0,.25); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+    .hero-season-grid--rain .hero-season-card { aspect-ratio: 1.34 / 1; padding: 15px; }
+    .hero-season-card:hover { z-index: 2; transform: translateY(-4px) scale(1.025); border-color: rgba(249,115,22,.85); box-shadow: 0 20px 38px rgba(0,0,0,.32), 0 0 24px rgba(249,115,22,.12); }
+    .hero-season-card img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; filter: drop-shadow(0 8px 12px rgba(15,23,42,.14)); }
     .hero-arrow { position: absolute; z-index: 5; top: 50%; width: 44px; height: 44px; display: grid; place-items: center; transform: translateY(-50%); border: 1px solid rgba(255,255,255,.22); border-radius: 50%; background: rgba(255,255,255,.08); color: #f8fafc; cursor: pointer; backdrop-filter: blur(8px); transition: .2s ease; }
     .hero-arrow:hover { border-color: var(--orange); background: var(--orange); color: #111827; }
     .hero-arrow--prev { left: 10px; }
@@ -413,6 +425,11 @@
       .hero-product--first { left: 12%; top: 5%; }
       .hero-product--second { right: 12%; top: 8%; }
       .hero-product--third { left: 36%; bottom: -5%; }
+      .hero-season-grid { width: min(620px, 100%); min-height: 265px; margin-inline: auto; }
+      .hero-season-grid--christmas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .hero-season-grid--christmas .hero-season-card { aspect-ratio: 2.1 / 1; }
+      .hero-season-grid--rain { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .hero-season-grid--rain .hero-season-card { aspect-ratio: 1 / 1; padding: 10px; }
       .service-grid { grid-template-columns: 1fr; }
       .service-item + .service-item { border-left: 0; border-top: 1px solid var(--line); }
       .filter-grid { grid-template-columns: 1fr 1fr; }
@@ -451,6 +468,11 @@
       .hero-product--first { left: 4%; }
       .hero-product--second { right: 4%; }
       .hero-product--third { width: 32%; left: 34%; bottom: -2%; }
+      .hero-season-grid { min-height: 215px; margin-top: 16px; gap: 7px; }
+      .hero-season-card { padding: 5px; border-radius: 8px; }
+      .hero-season-grid--christmas .hero-season-card { aspect-ratio: 2.15 / 1; }
+      .hero-season-grid--rain { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+      .hero-season-grid--rain .hero-season-card { aspect-ratio: 1.55 / 1; padding: 7px; }
       .hero-arrow { width: 36px; height: 36px; top: 61%; }
       .hero-arrow--prev { left: 5px; }
       .hero-arrow--next { right: 5px; }
@@ -623,6 +645,41 @@
           </div>
         </article>
 
+        <article class="hero-slide hero-slide--christmas" aria-hidden="true">
+          <div class="hero-slide__copy">
+            <span class="hero-slide__tag">Temporada navideña</span>
+            <h1>Ilumina tus fiestas <span>con seguridad</span></h1>
+            <p>Encuentra luces, extensiones, focos LED, multicontactos y herramientas para decorar esta Navidad.</p>
+            <button class="button button--primary" type="button" data-search-term="foco">Ver productos navideños <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4"/></svg></button>
+          </div>
+          <div class="hero-season-grid hero-season-grid--christmas" aria-label="Productos para la temporada navideña">
+            <div class="hero-season-card"><img src="https://i.imgur.com/gooHv8w.jpeg" alt="Producto navideño 1" loading="lazy"></div>
+            <div class="hero-season-card"><img src="https://i.imgur.com/yf7gMXj.jpeg" alt="Producto navideño 2" loading="lazy"></div>
+            <div class="hero-season-card"><img src="https://i.imgur.com/vBUfeY3.jpeg" alt="Producto navideño 3" loading="lazy"></div>
+            <div class="hero-season-card"><img src="https://i.imgur.com/tYzBnig.jpeg" alt="Producto navideño 4" loading="lazy"></div>
+            <div class="hero-season-card"><img src="https://i.imgur.com/JD22jI0.jpeg" alt="Producto navideño 5" loading="lazy"></div>
+            <div class="hero-season-card"><img src="https://i.imgur.com/bqu11T8.jpeg" alt="Producto navideño 6" loading="lazy"></div>
+            <div class="hero-season-card"><img src="https://i.imgur.com/SRb3ma5.jpeg" alt="Producto navideño 7" loading="lazy"></div>
+            <div class="hero-season-card"><img src="https://i.imgur.com/XQhCLtS.jpeg" alt="Producto navideño 8" loading="lazy"></div>
+            <div class="hero-season-card"><img src="https://i.imgur.com/d6aU1cV.jpeg" alt="Producto navideño 9" loading="lazy"></div>
+          </div>
+        </article>
+
+        <article class="hero-slide hero-slide--rain" aria-hidden="true">
+          <div class="hero-slide__copy">
+            <span class="hero-slide__tag">Promociones</span>
+            <h1>Temporada de lluvia <span>equipa tu proyecto</span></h1>
+            <p>Fumigadores Truper y Pretul de alta resistencia para jardines, terrenos y control de plagas en época de lluvias.</p>
+            <button class="button button--primary" type="button" data-search-term="fumigador">Ver fumigadores <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4"/></svg></button>
+          </div>
+          <div class="hero-season-grid hero-season-grid--rain" aria-label="Productos para temporada de lluvias">
+            <div class="hero-season-card"><img src="https://i.imgur.com/enbYyDI.jpeg" alt="Producto para temporada de lluvias 1" loading="lazy"></div>
+            <div class="hero-season-card"><img src="https://i.imgur.com/DBaKpym.jpeg" alt="Producto para temporada de lluvias 2" loading="lazy"></div>
+            <div class="hero-season-card"><img src="https://i.imgur.com/SeUuT0s.jpeg" alt="Producto para temporada de lluvias 3" loading="lazy"></div>
+            <div class="hero-season-card"><img src="https://i.imgur.com/gYqtZjO.jpeg" alt="Producto para temporada de lluvias 4" loading="lazy"></div>
+          </div>
+        </article>
+
         <button class="hero-arrow hero-arrow--prev" id="heroPrev" type="button" aria-label="Banner anterior"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
         <button class="hero-arrow hero-arrow--next" id="heroNext" type="button" aria-label="Banner siguiente"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
         <div class="hero-dots" id="heroDots" aria-label="Seleccionar banner">
@@ -631,6 +688,8 @@
           <button class="hero-dot" type="button" aria-label="Banner 3"></button>
           <button class="hero-dot" type="button" aria-label="Banner 4"></button>
           <button class="hero-dot" type="button" aria-label="Banner 5"></button>
+          <button class="hero-dot" type="button" aria-label="Banner 6"></button>
+          <button class="hero-dot" type="button" aria-label="Banner 7"></button>
         </div>
       </div>
     </section>
