@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Consulta información, disponibilidad y características del producto en Ferreteral del Sureste.">
+  <meta name="theme-color" content="#0b1118">
+  <title>Producto | Ferreteral del Sureste</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&family=Roboto+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f172a'/%3E%3Cpath d='M14 42h36v8H14zM18 14h28l6 22H12z' fill='%23f6ad16'/%3E%3Cpath d='M22 20h20l2 8H20z' fill='%23fff' opacity='.9'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #090e14;
+      --header: #161d23;
+      --surface: #111820;
+      --surface-2: #171f27;
+      --surface-3: #222c36;
+      --text: #f8fafc;
+      --muted: #9aa8ba;
+      --subtle: #697789;
+      --line: rgba(148, 163, 184, .18);
+      --line-strong: rgba(148, 163, 184, .32);
+      --accent: #f6ad16;
+      --accent-strong: #e99708;
+      --accent-soft: rgba(246, 173, 22, .12);
+      --blue: #63a8ff;
+      --green: #20d86c;
+      --red: #ef4444;
+      --max: 1100px;
+      color-scheme: dark;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      min-height: 100vh;
+      color: var(--text);
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(rgba(148, 163, 184, .06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, .06) 1px, transparent 1px);
+      background-size: 64px 64px;
+      font: 400 1rem/1.55 "Inter", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, input { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    svg { display: block; }
+    :focus-visible { outline: 3px solid rgba(246, 173, 22, .55); outline-offset: 3px; }
+    .container { width: min(calc(100% - 32px), var(--max)); margin-inline: auto; }
+    .icon { width: 20px; height: 20px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-sm { width: 17px; height: 17px; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--line); background: rgba(22, 29, 35, .94); backdrop-filter: blur(18px); }
+    .header-main { min-height: 66px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand img { width: 40px; height: 40px; padding: 3px; object-fit: contain; background: #fff; }
+    .brand span { font: 800 .86rem/1 "Montserrat", sans-serif; letter-spacing: -.04em; text-transform: uppercase; }
+    .brand strong { color: var(--accent); font-weight: 800; }
+    .nav { display: flex; align-items: center; gap: 5px; }
+    .nav a { padding: 10px 12px; border-radius: 7px; color: #cbd5e1; font: 800 .78rem/1 "Montserrat", sans-serif; text-transform: uppercase; transition: .2s ease; }
+    .nav a:hover, .nav a.is-active { background: var(--accent); color: #111827; }
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .header-pill { height: 39px; display: inline-flex; align-items: center; gap: 8px; padding: 0 13px; border: 1px solid rgba(246,173,22,.5); border-radius: 8px; color: var(--accent); background: transparent; font: 800 .76rem/1 "Montserrat", sans-serif; text-transform: uppercase; }
+    .cart-pill { position: relative; border-color: var(--accent); background: var(--accent); color: #111827; }
+    .cart-count { position: absolute; top: -8px; right: -7px; min-width: 19px; height: 19px; display: grid; place-items: center; padding-inline: 5px; border-radius: 999px; color: #fff; background: #111827; font-size: .72rem; }
+    .search-row { border-top: 1px solid var(--line); background: rgba(9,14,20,.46); }
+    .search-form { min-height: 68px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+    .search-field { position: relative; width: min(560px, 100%); }
+    .search-field svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+    .search-field input { width: 100%; height: 44px; padding: 0 15px 0 42px; border: 1px solid transparent; border-radius: 7px; outline: none; color: var(--text); background: #090f16; font-size: .82rem; }
+    .search-field input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .search-button { height: 44px; padding: 0 23px; border: 0; border-radius: 7px; background: var(--accent); color: #111827; cursor: pointer; font: 800 .76rem/1 "Montserrat", sans-serif; text-transform: uppercase; }
+
+    .product-main { padding: 0 0 72px; }
+    .back-row { min-height: 58px; display: flex; align-items: center; }
+    .back-link { display: inline-flex; align-items: center; gap: 7px; color: #9fb7d8; font: 800 .78rem/1 "Roboto Condensed", sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+    .back-link:hover { color: var(--accent); }
+
+    .product-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(430px, 1fr); gap: 40px; align-items: start; }
+    .gallery { min-width: 0; }
+    .main-image-frame { position: relative; overflow: hidden; aspect-ratio: 1/1; display: grid; place-items: center; padding: clamp(25px, 5vw, 58px); border: 1px solid var(--line); border-radius: 6px; background: #fff; box-shadow: 0 22px 58px rgba(0,0,0,.23); }
+    .main-image-frame img { width: 100%; height: 100%; object-fit: contain; }
+    .image-label { position: absolute; left: 15px; top: 15px; display: inline-flex; align-items: center; gap: 7px; padding: 7px 9px; border-radius: 5px; color: #334155; background: rgba(248,250,252,.94); box-shadow: 0 7px 18px rgba(15,23,42,.12); font-size: .75rem; font-weight: 800; }
+    .thumbnails { display: flex; gap: 10px; margin-top: 12px; overflow-x: auto; padding-bottom: 4px; }
+    .thumbnail { width: 76px; height: 76px; flex: 0 0 auto; padding: 7px; border: 2px solid transparent; border-radius: 8px; background: #fff; cursor: pointer; transition: .2s ease; }
+    .thumbnail img { width: 100%; height: 100%; object-fit: contain; }
+    .thumbnail:hover, .thumbnail.is-active { border-color: var(--accent); transform: translateY(-2px); }
+    .thumbnails:empty { display: none; }
+
+    .product-info { min-width: 0; padding-top: 2px; }
+    .badges { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .badge { padding: 6px 9px; border: 1px solid rgba(246,173,22,.5); border-radius: 5px; color: var(--accent); background: var(--accent-soft); font: 800 .75rem/1 "Roboto Condensed", sans-serif; letter-spacing: .05em; text-transform: uppercase; }
+    .badge--plain { border-color: transparent; color: #9fb7d8; background: transparent; padding-inline: 0; }
+    .product-title { margin: 15px 0 0; font: 500 clamp(2rem, 4vw, 3.2rem)/.98 "Roboto Condensed", sans-serif; letter-spacing: -.025em; text-transform: uppercase; overflow-wrap: anywhere; }
+    .price { margin-top: 18px; color: var(--accent); font: 800 clamp(2.35rem, 5vw, 3.6rem)/1 "Roboto Condensed", sans-serif; letter-spacing: -.04em; }
+    .stock-line { display: flex; align-items: center; gap: 7px; margin-top: 8px; color: #b8c5d6; font-size: .82rem; font-weight: 600; }
+    .stock-line::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(32,216,108,.1); }
+    .stock-line.is-out { color: #fca5a5; }
+    .stock-line.is-out::before { background: var(--red); box-shadow: 0 0 0 4px rgba(239,68,68,.1); }
+    .subtotal { margin-top: 4px; color: var(--accent); font: 800 .78rem/1.3 "Roboto Condensed", sans-serif; }
+    .divider { height: 1px; margin: 20px 0 17px; background: var(--line); }
+    .features { margin: 0; padding: 0; display: grid; gap: 15px; list-style: none; color: #e2e8f0; font-size: .9rem; }
+    .features li { position: relative; padding-left: 17px; }
+    .features li::before { content: ""; position: absolute; left: 0; top: .65em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+
+    .volume-box { margin-top: 22px; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface-2); }
+    .volume-title { margin: 0; color: var(--accent); font: 800 .82rem/1 "Roboto Condensed", sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+    .tiers { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tier { display: grid; gap: 3px; min-width: 92px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px; background: #0d131a; }
+    .tier span { color: var(--muted); font-size: .75rem; font-weight: 700; }
+    .tier strong { color: var(--accent); font-size: .8rem; }
+    .volume-note { margin: 10px 0 0; color: var(--muted); font-size: .75rem; }
+    .volume-note strong { color: var(--accent); }
+
+    .purchase-row { display: grid; grid-template-columns: 104px 1fr; gap: 10px; margin-top: 19px; }
+    .qty { display: grid; grid-template-columns: 32px 1fr 32px; align-items: center; min-height: 48px; border: 1px solid var(--line); border-radius: 7px; background: var(--surface-2); }
+    .qty button { height: 100%; border: 0; color: var(--muted); background: transparent; cursor: pointer; font-size: 1.15rem; }
+    .qty button:hover { color: var(--accent); }
+    .qty strong { text-align: center; font-size: 1.05rem; }
+    .action { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 16px; border: 1px solid transparent; border-radius: 7px; cursor: pointer; font: 800 .78rem/1 "Montserrat", sans-serif; text-transform: uppercase; transition: .2s ease; }
+    .action:hover { transform: translateY(-2px); }
+    .action:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+    .action--cart { color: #111827; background: var(--accent); box-shadow: 0 11px 25px rgba(246,173,22,.2); }
+    .action--cart:hover { background: var(--accent-strong); }
+    .action--whatsapp { width: 100%; margin-top: 9px; color: #fff; background: var(--green); }
+    .action--share { width: 100%; margin-top: 8px; color: #fff; border-color: var(--line-strong); background: var(--surface-2); }
+    .action--share:hover { border-color: var(--green); color: var(--green); }
+    .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; margin-top: 13px; }
+    .trust-item { min-height: 64px; display: grid; place-items: center; align-content: center; gap: 6px; padding: 8px; border: 1px solid var(--line); border-radius: 7px; color: var(--accent); background: var(--surface-2); text-align: center; }
+    .trust-item span { color: #9fb0c4; font: 700 .72rem/1.2 "Roboto Condensed", sans-serif; text-transform: uppercase; }
+
+    .loading-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .skeleton { position: relative; overflow: hidden; background: #202a34; }
+    .skeleton::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgba(255,255,255,.11), transparent); animation: shimmer 1.25s infinite; }
+    .skeleton-image { aspect-ratio: 1/1; border-radius: 7px; }
+    .skeleton-line { height: 15px; margin-bottom: 14px; border-radius: 999px; }
+    .skeleton-line--tag { width: 28%; height: 24px; }
+    .skeleton-line--title { width: 92%; height: 38px; }
+    .skeleton-line--title2 { width: 68%; height: 38px; }
+    .skeleton-line--price { width: 34%; height: 48px; margin-top: 25px; }
+    .skeleton-card { height: 94px; margin-top: 26px; border-radius: 8px; }
+    @keyframes shimmer { to { transform: translateX(100%); } }
+    .error-state { min-height: 430px; display: grid; place-items: center; text-align: center; }
+    .error-state[hidden], .product-layout[hidden], .loading-layout[hidden] { display: none; }
+    .error-icon { width: 58px; height: 58px; display: grid; place-items: center; margin: 0 auto 16px; border-radius: 17px; color: var(--accent); background: var(--accent-soft); }
+    .error-state h1 { margin: 0; font: 800 1.55rem/1.2 "Montserrat", sans-serif; }
+    .error-state p { max-width: 470px; margin: 10px auto 20px; color: var(--muted); }
+    .back-button { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 7px; color: #111827; background: var(--accent); font-weight: 800; }
+
+    .product-discovery { position: relative; margin-top: 74px; padding: 62px 0 68px; border-top: 1px solid var(--line); background: rgba(8, 13, 18, .82); }
+    .product-discovery[hidden] { display: none; }
+    .product-discovery::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: repeating-linear-gradient(135deg, var(--accent) 0 14px, transparent 14px 25px); }
+    .discovery-section + .discovery-section { margin-top: 52px; }
+    .discovery-section[hidden] { display: none; }
+    .discovery-heading { display: flex; align-items: center; gap: 10px; margin: 0 0 19px; }
+    .discovery-number { color: transparent; -webkit-text-stroke: 1px #4a5663; font: 800 2.15rem/1 "Roboto Condensed", sans-serif; letter-spacing: -.04em; }
+    .discovery-accent { width: 25px; height: 2px; background: var(--accent); box-shadow: 9px 0 0 var(--accent); }
+    .discovery-title { margin: 0 0 0 5px; font: 600 1.05rem/1.15 "Roboto Condensed", sans-serif; letter-spacing: .03em; text-transform: uppercase; }
+    .recommendation-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+    .mini-card { min-width: 0; overflow: hidden; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 8px; background: var(--surface-2); transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
+    .mini-card:hover { transform: translateY(-5px); border-color: rgba(246,173,22,.55); box-shadow: 0 18px 38px rgba(0,0,0,.24); }
+    .mini-media { position: relative; aspect-ratio: 1.15/1; display: grid; place-items: center; overflow: hidden; padding: 13px; background: #fff; }
+    .mini-media img { width: 100%; height: 100%; object-fit: contain; transition: transform .28s ease; }
+    .mini-card:hover .mini-media img { transform: scale(1.05); }
+    .mini-stock { position: absolute; right: 7px; top: 7px; display: inline-flex; align-items: center; gap: 5px; padding: 5px 7px; border-radius: 4px; color: #166534; background: #dcfce7; font-size: .75rem; font-weight: 800; }
+    .mini-stock::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #22c55e; }
+    .mini-stock.is-low { color: #92400e; background: #fef3c7; }
+    .mini-stock.is-low::before { background: #f59e0b; }
+    .mini-stock.is-out { color: #991b1b; background: #fee2e2; }
+    .mini-stock.is-out::before { background: #ef4444; }
+    .mini-discount { position: absolute; left: 7px; top: 7px; z-index: 1; padding: 5px 7px; border-radius: 4px; color: #111827; background: var(--accent); font-size: .75rem; font-weight: 800; }
+    .mini-body { display: flex; flex: 1; flex-direction: column; padding: 12px; }
+    .mini-brand { color: var(--muted); font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+    .mini-title { min-height: 43px; margin: 7px 0 0; font: 700 .78rem/1.35 "Roboto Condensed", sans-serif; text-transform: uppercase; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+    .mini-title a:hover { color: var(--accent); }
+    .mini-footer { display: flex; align-items: end; justify-content: space-between; gap: 7px; margin-top: auto; padding-top: 15px; }
+    .mini-price strong { display: block; color: var(--accent); font: 800 1.12rem/1 "Roboto Condensed", sans-serif; }
+    .mini-price span { display: block; margin-top: 5px; color: var(--muted); font-size: .75rem; }
+    .mini-add { min-height: 34px; display: inline-flex; align-items: center; justify-content: center; gap: 5px; padding: 0 9px; border: 0; border-radius: 5px; color: #111827; background: var(--accent); cursor: pointer; font: 800 .75rem/1 "Roboto Condensed", sans-serif; }
+    .mini-add:hover { background: var(--accent-strong); }
+    .mini-add:disabled { opacity: .45; cursor: not-allowed; }
+
+    .toast { position: fixed; z-index: 300; right: 18px; bottom: 18px; max-width: min(380px, calc(100vw - 36px)); display: flex; align-items: center; gap: 10px; padding: 13px 15px; border: 1px solid rgba(32,216,108,.35); border-radius: 9px; color: var(--text); background: var(--surface-2); box-shadow: 0 18px 45px rgba(0,0,0,.35); font-size: .82rem; font-weight: 700; transform: translateY(24px); opacity: 0; visibility: hidden; transition: .25s ease; }
+    .toast.is-visible { transform: translateY(0); opacity: 1; visibility: visible; }
+    .toast-icon { width: 25px; height: 25px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: var(--green); }
+
+    .site-footer { padding: 24px 0; border-top: 1px solid var(--line); color: var(--subtle); background: #080c11; font-size: .75rem; text-align: center; }
+
+    @media (max-width: 900px) {
+      .nav { display: none; }
+      .header-main { grid-template-columns: 1fr auto; }
+      .product-layout, .loading-layout { grid-template-columns: 1fr; }
+      .gallery { max-width: 650px; width: 100%; margin-inline: auto; }
+      .product-info { max-width: 650px; width: 100%; margin-inline: auto; }
+      .recommendation-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 560px) {
+      .container { width: min(calc(100% - 22px), var(--max)); }
+      .header-main { min-height: 60px; gap: 8px; }
+      .brand img { width: 37px; height: 37px; }
+      .brand span { max-width: 145px; font-size: .72rem; }
+      .header-pill--wholesale { display: none; }
+      .header-pill { width: 39px; height: 39px; justify-content: center; padding: 0; }
+      .header-pill > span:not(.cart-count) { display: none; }
+      .search-form { min-height: 58px; }
+      .search-field input, .search-button { height: 41px; }
+      .search-button { padding-inline: 13px; font-size: .72rem; }
+      .back-row { min-height: 49px; }
+      .product-main { padding-bottom: 48px; }
+      .product-layout { gap: 23px; }
+      .main-image-frame { padding: 27px; }
+      .product-title { font-size: clamp(1.8rem, 9vw, 2.45rem); }
+      .price { font-size: 2.55rem; }
+      .features { font-size: .84rem; }
+      .purchase-row { grid-template-columns: 1fr; }
+      .qty { grid-template-columns: 42px 1fr 42px; }
+      .trust-item { padding-inline: 4px; }
+      .trust-item span { font-size: .75rem; }
+      .product-discovery { margin-top: 54px; padding-top: 46px; }
+      .recommendation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+      .mini-body { padding: 10px; }
+      .mini-title { font-size: .76rem; }
+      .mini-add { padding-inline: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-main">
+      <a class="brand" href="index.html" aria-label="Ferreteral del Sureste, inicio">
+        <img src="https://i.imgur.com/ybCK68C.png" alt="">
+        <span>Ferreteral <strong>del Sureste</strong></span>
+      </a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="index.html">Inicio</a>
+        <a class="is-active" href="index.html#catalogo">Catálogo</a>
+      </nav>
+      <div class="header-actions">
+        <a class="header-pill header-pill--wholesale" href="https://wa.me/529621093834?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20precios%20de%20mayoreo." target="_blank" rel="noopener">
+          <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10h16v10H4zM7 10V7a5 5 0 0 1 10 0v3M8 14h8"/></svg><span>Mayoreo</span>
+        </a>
+        <a class="header-pill cart-pill" href="index.html?carrito=1#catalogo" aria-label="Abrir carrito">
+          <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1"/><circle cx="19" cy="20" r="1"/><path d="M3 4h2l2.3 10.4a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L21 8H6"/></svg><span>Carrito</span><strong class="cart-count" id="cartCount">0</strong>
+        </a>
+      </div>
+    </div>
+    <div class="search-row">
+      <form class="container search-form" id="productSearch" role="search">
+        <div class="search-field">
+          <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="searchValue" type="search" autocomplete="off" placeholder="Buscar herramienta, material…" aria-label="Buscar en el catálogo">
+        </div>
+        <button class="search-button" type="submit">Buscar</button>
+      </form>
+    </div>
+  </header>
+
+  <main class="product-main">
+    <div class="container back-row">
+      <a class="back-link" href="index.html#catalogo"><svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg> Volver al catálogo</a>
+    </div>
+
+    <div class="container loading-layout" id="productLoading" aria-label="Cargando producto">
+      <div class="skeleton skeleton-image"></div>
+      <div style="padding-top:4px">
+        <div class="skeleton skeleton-line skeleton-line--tag"></div>
+        <div class="skeleton skeleton-line skeleton-line--title"></div>
+        <div class="skeleton skeleton-line skeleton-line--title2"></div>
+        <div class="skeleton skeleton-line skeleton-line--price"></div>
+        <div class="skeleton skeleton-card"></div>
+      </div>
+    </div>
+
+    <section class="container product-layout" id="productView" hidden aria-labelledby="productTitle">
+      <div class="gallery">
+        <div class="main-image-frame">
+          <span class="image-label"><svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v13H4zM8 7V4h8v3"/></svg> Imagen del producto</span>
+          <img id="mainImage" src="" alt="">
+        </div>
+        <div class="thumbnails" id="thumbnails" aria-label="Imágenes adicionales"></div>
+      </div>
+
+      <div class="product-info">
+        <div class="badges"><span class="badge" id="productCategory"></span><span class="badge badge--plain" id="productBrand"></span></div>
+        <h1 class="product-title" id="productTitle"></h1>
+        <div class="price" id="productPrice"></div>
+        <div class="stock-line" id="productStock"></div>
+        <div class="subtotal" id="productSubtotal"></div>
+        <div class="divider"></div>
+        <ul class="features" id="productFeatures"></ul>
+
+        <div class="volume-box" id="volumeBox">
+          <h2 class="volume-title">Escalas por volumen</h2>
+          <div class="tiers" id="volumeTiers"></div>
+          <p class="volume-note">¿Compras por volumen? <strong>Consulta la cotización</strong> para confirmar condiciones y disponibilidad.</p>
+        </div>
+
+        <div class="purchase-row">
+          <div class="qty" aria-label="Cantidad">
+            <button id="qtyMinus" type="button" aria-label="Disminuir cantidad">−</button>
+            <strong id="quantity">1</strong>
+            <button id="qtyPlus" type="button" aria-label="Aumentar cantidad">+</button>
+          </div>
+          <button class="action action--cart" id="addToCart" type="button"><svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1"/><circle cx="19" cy="20" r="1"/><path d="M3 4h2l2.3 10.4a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L21 8H6"/></svg> Agregar al carrito</button>
+        </div>
+        <button class="action action--whatsapp" id="consultWhatsApp" type="button"><svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2-5.2A8.5 8.5 0 1 1 21 11.5Z"/></svg> Consultar por WhatsApp</button>
+        <button class="action action--share" id="shareWhatsApp" type="button"><svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2-5.2A8.5 8.5 0 1 1 21 11.5Z"/></svg> Compartir por WhatsApp</button>
+
+        <div class="trust-grid" aria-label="Servicios disponibles">
+          <div class="trust-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7zM5 17a2 2 0 1 0 4 0M16 17a2 2 0 1 0 4 0"/></svg><span>Envío a obra</span></div>
+          <div class="trust-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 7v5c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V7Z"/><path d="m9 12 2 2 4-4"/></svg><span>Garantía aplicable</span></div>
+          <div class="trust-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14v-3a8 8 0 0 1 16 0v3M4 14h3v6H5a1 1 0 0 1-1-1Zm16 0h-3v6h2a1 1 0 0 0 1-1Z"/></svg><span>Asesoría técnica</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container error-state" id="productError" hidden>
+      <div>
+        <span class="error-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v13H4zM8 7V4h8v3M9 12h6"/></svg></span>
+        <h1>No pudimos mostrar este producto</h1>
+        <p id="errorMessage">Regresa al catálogo e intenta abrirlo nuevamente.</p>
+        <a class="back-button" href="index.html#catalogo">Volver al catálogo</a>
+      </div>
+    </section>
+
+    <div class="product-discovery" id="productDiscovery" hidden>
+      <div class="container">
+        <section class="discovery-section" id="relatedSection" hidden aria-labelledby="relatedTitle">
+          <div class="discovery-heading"><span class="discovery-number">02</span><span class="discovery-accent"></span><h2 class="discovery-title" id="relatedTitle">También te puede interesar</h2></div>
+          <div class="recommendation-grid" id="relatedGrid"></div>
+        </section>
+        <section class="discovery-section" id="recentSection" hidden aria-labelledby="recentTitle">
+          <div class="discovery-heading"><span class="discovery-number">03</span><span class="discovery-accent"></span><h2 class="discovery-title" id="recentTitle">Recientemente vistos</h2></div>
+          <div class="recommendation-grid" id="recentGrid"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">© <span id="currentYear"></span> Ferreteral del Sureste · Huixtla, Chiapas</footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"><span class="toast-icon"><svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 12 4 4 8-8"/></svg></span><span id="toastText"></span></div>
+
+  <script>
+    (() => {
+      "use strict";
+      const CART_KEY = "fds-cart-v3";
+      const RECENT_KEY = "fds-recent-v1";
+      const PHONE = "529621093834";
+      const money = new Intl.NumberFormat("es-MX", { style: "currency", currency: "MXN" });
+      const fallbackImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'%3E%3Crect width='600' height='600' fill='%23f1f5f9'/%3E%3Cg fill='none' stroke='%2394a3b8' stroke-width='14'%3E%3Cpath d='M222 350h156v58H222zM260 175h80l18 110H242z'/%3E%3Cpath d='M200 408h200'/%3E%3C/g%3E%3Ctext x='300' y='475' text-anchor='middle' font-family='Arial' font-size='24' fill='%2364748b'%3ESin imagen%3C/text%3E%3C/svg%3E";
+      let product = null;
+      let quantity = 1;
+      let toastTimer = null;
+      let catalogProducts = [];
+
+      const els = {
+        loading: document.getElementById("productLoading"),
+        view: document.getElementById("productView"),
+        error: document.getElementById("productError"),
+        mainImage: document.getElementById("mainImage"),
+        thumbs: document.getElementById("thumbnails"),
+        category: document.getElementById("productCategory"),
+        brand: document.getElementById("productBrand"),
+        title: document.getElementById("productTitle"),
+        price: document.getElementById("productPrice"),
+        stock: document.getElementById("productStock"),
+        subtotal: document.getElementById("productSubtotal"),
+        features: document.getElementById("productFeatures"),
+        volumeBox: document.getElementById("volumeBox"),
+        tiers: document.getElementById("volumeTiers"),
+        quantity: document.getElementById("quantity"),
+        add: document.getElementById("addToCart"),
+        cartCount: document.getElementById("cartCount"),
+        toast: document.getElementById("toast"),
+        toastText: document.getElementById("toastText"),
+        discovery: document.getElementById("productDiscovery"),
+        relatedSection: document.getElementById("relatedSection"),
+        relatedGrid: document.getElementById("relatedGrid"),
+        recentSection: document.getElementById("recentSection"),
+        recentGrid: document.getElementById("recentGrid")
+      };
+
+      function number(value) {
+        const parsed = Number.parseFloat(String(value ?? 0).replace(/,/g, ""));
+        return Number.isFinite(parsed) ? parsed : 0;
+      }
+
+      function safeImage(value) {
+        try {
+          const url = new URL(String(value || ""));
+          return ["https:", "http:"].includes(url.protocol) ? url.href : fallbackImage;
+        } catch { return fallbackImage; }
+      }
+
+      function readCart() {
+        try {
+          const value = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+          return Array.isArray(value) ? value : [];
+        } catch { return []; }
+      }
+
+      function updateCartCount() {
+        const count = readCart().reduce((total, item) => total + Math.max(0, Math.floor(number(item.qty))), 0);
+        els.cartCount.textContent = count > 99 ? "99+" : String(count);
+      }
+
+      function readRecentIds() {
+        try {
+          const value = JSON.parse(localStorage.getItem(RECENT_KEY) || "[]");
+          return Array.isArray(value) ? value.filter(id => typeof id === "string") : [];
+        } catch { return []; }
+      }
+
+      function rememberProduct(id) {
+        const updated = [id, ...readRecentIds().filter(itemId => itemId !== id)].slice(0, 10);
+        localStorage.setItem(RECENT_KEY, JSON.stringify(updated));
+      }
+
+      function descriptionLines(value) {
+        const plain = String(value || "")
+          .replace(/<br\s*\/?>/gi, "\n")
+          .replace(/<\/p>/gi, "\n")
+          .replace(/<[^>]*>/g, " ")
+          .replace(/&nbsp;/gi, " ")
+          .replace(/\r/g, "");
+        const lines = plain.split(/\n|•|\s+-\s+/).map(line => line.replace(/\s+/g, " ").trim()).filter(Boolean);
+        return lines.length ? lines.slice(0, 8) : ["Consulta especificaciones, compatibilidad y condiciones al confirmar tu pedido."];
+      }
+
+      function normalize(raw, id) {
+        const images = [raw.img1, raw.img2, raw.img3].map(safeImage).filter((url, index, array) => url !== fallbackImage && array.indexOf(url) === index);
+        const tierQuantities = [3, 5, 10, 12, 20, 25, 50, 100];
+        return {
+          id,
+          name: String(raw.nombre || raw.name || "Producto sin nombre").trim(),
+          brand: String(raw.marca || "Sin marca").trim(),
+          category: String(raw.departamento || raw.categoria || "General").trim(),
+          price: number(raw.precio),
+          stock: Math.max(0, number(raw.stock)),
+          images: images.length ? images : [fallbackImage],
+          features: descriptionLines(raw.desc || raw.descripcion),
+          tiers: tierQuantities.map(qty => ({ qty, price: number(raw[`t${qty}`]) })).filter(tier => tier.price > 0)
+        };
+      }
+
+      function setMainImage(url, button) {
+        els.mainImage.src = url;
+        els.thumbs.querySelectorAll(".thumbnail").forEach(item => item.classList.toggle("is-active", item === button));
+      }
+
+      function updateTotals() {
+        els.quantity.textContent = String(quantity);
+        els.subtotal.textContent = `Subtotal (${quantity} ${quantity === 1 ? "pza" : "pzas"}): ${money.format(product.price * quantity)}`;
+      }
+
+      function renderProduct(raw, id) {
+        product = normalize(raw, id);
+        document.title = `${product.name} | Ferreteral del Sureste`;
+        document.querySelector('meta[name="description"]').content = `Consulta precio, existencia y características de ${product.name}.`;
+        els.mainImage.src = product.images[0];
+        els.mainImage.alt = product.name;
+        els.mainImage.onerror = () => { els.mainImage.onerror = null; els.mainImage.src = fallbackImage; };
+        els.category.textContent = product.category;
+        els.brand.textContent = product.brand;
+        els.title.textContent = product.name;
+        els.price.textContent = money.format(product.price);
+        els.stock.textContent = product.stock > 0 ? `${formatStock(product.stock)} piezas disponibles` : "Producto agotado";
+        els.stock.classList.toggle("is-out", product.stock <= 0);
+        els.add.disabled = product.stock <= 0;
+
+        els.features.replaceChildren();
+        product.features.forEach(feature => {
+          const item = document.createElement("li");
+          item.textContent = feature;
+          els.features.appendChild(item);
+        });
+
+        els.thumbs.replaceChildren();
+        if (product.images.length > 1) {
+          product.images.forEach((url, index) => {
+            const button = document.createElement("button");
+            button.className = `thumbnail${index === 0 ? " is-active" : ""}`;
+            button.type = "button";
+            button.setAttribute("aria-label", `Ver imagen ${index + 1}`);
+            const image = document.createElement("img");
+            image.src = url;
+            image.alt = "";
+            image.onerror = () => { image.onerror = null; image.src = fallbackImage; };
+            button.appendChild(image);
+            button.addEventListener("click", () => setMainImage(url, button));
+            els.thumbs.appendChild(button);
+          });
+        }
+
+        els.tiers.replaceChildren();
+        if (product.tiers.length) {
+          product.tiers.forEach(tier => {
+            const card = document.createElement("div");
+            card.className = "tier";
+            const label = document.createElement("span");
+            label.textContent = `${tier.qty}+ piezas`;
+            const price = document.createElement("strong");
+            price.textContent = `${money.format(tier.price)} c/u`;
+            card.append(label, price);
+            els.tiers.appendChild(card);
+          });
+        } else {
+          els.volumeBox.hidden = true;
+        }
+
+        quantity = 1;
+        updateTotals();
+        rememberProduct(product.id);
+        els.loading.hidden = true;
+        els.view.hidden = false;
+      }
+
+      function productScore(item) {
+        let score = 0;
+        if (item.category === product.category) score += 4;
+        if (item.brand === product.brand) score += 2;
+        if (item.stock > 0) score += 1;
+        return score;
+      }
+
+      function stockDetails(item) {
+        if (item.stock <= 0) return { text: "Agotado", className: "mini-stock is-out" };
+        if (item.stock <= 5) return { text: `${formatStock(item.stock)} disp.`, className: "mini-stock is-low" };
+        return { text: `${formatStock(item.stock)} disp.`, className: "mini-stock" };
+      }
+
+      function createProductCard(item) {
+        const card = document.createElement("article");
+        card.className = "mini-card";
+
+        const media = document.createElement("a");
+        media.className = "mini-media";
+        media.href = `producto.html?id=${encodeURIComponent(item.id)}`;
+        media.setAttribute("aria-label", `Abrir ${item.name}`);
+        const stock = stockDetails(item);
+        const stockBadge = document.createElement("span");
+        stockBadge.className = stock.className;
+        stockBadge.textContent = stock.text;
+        const tierPrices = item.tiers.map(tier => tier.price).filter(price => price > 0 && price < item.price);
+        if (tierPrices.length && item.price > 0) {
+          const discount = Math.round((1 - Math.min(...tierPrices) / item.price) * 100);
+          if (discount > 0) {
+            const discountBadge = document.createElement("span");
+            discountBadge.className = "mini-discount";
+            discountBadge.textContent = `Vol. −${discount}%`;
+            media.appendChild(discountBadge);
+          }
+        }
+        const image = document.createElement("img");
+        image.src = item.images[0];
+        image.alt = item.name;
+        image.loading = "lazy";
+        image.onerror = () => { image.onerror = null; image.src = fallbackImage; };
+        media.append(stockBadge, image);
+
+        const body = document.createElement("div");
+        body.className = "mini-body";
+        const brand = document.createElement("span");
+        brand.className = "mini-brand";
+        brand.textContent = item.brand;
+        const title = document.createElement("h3");
+        title.className = "mini-title";
+        const titleLink = document.createElement("a");
+        titleLink.href = media.href;
+        titleLink.textContent = item.name;
+        title.appendChild(titleLink);
+
+        const footer = document.createElement("div");
+        footer.className = "mini-footer";
+        const price = document.createElement("div");
+        price.className = "mini-price";
+        const priceStrong = document.createElement("strong");
+        priceStrong.textContent = money.format(item.price);
+        const stockText = document.createElement("span");
+        stockText.textContent = item.stock > 0 ? "Precio mostrado" : "Sin existencia";
+        price.append(priceStrong, stockText);
+        const add = document.createElement("button");
+        add.className = "mini-add";
+        add.type = "button";
+        add.disabled = item.stock <= 0;
+        add.setAttribute("aria-label", `Agregar ${item.name} al carrito`);
+        add.innerHTML = `<svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1"/><circle cx="19" cy="20" r="1"/><path d="M3 4h2l2.3 10.4a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L21 8H6"/></svg> Agregar`;
+        add.addEventListener("click", () => addCatalogProduct(item));
+        footer.append(price, add);
+        body.append(brand, title, footer);
+        card.append(media, body);
+        return card;
+      }
+
+      function renderProductGrid(container, items) {
+        container.replaceChildren(...items.map(createProductCard));
+      }
+
+      function renderRecommendations(rawProducts) {
+        if (!product) return;
+        catalogProducts = rawProducts.map(entry => normalize(entry.data, entry.id));
+        const candidates = catalogProducts
+          .filter(item => item.id !== product.id)
+          .sort((a, b) => productScore(b) - productScore(a) || a.name.localeCompare(b.name, "es", { sensitivity: "base" }));
+        const related = candidates.slice(0, 5);
+        const map = new Map(catalogProducts.map(item => [item.id, item]));
+        const recent = readRecentIds().filter(id => id !== product.id).map(id => map.get(id)).filter(Boolean).slice(0, 5);
+
+        if (related.length) {
+          renderProductGrid(els.relatedGrid, related);
+          els.relatedSection.hidden = false;
+        }
+        if (recent.length) {
+          renderProductGrid(els.recentGrid, recent);
+          els.recentSection.hidden = false;
+        }
+        els.discovery.hidden = !related.length && !recent.length;
+      }
+
+      function formatStock(value) { return Number.isInteger(value) ? String(value) : value.toFixed(1); }
+
+      function showError(message) {
+        els.loading.hidden = true;
+        els.view.hidden = true;
+        document.getElementById("errorMessage").textContent = message || "Regresa al catálogo e intenta abrirlo nuevamente.";
+        els.error.hidden = false;
+      }
+
+      function changeQuantity(delta) {
+        if (!product || product.stock <= 0) return;
+        const max = Math.max(1, Math.floor(product.stock));
+        quantity = Math.max(1, Math.min(max, quantity + delta));
+        updateTotals();
+      }
+
+      function addToCart() {
+        if (!product) return;
+        addCatalogProduct(product, quantity);
+      }
+
+      function addCatalogProduct(itemProduct, requestedQty = 1) {
+        if (!itemProduct || itemProduct.stock <= 0) return;
+        const cart = readCart();
+        const item = cart.find(entry => entry.id === itemProduct.id);
+        const max = Math.max(1, Math.floor(itemProduct.stock));
+        const current = item ? Math.max(0, Math.floor(number(item.qty))) : 0;
+        if (current >= max) {
+          showToast(`Ya tienes todas las unidades disponibles de ${itemProduct.name}.`);
+          return;
+        }
+        const next = Math.min(max, current + requestedQty);
+        if (item) item.qty = next;
+        else cart.push({ id: itemProduct.id, qty: next });
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        updateCartCount();
+        showToast(next < current + requestedQty ? `Se agregaron las unidades disponibles de ${itemProduct.name}.` : `${itemProduct.name} se agregó al carrito.`);
+      }
+
+      function showToast(message) {
+        clearTimeout(toastTimer);
+        els.toastText.textContent = message;
+        els.toast.classList.add("is-visible");
+        toastTimer = setTimeout(() => els.toast.classList.remove("is-visible"), 3200);
+      }
+
+      function openWhatsApp(message, includeNumber = true) {
+        const base = includeNumber ? `https://wa.me/${PHONE}` : "https://wa.me/";
+        window.open(`${base}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
+      }
+
+      document.getElementById("qtyMinus").addEventListener("click", () => changeQuantity(-1));
+      document.getElementById("qtyPlus").addEventListener("click", () => changeQuantity(1));
+      els.add.addEventListener("click", addToCart);
+      document.getElementById("consultWhatsApp").addEventListener("click", () => {
+        if (!product) return;
+        openWhatsApp(`Hola, vi este producto en el catálogo de Ferreteral del Sureste:\n\n${product.name}\nCantidad: ${quantity}\nPrecio mostrado: ${money.format(product.price)} c/u\nSubtotal estimado: ${money.format(product.price * quantity)}\n\n${window.location.href}\n\n¿Me confirman existencia, precio final y entrega?`);
+      });
+      document.getElementById("shareWhatsApp").addEventListener("click", () => {
+        if (!product) return;
+        openWhatsApp(`Mira este producto de Ferreteral del Sureste:\n${product.name}\n${money.format(product.price)}\n${window.location.href}`, false);
+      });
+      document.getElementById("productSearch").addEventListener("submit", event => {
+        event.preventDefault();
+        const term = document.getElementById("searchValue").value.trim();
+        window.location.href = `index.html?buscar=${encodeURIComponent(term)}#catalogo`;
+      });
+
+      document.getElementById("currentYear").textContent = String(new Date().getFullYear());
+      updateCartCount();
+      window.productDetailApp = { renderProduct, renderRecommendations, showError };
+    })();
+  </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getFirestore, collection, doc, getDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDcu8X6gdw7He5Rvwfl2UfICp4TP10O6LM",
+      authDomain: "ferreteral-sureste.firebaseapp.com",
+      projectId: "ferreteral-sureste",
+      storageBucket: "ferreteral-sureste.firebasestorage.app",
+      messagingSenderId: "520677026154",
+      appId: "1:520677026154:web:563d2788f799c0fe441d13"
+    };
+
+    const id = new URLSearchParams(window.location.search).get("id");
+    if (!id) {
+      window.productDetailApp.showError("No se indicó qué producto deseas consultar.");
+    } else {
+      try {
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const snapshot = await getDoc(doc(db, "productos", id));
+        if (!snapshot.exists()) throw new Error("Este producto ya no está disponible en el catálogo.");
+        window.productDetailApp.renderProduct(snapshot.data(), snapshot.id);
+        try {
+          const catalogSnapshot = await getDocs(collection(db, "productos"));
+          const catalog = [];
+          catalogSnapshot.forEach(item => catalog.push({ id: item.id, data: item.data() }));
+          window.productDetailApp.renderRecommendations(catalog);
+        } catch (recommendationError) {
+          console.warn("No se pudieron cargar las recomendaciones:", recommendationError);
+        }
+      } catch (error) {
+        console.error("No se pudo cargar el producto:", error);
+        window.productDetailApp.showError(error?.message || "No fue posible conectar con el catálogo.");
+      }
+    }
+  </script>
+</body>
+</html>
